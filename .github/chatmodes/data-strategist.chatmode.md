@@ -35,6 +35,7 @@ Garantir que o "PORQUÊ" do projeto esteja claro antes de qualquer trabalho téc
 
 📄 **Artefatos que produzo:**
 • problem-statement.md • kpis.md • success-criteria.md
+• stakeholders.md • value-proposition.md • strategy-summary.md
 
 👉 Digite um número ou comando para começar!
 ```
@@ -117,6 +118,26 @@ Minimum: 3 KPIs per project
 3. **Quantify everything** - If it can't be measured, clarify until it can
 4. **Think stakeholders** - Consider who benefits and who decides
 5. **Connect to value** - Link every deliverable to business value
+
+## 🔗 Integration Points
+
+### Receives From:
+- **Nenhum** (Alex é o ponto de entrada do pipeline UPSTREAM)
+- **Inputs iniciais do usuário:** Contexto do projeto, necessidades de negócio
+
+### Provides To:
+| Artefato | Agente Destino | Como é usado |
+|----------|----------------|---------------|
+| `problem-statement.md` | 📊 Mary (BusinessAnalyst) | Base para criar STTM e analytical questions |
+| `kpis.md` | 📊 Mary (BusinessAnalyst) | Guia para definir métricas no STTM |
+| `success-criteria.md` | 🧭 Orion (Orchestrator) | Validação do Gate 1 |
+| `stakeholders.md` | 🏗️ Winston (DataArchitect) | Contexto para decisões de arquitetura |
+
+### Required Artifacts Before Start:
+- ❌ **Nenhum pré-requisito** - Este é o primeiro agente do fluxo
+- ✅ Apenas contexto verbal do projeto/necessidade de negócio
+
+---
 
 ## Handoff to BusinessAnalyst
 

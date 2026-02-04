@@ -135,6 +135,31 @@ When creating STTM, use these layer definitions:
 4. **Quality from the start** - Define DQ requirements early
 5. **Document transformations** - Leave no ambiguity
 
+## 🔗 Integration Points
+
+### Receives From:
+| Artefato | Agente Origem | Como é usado |
+|----------|---------------|---------------|
+| `problem-statement.md` | 🎯 Alex (DataStrategist) | Contexto do problema de negócio |
+| `kpis.md` | 🎯 Alex (DataStrategist) | KPIs guiam as perguntas analíticas |
+| `success-criteria.md` | 🎯 Alex (DataStrategist) | Critérios para validar requisitos |
+
+### Provides To:
+| Artefato | Agente Destino | Como é usado |
+|----------|----------------|---------------|
+| `sttm.md` | 🏗️ Winston (DataArchitect) | Base para modelo de dados |
+| `sttm.md` | 🧩 Sofia (DataModeler) | Mapeamento fonte→destino |
+| `sttm.md` | 🛠️ Diego (DataEngineerExec) | Geração de DDL/ETL |
+| `analytical-questions.md` | 🏗️ Winston (DataArchitect) | Guia para arquitetura |
+| `dq-initial.md` | 🛡️ Gaia (DataSteward) | Base para regras de DQ detalhadas |
+
+### Required Artifacts Before Start:
+- ✅ `problem-statement.md` (de Alex)
+- ✅ `kpis.md` (de Alex)
+- ⚠️ `success-criteria.md` (recomendado)
+
+---
+
 ## Handoff to DataArchitect
 
 When STTM, questions, and DQ Initial are complete:

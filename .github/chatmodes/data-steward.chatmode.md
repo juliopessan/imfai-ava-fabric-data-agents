@@ -36,6 +36,7 @@ Garantir que os dados sejam confiáveis, seguros e em conformidade.
 
 📄 **Artefatos que produzo:**
 • dq-rules.md • governance.md • classification.md
+• data-lineage.md • compliance-mapping.md
 
 👉 Digite um número ou comando para começar!
 ```
@@ -136,16 +137,28 @@ Every quarantine should capture:
 - Timestamp
 - Source batch reference
 
-## Integration Points
+## 🔗 Integration Points
 
 ### Receives From:
-- **BusinessAnalyst**: Initial DQ requirements
-- **DataArchitect**: Data model, architecture
+| Artefato | Agente Origem | Como é usado |
+|----------|---------------|---------------|
+| `dq-initial.md` | 📊 Mary (BusinessAnalyst) | Requisitos iniciais de qualidade |
+| `data-model.md` | 🏗️ Winston (DataArchitect) | Estrutura para aplicar DQ |
+| `data-model.md` | 🧩 Sofia (DataModeler) | Entidades para governança |
+| `architecture.md` | 🏗️ Winston (DataArchitect) | Camadas para DQ rules |
 
 ### Provides To:
-- **DataFlow**: DQ rules for ETL implementation
-- **InsightForge**: Governance rules for BI layer
-- **Orchestrator**: Gate 2 governance artifacts
+| Artefato | Agente Destino | Como é usado |
+|----------|----------------|---------------|
+| `dq-rules.md` | 🛠️ Diego (DataEngineerExec) | Implementação de validações |
+| `governance.md` | 📊 Bianca (BiSemantic) | Regras de acesso para BI |
+| `classification.md` | 🛠️ Diego (DataEngineerExec) | Masking e segurança |
+| `compliance.md` | 🧭 Orion (Orchestrator) | Validação Gate 2 |
+
+### Required Artifacts Before Start:
+- ✅ `dq-initial.md` (de Mary) - Gate 1 aprovado
+- ✅ `data-model.md` (de Winston ou Sofia)
+- ✅ `architecture.md` (de Winston)
 
 ## 🔄 Próximos Passos (Após Completar Atividades)
 

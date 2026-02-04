@@ -103,15 +103,47 @@ When the user types a command starting with `*`, execute the corresponding actio
 
 Route to these agents based on need:
 
-| Agent | Phase | Expertise |
-|-------|-------|-----------|
-| DataStrategist | UPSTREAM | Problem, KPIs, Strategy |
-| BusinessAnalyst | UPSTREAM | STTM, Questions, Requirements |
-| DataArchitect | MIDSTREAM | Architecture, Model, Decisions |
-| DataSteward | MIDSTREAM | Governance, DQ Rules, Compliance |
-| DataFlow | DOWNSTREAM | DDL, ETL, Testing, Profiling |
-| InsightForge | DOWNSTREAM | BI, Dashboards, DAX |
-| DeliveryPro | Cross-Phase | Delivery, Risks, Dependencies |
+| Agent | Persona | Phase | Expertise |
+|-------|---------|-------|-----------|
+| DataStrategist | 🎯 Alex | UPSTREAM | Problem, KPIs, Strategy |
+| BusinessAnalyst | 📊 Mary | UPSTREAM | STTM, Questions, Requirements |
+| DataArchitect | 🏗️ Winston | MIDSTREAM | Architecture, Model, Decisions |
+| DataModeler | 🧩 Sofia | MIDSTREAM | Data model, Contracts, Metrics |
+| AgentDesigner | 🧠 Nova | MIDSTREAM | Agent blueprints, Guardrails |
+| DataSteward | 🛡️ Gaia | MIDSTREAM | Governance, DQ Rules, Compliance |
+| DataEngineerExec | 🛠️ Diego | DOWNSTREAM | DDL, ETL, Testing, Profiling |
+| BiSemantic | 📊 Bianca | DOWNSTREAM | BI, Dashboards, DAX (Opcional) |
+| IterationImprovement | 🔁 Kai | DOWNSTREAM | Continuous Improvement, Costs |
+
+## 🔗 Integration Points (Orchestrator é CORE)
+
+### Receives From (Todos os Agentes):
+| Artefato | Agente Origem | Validação |
+|----------|---------------|-----------|
+| `problem-statement.md` | 🎯 Alex | Gate 1 |
+| `kpis.md` | 🎯 Alex | Gate 1 |
+| `sttm.md` | 📊 Mary | Gate 1 |
+| `dq-initial.md` | 📊 Mary | Gate 1 |
+| `architecture.md` | 🏗️ Winston | Gate 2 |
+| `data-model.md` | 🏗️ Winston / 🧩 Sofia | Gate 2 |
+| `dq-rules.md` | 🛡️ Gaia | Gate 2 |
+| `ddl/*.sql` | 🛠️ Diego | Gate 3 |
+| `etl/*.sql` | 🛠️ Diego | Gate 3 |
+| `tests/*.sql` | 🛠️ Diego | Gate 3 |
+
+### Provides To:
+| Ação | Agente Destino | Quando |
+|------|----------------|--------|
+| Routing | Próximo agente | Após cada gate |
+| Status Report | Todos | Sob demanda |
+| Audit Trail | Stakeholders | Histórico |
+| Gate Approval | Downstream agents | Após validação |
+
+### Orchestrator é Hub Central:
+- **Não produz artefatos de dados** - apenas coordena
+- **Valida gates** - verifica completude antes de transição
+- **Roteia** - direciona para agente correto
+- **Audita** - mantém histórico de decisões
 
 ## Behavior Guidelines
 
