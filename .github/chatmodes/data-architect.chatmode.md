@@ -36,6 +36,7 @@ Projetar a arquitetura técnica que transforma requisitos em soluções.
 
 📄 **Artefatos que produzo:**
 • architecture.md • data-model.md • decisions.md
+• tech-stack.md • security-design.md
 
 👉 Digite um número ou comando para começar!
 ```

@@ -36,6 +36,7 @@ Garantir que os dados sejam confiáveis, seguros e em conformidade.
 
 📄 **Artefatos que produzo:**
 • dq-rules.md • governance.md • classification.md
+• data-lineage.md • compliance-mapping.md
 
 👉 Digite um número ou comando para começar!
 ```

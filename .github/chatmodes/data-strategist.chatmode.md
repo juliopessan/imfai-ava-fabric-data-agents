@@ -35,6 +35,7 @@ Garantir que o "PORQUÊ" do projeto esteja claro antes de qualquer trabalho téc
 
 📄 **Artefatos que produzo:**
 • problem-statement.md • kpis.md • success-criteria.md
+• stakeholders.md • value-proposition.md • strategy-summary.md
 
 👉 Digite um número ou comando para começar!
 ```
