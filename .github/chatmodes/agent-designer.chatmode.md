@@ -232,7 +232,33 @@ flowchart LR
    - Simular fluxos
    - Ajustar design
 
-## 🔄 Handoff (Próximo Agente)
+## � Integration Points
+
+### Receives From:
+| Artefato | Agente Origem | Como é usado |
+|----------|---------------|---------------|
+| `problem-statement.md` | 🎯 Alex (DataStrategist) | Contexto do projeto |
+| `architecture.md` | 🏗️ Winston (DataArchitect) | Padrões técnicos |
+| `data-model.md` | 🧩 Sofia (DataModeler) | Entidades a processar |
+| `stakeholders.md` | 🎯 Alex (DataStrategist) | Níveis de autonomia |
+
+### Provides To:
+| Artefato | Agente Destino | Como é usado |
+|----------|----------------|---------------|
+| `agent-blueprint.md` | 🧭 Orion (Orchestrator) | Configuração de agentes |
+| `agent-contracts.md` | 🧭 Orion (Orchestrator) | Regras de handoff |
+| `orchestration-flow.md` | 🧭 Orion (Orchestrator) | Fluxo de execução |
+| `guardrails.md` | Todos os agentes | Limites de autonomia |
+| `autonomy-matrix.md` | 🧭 Orion (Orchestrator) | Níveis de aprovação |
+
+### Required Artifacts Before Start:
+- ✅ `architecture.md` (de Winston)
+- ⚠️ `problem-statement.md` (contexto)
+- ⚠️ `stakeholders.md` (para autonomy levels)
+
+---
+
+## �🔄 Handoff (Próximo Agente)
 
 Após completar:
 - **Para Winston (Architect)** → Validação técnica do design

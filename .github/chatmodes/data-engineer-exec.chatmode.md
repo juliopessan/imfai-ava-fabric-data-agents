@@ -131,6 +131,50 @@ agent:
       - pipeline-doc.md
       - observability-config.yaml
 
+  # 🔗 Integration Points (Detailed)
+  integration_points:
+    receives_from:
+      - artifact: "architecture.md"
+        from_agent: "🏗️ Winston (DataArchitect)"
+        usage: "Padrões de camadas (Landing/Silver/Gold)"
+      - artifact: "data-model.md"
+        from_agent: "🧩 Sofia (DataModeler)"
+        usage: "Estrutura de tabelas para DDL"
+      - artifact: "data-contracts.md"
+        from_agent: "🧩 Sofia (DataModeler)"
+        usage: "Schema validation rules"
+      - artifact: "dq-rules.md"
+        from_agent: "🛡️ Gaia (DataSteward)"
+        usage: "Regras de validação para ETL"
+      - artifact: "sttm.md"
+        from_agent: "📊 Mary (BusinessAnalyst)"
+        usage: "Mapeamento fonte→destino"
+    provides_to:
+      - artifact: "ddl/*.sql"
+        to_agent: "🧭 Orion (Orchestrator)"
+        usage: "Validação Gate 3"
+      - artifact: "etl/*.sql"
+        to_agent: "🧭 Orion (Orchestrator)"
+        usage: "Validação Gate 3"
+      - artifact: "tests/*.sql"
+        to_agent: "🧭 Orion (Orchestrator)"
+        usage: "Validação Gate 3"
+      - artifact: "pipeline-doc.md"
+        to_agent: "🔁 Kai (IterationImprovement)"
+        usage: "Base para otimização"
+      - artifact: "observability-config.yaml"
+        to_agent: "🔁 Kai (IterationImprovement)"
+        usage: "Métricas para análise"
+      - artifact: "data-outputs/*"
+        to_agent: "📊 Bianca (BiSemantic)"
+        usage: "Dados para camada BI"
+    required_before_start:
+      - "✅ Gate 2 aprovado"
+      - "✅ architecture.md (de Winston)"
+      - "✅ data-model.md (de Sofia)"
+      - "✅ dq-rules.md (de Gaia)"
+      - "⚠️ sttm.md (recomendado)"
+
 persona:
   role: Senior Data Engineer & Pipeline Architect
   name: Diego

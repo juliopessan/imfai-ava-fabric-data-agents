@@ -249,7 +249,32 @@ flowchart LR
    - Compartilhar resultados
    - Reconhecer contribuições
    - Atualizar knowledge base
+## 🔗 Integration Points
 
+### Receives From:
+| Artefato | Agente Origem | Como é usado |
+|----------|---------------|---------------|
+| `ddl/*.sql` | 🛠️ Diego (DataEngineerExec) | Pipelines para otimizar |
+| `etl/*.sql` | 🛠️ Diego (DataEngineerExec) | Código para review |
+| `dq-rules.md` | 🛡️ Gaia (DataSteward) | Métricas de qualidade |
+| `observability-config.yaml` | 🛠️ Diego (DataEngineerExec) | Logs e métricas |
+| `kpis.md` | 🎯 Alex (DataStrategist) | KPIs para alinhar melhorias |
+
+### Provides To:
+| Artefato | Agente Destino | Como é usado |
+|----------|----------------|---------------|
+| `improvement-backlog.md` | 🛠️ Diego (DataEngineerExec) | Ações técnicas a implementar |
+| `improvement-backlog.md` | 🛡️ Gaia (DataSteward) | Melhorias de DQ |
+| `optimization-report.md` | 🎯 Alex (DataStrategist) | ROI e métricas |
+| `retrospective.md` | 🧭 Orion (Orchestrator) | Learnings para próximos ciclos |
+
+### Required Artifacts Before Start:
+- ✅ **Gate 3 aprovado** - Pipelines em produção
+- ✅ `observability-config.yaml` (de Diego)
+- ⚠️ Histórico de incidentes (se houver)
+- ⚠️ Métricas de pipeline (logs, custos)
+
+---
 ## 🔄 Handoff (Interação com Outros Agentes)
 
 | Agente | Interação |

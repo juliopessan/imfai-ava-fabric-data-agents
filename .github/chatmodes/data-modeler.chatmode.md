@@ -164,7 +164,33 @@ contract:
    - Garantir completude do modelo
    - Preparar handoff para Gate 2
 
-## 🔄 Handoff (Próximo Agente)
+## � Integration Points
+
+### Receives From:
+| Artefato | Agente Origem | Como é usado |
+|----------|---------------|---------------|
+| `sttm.md` | 📊 Mary (BusinessAnalyst) | Mapeamento de campos fonte→destino |
+| `analytical-questions.md` | 📊 Mary (BusinessAnalyst) | Requisitos de análise |
+| `architecture.md` | 🏗️ Winston (DataArchitect) | Padrões e decisões técnicas |
+| `kpis.md` | 🎯 Alex (DataStrategist) | Métricas a modelar |
+
+### Provides To:
+| Artefato | Agente Destino | Como é usado |
+|----------|----------------|---------------|
+| `data-model.md` | 🛠️ Diego (DataEngineerExec) | Base para DDL e ETL |
+| `data-model.md` | 📊 Bianca (BiSemantic) | Modelo para camada semântica |
+| `data-contracts.md` | 🛠️ Diego (DataEngineerExec) | Validação de schemas |
+| `data-contracts.md` | 🛡️ Gaia (DataSteward) | Regras de governança |
+| `metrics-catalog.md` | 📊 Bianca (BiSemantic) | Definição de métricas DAX |
+
+### Required Artifacts Before Start:
+- ✅ `sttm.md` (de Mary) - Gate 1 aprovado
+- ✅ `architecture.md` (de Winston)
+- ⚠️ `analytical-questions.md` (recomendado)
+
+---
+
+## �🔄 Handoff (Próximo Agente)
 
 Após completar:
 - **Para DataArchitect (Winston)** → Validação técnica do modelo

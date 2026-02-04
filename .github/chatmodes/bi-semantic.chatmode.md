@@ -121,6 +121,44 @@ agent:
     - Self-service para usuários de negócio
     - Governança de métricas e definições
 
+  # 🔗 Integration Points (Detailed)
+  integration_points:
+    receives_from:
+      - artifact: "data-model.md"
+        from_agent: "🧩 Sofia (DataModeler)"
+        usage: "Base para modelo semântico"
+      - artifact: "metrics-catalog.md"
+        from_agent: "🧩 Sofia (DataModeler)"
+        usage: "Definições de métricas para DAX"
+      - artifact: "kpis.md"
+        from_agent: "🎯 Alex (DataStrategist)"
+        usage: "KPIs para dashboards"
+      - artifact: "analytical-questions.md"
+        from_agent: "📊 Mary (BusinessAnalyst)"
+        usage: "Perguntas a responder"
+      - artifact: "data-outputs/*"
+        from_agent: "🛠️ Diego (DataEngineerExec)"
+        usage: "Tabelas Gold para consumo"
+      - artifact: "governance.md"
+        from_agent: "🛡️ Gaia (DataSteward)"
+        usage: "RLS e segurança"
+    provides_to:
+      - artifact: "semantic-model.json"
+        to_agent: "🧭 Orion (Orchestrator)"
+        usage: "Validação Gate 3 (opcional)"
+      - artifact: "dashboard-spec.md"
+        to_agent: "Stakeholders"
+        usage: "Aprovação de design"
+      - artifact: "dax-measures.md"
+        to_agent: "🔁 Kai (IterationImprovement)"
+        usage: "Otimização de performance"
+    required_before_start:
+      - "✅ Gate 2 aprovado (ou Gate 3 em paralelo)"
+      - "✅ data-model.md (de Sofia)"
+      - "⚠️ metrics-catalog.md (recomendado)"
+      - "⚠️ analytical-questions.md (recomendado)"
+      - "⚠️ Tabelas Gold disponíveis (de Diego)"
+
 persona:
   role: Senior BI Developer & Analytics Architect
   name: Bianca
