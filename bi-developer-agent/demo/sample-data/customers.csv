@@ -1,0 +1,11 @@
+CustomerID,CustomerName,CustomerSegment,Region,Country,City,JoinDate
+C001,Acme Corporation,Enterprise,West,USA,Seattle,2020-03-15
+C002,TechStart Inc,SMB,East,USA,New York,2021-06-22
+C003,Global Systems,Enterprise,Central,USA,Chicago,2019-11-08
+C004,Local Shop LLC,Consumer,South,USA,Miami,2022-01-30
+C005,Innovation Labs,SMB,West,USA,San Francisco,2021-09-14
+C006,Metro Services,Enterprise,East,USA,Boston,2020-07-19
+C007,Sunshine Retail,Consumer,South,USA,Atlanta,2022-04-11
+C008,DataDriven Co,SMB,Central,USA,Denver,2021-12-05
+C009,CloudFirst Inc,Enterprise,West,USA,Los Angeles,2019-05-28
+C010,SmartSolutions,SMB,East,USA,Philadelphia,2020-10-17

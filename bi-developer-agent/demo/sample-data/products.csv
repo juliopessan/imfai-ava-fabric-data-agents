@@ -1,0 +1,16 @@
+ProductID,ProductName,ProductCategory,SubCategory,Brand,UnitCost,ListPrice,LaunchDate
+P001,Laptop Pro 15,Electronics,Laptops,TechBrand,850.00,1299.99,2023-01-15
+P002,Laptop Pro 17,Electronics,Laptops,TechBrand,1050.00,1599.99,2023-06-01
+P003,Tablet X1,Electronics,Tablets,TechBrand,320.00,499.99,2022-09-10
+P004,Tablet X2,Electronics,Tablets,TechBrand,380.00,599.99,2024-03-20
+P005,Smartphone Z,Electronics,Phones,TechBrand,500.00,799.99,2024-01-01
+P006,Desktop Station,Electronics,Desktops,TechBrand,1200.00,1899.99,2023-04-15
+P007,Monitor UltraWide,Electronics,Monitors,TechBrand,350.00,549.99,2023-07-22
+P008,Wireless Mouse Pro,Accessories,Input Devices,AccessoryBrand,15.00,29.99,2022-05-01
+P009,Mechanical Keyboard,Accessories,Input Devices,AccessoryBrand,65.00,129.99,2022-08-14
+P010,USB-C Hub,Accessories,Connectivity,AccessoryBrand,40.00,79.99,2023-02-28
+P011,Webcam HD,Accessories,Video,AccessoryBrand,50.00,99.99,2022-11-11
+P012,Office Suite Pro,Software,Productivity,SoftCorp,50.00,149.99,2024-01-01
+P013,Security Suite,Software,Security,SoftCorp,30.00,89.99,2023-09-01
+P014,Design Suite,Software,Creative,SoftCorp,100.00,299.99,2023-11-15
+P015,Cloud Storage 1TB,Software,Cloud,SoftCorp,15.00,49.99,2024-02-01

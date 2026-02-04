@@ -1,0 +1,83 @@
+# Orchestrator Agent Configuration
+# Avanade Core Framework
+
+project:
+  name: "Data Pipeline Project"
+  code: "data-project"
+  version: "1.0.0"
+
+output:
+  base_folder: "./orchestrator-outputs"
+  subfolders:
+    - gate-reports
+    - status-reports
+    - audit-logs
+    - artifacts-inventory
+
+agent:
+  id: orchestrator
+  name: Orchestrator
+  version: "1.0.0"
+
+gate_criteria:
+  gate_1:
+    name: "UPSTREAM → MIDSTREAM"
+    required_artifacts:
+      - problem-statement.md
+      - kpis.md
+      - analytical-questions.md
+      - sttm.md
+      - dq-initial.md
+    minimum_completeness: 100%
+    
+  gate_2:
+    name: "MIDSTREAM → DOWNSTREAM"
+    required_artifacts:
+      - architecture.md
+      - data-model.md
+      - decisions.md
+      - dq-rules.md
+      - monitoring-spec.md
+    minimum_completeness: 100%
+    
+  gate_3:
+    name: "DOWNSTREAM → PRODUCTION"
+    required_artifacts:
+      - ddl/
+      - etl/
+      - tests/
+      - documentation/
+      - gate-3-report.md
+    minimum_test_coverage: 80%
+    minimum_documentation: true
+
+routing:
+  upstream_agents:
+    - id: data-strategist
+      name: DataStrategist
+      expertise: [problem-statement, kpis, success-criteria]
+    - id: business-analyst
+      name: BusinessAnalyst
+      expertise: [sttm, analytical-questions, dq-initial, business-rules]
+  
+  midstream_agents:
+    - id: data-architect
+      name: DataArchitect
+      expertise: [architecture, data-model, decisions, contracts]
+  
+  downstream_agents:
+    - id: data-engineer
+      name: DataFlow
+      expertise: [ddl, etl, pipelines, tests]
+    - id: bi-developer
+      name: InsightForge
+      expertise: [semantic-model, dax, dashboards]
+    - id: data-steward
+      name: DataSteward
+      expertise: [dq-rules, monitoring, compliance, audit]
+
+settings:
+  language: "pt-BR"
+  date_format: "YYYY-MM-DD"
+  require_human_approval_for_gates: true
+  auto_route_on_gate_pass: false

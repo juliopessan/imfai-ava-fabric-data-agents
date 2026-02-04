@@ -1,0 +1,166 @@
+# DDL Scripts Template
+
+## Metadata
+```yaml
+project:
+  name: "{PROJECT_NAME}"
+  database: "{DATABASE_NAME}"
+  schema_convention: "Medallion Architecture"
+  
+generator:
+  name: "{Generator Name}"
+  date: "{YYYY-MM-DD}"
+  version: "1.0"
+```
+
+## Landing Layer (Bronze)
+```yaml
+landing_tables:
+  - table_name: "LND.{SOURCE_NAME}"
+    purpose: "Raw data ingestion from {SOURCE_TYPE}"
+    columns:
+      - name: "{column_1}"
+        type: "VARCHAR(MAX)"
+        nullable: true
+        description: "{Column description}"
+        
+      - name: "{column_2}"
+        type: "VARCHAR(MAX)"
+        nullable: true
+        description: "{Column description}"
+        
+    audit_columns:
+      - name: "load_timestamp"
+        type: "DATETIME2"
+        default: "GETDATE()"
+        description: "Record load timestamp"
+        
+      - name: "source_file"
+        type: "VARCHAR(500)"
+        nullable: true
+        description: "Source file name"
+        
+    constraints:
+      primary_key: null
+      unique: null
+      
+    options:
+      idempotent: true
+      pattern: "DROP TABLE IF EXISTS / CREATE TABLE"
+```
+
+## Silver Layer
+```yaml
+silver_tables:
+  - table_name: "SILVER.{SOURCE_NAME}"
+    purpose: "Typed and validated data"
+    source_table: "LND.{SOURCE_NAME}"
+    columns:
+      - name: "{column_1}"
+        type: "{APPROPRIATE_TYPE}"
+        nullable: "{true|false}"
+        validation: "{Validation rule}"
+        
+    audit_columns:
+      - name: "processed_timestamp"
+        type: "DATETIME2"
+        default: "GETDATE()"
+        
+      - name: "quality_flag"
+        type: "VARCHAR(20)"
+        values: ["VALID", "INVALID", "SUSPECT"]
+        
+    constraints:
+      primary_key: "{PK column}"
+      indexes:
+        - columns: ["{index_col}"]
+          type: "NONCLUSTERED"
+          
+  - table_name: "SILVER.{SOURCE_NAME}_REJECT"
+    purpose: "Rejected records from validation"
+    columns:
+      - name: "original_columns"
+        note: "Mirror of landing table"
+      - name: "reject_reason"
+        type: "VARCHAR(500)"
+      - name: "reject_timestamp"
+        type: "DATETIME2"
+```
+
+## Gold Layer
+```yaml
+gold_tables:
+  - table_name: "GOLD.{PURPOSE}_ENRICHED"
+    purpose: "Denormalized, business-ready data"
+    source_tables:
+      - "SILVER.{SOURCE_NAME}"
+      - "REF.{REFERENCE_TABLE}"
+    columns:
+      - name: "{business_column}"
+        type: "{TYPE}"
+        source: "{derived from}"
+        
+    constraints:
+      primary_key: "{PK column}"
+      indexes:
+        - columns: ["{query_filter_col}"]
+          type: "NONCLUSTERED"
+          
+  - table_name: "GOLD.{PURPOSE}_AGG"
+    purpose: "Aggregated metrics and KPIs"
+    grain: "{Aggregation level}"
+    columns:
+      - name: "{dimension}"
+        type: "{TYPE}"
+      - name: "{metric}"
+        type: "{NUMERIC TYPE}"
+        aggregation: "{SUM|AVG|COUNT|MIN|MAX}"
+```
+
+## Reference Tables
+```yaml
+reference_tables:
+  - table_name: "REF.{LOOKUP_NAME}"
+    purpose: "Lookup/dimension table"
+    source_format: "{JSON|TSV|CSV}"
+    columns:
+      - name: "{code_column}"
+        type: "INT"
+        constraint: "PRIMARY KEY"
+      - name: "{description_column}"
+        type: "VARCHAR(100)"
+```
+
+## DDL Script Pattern
+```sql
+-- =============================================================================
+-- DDL Script: {LAYER} Tables
+-- Project: {PROJECT_NAME}
+-- Generated: {YYYY-MM-DD}
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- {TABLE_NAME}
+-- Purpose: {PURPOSE}
+-- -----------------------------------------------------------------------------
+IF OBJECT_ID('{SCHEMA}.{TABLE_NAME}', 'U') IS NOT NULL
+    DROP TABLE {SCHEMA}.{TABLE_NAME};
+GO
+
+CREATE TABLE {SCHEMA}.{TABLE_NAME} (
+    {column_definitions}
+    
+    -- Audit columns
+    {audit_column_definitions}
+    
+    -- Constraints
+    {constraint_definitions}
+);
+GO
+
+-- Indexes
+{index_definitions}
+
+-- Comments
+{column_comments}
+```

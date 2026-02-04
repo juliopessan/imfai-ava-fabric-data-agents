@@ -1,0 +1,485 @@
+// =====================================================
+// DAX Measure Library: Financial KPI Scorecard
+// Generated: January 28, 2026 12:00 PM
+// Agent: InsightForge BI Developer v1.0
+// Model: Star Schema (FactSales, FactBudget, Dimensions)
+// =====================================================
+
+// ===================================================
+// SECTION 1: BASE MEASURES
+// ===================================================
+
+Total Revenue = 
+SUMX(
+    FactSales,
+    FactSales[Quantity] * FactSales[UnitPrice]
+)
+// Description: Total sales revenue from all transactions
+// Format: Currency ($)
+// Used In: KPI cards, trend charts, variance calculations
+
+Total Quantity Sold = 
+SUM(FactSales[Quantity])
+// Description: Total units sold across all products
+// Format: Whole Number
+// Used In: Quantity analysis, average price calculations
+
+Total Budget = 
+SUM(FactBudget[BudgetAmount])
+// Description: Total budgeted revenue for selected period/dimensions
+// Format: Currency ($)
+// Used In: Variance calculations, trend comparisons
+
+Budget Target Quantity = 
+SUM(FactBudget[TargetQuantity])
+// Description: Target units to be sold per budget
+// Format: Whole Number
+// Used In: Quantity variance analysis
+
+Transaction Count = 
+COUNTROWS(FactSales)
+// Description: Number of sales transactions
+// Format: Whole Number
+// Used In: Average transaction value, frequency analysis
+
+// ===================================================
+// SECTION 2: VARIANCE MEASURES
+// ===================================================
+
+Variance (Absolute) = 
+[Total Revenue] - [Total Budget]
+// Description: Dollar difference between actual and budget
+// Format: Currency ($) with sign
+// Used In: Variance waterfall, detail tables
+// Positive = over budget (good), Negative = under budget (bad)
+
+Variance (%) = 
+DIVIDE(
+    [Total Revenue] - [Total Budget],
+    [Total Budget],
+    0
+)
+// Description: Percentage variance from budget
+// Format: Percentage with 1 decimal place
+// Used In: KPI cards, conditional formatting
+// Target: ≥0% (at or above budget)
+
+Variance Status = 
+VAR _VarPct = [Variance (%)]
+RETURN
+    SWITCH(
+        TRUE(),
+        _VarPct >= 0.05, "Above Target",        // >5% over budget
+        _VarPct >= 0, "On Target",              // 0-5% over budget
+        _VarPct >= -0.05, "Slightly Below",     // 0-5% under budget
+        _VarPct >= -0.10, "Below Target",       // 5-10% under budget
+        "Critical"                               // >10% under budget
+    )
+// Description: Text status indicator for variance
+// Format: Text
+// Used In: Conditional formatting, alerts
+
+Variance Color = 
+VAR _VarPct = [Variance (%)]
+RETURN
+    SWITCH(
+        TRUE(),
+        _VarPct >= 0, "#107C10",         // Green (positive variance)
+        _VarPct >= -0.10, "#F7630C",     // Orange (within tolerance)
+        "#D13438"                         // Red (critical)
+    )
+// Description: Hex color code for variance indicators
+// Format: Text (Hex color)
+// Used In: Conditional formatting rules
+
+Quantity Variance = 
+[Total Quantity Sold] - [Budget Target Quantity]
+// Description: Unit variance from target
+// Format: Whole Number with sign
+// Used In: Operational metrics, volume analysis
+
+// ===================================================
+// SECTION 3: TIME INTELLIGENCE MEASURES
+// ===================================================
+
+Revenue YTD = 
+CALCULATE(
+    [Total Revenue],
+    DATESYTD(DimDate[Date])
+)
+// Description: Year-to-date cumulative revenue
+// Format: Currency ($)
+// Used In: YTD performance tracking
+
+Budget YTD = 
+CALCULATE(
+    [Total Budget],
+    DATESYTD(DimDate[Date])
+)
+// Description: Year-to-date cumulative budget
+// Format: Currency ($)
+// Used In: YTD variance calculations
+
+Revenue MTD = 
+CALCULATE(
+    [Total Revenue],
+    DATESMTD(DimDate[Date])
+)
+// Description: Month-to-date revenue
+// Format: Currency ($)
+// Used In: Current month tracking
+
+Revenue Prior Year = 
+CALCULATE(
+    [Total Revenue],
+    SAMEPERIODLASTYEAR(DimDate[Date])
+)
+// Description: Revenue for same period last year
+// Format: Currency ($)
+// Used In: Year-over-year comparisons
+
+Revenue YoY Growth = 
+DIVIDE(
+    [Total Revenue] - [Revenue Prior Year],
+    [Revenue Prior Year],
+    0
+)
+// Description: Year-over-year growth percentage
+// Format: Percentage with 1 decimal
+// Used In: Trend analysis, growth tracking
+
+Revenue Prior Month = 
+CALCULATE(
+    [Total Revenue],
+    DATEADD(DimDate[Date], -1, MONTH)
+)
+// Description: Revenue from previous month
+// Format: Currency ($)
+// Used In: Month-over-month comparisons
+
+Revenue MoM Growth = 
+DIVIDE(
+    [Total Revenue] - [Revenue Prior Month],
+    [Revenue Prior Month],
+    0
+)
+// Description: Month-over-month growth percentage
+// Format: Percentage with 1 decimal
+// Used In: Short-term trend analysis
+
+// ===================================================
+// SECTION 4: KPI MEASURES
+// ===================================================
+
+Budget Utilization % = 
+VAR _YTDRevenue = [Revenue YTD]
+VAR _TotalAnnualBudget = 
+    CALCULATE(
+        [Total Budget],
+        ALL(DimDate),
+        DimDate[Year] = YEAR(TODAY())
+    )
+RETURN
+    DIVIDE(_YTDRevenue, _TotalAnnualBudget, 0)
+// Description: Percentage of annual budget consumed YTD
+// Format: Percentage with 1 decimal
+// Used In: Budget utilization tracking
+// Alert: Compare to % of year elapsed
+
+Time Elapsed % = 
+VAR _Today = TODAY()
+VAR _YearStart = DATE(YEAR(_Today), 1, 1)
+VAR _YearEnd = DATE(YEAR(_Today), 12, 31)
+VAR _DaysElapsed = _Today - _YearStart
+VAR _TotalDays = _YearEnd - _YearStart + 1
+RETURN
+    DIVIDE(_DaysElapsed, _TotalDays, 0)
+// Description: Percentage of calendar year elapsed
+// Format: Percentage with 1 decimal
+// Used In: Budget pacing analysis
+
+Budget Pacing = 
+[Budget Utilization %] - [Time Elapsed %]
+// Description: Difference between budget used and time elapsed
+// Format: Percentage with sign
+// Used In: Overspending/underspending alerts
+// Target: Within ±5%
+// Positive = spending faster than time (caution)
+
+Average Transaction Value = 
+DIVIDE(
+    [Total Revenue],
+    [Transaction Count],
+    0
+)
+// Description: Average revenue per transaction
+// Format: Currency ($)
+// Used In: Transaction analysis, customer value
+
+Average Unit Price = 
+DIVIDE(
+    [Total Revenue],
+    [Total Quantity Sold],
+    0
+)
+// Description: Average price per unit sold
+// Format: Currency ($)
+// Used In: Pricing analysis, margin tracking
+
+// ===================================================
+// SECTION 5: COMPARATIVE MEASURES
+// ===================================================
+
+Best Region by Revenue = 
+VAR _BestRegion = 
+    TOPN(
+        1,
+        SUMMARIZE(
+            FactSales,
+            DimRegion[Region],
+            "Revenue", [Total Revenue]
+        ),
+        [Revenue],
+        DESC
+    )
+RETURN
+    MAXX(_BestRegion, DimRegion[Region])
+// Description: Name of region with highest revenue
+// Format: Text
+// Used In: Summary cards, leaderboards
+
+Best Region Performance = 
+VAR _BestRegion = [Best Region by Revenue]
+RETURN
+    CALCULATE(
+        [Total Revenue],
+        DimRegion[Region] = _BestRegion
+    )
+// Description: Revenue amount for best performing region
+// Format: Currency ($)
+// Used In: KPI cards
+
+Best Category by Revenue = 
+VAR _BestCategory = 
+    TOPN(
+        1,
+        SUMMARIZE(
+            FactSales,
+            DimCategory[ProductCategory],
+            "Revenue", [Total Revenue]
+        ),
+        [Revenue],
+        DESC
+    )
+RETURN
+    MAXX(_BestCategory, DimCategory[ProductCategory])
+// Description: Category with highest revenue
+// Format: Text
+// Used In: Category performance tracking
+
+Regional Rank = 
+RANKX(
+    ALL(DimRegion[Region]),
+    [Total Revenue],
+    ,
+    DESC,
+    DENSE
+)
+// Description: Rank of current region by revenue
+// Format: Whole Number
+// Used In: Regional comparisons, leaderboards
+
+% of Total Revenue = 
+DIVIDE(
+    [Total Revenue],
+    CALCULATE([Total Revenue], ALL(DimRegion), ALL(DimCategory)),
+    0
+)
+// Description: Selected dimension as % of grand total
+// Format: Percentage with 1 decimal
+// Used In: Mix analysis, contribution charts
+
+// ===================================================
+// SECTION 6: CONDITIONAL FORMATTING MEASURES
+// ===================================================
+
+Variance Conditional Format = 
+VAR _VarPct = [Variance (%)]
+RETURN
+    SWITCH(
+        TRUE(),
+        _VarPct >= 0.05, 1,          // Green
+        _VarPct >= 0, 0.5,           // Light green
+        _VarPct >= -0.05, 0,         // Yellow
+        _VarPct >= -0.10, -0.5,      // Orange
+        -1                            // Red
+    )
+// Description: Numeric value for gradient conditional formatting
+// Format: Decimal (-1 to 1)
+// Used In: Matrix/table conditional formatting rules
+
+Budget Alert Icon = 
+VAR _VarPct = [Variance (%)]
+RETURN
+    SWITCH(
+        TRUE(),
+        _VarPct >= 0, "✓",           // Checkmark
+        _VarPct >= -0.10, "⚠",      // Warning
+        "✖"                          // X mark
+    )
+// Description: Unicode icon for variance status
+// Format: Text (Unicode character)
+// Used In: KPI cards, alert indicators
+
+// ===================================================
+// SECTION 7: ADVANCED ANALYTICS
+// ===================================================
+
+Revenue Moving Avg (3M) = 
+CALCULATE(
+    AVERAGEX(
+        DATESINPERIOD(
+            DimDate[Date],
+            MAX(DimDate[Date]),
+            -3,
+            MONTH
+        ),
+        [Total Revenue]
+    ),
+    ALL(DimDate)
+)
+// Description: 3-month moving average of revenue
+// Format: Currency ($)
+// Used In: Trend smoothing, seasonality analysis
+
+Revenue Trend = 
+VAR _CurrentRevenue = [Total Revenue]
+VAR _PriorRevenue = [Revenue Prior Month]
+RETURN
+    SWITCH(
+        TRUE(),
+        _CurrentRevenue > _PriorRevenue * 1.05, "▲ Strong Growth",
+        _CurrentRevenue > _PriorRevenue, "↗ Growing",
+        _CurrentRevenue >= _PriorRevenue * 0.95, "→ Stable",
+        _CurrentRevenue >= _PriorRevenue * 0.90, "↘ Declining",
+        "▼ Sharp Decline"
+    )
+// Description: Textual description of revenue trend
+// Format: Text with arrow
+// Used In: Executive summaries, trend cards
+
+Forecast Accuracy = 
+VAR _ActualRevenue = [Total Revenue]
+VAR _BudgetRevenue = [Total Budget]
+RETURN
+    1 - ABS(DIVIDE(_ActualRevenue - _BudgetRevenue, _BudgetRevenue, 0))
+// Description: Accuracy of budget forecast (1 = perfect, 0 = complete miss)
+// Format: Percentage
+// Used In: Forecasting evaluation, process improvement
+
+Cumulative Variance = 
+CALCULATE(
+    [Variance (Absolute)],
+    DATESYTD(DimDate[Date])
+)
+// Description: Year-to-date cumulative variance
+// Format: Currency ($) with sign
+// Used In: Cumulative performance tracking
+
+// ===================================================
+// SECTION 8: FORMATTING MEASURES
+// ===================================================
+
+Revenue Display = 
+VAR _Rev = [Total Revenue]
+RETURN
+    IF(
+        _Rev >= 1000000,
+        FORMAT(_Rev / 1000000, "$#,##0.0M"),
+        FORMAT(_Rev / 1000, "$#,##0K")
+    )
+// Description: Formatted revenue with K/M suffixes
+// Format: Text
+// Used In: Dashboard labels, mobile views
+
+Variance Display = 
+VAR _Var = [Variance (Absolute)]
+VAR _VarText = 
+    IF(
+        ABS(_Var) >= 1000000,
+        FORMAT(ABS(_Var) / 1000000, "$#,##0.0M"),
+        FORMAT(ABS(_Var) / 1000, "$#,##0K")
+    )
+VAR _Sign = IF(_Var >= 0, "+", "-")
+RETURN
+    _Sign & _VarText
+// Description: Formatted variance with +/- sign and K/M suffix
+// Format: Text
+// Used In: KPI cards, variance labels
+
+// ===================================================
+// SECTION 9: DYNAMIC TITLES
+// ===================================================
+
+Dashboard Title = 
+"Financial KPI Scorecard - " & 
+    IF(
+        ISFILTERED(DimDate[Year]),
+        "FY" & MAX(DimDate[Year]),
+        "All Years"
+    )
+// Description: Dynamic dashboard title based on filters
+// Format: Text
+// Used In: Report header
+
+Selected Period = 
+IF(
+    ISFILTERED(DimDate[Date]),
+    FORMAT(MIN(DimDate[Date]), "MMM DD, YYYY") & " - " & 
+    FORMAT(MAX(DimDate[Date]), "MMM DD, YYYY"),
+    "All Time"
+)
+// Description: Display text for selected date range
+// Format: Text
+// Used In: Filter context display
+
+// ===================================================
+// SECTION 10: TESTING MEASURES (For Validation)
+// ===================================================
+
+_TEST Budget Coverage = 
+VAR _SalesRegions = 
+    DISTINCT(FactSales[Region])
+VAR _BudgetRegions = 
+    DISTINCT(FactBudget[Region])
+RETURN
+    COUNTROWS(_SalesRegions) = COUNTROWS(_BudgetRegions)
+// Description: Validates all sales regions have budget data
+// Format: True/False
+// Used In: Data quality checks
+// Expected: TRUE
+
+_TEST Orphan Sales = 
+CALCULATE(
+    COUNTROWS(FactSales),
+    ISBLANK([Total Budget])
+)
+// Description: Count of sales rows without matching budget
+// Format: Whole Number
+// Used In: Data quality checks
+// Expected: 0
+
+// =====================================================
+// END OF MEASURE LIBRARY
+// Total Measures: 42
+// Created by: InsightForge BI Developer Agent
+// Last Updated: January 28, 2026
+// =====================================================
+
+// USAGE NOTES:
+// - Copy measures into Power BI Desktop measure table
+// - Set formats in Power BI (Currency, Percentage, etc.)
+// - Test all measures with sample data before production
+// - Add descriptions to each measure in Power BI for documentation
+// - Use _TEST measures in DAX Studio for validation
+// - Conditional formatting measures use specific value ranges

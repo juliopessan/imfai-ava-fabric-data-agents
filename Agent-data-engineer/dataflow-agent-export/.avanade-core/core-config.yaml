@@ -1,0 +1,300 @@
+# DataFlow Agent - Core Configuration
+# Avanade Method - Data Engineering Framework
+# Version: 2.0
+
+agent:
+  name: DataFlow
+  id: data-engineer
+  title: Data Engineering & Pipeline Specialist
+  icon: 🔄
+  version: "2.0"
+  framework: "Avanade Method - Data Engineering Excellence"
+
+# Output Configuration
+outputStructure:
+  baseFolder: "data-outputs"
+  subFolders:
+    - ddl              # Table definitions (DDL scripts)
+    - etl              # ETL/ELT transformation scripts
+    - tests            # Unit and integration tests
+    - profiles         # Data profiling reports
+    - quality          # Data quality validation results
+    - documentation    # Pipeline documentation
+    - optimization     # Performance analysis reports
+    - audits           # Checklist execution results
+    - catalog          # Data catalog and glossary
+    - sttm             # Source-to-Target Mappings
+    - lineage          # Data lineage documentation
+    - monitoring       # Monitoring configuration
+    - reviews          # Code review reports
+
+# Naming Convention
+naming:
+  pattern: "{type}_{name}_{YYYY-MM-DD_HHmm}.{ext}"
+  examples:
+    - "ddl_landing-tables_2026-01-26_1600.sql"
+    - "etl_transform-silver_2026-01-26_1600.sql"
+    - "profile_nyc-taxi_2026-01-26_1600.md"
+    - "tests_unit-tests_2026-01-26_1600.sql"
+
+# Capabilities Mapping (Avanade Canada Requirements)
+capabilities:
+  data_profiling:
+    command: "*profile-data"
+    task: "profile-data-sources.md"
+    output_folder: "profiles"
+    description: "Analyze source data files for schema, quality, and patterns"
+    indicative_impact:
+      traditional_time: "11 hours"
+      ai_assisted_time: "0.6 hours"
+      reduction: "95%"
+      
+  pipeline_creation:
+    command: "*create-pipeline"
+    task: "create-data-pipeline.md"
+    output_folder: "ddl,etl,tests,documentation"
+    description: "End-to-end pipeline with Landing/Silver/Gold layers"
+    indicative_impact:
+      traditional_time: "56 hours"
+      ai_assisted_time: "5.5 hours"
+      reduction: "90%"
+      
+  ddl_generation:
+    command: "*create-ddl"
+    task: "create-ddl-scripts.md"
+    output_folder: "ddl"
+    template: "ddl-scripts-tmpl.yaml"
+    description: "Generate table definitions for all layers"
+    indicative_impact:
+      traditional_time: "14 hours"
+      ai_assisted_time: "1 hour"
+      reduction: "93%"
+      
+  etl_development:
+    command: "*create-etl"
+    task: "create-etl-scripts.md"
+    output_folder: "etl"
+    template: "etl-scripts-tmpl.yaml"
+    description: "Create ETL/ELT transformation logic"
+    indicative_impact:
+      traditional_time: "29 hours"
+      ai_assisted_time: "3 hours"
+      reduction: "90%"
+      
+  data_quality:
+    command: "*validate-quality"
+    task: "validate-data-quality.md"
+    output_folder: "quality"
+    description: "Implement data quality validation framework"
+    indicative_impact:
+      traditional_time: "16 hours"
+      ai_assisted_time: "0.75 hours"
+      reduction: "95%"
+      
+  test_creation:
+    command: "*create-tests"
+    task: "create-data-tests.md"
+    output_folder: "tests"
+    template: "data-tests-tmpl.yaml"
+    description: "Generate unit and integration tests"
+    indicative_impact:
+      traditional_time: "21 hours"
+      ai_assisted_time: "1 hour"
+      reduction: "95%"
+      
+  optimization:
+    command: "*optimize-pipeline"
+    task: "optimize-pipeline.md"
+    output_folder: "optimization"
+    description: "Analyze and optimize pipeline performance"
+    indicative_impact:
+      traditional_time: "21 hours"
+      ai_assisted_time: "2.25 hours"
+      reduction: "89%"
+      
+  documentation:
+    command: "*document-pipeline"
+    task: "document-data-pipeline.md"
+    output_folder: "documentation"
+    description: "Generate comprehensive pipeline documentation"
+    indicative_impact:
+      traditional_time: "17 hours"
+      ai_assisted_time: "1.2 hours"
+      reduction: "93%"
+      
+  checklist_execution:
+    command: "*execute-checklist"
+    task: "execute-checklist.md"
+    output_folder: "audits"
+    description: "Execute production readiness checklist"
+    indicative_impact:
+      traditional_time: "26 hours"
+      ai_assisted_time: "4 hours"
+      reduction: "85%"
+
+  # NEW CAPABILITIES - 100% Requirements Coverage
+  
+  data_catalog:
+    command: "*create-catalog"
+    task: "create-data-catalog.md"
+    output_folder: "documentation"
+    description: "Create data catalog and business glossary"
+    personas: ["Data Modeler"]
+    indicative_impact:
+      traditional_time: "24 hours"
+      ai_assisted_time: "2 hours"
+      reduction: "92%"
+      
+  sttm_creation:
+    command: "*create-sttm"
+    task: "create-sttm.md"
+    output_folder: "documentation"
+    description: "Create Source-to-Target Mapping documentation"
+    personas: ["Data Analyst"]
+    indicative_impact:
+      traditional_time: "18 hours"
+      ai_assisted_time: "1.5 hours"
+      reduction: "92%"
+      
+  test_data_generation:
+    command: "*generate-test-data"
+    task: "generate-test-data.md"
+    output_folder: "tests"
+    description: "Generate synthetic/mock data for testing"
+    personas: ["Data Engineer"]
+    indicative_impact:
+      traditional_time: "12 hours"
+      ai_assisted_time: "1 hour"
+      reduction: "92%"
+      
+  data_lineage:
+    command: "*create-lineage"
+    task: "create-lineage-doc.md"
+    output_folder: "documentation"
+    description: "Create data lineage documentation"
+    personas: ["Data Modeler", "Data Engineer"]
+    indicative_impact:
+      traditional_time: "16 hours"
+      ai_assisted_time: "1.5 hours"
+      reduction: "91%"
+      
+  monitoring_observability:
+    command: "*setup-monitoring"
+    task: "setup-monitoring.md"
+    output_folder: "documentation"
+    description: "Setup pipeline monitoring and observability"
+    personas: ["Data Engineer"]
+    indicative_impact:
+      traditional_time: "20 hours"
+      ai_assisted_time: "2 hours"
+      reduction: "90%"
+      
+  code_review:
+    command: "*code-review"
+    task: "code-review.md"
+    output_folder: "audits"
+    description: "Perform peer review of pipeline code"
+    personas: ["Data Engineer"]
+    indicative_impact:
+      traditional_time: "8 hours"
+      ai_assisted_time: "0.5 hours"
+      reduction: "94%"
+
+# Architecture Patterns
+architecture:
+  medallion:
+    landing:
+      alias: "Bronze"
+      schema_prefix: "LND"
+      purpose: "Raw data ingestion, VARCHAR columns"
+      principles:
+        - "Preserve source data exactly as received"
+        - "All columns as VARCHAR for flexibility"
+        - "Include audit columns (load_timestamp, source_file)"
+        
+    silver:
+      schema_prefix: "SILVER"
+      purpose: "Typed, validated, quality-checked data"
+      principles:
+        - "Proper data types applied"
+        - "Data quality flags (VALID/INVALID)"
+        - "Reject records captured separately"
+        - "Business rules validated"
+        
+    gold:
+      schema_prefix: "GOLD"
+      purpose: "Business-ready, enriched, aggregated data"
+      principles:
+        - "Only VALID records from Silver"
+        - "Denormalized for query performance"
+        - "Business KPIs and metrics"
+        - "Ready for analytics/reporting"
+        
+    reference:
+      schema_prefix: "REF"
+      purpose: "Lookup and dimension tables"
+
+# Supported Technologies
+technologies:
+  languages:
+    - SQL (T-SQL, PL/SQL, SparkSQL)
+    - Python (PySpark)
+    - Scala (Spark)
+    
+  platforms:
+    - Azure Synapse Analytics
+    - Azure Databricks
+    - Azure Data Factory
+    - Microsoft Fabric
+    - SQL Server
+    
+  file_formats:
+    - CSV (Comma-Separated Values)
+    - TSV (Tab-Separated Values)
+    - Parquet (Columnar Storage)
+    - JSON (Structured/Semi-structured)
+    - Avro, ORC, Delta Lake
+
+# Data Quality Framework
+dataQuality:
+  validation_types:
+    - type_validation: "Ensure correct data types"
+    - null_checks: "Validate required fields"
+    - range_validation: "Check numeric ranges"
+    - referential_integrity: "Validate foreign keys"
+    - business_rules: "Apply domain-specific rules"
+    - format_validation: "Check patterns (email, phone)"
+    - duplicate_detection: "Identify duplicate records"
+    
+  quality_flags:
+    - VALID: "Passed all quality checks"
+    - INVALID: "Failed one or more checks"
+    - SUSPECT: "Warning, requires review"
+
+# Demo Configuration
+demo:
+  sample_data_folder: "../Files"
+  sample_files:
+    csv:
+      - "green_tripdata_2021-04.csv"
+      - "green_tripdata_2021-05.csv"
+      - "green_tripdata_2021-06.csv"
+    json:
+      - "payment_type_array.json"
+      - "rate_code.json"
+    tsv:
+      - "trip_type.tsv"
+    parquet:
+      - "month=04/"
+      - "month=05/"
+      - "month=06/"
+  reference_project: "../real-test"
+  
+# AI Impact Summary (Complete Pipeline)
+aiImpactSummary:
+  traditional_total: "152 hours (~19 working days)"
+  ai_assisted_total: "21 hours (~2.6 working days)"
+  overall_reduction: "86%"
+  acceleration: "7.2x faster delivery"
+  annual_capacity_increase: "7.6x more pipelines"
+  cost_savings_per_pipeline: "$10,480 (86% reduction)"

@@ -1,0 +1,207 @@
+# Data Tests Template
+
+## Metadata
+```yaml
+project:
+  name: "{PROJECT_NAME}"
+  database: "{DATABASE_NAME}"
+  test_framework: "SQL Unit Tests"
+  
+generator:
+  name: "{Generator Name}"
+  date: "{YYYY-MM-DD}"
+  version: "1.0"
+```
+
+## Test Categories
+```yaml
+test_categories:
+  - category: "Row Count Tests"
+    description: "Validate record counts across layers"
+    
+  - category: "Schema Tests"
+    description: "Validate table structures"
+    
+  - category: "Data Type Tests"
+    description: "Verify data type conversions"
+    
+  - category: "Null Check Tests"
+    description: "Validate required fields"
+    
+  - category: "Referential Integrity Tests"
+    description: "Verify foreign key relationships"
+    
+  - category: "Aggregation Tests"
+    description: "Validate summary calculations"
+    
+  - category: "Business Rule Tests"
+    description: "Verify domain-specific rules"
+```
+
+## Row Count Tests
+```yaml
+row_count_tests:
+  - test_name: "TEST_01_LANDING_ROW_COUNT"
+    description: "Verify Landing table has expected row count"
+    assertion: "Landing rows >= expected minimum"
+    sql_pattern: |
+      -- Test: Landing Row Count
+      DECLARE @landing_count INT;
+      SELECT @landing_count = COUNT(*) FROM LND.{TABLE_NAME};
+      
+      IF @landing_count >= {expected_min}
+          PRINT '✅ PASS: Landing has ' + CAST(@landing_count AS VARCHAR) + ' rows';
+      ELSE
+          PRINT '❌ FAIL: Landing has only ' + CAST(@landing_count AS VARCHAR) + ' rows';
+          
+  - test_name: "TEST_02_SILVER_COMPLETENESS"
+    description: "Verify no data loss from Landing to Silver"
+    assertion: "Silver VALID + INVALID = Landing"
+    sql_pattern: |
+      -- Test: Silver Completeness
+      DECLARE @landing INT, @silver_valid INT, @silver_reject INT;
+      SELECT @landing = COUNT(*) FROM LND.{TABLE_NAME};
+      SELECT @silver_valid = COUNT(*) FROM SILVER.{TABLE_NAME} WHERE quality_flag = 'VALID';
+      SELECT @silver_reject = COUNT(*) FROM SILVER.{TABLE_NAME}_REJECT;
+      
+      IF @landing = @silver_valid + @silver_reject
+          PRINT '✅ PASS: No data loss';
+      ELSE
+          PRINT '❌ FAIL: Data loss detected';
+```
+
+## Schema Tests
+```yaml
+schema_tests:
+  - test_name: "TEST_03_COLUMN_EXISTS"
+    description: "Verify required columns exist"
+    sql_pattern: |
+      -- Test: Required Columns Exist
+      IF EXISTS (
+          SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS 
+          WHERE TABLE_SCHEMA = '{SCHEMA}' 
+          AND TABLE_NAME = '{TABLE}' 
+          AND COLUMN_NAME = '{COLUMN}'
+      )
+          PRINT '✅ PASS: Column {COLUMN} exists';
+      ELSE
+          PRINT '❌ FAIL: Column {COLUMN} missing';
+          
+  - test_name: "TEST_04_DATA_TYPE"
+    description: "Verify column data types"
+    sql_pattern: |
+      -- Test: Data Type Verification
+      IF EXISTS (
+          SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS 
+          WHERE TABLE_SCHEMA = '{SCHEMA}' 
+          AND TABLE_NAME = '{TABLE}' 
+          AND COLUMN_NAME = '{COLUMN}'
+          AND DATA_TYPE = '{EXPECTED_TYPE}'
+      )
+          PRINT '✅ PASS: {COLUMN} is {EXPECTED_TYPE}';
+      ELSE
+          PRINT '❌ FAIL: {COLUMN} type mismatch';
+```
+
+## Null Check Tests
+```yaml
+null_tests:
+  - test_name: "TEST_05_REQUIRED_NOT_NULL"
+    description: "Verify required fields have no NULLs in VALID records"
+    sql_pattern: |
+      -- Test: Required Fields Not Null
+      DECLARE @null_count INT;
+      SELECT @null_count = COUNT(*) 
+      FROM SILVER.{TABLE_NAME} 
+      WHERE {REQUIRED_COLUMN} IS NULL 
+      AND quality_flag = 'VALID';
+      
+      IF @null_count = 0
+          PRINT '✅ PASS: No NULLs in {REQUIRED_COLUMN}';
+      ELSE
+          PRINT '❌ FAIL: ' + CAST(@null_count AS VARCHAR) + ' NULLs found';
+```
+
+## Referential Integrity Tests
+```yaml
+referential_tests:
+  - test_name: "TEST_06_FK_REFERENCE_VALID"
+    description: "Verify all foreign keys exist in reference table"
+    sql_pattern: |
+      -- Test: Referential Integrity
+      DECLARE @orphan_count INT;
+      SELECT @orphan_count = COUNT(*) 
+      FROM SILVER.{TABLE_NAME} s
+      LEFT JOIN REF.{REFERENCE_TABLE} r ON s.{FK_COLUMN} = r.{PK_COLUMN}
+      WHERE r.{PK_COLUMN} IS NULL 
+      AND s.{FK_COLUMN} IS NOT NULL
+      AND s.quality_flag = 'VALID';
+      
+      IF @orphan_count = 0
+          PRINT '✅ PASS: All references valid';
+      ELSE
+          PRINT '❌ FAIL: ' + CAST(@orphan_count AS VARCHAR) + ' orphan records';
+```
+
+## Aggregation Tests
+```yaml
+aggregation_tests:
+  - test_name: "TEST_07_AGG_TOTAL_MATCHES"
+    description: "Verify aggregated totals match detail"
+    sql_pattern: |
+      -- Test: Aggregation Total Matches
+      DECLARE @detail_total DECIMAL(18,2), @agg_total DECIMAL(18,2);
+      SELECT @detail_total = SUM({AMOUNT_COLUMN}) FROM GOLD.{ENRICHED_TABLE};
+      SELECT @agg_total = SUM({AMOUNT_COLUMN}) FROM GOLD.{AGG_TABLE};
+      
+      IF ABS(@detail_total - @agg_total) < 0.01
+          PRINT '✅ PASS: Aggregation totals match';
+      ELSE
+          PRINT '❌ FAIL: Total mismatch - Detail: ' + CAST(@detail_total AS VARCHAR) + 
+                ', Agg: ' + CAST(@agg_total AS VARCHAR);
+```
+
+## Business Rule Tests
+```yaml
+business_rule_tests:
+  - test_name: "TEST_08_RANGE_VALIDATION"
+    description: "Verify values within business ranges"
+    sql_pattern: |
+      -- Test: Business Range Validation
+      DECLARE @out_of_range INT;
+      SELECT @out_of_range = COUNT(*) 
+      FROM SILVER.{TABLE_NAME} 
+      WHERE ({VALUE_COLUMN} < {MIN_VALUE} OR {VALUE_COLUMN} > {MAX_VALUE})
+      AND quality_flag = 'VALID';
+      
+      IF @out_of_range = 0
+          PRINT '✅ PASS: All values in valid range';
+      ELSE
+          PRINT '❌ FAIL: ' + CAST(@out_of_range AS VARCHAR) + ' out of range';
+```
+
+## Test Execution Pattern
+```sql
+-- =============================================================================
+-- Unit Tests: {PROJECT_NAME}
+-- Generated: {YYYY-MM-DD}
+-- =============================================================================
+
+PRINT '=============================================================';
+PRINT ' DATA PIPELINE UNIT TESTS';
+PRINT '=============================================================';
+PRINT '';
+
+-- Test 1: Row Count
+{test_1_sql}
+
+-- Test 2: Completeness
+{test_2_sql}
+
+-- ... additional tests ...
+
+PRINT '';
+PRINT '=============================================================';
+PRINT ' TEST EXECUTION COMPLETE';
+PRINT '=============================================================';
+```
