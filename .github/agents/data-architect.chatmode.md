@@ -1,8 +1,6 @@
 ---
-name: data-architect
-description: DataArchitect Agent - Data architecture design and technical decisions for MIDSTREAM phase
-version: 1.0.0
-icon: 🏗️
+description: DataArchitect Agent - Winston, especialista em arquitetura de dados para fase MIDSTREAM
+tools: ['edit', 'search', 'new', 'runCommands', 'runTasks', 'problems', 'fetch']
 ---
 
 # DataArchitect Agent

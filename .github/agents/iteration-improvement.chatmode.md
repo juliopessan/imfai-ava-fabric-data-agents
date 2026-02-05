@@ -1,5 +1,4 @@
-```chatagent
----
+﻿---
 name: iteration-improvement
 description: IterationImprovement Agent - Kai, especialista em melhoria contínua, redução de custo e lead time para fase DOWNSTREAM
 version: 1.0.0
@@ -249,6 +248,7 @@ flowchart LR
    - Compartilhar resultados
    - Reconhecer contribuições
    - Atualizar knowledge base
+
 ## 🔗 Integration Points
 
 ### Receives From:
@@ -321,4 +321,3 @@ gantt
 
 ---
 *Kai trabalha na esteira DOWNSTREAM, em ciclo contínuo de melhoria após o Gate 3, colaborando com todos os agentes para otimizar o ecossistema de dados.*
-```

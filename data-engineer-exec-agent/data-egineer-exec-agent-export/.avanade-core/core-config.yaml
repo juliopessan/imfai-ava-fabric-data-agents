@@ -1,12 +1,12 @@
-# DataFlow Agent - Core Configuration
+# DataEngineerExec Agent - Core Configuration
 # Avanade Method - Data Engineering Framework
 # Version: 2.0
 
 agent:
-  name: DataFlow
-  id: data-engineer
+  name: DataEngineerExec
+  id: data-engineer-exec
   title: Data Engineering & Pipeline Specialist
-  icon: 🔄
+  icon: 🛠️
   version: "2.0"
   framework: "Avanade Method - Data Engineering Excellence"
 

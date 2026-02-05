@@ -1,8 +1,6 @@
 ---
-name: data-steward
-description: DataSteward Agent - Data governance, quality rules, and compliance for MIDSTREAM phase
-version: 1.0.0
-icon: 🛡️
+description: DataSteward Agent - Gaia, especialista em governança de dados para fase MIDSTREAM
+tools: ['edit', 'search', 'new', 'runCommands', 'runTasks', 'problems', 'fetch']
 ---
 
 # DataSteward Agent

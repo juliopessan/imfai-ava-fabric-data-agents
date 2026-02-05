@@ -1,0 +1,130 @@
+/// Dimension Table: NYC Taxi Zone Locations
+/// Grain: One row per TLC taxi zone
+/// Type: Type 1 SCD (Overwrite)
+/// Rows: 265
+/// Created: 2026-02-05
+
+table dim_location
+	lineageTag: f1e2d3c4-b5a6-9870-1234-567890abcdef
+	dataCategory: Place
+
+	/// Surrogate Key
+	column location_sk
+		dataType: int64
+		isKey: true
+		formatString: 0
+		lineageTag: e2d3c4b5-a6f7-8901-2345-678901bcdef0
+		summarizeBy: none
+		sourceColumn: location_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Natural Key
+	column location_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d3c4b5a6-f7e8-9012-3456-789012cdef01
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Geographic Attributes
+	column borough
+		dataType: string
+		lineageTag: c4b5a6f7-e8d9-0123-4567-890123def012
+		summarizeBy: none
+		sourceColumn: borough
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_name
+		dataType: string
+		lineageTag: b5a6f7e8-d9c0-1234-5678-901234ef0123
+		summarizeBy: none
+		sourceColumn: zone_name
+		dataCategory: Place
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_zone
+		dataType: string
+		lineageTag: a6f7e8d9-c0b1-2345-6789-012345f01234
+		summarizeBy: none
+		sourceColumn: service_zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: decimal
+		formatString: #,0.000000
+		lineageTag: f7e8d9c0-b1a2-3456-7890-123456012345
+		summarizeBy: none
+		sourceColumn: latitude
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitude
+		dataType: decimal
+		formatString: #,0.000000
+		lineageTag: e8d9c0b1-a2f3-4567-8901-234567123456
+		summarizeBy: none
+		sourceColumn: longitude
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hierarchies
+	hierarchy 'Geographic Hierarchy'
+		lineageTag: d9c0b1a2-f3e4-5678-9012-345678234567
+
+		level Borough
+			column: borough
+			lineageTag: c0b1a2f3-e4d5-6789-0123-456789345678
+
+		level 'Service Zone'
+			column: service_zone
+			lineageTag: b1a2f3e4-d5c6-7890-1234-567890456789
+
+		level Zone
+			column: zone_name
+			lineageTag: a2f3e4d5-c6b7-8901-2345-678901567890
+
+	/// DAX Measures
+	measure 'Location Count' = COUNTROWS(dim_location)
+		formatString: #,0
+		displayFolder: Location Metrics
+
+	measure 'Selected Borough' = SELECTEDVALUE(dim_location[borough], "All Boroughs")
+		displayFolder: Location Metrics
+
+	measure 'Selected Zone' = SELECTEDVALUE(dim_location[zone_name], "All Zones")
+		displayFolder: Location Metrics
+
+	measure 'Unique Boroughs' = DISTINCTCOUNT(dim_location[borough])
+		formatString: #,0
+		displayFolder: Location Metrics
+
+	measure 'Avg Trips Per Zone' = 
+		DIVIDE(
+			[Total Trips],
+			DISTINCTCOUNT(fact_trips[pickup_location_sk]),
+			0
+		)
+		formatString: #,0.00
+		displayFolder: Location Metrics
+
+	/// Partition
+	partition dim_location = m
+		mode: import
+		source = 
+			let
+				Source = AzureDatabricks.Catalogs("adb-####.##.azuredatabricks.net", "/sql/1.0/warehouses/####", [Catalog="nyc_taxi"]),
+				gold = Source{[Name="gold"]}[Data],
+				dim_location = gold{[Name="dim_location"]}[Data]
+			in
+				dim_location
+
+	annotation PBI_ResultType = Table

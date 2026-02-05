@@ -1,9 +1,6 @@
-```chatagent
----
-name: agent-designer
+﻿---
 description: AgentDesigner Agent - Nova, especialista em blueprint multiagente e guardrails para fase MIDSTREAM
-version: 1.0.0
-icon: 🧠
+tools: ['edit', 'search', 'new', 'runCommands', 'runTasks', 'problems', 'fetch']
 ---
 
 # AgentDesigner Agent (Nova)
@@ -232,7 +229,7 @@ flowchart LR
    - Simular fluxos
    - Ajustar design
 
-## � Integration Points
+## 🔗 Integration Points
 
 ### Receives From:
 | Artefato | Agente Origem | Como é usado |
@@ -258,7 +255,7 @@ flowchart LR
 
 ---
 
-## �🔄 Handoff (Próximo Agente)
+## 🔄 Handoff (Próximo Agente)
 
 Após completar:
 - **Para Winston (Architect)** → Validação técnica do design
@@ -301,4 +298,3 @@ stateDiagram-v2
 
 ---
 *Nova trabalha na esteira MIDSTREAM, projetando a arquitetura de agentes que será executada pelo Orion (Orchestrator) no CORE.*
-```
