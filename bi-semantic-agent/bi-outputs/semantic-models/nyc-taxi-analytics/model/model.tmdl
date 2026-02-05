@@ -1,0 +1,60 @@
+/// NYC Green Taxi Analytics - Semantic Model Definition
+/// Platform: Power BI / Azure Analysis Services
+/// Created: 2026-02-05
+/// Author: Bianca (BiSemantic)
+
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotations
+	PBI_QueryOrder = ["fact_trips", "dim_date", "dim_payment", "dim_rate", "dim_trip_type", "dim_location"]
+	__PBI_TimeIntelligenceEnabled = "1"
+
+/// Data Source Connection
+dataSource 'Azure Databricks - NYC Taxi'
+	type: databricks
+	connectionDetails
+		server: "adb-####.##.azuredatabricks.net"
+		httpPath: "/sql/1.0/warehouses/####"
+		database: "nyc_taxi"
+	mode: directQuery
+	credential
+		AuthenticationKind: ServicePrincipal
+		EncryptConnection: true
+		PrivacySetting: Organizational
+
+/// Tables
+ref table fact_trips
+ref table dim_date
+ref table dim_payment
+ref table dim_rate
+ref table dim_trip_type
+ref table dim_location
+
+/// Relationships
+ref relationship fact_trips_dim_date
+ref relationship fact_trips_dim_payment
+ref relationship fact_trips_dim_rate
+ref relationship fact_trips_dim_trip_type
+ref relationship fact_trips_dim_location_pickup
+ref relationship fact_trips_dim_location_dropoff
+
+/// Roles (Row-Level Security)
+role 'Operations Manager'
+	modelPermission: read
+	tablePermission dim_location = [borough] = USERNAME()
+
+role 'Executive'
+	modelPermission: read
+
+/// Model Metadata
+annotation PBI_ProTooling = "[]"
+annotation TabularEditor_SerializeOptions = {"IgnoreInferredObjects":true,"IgnoreInferredProperties":true,"IgnoreTimestamps":true,"SplitMultilineStrings":true,"PrefixFilenames":false,"LocalTranslations":false,"LocalPerspectives":false,"LocalRelationships":false,"Levels":["Data Sources","Shared Expressions","Perspectives","Relationships","Roles","Tables","Tables/Columns","Tables/Hierarchies","Tables/Measures","Tables/Partitions","Translations"]}
+
+/// Model Properties
+annotation __PBI_LocalDateTable = "dim_date"

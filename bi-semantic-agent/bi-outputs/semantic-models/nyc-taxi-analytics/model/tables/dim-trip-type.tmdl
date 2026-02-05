@@ -1,0 +1,77 @@
+/// Dimension Table: Trip Type
+/// Grain: One row per trip type
+/// Type: Type 1 SCD (Overwrite)
+/// Rows: 3
+/// Created: 2026-02-05
+
+table dim_trip_type
+	lineageTag: 1a2b3c4d-5e6f-7890-9876-fedcba098765
+
+	/// Surrogate Key
+	column trip_type_sk
+		dataType: int64
+		isKey: true
+		formatString: 0
+		lineageTag: 2b3c4d5e-6f7a-8901-8765-edcba0987654
+		summarizeBy: none
+		sourceColumn: trip_type_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Natural Key
+	column trip_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c4d5e6f-7a8b-9012-7654-dcba09876543
+		summarizeBy: none
+		sourceColumn: trip_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Attributes
+	column trip_type_desc
+		dataType: string
+		lineageTag: 4d5e6f7a-8b9c-0123-6543-cba098765432
+		summarizeBy: none
+		sourceColumn: trip_type_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_dispatch
+		dataType: boolean
+		formatString: "TRUE";"TRUE";"FALSE"
+		lineageTag: 5e6f7a8b-9c0d-1234-5432-ba0987654321
+		summarizeBy: none
+		sourceColumn: is_dispatch
+
+		annotation SummarizationSetBy = Automatic
+
+	/// DAX Measures
+	measure 'Trip Type Count' = COUNTROWS(dim_trip_type)
+		formatString: #,0
+		displayFolder: Trip Type Metrics
+
+	measure 'Selected Trip Type' = SELECTEDVALUE(dim_trip_type[trip_type_desc], "All Trip Types")
+		displayFolder: Trip Type Metrics
+
+	measure '% Dispatch Trips' = 
+		DIVIDE(
+			CALCULATE([Total Trips], dim_trip_type[is_dispatch] = TRUE()),
+			[Total Trips],
+			0
+		)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Trip Type Metrics
+
+	/// Partition
+	partition dim_trip_type = m
+		mode: import
+		source = 
+			let
+				Source = AzureDatabricks.Catalogs("adb-####.##.azuredatabricks.net", "/sql/1.0/warehouses/####", [Catalog="nyc_taxi"]),
+				gold = Source{[Name="gold"]}[Data],
+				dim_trip_type = gold{[Name="dim_trip_type"]}[Data]
+			in
+				dim_trip_type
+
+	annotation PBI_ResultType = Table
