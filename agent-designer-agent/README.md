@@ -6,7 +6,7 @@
 
 ## Overview
 
-The AgentDesigner agent (Nova 🧠) is responsible for designing multi-agent blueprints, defining guardrails, and establishing agent contracts during the MIDSTREAM phase of data projects.
+The AgentDesigner agent (Nova 🧠) is a **meta-level agent** responsible for designing multi-agent blueprints, defining guardrails, and establishing agent contracts. It operates in the **CORE layer** and is **OPTIONAL** - used only for complex multi-agent projects (5+ custom agents).
 
 ---
 
@@ -160,4 +160,4 @@ agent-designer-agent/
 
 ---
 
-*Nova works in the MIDSTREAM phase, designing the agent architecture that will be executed by Orion (Orchestrator) in CORE.*
+*Nova works in the CORE (Meta-Level) layer, designing the agent architecture for complex multi-agent projects. For standard data pipeline projects (80% of cases), this agent is NOT needed.*

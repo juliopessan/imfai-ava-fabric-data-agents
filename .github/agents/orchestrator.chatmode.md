@@ -109,7 +109,7 @@ Route to these agents based on need:
 | BusinessAnalyst | 📊 Mary | UPSTREAM | STTM, Questions, Requirements |
 | DataArchitect | 🏗️ Winston | MIDSTREAM | Architecture, Model, Decisions |
 | DataModeler | 🧩 Sofia | MIDSTREAM | Data model, Contracts, Metrics |
-| AgentDesigner | 🧠 Nova | MIDSTREAM | Agent blueprints, Guardrails |
+| AgentDesigner | 🧠 Nova | CORE (Meta) | Agent blueprints (OPCIONAL) |
 | DataSteward | 🛡️ Gaia | MIDSTREAM | Governance, DQ Rules, Compliance |
 | DataEngineerExec | 🛠️ Diego | DOWNSTREAM | DDL, ETL, Testing, Profiling |
 | BiSemantic | 📊 Bianca | DOWNSTREAM | BI, Dashboards, DAX (Opcional) |

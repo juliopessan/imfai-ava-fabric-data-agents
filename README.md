@@ -30,16 +30,15 @@ O **Avanade™ Core** é um framework de 10 agentes de IA especializados que gui
 │   BusinessAnalyst           DataModeler                BiSemantic     │
 │                                   │                    (opcional)     │
 │                                   ▼                          │        │
-│                             🧠 Nova                          ▼        │
-│                             AgentDesigner              🔁 Kai         │
-│                                   │                    Iteration      │
-│                                   ▼                    Improvement    │
-│                             🛡️ Gaia                                   │
-│                             DataSteward                               │
+│                             🛡️ Gaia                          ▼        │
+│                             DataSteward              🔁 Kai            │
+│                                                      Iteration         │
+│                                                      Improvement       │
 │                                                                        │
 │                         🧭 Orion (Orchestrator)                        │
-│                         ───────────────────────                        │
-│                         Coordena TODAS as fases                        │
+│                         🧠 Nova (AgentDesigner - OPCIONAL)             │
+│                         ─────────────────────────────────              │
+│                         Coordenação CORE / Meta-Level                  │
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
 ```
@@ -54,12 +53,12 @@ O **Avanade™ Core** é um framework de 10 agentes de IA especializados que gui
 | 2 | **BusinessAnalyst** | 📋 Mary | UPSTREAM | 1 | STTM, requisitos, regras de negócio |
 | 3 | **DataArchitect** | 🏛️ Winston | MIDSTREAM | 2 | Arquitetura técnica, ADRs |
 | 4 | **DataModeler** | 🧩 Sofia | MIDSTREAM | 2 | Modelo lógico, contratos de dados |
-| 5 | **AgentDesigner** | 🧠 Nova | MIDSTREAM | 2 | Blueprints de agentes, guardrails |
-| 6 | **DataSteward** | 🛡️ Gaia | MIDSTREAM | 2 | Governança, qualidade, compliance |
-| 7 | **DataEngineerExec** | 🛠️ Diego | DOWNSTREAM | 3 | DDL, ETL, testes, pipelines |
-| 8 | **BiSemantic** | 📊 Bianca | DOWNSTREAM | 3 | Dashboards, DAX, modelos semânticos |
-| 9 | **IterationImprovement** | 🔁 Kai | DOWNSTREAM | Pós-3 | Melhoria contínua, custos, lead time |
-| 10 | **Orchestrator** | 🧭 Orion | CORE | Todos | Coordenação, validação de gates |
+| 5 | **DataSteward** | 🛡️ Gaia | MIDSTREAM | 2 | Governança, qualidade, compliance |
+| 6 | **DataEngineerExec** | 🛠️ Diego | DOWNSTREAM | 3 | DDL, ETL, testes, pipelines |
+| 7 | **BiSemantic** | 📊 Bianca | DOWNSTREAM | 3 | Dashboards, DAX, modelos semânticos |
+| 8 | **IterationImprovement** | 🔁 Kai | DOWNSTREAM | Pós-3 | Melhoria contínua, custos, lead time |
+| 9 | **Orchestrator** | 🧭 Orion | CORE | Todos | Coordenação, validação de gates |
+| 10 | **AgentDesigner** | 🧠 Nova | CORE (Meta) | 2 (Opt) | Agent blueprints (OPCIONAL) |
 
 ---
 

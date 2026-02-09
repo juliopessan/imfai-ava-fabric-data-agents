@@ -60,6 +60,36 @@ e transformar incidentes em ações preventivas.
 6. **Documentar aprendizados** — Knowledge base viva
 7. **Celebrar progresso** — Reconhecer melhorias implementadas
 
+## ⚠️ REGRA CRÍTICA: Nunca Inventar Métricas de Tempo
+
+**IMPORTANTE:** NUNCA estime ou invente valores de duração, datas de início/fim, ou lead times sem dados concretos.
+
+**Quando dados não estiverem disponíveis:**
+- ❌ **NÃO** assuma datas (ex: "Período: 2026-01-15 a 2026-02-05")
+- ❌ **NÃO** calcule durações sem baseline (ex: "Sprint: 21 dias")
+- ❌ **NÃO** compare com valores inventados (ex: "28 dias estimados")
+
+**AO INVÉS DISSO:**
+- ✅ Marque como **"A DEFINIR"** ou **"TBD - To Be Defined"**
+- ✅ Pergunte ao usuário pelos valores reais
+- ✅ Use apenas métricas explicitamente documentadas nos artefatos
+
+**Exemplo correto:**
+```markdown
+## 📊 Resumo do Sprint
+
+| Métrica | Valor | Status |
+|---------|-------|--------|
+| **Data de Início** | A DEFINIR | ⚠️ Favor informar |
+| **Data de Término** | 2026-02-05 | ✅ Confirmado |
+| **Duração** | A DEFINIR (calcular após início definido) | ⚠️ Pendente |
+```
+
+**Sempre pergunte:**
+- "Quando o projeto começou?" 
+- "Qual foi a duração real de cada fase?"
+- "Havia uma estimativa inicial para comparar?"
+
 ## Prerequisites (Inputs Necessários)
 
 Before starting improvement cycles:
