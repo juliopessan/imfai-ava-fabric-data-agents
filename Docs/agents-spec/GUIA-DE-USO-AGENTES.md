@@ -1,7 +1,7 @@
 # 📘 Guia de Uso - Agentes Avanade™ Core para Data Engineering
 
-**Versão:** 2.0  
-**Data:** 4 de Fevereiro de 2026  
+**Versão:** 2.1  
+**Data:** 9 de Fevereiro de 2026  
 **Autor:** Avanade Method Team
 
 ---
@@ -20,22 +20,28 @@
 
 ## 1. Visão Geral
 
-O Avanade™ Core para Data Engineering é um framework de **10 agentes de IA especializados** que guiam você através de todas as fases de um projeto de dados, desde a definição do problema até a entrega em produção e melhoria contínua.
+O Avanade™ Core para Data Engineering é um framework de **9 agentes especializados em dados + 3 agentes meta-level** que guiam você através de todas as fases de um projeto de dados, desde a definição do problema até a entrega em produção e melhoria contínua.
 
-### Resumo dos 10 Agentes
+### Resumo dos Agentes
 
+#### 🔄 Data Pipeline Agents (9 Especializados)
 | # | Agente | Persona | Fase | Gate | Responsabilidade Principal |
 |---|--------|---------|------|------|---------------------------|
 | 1 | 🎯 DataStrategist | Alex | UPSTREAM | Gate 1 | Definição do problema e KPIs |
 | 2 | 📊 BusinessAnalyst | Mary | UPSTREAM | Gate 1 | Requisitos e mapeamento de dados |
 | 3 | 🏗️ DataArchitect | Winston | MIDSTREAM | Gate 2 | Arquitetura técnica e ADRs |
 | 4 | 🧩 DataModeler | Sofia | MIDSTREAM | Gate 2 | Modelo lógico e contratos |
-| 5 | 🧠 AgentDesigner | Nova | MIDSTREAM | Gate 2 | Blueprint de agentes |
-| 6 | 🛡️ DataSteward | Gaia | MIDSTREAM | Gate 2 | Governança e qualidade |
-| 7 | 🛠️ DataEngineerExec | Diego | DOWNSTREAM | Gate 3 | Pipelines executáveis |
-| 8 | 📊 BiSemantic | Bianca | DOWNSTREAM | Gate 3 (Opcional) | Dashboards e BI |
-| 9 | 🔁 IterationImprovement | Kai | DOWNSTREAM | Pós Gate 3 | Melhoria contínua |
-| 10 | 🧭 Orchestrator | Orion | CORE | Todos | Coordenação e validação |
+| 5 | 🛡️ DataSteward | Gaia | MIDSTREAM | Gate 2 | Governança e qualidade |
+| 6 | 🛠️ DataEngineerExec | Diego | DOWNSTREAM | Gate 3 | Pipelines executáveis |
+| 7 | 📊 BiSemantic | Bianca | DOWNSTREAM | Gate 3 (Opcional) | Dashboards e BI |
+| 8 | 🔁 IterationImprovement | Kai | DOWNSTREAM | Pós Gate 3 | Melhoria contínua |
+| 9 | 🧭 Orchestrator | Orion | CORE | Todos | Coordenação e validação |
+
+#### 🧠 Meta-Level Agents (CORE)
+| # | Agente | Persona | Quando Usar | Responsabilidade |
+|---|--------|---------|-------------|------------------|
+| 10 | 🧠 AgentDesigner | Nova | Projetos multi-agente complexos | Blueprint de agentes customizados |
+| 11 | 🎛️ MasterAgent | Master | Roteamento geral | Coordenação principal |
 
 ### Arquitetura de Fases e Gates
 
@@ -81,19 +87,31 @@ O Avanade™ Core para Data Engineering é um framework de **10 agentes de IA es
 │  │   ├─ *tech-stack                  ├─ *metrics                              │    │
 │  │   └─ *security-design             └─ *metadata                             │    │
 │  │                                                                            │    │
-│  │   🧠 AgentDesigner (Nova)         🛡️ DataSteward (Gaia)                   │    │
-│  │   ├─ *agent-blueprint             ├─ *create-dq-rules                      │    │
-│  │   ├─ *agent-contracts             ├─ *create-governance                    │    │
-│  │   ├─ *guardrails                  ├─ *classify-data                        │    │
-│  │   ├─ *orchestration               ├─ *map-compliance                       │    │
-│  │   └─ *autonomy-matrix             └─ *document-lineage                     │    │
+│  │   🛡️ DataSteward (Gaia)                                                    │    │
+│  │   ├─ *create-dq-rules                                                      │    │
+│  │   ├─ *create-governance                                                    │    │
+│  │   ├─ *classify-data                                                        │    │
+│  │   ├─ *map-compliance                                                       │    │
+│  │   └─ *document-lineage                                                     │    │
 │  │                                                                            │    │
 │  │   📄 Artefatos:                                                            │    │
 │  │   • architecture.md • data-model.md • decisions.md • tech-stack.md         │    │
 │  │   • data-contracts.md • metrics-catalog.md • granularity-spec.md           │    │
-│  │   • agent-blueprint.md • orchestration-flow.md • guardrails.md             │    │
 │  │   • dq-rules.md • governance.md • classification.md • compliance.md        │    │
 │  └───────────────────────────────────────────────────────────────────────────┘    │
+│                                                                                   │
+│  ┌─────────────────────────────────────────────────────────────────────────┐    │
+│  │ ⚠️  CORE - Meta Level (OPCIONAL - Só para projetos avançados)        │    │
+│  │                                                                            │    │
+│  │   🧠 AgentDesigner (Nova) - Design de Agentes Customizados               │    │
+│  │   ├─ *agent-blueprint             (Projetos multi-agente complexos)        │    │
+│  │   ├─ *agent-contracts             (5+ agentes customizados)                │    │
+│  │   ├─ *guardrails                  (Requisitos críticos de segurança)      │    │
+│  │   ├─ *orchestration               (Coordenação avançada)                   │    │
+│  │   └─ *autonomy-matrix             (Níveis de autonomia customizados)      │    │
+│  │                                                                            │    │
+│  │   📄 Artefatos: agent-blueprint.md, orchestration-flow.md, guardrails.md   │    │
+│  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                        │                                           │
 │                              🧭 *gate-2 (Validação)                               │
 │                                        ▼                                           │
@@ -198,6 +216,7 @@ flowchart TB
 | **BiSemantic** | 📊 Bianca | DOWNSTREAM | 3 (Opcional) | `@bi-semantic` | Modelos semânticos, DAX, dashboards, reports, otimização BI |
 | **IterationImprovement** | 🔁 Kai | DOWNSTREAM | Pós-3 | `@iteration-improvement` | Melhoria contínua, custos, lead time, retrospectivas, incidentes |
 | **Orchestrator** | 🧭 Orion | CORE | Todos | `@orchestrator` | Validação de gates, roteamento, status, auditoria |
+| **AgentDesigner** | 🧠 Nova | CORE (Meta) | 2 (Opcional) | `@agent-designer` | Blueprint de agentes customizados, orquestração avançada [APENAS projetos complexos] |
 
 ---
 
@@ -218,8 +237,13 @@ flowchart LR
     subgraph MIDSTREAM["MIDSTREAM (Design)"]
         DA[🏗️ Winston - DataArchitect] --> DM[🧩 Sofia - DataModeler]
         DM --> DST[🛡️ Gaia - DataSteward]
-        AD[🧠 Nova - AgentDesigner] -.-> DM
     end
+    
+    subgraph CORE_META["CORE - Meta Level (Opcional)"]
+        AD[🧠 Nova - AgentDesigner]
+    end
+    
+    AD -.->|projetos<br>multi-agente| DA
     
     subgraph GATE2["Gate 2"]
         G2{🧭 Validação}
@@ -392,9 +416,11 @@ Um **Gate** é um ponto de validação obrigatório entre fases. O Orchestrator 
 
 ---
 
-#### 🧠 AgentDesigner (Nova)
+#### 🧠 AgentDesigner (Nova) ⚠️ OPCIONAL
 
-**Função:** Especialista em design de agentes, blueprints e guardrails.
+**Função:** Meta-agente especialista em design de agentes customizados, blueprints e guardrails.
+
+**Nível:** CORE (Meta-Level) - Opera em nível de design de AGENTES, não de dados.
 
 **Princípios:**
 - Contratos claros de I/O
@@ -402,10 +428,16 @@ Um **Gate** é um ponto de validação obrigatório entre fases. O Orchestrator 
 - Autonomia proporcional ao risco
 - Especialização sobre generalização
 
-**Quando usar:**
-- Quando o projeto envolve múltiplos agentes
-- Para definir níveis de autonomia
-- Para projetar orquestração de agentes
+**Quando usar (APENAS para projetos avançados):**
+- Projetos multi-agente complexos (5+ agentes customizados)
+- Quando 80% do projeto é sobre coordenação entre agentes
+- Quando precisa definir níveis de autonomia customizados
+- Quando há requisitos de segurança críticos
+
+**Quando NÃO usar (80% dos projetos):**
+- Projetos tradicionais de pipeline de dados
+- Quando os 9 agentes de dados são suficientes
+- Projetos small/medium (PEQUENO/MÉDIO)
 
 **Comandos:**
 | Comando | Descrição |
@@ -866,12 +898,12 @@ Passo 3: Facilite retrospectiva
 | 📊 BusinessAnalyst | Mary | `@business-analyst` | `*create-sttm`, `*analytical-questions`, `*dq-initial`, `*business-rules` |
 | 🏗️ DataArchitect | Winston | `@data-architect` | `*create-architecture`, `*create-data-model`, `*document-decisions`, `*tech-stack`, `*security-design` |
 | 🧩 DataModeler | Sofia | `@data-modeler` | `*data-model`, `*data-contracts`, `*granularity`, `*metrics`, `*metadata` |
-| 🧠 AgentDesigner | Nova | `@agent-designer` | `*agent-blueprint`, `*agent-contracts`, `*guardrails`, `*orchestration`, `*autonomy-matrix` |
 | 🛡️ DataSteward | Gaia | `@data-steward` | `*create-dq-rules`, `*create-governance`, `*classify-data`, `*map-compliance`, `*document-lineage` |
 | 🛠️ DataEngineerExec | Diego | `@data-engineer-exec` | `*create-ddl`, `*create-etl`, `*create-tests`, `*profile-data`, `*create-pipeline`, `*setup-monitoring` |
 | 📊 BiSemantic | Bianca | `@bi-semantic` | `*create-semantic-model`, `*create-dax`, `*create-dashboard`, `*create-report`, `*optimize-dataset` |
 | 🔁 IterationImprovement | Kai | `@iteration-improvement` | `*improvement-backlog`, `*retrospective`, `*metrics-analysis`, `*cost-optimization`, `*incident-review` |
 | 🧭 Orchestrator | Orion | `@orchestrator` | `*status`, `*gate-1`, `*gate-2`, `*gate-3`, `*route`, `*artifacts`, `*audit` |
+| 🧠 AgentDesigner | Nova | `@agent-designer` | `*agent-blueprint`, `*agent-contracts`, `*guardrails`, `*orchestration` [⚠️ OPCIONAL - Projetos avançados] |
 
 ### Atalhos por Fase
 
@@ -883,13 +915,17 @@ Passo 3: Facilite retrospectiva
 # MIDSTREAM (Gate 2)
 @data-architect *help       # Winston - Arquitetura
 @data-modeler *help         # Sofia - Modelo Lógico
-@agent-designer *help       # Nova - Design de Agentes
 @data-steward *help         # Gaia - Governança
 
 # DOWNSTREAM (Gate 3)
 @data-engineer-exec *help   # Diego - Pipelines
 @bi-semantic *help          # Bianca - BI (opcional)
 @iteration-improvement *help # Kai - Melhoria Contínua
+
+# CORE (Meta-Level)
+@orchestrator *help         # Orion - Coordenação
+@agent-designer *help       # Nova - Design de Agentes (OPCIONAL - projetos avançados)
+```
 
 # CORE
 @orchestrator *help         # Orion - Coordenação
@@ -989,13 +1025,19 @@ Dúvidas sobre o Avanade Method? Use:
 | Mary | BusinessAnalyst | UPSTREAM | Requisitos de Negócio |
 | Winston | DataArchitect | MIDSTREAM | Arquitetura Técnica |
 | Sofia | DataModeler | MIDSTREAM | Modelo Lógico |
-| Nova | AgentDesigner | MIDSTREAM | Design de Agentes |
 | Gaia | DataSteward | MIDSTREAM | Governança e DQ |
 | Diego | DataEngineerExec | DOWNSTREAM | Pipelines |
 | Bianca | BiSemantic | DOWNSTREAM | BI e Dashboards |
 | Kai | IterationImprovement | DOWNSTREAM | Melhoria Contínua |
 | Orion | Orchestrator | CORE | Coordenação |
+| Nova | AgentDesigner | CORE (Meta) | Design de Agentes (⚠️ OPCIONAL) |
 
 ---
 
-*Powered by Avanade™ Core - Data Engineering Agents v2.0*
+*Powered by Avanade™ Core - Data Engineering Agents v2.1*
+*Atualizado em 9 de Fevereiro de 2026*
+
+**Changelog v2.1:**
+- 🧠 AgentDesigner (Nova) movido de MIDSTREAM para CORE (Meta-Level)
+- Justificativa: Opera em nível META (desenha agentes, não dados)
+- Marcado como OPCIONAL (usar apenas para projetos multi-agente complexos)

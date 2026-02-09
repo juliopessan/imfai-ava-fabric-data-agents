@@ -32,7 +32,10 @@ flowchart TB
         W --> |architecture.md<br>decisions.md| S
         S --> |data-model.md<br>data-contracts.md| GA[🛡️ Gaia<br>DataSteward]
         GA --> |dq-rules.md<br>governance.md| G2{🧭 Gate 2}
-        N[🧠 Nova<br>AgentDesigner] -.-> |agent-blueprint.md| G2
+    end
+    
+    subgraph CORE_META["🧠 CORE - Meta Level (OPCIONAL)"]
+        N[🧠 Nova<br>AgentDesigner] -.-> |agent-blueprint.md<br>apenas projetos complexos| G2
     end
     
     subgraph DOWNSTREAM["🔽 DOWNSTREAM (Gate 3)"]
@@ -277,9 +280,12 @@ flowchart LR
 • metrics-catalog.md
 ```
 
-### 🧠 Nova (AgentDesigner)
+### 🧠 Nova (AgentDesigner) ⚠️ OPCIONAL
 ```
-📥 ENTRADA NECESSÁRIA:
+📍 LAYER: CORE (Meta-Level)
+🎯 USO: Apenas para projetos multi-agente complexos (5+ agentes customizados)
+
+📥 ENTRADA NECESSÁRIA (quando aplicável):
 ⚠️ architecture.md (de Winston)
 ⚠️ problem-statement.md (contexto)
 ⚠️ stakeholders.md (autonomy levels)
@@ -288,6 +294,8 @@ flowchart LR
 • agent-blueprint.md
 • agent-contracts.md
 • orchestration-flow.md
+
+⚠️ NOTA: Para 80% dos projetos de pipeline de dados, este agente NÃO é necessário.
 ```
 
 ### 🛡️ Gaia (DataSteward)

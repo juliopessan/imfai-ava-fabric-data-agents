@@ -254,7 +254,7 @@ Cada agente possui **2-3 arquivos**:
 | 2 | **business-analyst** (Beatriz) | UPSTREAM | Análise de negócio, requisitos |
 | 3 | **data-solution-architect** (André) | MIDSTREAM | Arquitetura técnica, decisões |
 | 4 | **data-modeler** (Marina) | MIDSTREAM | Modelagem lógica/física |
-| 5 | **agent-designer** (Theo) | MIDSTREAM | Design de novos agentes |
+| 5 | **agent-designer** (Nova) | CORE (Meta) | Design de agentes (OPCIONAL) |
 | 6 | **data-engineer-exec** (Diego) | DOWNSTREAM | Geração de DDL/SQL/PySpark |
 | 7 | **bi-semantic** (Isabela) | DOWNSTREAM | Modelo semântico, DAX |
 | 8 | **data-steward** (Gabriel) | DOWNSTREAM | Governança, qualidade |

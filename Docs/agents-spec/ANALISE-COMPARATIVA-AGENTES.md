@@ -804,7 +804,7 @@ Conv = Convergência total
 | business-analyst | Mary | 📋 | BMAD-Data | UPSTREAM |
 | data-solution-architect | Winston | 🏛️ | BMAD-Data | MIDSTREAM |
 | data-modeler | Sofia | 🧩 | BMAD-Data | MIDSTREAM |
-| agent-designer | Nova | 🧠 | BMAD-Data | MIDSTREAM |
+| agent-designer | Nova | 🧠 | Avanade Core | CORE (Meta) - OPCIONAL |
 | data-engineer-exec | Diego | 🛠️ | BMAD-Data | DOWNSTREAM |
 | bi-semantic | Bianca | 📊 | BMAD-Data | DOWNSTREAM |
 | data-steward | Gaia | 🛡️ | BMAD-Data | DOWNSTREAM |

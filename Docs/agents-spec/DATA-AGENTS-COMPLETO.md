@@ -89,8 +89,8 @@ O framework BMAD-Data segue uma abordagem **method-first** com experiência **ag
 | 2 | business-analyst | Mary | UP | 📋 | Requisitos, STTM, DQ inicial |
 | 3 | data-solution-architect | Winston | MID | 🏛️ | Arquitetura, trade-offs |
 | 4 | data-modeler | Sofia | MID | 🧩 | Modelo lógico, metadados |
-| 5 | agent-designer | Nova | MID | 🧠 | Blueprint multiagente |
-| 6 | data-engineer-exec | Diego | DOWN | 🛠️ | DDL/SQL/PySpark, testes |
+| 5 | data-engineer-exec | Diego | DOWN | 🛠️ | DDL/SQL/PySpark, testes |
+| 6 | agent-designer | Nova | CORE (Meta) | 🧠 | Blueprint multiagente (OPCIONAL) |
 | 7 | bi-semantic | Bianca | DOWN | 📊 | Semantic layer (opcional) |
 | 8 | data-steward | Gaia | DOWN | 🛡️ | Governança, DQ, compliance |
 | 9 | iteration-improvement | Kai | DOWN | 🔁 | Melhoria contínua |
@@ -211,7 +211,7 @@ communication_style: Calmo, pragmático e orientado a decisões
 
 **Colaboração:**
 - Recebe de: `business-analyst`
-- Colabora com: `agent-designer`, `data-modeler`
+- Colabora com: `data-modeler` (e `agent-designer` se projeto complexo)
 - Entrega para: `data-modeler`, `data-engineer-exec`
 
 ---
@@ -254,17 +254,19 @@ communication_style: Precisa e didática, com tabelas e exemplos
 
 ---
 
-#### 🧠 AGENT-DESIGNER (Nova)
+#### 🧠 AGENT-DESIGNER (Nova) ⚠️ OPCIONAL
 
-**Esteira:** MIDSTREAM  
-**Arquivo:** `agents/agent-designer.md`
+**Esteira:** CORE (Meta-Level)  
+**Arquivo:** `agents/agent-designer.md`  
+**Uso:** Apenas para projetos multi-agente complexos
 
 **Persona:**
 ```yaml
-role: Agent Designer (MIDSTREAM) — blueprint multiagente e guardrails
-identity: Arquiteta de sistemas multiagentes focada em contratos, 
-         guardrails e orquestração
+role: Agent Designer (CORE - Meta-Level) — blueprint multiagente e guardrails
+identity: Meta-agente focada em design de agentes customizados, contratos, 
+         guardrails e orquestração para projetos complexos
 communication_style: Estrutural e objetiva; usa diagramas/contratos
+usage: OPCIONAL - apenas para projetos multi-agente com 5+ agentes customizados
 ```
 
 **Princípios:**
@@ -287,8 +289,9 @@ communication_style: Estrutural e objetiva; usa diagramas/contratos
 - `agent-contracts/` → Contracts/guardrails
 
 **Colaboração:**
-- Recebe de: `data-solution-architect`
+- Recebe de: `data-solution-architect` (quando projeto requer agentes customizados)
 - Entrega para: `orchestrator`
+- **Nota:** Usado em <20% dos projetos (apenas complexos multi-agente)
 
 ---
 
@@ -630,7 +633,7 @@ Cada gate gera um relatório em:
 | **Análise de Negócio** | business-analyst (Mary) | — | 🆕 CRIAR |
 | **Arquitetura de Dados** | data-solution-architect (Winston) | — | 🆕 CRIAR |
 | **Modelagem de Dados** | data-modeler (Sofia) | — | 🆕 CRIAR |
-| **Design de Agentes** | agent-designer (Nova) | — | 🆕 CRIAR |
+| **Design de Agentes** | agent-designer (Nova) | — | 🆕 CRIAR (CORE Meta-Level, OPCIONAL) |
 | **Engenharia de Dados** | data-engineer-exec (Diego) | DataFlow | 🔄 MELHORAR |
 | **BI / Semantic Layer** | bi-semantic (Bianca) | InsightForge | 🔄 MELHORAR |
 | **Governança de Dados** | data-steward (Gaia) | — | 🆕 CRIAR |

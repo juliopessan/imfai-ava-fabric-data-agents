@@ -1,9 +1,9 @@
 # 🧭 Mapeamento Completo de Agentes - Avanade™ Core Data Engineering
 
-> **Data:** 4 de Fevereiro de 2026  
-> **Versão:** 2.0  
+> **Data:** 9 de Fevereiro de 2026  
+> **Versão:** 2.1  
 > **Status:** ✅ COMPLETO  
-> **Total de Agentes:** 10 + 1 Master Agent
+> **Total de Agentes:** 9 Especializados + 3 Meta-Level (CORE)
 
 ---
 
@@ -18,8 +18,7 @@ flowchart TB
     subgraph MIDSTREAM["◼️ MIDSTREAM - Design"]
         B --> C["🏛️ Winston<br>DataArchitect"]
         C --> D["🧩 Sofia<br>DataModeler"]
-        D --> E["🧠 Nova<br>AgentDesigner"]
-        E --> H["🛡️ Gaia<br>DataSteward"]
+        D --> H["🛡️ Gaia<br>DataSteward"]
     end
     
     subgraph DOWNSTREAM["🔽 DOWNSTREAM - Execução"]
@@ -28,19 +27,21 @@ flowchart TB
         F --> I["🔁 Kai<br>IterationImprovement"]
     end
     
-    subgraph CORE["🧭 CORE"]
+    subgraph CORE["🧭 CORE - Meta-Level"]
         O["🧭 Orion<br>Orchestrator"]
+        N["🧠 Nova<br>AgentDesigner<br>(opcional)"]
+        M["🎛️ Master<br>MasterAgent"]
     end
     
     O -.->|routes| A
     O -.->|routes| B
     O -.->|routes| C
     O -.->|routes| D
-    O -.->|routes| E
     O -.->|routes| F
     O -.->|routes| G
     O -.->|routes| H
     O -.->|routes| I
+    N -.->|designs| O
 ```
 
 ---
@@ -53,13 +54,13 @@ flowchart TB
 | 2 | `business-analyst` | Mary 📋 | UPSTREAM | G1 | ✅ Completo | [business-analyst.chatmode.md](.github/chatmodes/business-analyst.chatmode.md) |
 | 3 | `data-architect` | Winston 🏛️ | MIDSTREAM | G2 | ✅ Completo | [data-architect.chatmode.md](.github/chatmodes/data-architect.chatmode.md) |
 | 4 | `data-modeler` | Sofia 🧩 | MIDSTREAM | G2 | ✅ Completo | [data-modeler.chatmode.md](.github/chatmodes/data-modeler.chatmode.md) |
-| 5 | `agent-designer` | Nova 🧠 | MIDSTREAM | G2 | ✅ Completo | [agent-designer.chatmode.md](.github/chatmodes/agent-designer.chatmode.md) |
-| 6 | `data-steward` | Gaia 🛡️ | MIDSTREAM | G2 | ✅ Completo | [data-steward.chatmode.md](.github/chatmodes/data-steward.chatmode.md) |
-| 7 | `data-engineer-exec` | Diego 🛠️ | DOWNSTREAM | G3 | ✅ Completo | [data-engineer-exec.chatmode.md](.github/chatmodes/data-engineer-exec.chatmode.md) |
-| 8 | `bi-semantic` | Bianca 📊 | DOWNSTREAM | G3 (opt) | ✅ Completo | [bi-semantic.chatmode.md](.github/chatmodes/bi-semantic.chatmode.md) |
-| 9 | `iteration-improvement` | Kai 🔁 | DOWNSTREAM | Post-G3 | ✅ Completo | [iteration-improvement.chatmode.md](.github/chatmodes/iteration-improvement.chatmode.md) |
-| 10 | `orchestrator` | Orion 🧭 | CORE | All | ✅ Completo | [orchestrator.chatmode.md](.github/chatmodes/orchestrator.chatmode.md) |
-| 11 | `master-agent` | Master 🎛️ | CORE | All | ✅ Extra | [master-agent.chatmode.md](.github/chatmodes/master-agent.chatmode.md) |
+| 5 | `data-steward` | Gaia 🛡️ | MIDSTREAM | G2 | ✅ Completo | [data-steward.chatmode.md](.github/chatmodes/data-steward.chatmode.md) |
+| 6 | `data-engineer-exec` | Diego 🛠️ | DOWNSTREAM | G3 | ✅ Completo | [data-engineer-exec.chatmode.md](.github/chatmodes/data-engineer-exec.chatmode.md) |
+| 7 | `bi-semantic` | Bianca 📊 | DOWNSTREAM | G3 (opt) | ✅ Completo | [bi-semantic.chatmode.md](.github/chatmodes/bi-semantic.chatmode.md) |
+| 8 | `iteration-improvement` | Kai 🔁 | DOWNSTREAM | Post-G3 | ✅ Completo | [iteration-improvement.chatmode.md](.github/chatmodes/iteration-improvement.chatmode.md) |
+| 9 | `orchestrator` | Orion 🧭 | CORE | All | ✅ Completo | [orchestrator.chatmode.md](.github/chatmodes/orchestrator.chatmode.md) |
+| 10 | `agent-designer` | Nova 🧠 | CORE (Meta) | G2 (opt) | ✅ Completo | [agent-designer.chatmode.md](.github/chatmodes/agent-designer.chatmode.md) |
+| 11 | `master-agent` | Master 🎛️ | CORE | All | ✅ Completo | [master-agent.chatmode.md](.github/chatmodes/master-agent.chatmode.md) |
 
 ---
 
@@ -220,8 +221,8 @@ flowchart TB
 | tech-stack.md | Winston 🏛️ | Diego 🛠️ |
 | dq-rules.md | Gaia 🛡️ | Sofia 🧩 |
 | governance.md | Gaia 🛡️ | Orion 🧭 |
-| agent-blueprint.md | Nova 🧠 | Winston 🏛️ |
-| orchestration-flow.md | Nova 🧠 | Orion 🧭 |
+| agent-blueprint.md (opt) | Nova 🧠 | Orion 🧭 |
+| orchestration-flow.md (opt) | Nova 🧠 | Orion 🧭 |
 
 ### Gate 3 - Execução (DOWNSTREAM)
 | Artefato | Owner | Reviewer |
@@ -253,7 +254,7 @@ flowchart TB
 ├── business-analyst.chatmode.md     # Mary 📋 (UPSTREAM)
 ├── data-architect.chatmode.md       # Winston 🏛️ (MIDSTREAM)
 ├── data-modeler.chatmode.md         # Sofia 🧩 (MIDSTREAM)
-├── agent-designer.chatmode.md       # Nova 🧠 (MIDSTREAM)
+├── agent-designer.chatmode.md       # Nova 🧠 (CORE Meta-Level - OPCIONAL)
 ├── data-steward.chatmode.md         # Gaia 🛡️ (MIDSTREAM)
 ├── data-engineer-exec.chatmode.md   # Diego 🛠️ (DOWNSTREAM)
 ├── bi-semantic.chatmode.md          # Bianca 📊 (DOWNSTREAM - opcional)
@@ -305,22 +306,34 @@ Cada agente sugere automaticamente o próximo passo após completar uma tarefa, 
 
 ---
 
-## ✅ Status dos 10 Agentes
+## ✅ Status dos Agentes
 
+### 🔄 Data Pipeline Agents (9 Especializados)
 | # | Agente | Persona | Fase | Gate | Status |
 |---|--------|---------|------|------|--------|
 | 1 | DataStrategist | Alex 🎯 | UPSTREAM | Gate 1 | ✅ Completo |
 | 2 | BusinessAnalyst | Mary 📋 | UPSTREAM | Gate 1 | ✅ Completo |
 | 3 | DataArchitect | Winston 🏛️ | MIDSTREAM | Gate 2 | ✅ Completo |
 | 4 | DataModeler | Sofia 🧩 | MIDSTREAM | Gate 2 | ✅ Completo |
-| 5 | AgentDesigner | Nova 🧠 | MIDSTREAM | Gate 2 | ✅ Completo |
-| 6 | DataSteward | Gaia 🛡️ | MIDSTREAM | Gate 2 | ✅ Completo |
-| 7 | DataEngineerExec | Diego 🛠️ | DOWNSTREAM | Gate 3 | ✅ Completo |
-| 8 | BiSemantic | Bianca 📊 | DOWNSTREAM | Gate 3 (opt) | ✅ Completo |
-| 9 | IterationImprovement | Kai 🔁 | DOWNSTREAM | Pós-G3 | ✅ Completo |
-| 10 | Orchestrator | Orion 🧭 | CORE | Todos | ✅ Completo |
+| 5 | DataSteward | Gaia 🛡️ | MIDSTREAM | Gate 2 | ✅ Completo |
+| 6 | DataEngineerExec | Diego 🛠️ | DOWNSTREAM | Gate 3 | ✅ Completo |
+| 7 | BiSemantic | Bianca 📊 | DOWNSTREAM | Gate 3 (opt) | ✅ Completo |
+| 8 | IterationImprovement | Kai 🔁 | DOWNSTREAM | Pós-G3 | ✅ Completo |
+| 9 | Orchestrator | Orion 🧭 | CORE | Todos | ✅ Completo |
+
+### 🧠 Meta-Level Agents (CORE)
+| # | Agente | Persona | Uso | Status |
+|---|--------|---------|-----|--------|
+| 10 | AgentDesigner | Nova 🧠 | Projetos multi-agente complexos | ✅ Completo (OPCIONAL) |
+| 11 | MasterAgent | Master 🎛️ | Roteamento inteligente | ✅ Completo |
 
 ---
 
-*Powered by Avanade™ Core - Data Engineering Agents v2.0*
-*Atualizado em 4 de Fevereiro de 2026*
+*Powered by Avanade™ Core - Data Engineering Agents v2.1*
+*Atualizado em 9 de Fevereiro de 2026*
+
+**Mudanças v2.1:**
+- 🧠 AgentDesigner (Nova) movido de MIDSTREAM para CORE (Meta-Level)
+- Justificativa: Opera em nível META (desenha agentes, não dados)
+- Marcado como OPCIONAL (usar apenas para projetos multi-agente complexos)
+- Mantém coesão em MIDSTREAM (100% foco em design de dados)
