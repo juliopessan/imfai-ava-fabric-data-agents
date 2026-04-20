@@ -1,0 +1,20 @@
+name: core-coordination
+display_name: "Core Coordination"
+version: "3.0.0"
+description: "Agentes de orquestração cross-phase, triage de usuários e melhoria contínua"
+agents:
+  - id: master-agent
+    file: agents/master-agent.md
+    skill: dmf-master-agent
+  - id: migration-coordinator
+    file: agents/migration-coordinator.md
+    skill: dmf-migration-coordinator
+  - id: iteration-improvement
+    file: agents/iteration-improvement.md
+    skill: dmf-iteration-improvement
+outputs:
+  base_path: "projects/{project_name}/outputs/summary"
+  artifacts:
+    - gate-decisions/*.md
+    - wave-status.md
+    - improvement-backlog.md

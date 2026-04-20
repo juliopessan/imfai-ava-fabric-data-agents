@@ -1,0 +1,28 @@
+name: downstream-execution
+display_name: "Execution DOWNSTREAM"
+version: "3.0.0"
+description: "Agentes de execução DDL/ETL, reconciliação, self-healing, documentação e BI"
+agents:
+  - id: downstream-executor
+    file: agents/downstream-executor.md
+    skill: dmf-downstream-executor
+  - id: reconciliation
+    file: agents/reconciliation.md
+    skill: dmf-reconciliation
+  - id: self-healing
+    file: agents/self-healing.md
+    skill: dmf-self-healing
+  - id: documentation
+    file: agents/documentation.md
+    skill: dmf-documentation
+  - id: bi-semantic
+    file: agents/bi-semantic.md
+    skill: dmf-bi-semantic
+outputs:
+  base_path: "projects/{project_name}/outputs/downstream"
+  artifacts:
+    - ddl/*.sql
+    - etl/*.sql
+    - tests/results-summary.md
+    - wave-report.md
+    - documentation/*.md

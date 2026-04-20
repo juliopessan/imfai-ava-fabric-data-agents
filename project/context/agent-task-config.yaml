@@ -1,0 +1,31 @@
+trace_id: ""                  # UUID gerado pelo migration-coordinator ao iniciar a wave
+project_name: ""              # Deve coincidir com o nome da pasta em projects/
+scope_modules:                # Lista dos módulos a executar nesta wave
+  - upstream-discovery
+  - midstream-design
+  - midstream-quality
+  - downstream-execution
+  - core-coordination
+agent_sequence:               # Ordem de ativação dos agentes nesta wave
+  - discovery-scout
+  - inventory-scout
+  - data-strategist
+  - business-analyst
+  - logic-extractor
+  - data-architect
+  - data-modeler
+  - data-steward
+  - code-generator
+  - quality-gate
+  - security-compliance
+  - downstream-executor
+  - reconciliation
+  - self-healing
+  - documentation
+  - migration-coordinator
+max_retries: 2                # Número máximo de retentativas por agente em caso de falha
+timeout_minutes: 120          # Timeout por step (em minutos)
+human_gates:
+  - gate_1                    # Gates que requerem aprovação humana explícita
+  - gate_2
+  - gate_3

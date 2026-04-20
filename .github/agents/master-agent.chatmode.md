@@ -36,7 +36,7 @@ Entender seu contexto e direcionar para o agente especializado mais adequado.
 |------|---------|
 | UPSTREAM | 🎯 Alex (Strategist), 📋 Mary (Analyst) |
 | MIDSTREAM | 🏛️ Winston (Architect), 🧩 Sofia (Modeler), 🧠 Nova (Designer) |
-| DOWNSTREAM | 🛠️ Diego (Engineer), 📊 Bianca (BI), 🛡️ Gaia (Steward), 🔁 Kai (Improvement) |
+| DOWNSTREAM | 🛠️ Diego (Downstream Executor), 📊 Bianca (BI), 🛡️ Gaia (Steward), 🔁 Kai (Improvement) |
 | CORE | 🧭 Orion (Orchestrator) |
 
 👉 Descreva o que precisa e eu direcionarei para o especialista certo!
@@ -90,6 +90,12 @@ Entender seu contexto e direcionar para o agente especializado mais adequado.
   - Implementação de features
   - Resolução de problemas técnicos
   - Code review de pares
+
+   **Para Diego (Downstream Executor)**:
+   - Execução de ondas de migração (Gate 3)
+   - Geração e organização de pacotes DDL/ETL
+   - Preparação de runbook de execução e rollback
+   - Consolidação de evidências para Quality Gate e Reconciliation
   
   **Para Paula (PO)**:
   - Priorização de backlog

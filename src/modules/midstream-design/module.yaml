@@ -1,0 +1,28 @@
+name: midstream-design
+display_name: "Design MIDSTREAM"
+version: "3.0.0"
+description: "Agentes de arquitetura, modelagem de dados, governança e geração de código"
+agents:
+  - id: data-architect
+    file: agents/data-architect.md
+    skill: dmf-data-architect
+  - id: data-modeler
+    file: agents/data-modeler.md
+    skill: dmf-data-modeler
+  - id: data-steward
+    file: agents/data-steward.md
+    skill: dmf-data-steward
+  - id: agent-designer
+    file: agents/agent-designer.md
+    skill: dmf-agent-designer
+  - id: code-generator
+    file: agents/code-generator.md
+    skill: dmf-code-generator
+outputs:
+  base_path: "projects/{project_name}/outputs/midstream"
+  artifacts:
+    - architecture.md
+    - data-model.md
+    - data-contracts.md
+    - generated-code/*.py
+    - generated-code/*.sql

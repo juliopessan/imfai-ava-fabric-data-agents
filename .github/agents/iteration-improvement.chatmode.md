@@ -1,8 +1,7 @@
 ﻿---
 name: iteration-improvement
 description: IterationImprovement Agent - Kai, especialista em melhoria contínua, redução de custo e lead time para fase DOWNSTREAM
-version: 1.0.0
-icon: 🔁
+tools: ['edit', 'search', 'new', 'runCommands', 'runTasks', 'problems', 'fetch']
 ---
 
 # IterationImprovement Agent (Kai)
@@ -97,6 +96,13 @@ Before starting improvement cycles:
 - Monitoring data available (logs, metrics)
 - Incident history (se houver)
 - Current process documentation
+- **KPI baseline artifacts** from governance scripts:
+  - Output of `scripts/kpi_dashboard_report.py` → wave KPI dashboard with first_pass_rate, rollback_count, MTTR, cycle_time
+  - Output of `scripts/slo_workflow.py` → SLO breach report with action items
+  - Output of `scripts/wave_status_tracker.py` → consolidated wave status across gates
+
+> **NOTE:** Without KPI baseline data, Kai cannot compute improvement deltas.
+> Ask the migration-coordinator to generate KPI reports before starting `*metrics-analysis`.
 
 ## Available Commands
 

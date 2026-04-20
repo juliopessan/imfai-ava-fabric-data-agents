@@ -1,0 +1,181 @@
+name: CI — Governance Checks
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # -----------------------------------------------------------------------
+  # 1. Unit tests (B-006, B-017, B-005 validators)
+  # -----------------------------------------------------------------------
+  tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pytest pyyaml
+
+      - name: Run tests (Sprint 1 + Sprint 2)
+        run: python -m pytest tests/ -v --tb=short
+
+  # -----------------------------------------------------------------------
+  # 2. Python linting with Ruff
+  # -----------------------------------------------------------------------
+  lint:
+    name: Lint (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run ruff check
+        run: ruff check scripts/ tests/ --output-format=github
+
+  # -----------------------------------------------------------------------
+  # 3. Security scanning with Bandit
+  # -----------------------------------------------------------------------
+  security:
+    name: Security Scan (Bandit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install bandit
+        run: pip install bandit
+
+      - name: Run bandit (low+medium severity)
+        run: bandit -r scripts/ -ll -f json -o bandit-report.json || true
+
+      - name: Upload bandit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: bandit-report.json
+
+  # -----------------------------------------------------------------------
+  # 4. Agent contract validation
+  # -----------------------------------------------------------------------
+  agent-contracts:
+    name: Agent Contract Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate agent contracts
+        run: python -m scripts.validate_agent_contracts --root .
+
+  # -----------------------------------------------------------------------
+  # 5. Chatmode ↔ agent-folder alignment (B-005 / B-017)
+  # -----------------------------------------------------------------------
+  chatmode-alignment:
+    name: Chatmode Alignment Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check chatmode alignment
+        run: python -m scripts.check_chatmode_alignment --root . --allowlist master-agent
+
+  # -----------------------------------------------------------------------
+  # 6. Gate 3 wave artifact validation (B-006)
+  #    Only runs when downstream-executor-agent/downstream-outputs exists.
+  # -----------------------------------------------------------------------
+  gate3-validation:
+    name: Gate 3 Artifact Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Gate 3 artifacts (WAVE-001)
+        run: |
+          python -m scripts.validate_gate3_artifacts \
+            downstream-executor-agent/downstream-outputs \
+            --gate 3
+
+  # -----------------------------------------------------------------------
+  # 7. Policy schema presence check (B-001)
+  # -----------------------------------------------------------------------
+  policy-schema:
+    name: Policy Schema Present
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check governance policy files exist
+        run: |
+          test -f .avanade-core/policies/governance-policy-schema.yaml || \
+            (echo "ERROR: governance-policy-schema.yaml missing" && exit 1)
+          test -f .avanade-core/policies/agent-classes.yaml || \
+            (echo "ERROR: agent-classes.yaml missing" && exit 1)
+          echo "Policy schema files present."
+
+  # -----------------------------------------------------------------------
+  # 8. Module Schema Validation
+  # -----------------------------------------------------------------------
+  validate-module-schemas:
+    name: Module Schema Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate module.yaml files
+        run: |
+          python -c "
+          import yaml, glob, sys
+          errors = []
+          for f in glob.glob('src/modules/*/module.yaml'):
+              with open(f) as fh:
+                  m = yaml.safe_load(fh)
+              for field in ['name', 'agents', 'outputs']:
+                  if field not in m:
+                      errors.append(f'{f}: campo obrigatorio ausente: {field}')
+          if errors:
+              [print(e) for e in errors]; sys.exit(1)
+          count = len(list(glob.glob('src/modules/*/module.yaml')))
+          print(f'OK: {count} module.yaml validados')
+          "
