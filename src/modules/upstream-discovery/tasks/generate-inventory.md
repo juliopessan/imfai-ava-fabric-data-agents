@@ -7,8 +7,8 @@ version: "4.0"
 command: "*generate-inventory"
 phase: UPSTREAM
 gate: 1
-output: "inventory.json"
-output_folder: "./discovery-outputs/inventory/"
+output: "asis-platform-landscape.html"
+output_folder: "projects/{project_name}/outputs/upstream/"
 ```
 
 ---
@@ -82,15 +82,43 @@ Generate the final, consolidated inventory report that merges all discovery arti
      - Wave 3+ (complex, deep dependencies)
 ```
 
-### Step 4 — Generate Report
+### Step 4 — Generate HTML Output
 
-```
-4.1  Generate enriched inventory.json
-4.2  Generate human-readable inventory report (Markdown)
-     using inventory-tmpl.md template
-4.3  Save both to ./discovery-outputs/inventory/
-4.4  Log completion metrics
-```
+Produce a single self-contained HTML file (`asis-platform-landscape.html`)
+using all data from Steps 1–3. Do NOT produce Markdown.
+Save to `projects/{project_name}/outputs/upstream/`.
+
+The file must match this visual specification:
+
+**Style:** Dark theme (#0D0F14 bg). Fonts: DM Serif Display (headings,
+italic accent), DM Mono (labels/tags/values), Outfit (body) via Google Fonts.
+Accent color amber #F59E0B for AS-IS badge and primary KPI. Secondary colors:
+teal #14B8A6 (coverage), blue #60A5FA (semantic), coral #FB923C (gaps),
+purple #A78BFA (readiness), red #EF4444 (high risk). All as CSS variables.
+
+**Required sections (in order):**
+
+1. Header — amber badge 'AS-IS Assessment', DM Serif Display title with
+   italic accent, subtitle, right-aligned metadata block (Trace ID, agents,
+   source platform, target platform, date) in DM Mono.
+2. KPI Row — 5 cards with 2px top color bar, large monospace value, uppercase
+   label, sub-line. Values: total objects, physical coverage %, semantic
+   enrichment %, gaps count, target readiness %.
+3. Source Platforms Grid — 2-column grid, one card per discovered platform:
+   icon square, name, version, 2x2 attribute grid, risk tag (High/Medium/Low).
+4. Data Lineage Flow — horizontal node→arrow chain showing current data flow.
+   Each node: system name + tech sub-label. Each arrow: tool label above line.
+5. Critical Objects Table — top objects by complexity. Columns: #, name,
+   type tag (colored), platform, dependencies count, complexity mini-bar,
+   migration strategy badge (Lift / Refactor / Rebuild).
+6. Gaps & Risks Grid — 3-column, each card: impact dot+label, title, desc.
+   Border color matches impact (red=high, amber=medium, teal=low).
+7. Footer — left: brand text. Right: 'AS-IS Assessment · date'.
+
+Section titles use DM Mono, uppercase, letter-spacing 0.14em,
+with ::after pseudo-element line extending to the right.
+Hover effects on all cards and table rows (transition: all 0.2s).
+No external JS. Single <style> block. All content from project data.
 
 ---
 

@@ -1,8 +1,15 @@
 # Create Architecture Task
 
-**Task ID:** create-architecture  
-**Agent:** DataArchitect  
-**Version:** 1.0
+```yaml
+task_id: create-architecture
+agent: data-architect
+version: "1.0"
+command: "*create-architecture"
+phase: MIDSTREAM
+gate: 2
+output: "tobe-target-architecture.html"
+output_folder: "projects/{project_name}/outputs/midstream/"
+```
 
 ---
 
@@ -71,276 +78,195 @@ Document:
 
 ### Step 7: Generate Architecture Document
 
+Produce a single self-contained HTML file (`tobe-target-architecture.html`)
+using all decisions made in Steps 2–6. Do NOT produce Markdown.
+Save to `projects/{project_name}/outputs/midstream/`.
+
+The file must match this visual specification:
+
+**Style:** Light theme (#F7F8FA bg). Fonts: Playfair Display (headings —
+elegant serif), JetBrains Mono (labels/tags/metadata), Plus Jakarta Sans
+(body) via Google Fonts. Primary accent: Microsoft Fabric blue #0078D4.
+Layer colors: Bronze #C0782A, Silver #5B7FA6, Gold #A8860C, each with
+*-light bg variant and *-mid border variant. All as CSS variables.
+Header: white card, border-radius 16px, 3px gradient top border spanning
+all layer colors.
+
+**Required sections (in order):**
+
+1. Header — white card with gradient top border, fabric blue badge
+   'TO-BE Architecture', Playfair Display title, subtitle, right-aligned
+   metadata (Trace ID, agents, target platform, pattern, gate status, date).
+2. Architecture Principles — 4-column grid. Each card: large muted number
+   (01-04), bold title, 2-line description.
+3. Medallion Architecture — main visual. Horizontal flow:
+   Sources → Bronze → Silver → Gold → Serving.
+   Each layer: tall card with colored top border + tinted background,
+   uppercase layer label, large serif name, description, JetBrains Mono
+   detail lines (Format, Naming, Retention, Access), colored mini-badges.
+   SVG chevron arrows (opacity 0.3) between layers.
+   Below flow: 2-column cross-cutting cards (Governance + Observability).
+4. Technology Stack — 3-column grid. Each card: colored dot + layer tag,
+   bold tech name, description mentioning what it replaces from AS-IS.
+5. SLA Table — columns: Layer, Metric, Target (TO-BE in green mono),
+   Current AS-IS, Improvement (green with + prefix). Hover on rows.
+6. Architecture Decisions (ADRs) — 3-column grid, 6 cards. Each card:
+   ADR-00X in muted mono, bold title, decision in fabric blue, rationale.
+7. Footer — left: brand. Right: 'TO-BE Architecture · Gate 2 · date'.
+
+Section titles: JetBrains Mono, uppercase, letter-spacing 0.14em,
+::after line to the right. No external JS. Single <style> block.
+All content from decisions made in this task execution.
+
 ---
 
-## Output Template
+## Step 10 — Generate Markdown Output (architecture.md)
 
-```markdown
-# Data Architecture Document
+After saving the HTML file in Step 9, produce a second output:
+a Markdown file (`architecture.md`) with the same architectural
+content in structured text format.
 
-**Project:** {project_name}  
-**Date:** {date}  
-**Author:** DataArchitect  
-**Version:** 1.0
+Save to `projects/{project_name}/outputs/midstream/architecture.md`.
+
+The Markdown file must contain:
+
+```
+# Data Architecture — {project_name}
+
+**Pattern:** {architecture_pattern}
+**Primary Technology:** {primary_technology}
+**Target Environment:** {target_environment}
+**Date:** {date}
+**Version:** {version}
 
 ---
 
 ## Executive Summary
 
-{2-3 paragraph summary of the architecture approach}
-
-**Architecture Pattern:** {Lakehouse / Data Warehouse / Hybrid}  
-**Primary Technology:** {technology}  
-**Target Environment:** {cloud/on-premise/hybrid}
+{executive_summary — 2-3 paragraphs}
 
 ---
 
-## Architecture Overview
+## Architecture Principles
 
-### High-Level Architecture Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         DATA ARCHITECTURE                                │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐          │
-│  │  SOURCES │───▶│ LANDING  │───▶│  BRONZE  │───▶│  SILVER  │───▶ GOLD │
-│  └──────────┘    └──────────┘    └──────────┘    └──────────┘          │
-│                                                                          │
-│  ┌────────────────────────────────────────────────────────────────┐    │
-│  │                    ORCHESTRATION & MONITORING                   │    │
-│  └────────────────────────────────────────────────────────────────┘    │
-│                                                                          │
-│  ┌────────────────────────────────────────────────────────────────┐    │
-│  │                    SECURITY & GOVERNANCE                        │    │
-│  └────────────────────────────────────────────────────────────────┘    │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
-### Architecture Principles
-
-1. **{principle_1}**: {description}
-2. **{principle_2}**: {description}
-3. **{principle_3}**: {description}
+1. **{principle_1_title}**: {principle_1_desc}
+2. **{principle_2_title}**: {principle_2_desc}
+3. **{principle_3_title}**: {principle_3_desc}
+4. **{principle_4_title}**: {principle_4_desc}
 
 ---
 
 ## Data Layers
 
-### Landing Layer (Raw)
+### Sources
+- Systems: {source_systems}
+- Ingestion: {ingestion_method}
 
-| Attribute | Value |
-|-----------|-------|
-| **Purpose** | Raw data ingestion, source fidelity |
-| **Format** | {Parquet / Delta / CSV} |
-| **Retention** | {30 days / configurable} |
-| **Access** | ETL processes only |
-| **Naming** | `lnd_{source}_{entity}` |
+### Bronze Layer
+- Format: {bronze_format}
+- Retention: {bronze_retention}
+- Naming: `brz_{domain}_{entity}`
+- Transformations: {bronze_transformations}
 
-**Ingestion Patterns:**
-- {batch / streaming / hybrid}
-- {full / incremental / CDC}
+### Silver Layer
+- Format: {silver_format}
+- Retention: {silver_retention}
+- Naming: `slv_{domain}_{entity}`
+- Transformations: {silver_transformations}
 
-### Bronze Layer (Cleansed)
+### Gold Layer
+- Format: {gold_format}
+- Retention: {gold_retention}
+- Naming: `gld_{domain}_{subject}`
+- Optimizations: {gold_optimizations}
 
-| Attribute | Value |
-|-----------|-------|
-| **Purpose** | Cleansed, typed, deduplicated |
-| **Format** | {Delta / Parquet} |
-| **Retention** | {90 days} |
-| **Access** | ETL, advanced users |
-| **Naming** | `brz_{domain}_{entity}` |
-
-**Transformations Applied:**
-- Data type standardization
-- NULL handling
-- Deduplication
-- Schema enforcement
-
-### Silver Layer (Curated)
-
-| Attribute | Value |
-|-----------|-------|
-| **Purpose** | Business logic, joined, enriched |
-| **Format** | {Delta} |
-| **Retention** | {1 year} |
-| **Access** | Analytics, Data Science |
-| **Naming** | `slv_{domain}_{entity}` |
-
-**Transformations Applied:**
-- Business rules
-- Lookups and enrichment
-- Aggregations
-- Data quality rules
-
-### Gold Layer (Aggregated)
-
-| Attribute | Value |
-|-----------|-------|
-| **Purpose** | Consumption-ready, aggregated |
-| **Format** | {Delta / Semantic Model} |
-| **Retention** | {Permanent} |
-| **Access** | BI, Reporting, End Users |
-| **Naming** | `gld_{domain}_{subject}` |
-
-**Optimizations:**
-- Pre-aggregated metrics
-- Dimensional models
-- Query-optimized schemas
+### Serving
+- BI Tool: {bi_tool}
+- Access Pattern: {access_pattern}
+- Consumers: {consumers}
 
 ---
 
 ## Technology Stack
 
-### Stack Overview
-
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| Storage | {Azure Data Lake / S3 / GCS} | Raw and processed data |
-| Processing | {Spark / Databricks / Synapse} | ETL and transformations |
-| Orchestration | {ADF / Airflow / Prefect} | Pipeline scheduling |
-| Serving | {Delta / SQL Endpoint / Synapse} | Query access |
-| BI | {Power BI / Tableau / Looker} | Visualization |
-| Governance | {Unity Catalog / Purview} | Metadata and access |
-
-### Component Details
-
-#### {Component 1}
-
-| Attribute | Value |
-|-----------|-------|
-| **Technology** | {technology_name} |
-| **Purpose** | {what it does} |
-| **Justification** | {why chosen} |
-| **Alternatives** | {what else was considered} |
+| Layer | Technology | Replaces | Justification |
+|-------|-----------|----------|---------------|
+| Ingestion | {tech} | {replaces} | {justification} |
+| Processing | {tech} | {replaces} | {justification} |
+| Orchestration | {tech} | {replaces} | {justification} |
+| Storage | {tech} | {replaces} | {justification} |
+| Governance | {tech} | {replaces} | {justification} |
+| Consumption | {tech} | {replaces} | {justification} |
 
 ---
 
-## Data Flow
+## SLA Targets
 
-### Ingestion Flow
-
-```
-{Source 1} ──┐
-             ├──▶ [Ingestion] ──▶ Landing
-{Source 2} ──┘
-```
-
-**Ingestion Details:**
-
-| Source | Type | Method | Frequency | SLA |
-|--------|------|--------|-----------|-----|
-| {source_1} | {DB/API/File} | {method} | {freq} | {sla} |
-| {source_2} | {type} | {method} | {freq} | {sla} |
-
-### Transformation Flow
-
-```
-Landing ──▶ [Clean] ──▶ Bronze ──▶ [Enrich] ──▶ Silver ──▶ [Aggregate] ──▶ Gold
-```
-
-### Serving Flow
-
-```
-Gold ──▶ [SQL Endpoint] ──▶ Power BI
-     ──▶ [API]          ──▶ Applications
-     ──▶ [Export]       ──▶ External Systems
-```
+| Layer | Metric | Target | Current (AS-IS) | Improvement |
+|-------|--------|--------|-----------------|-------------|
+| {layer} | {metric} | {target} | {current} | {delta} |
 
 ---
 
 ## Security Architecture
 
-### Access Control
-
 | Layer | Access Level | Method |
-|-------|--------------|--------|
-| Landing | ETL Service | Service Principal |
+|-------|-------------|--------|
+| Landing | ETL Service only | Service Principal |
 | Bronze | ETL + Advanced Users | AAD Groups |
-| Silver | Analytics Team | AAD Groups + Row Level |
+| Silver | Analytics Team | AAD Groups + RLS |
 | Gold | All Authorized | AAD + RLS |
 
-### Data Protection
-
-- **Encryption at Rest**: {method}
-- **Encryption in Transit**: {method}
-- **Key Management**: {approach}
-
-### Compliance
-
-- {compliance_requirement_1}
-- {compliance_requirement_2}
+- Encryption at Rest: {encryption_rest}
+- Encryption in Transit: {encryption_transit}
+- Key Management: {key_management}
 
 ---
 
-## Scalability
+## Cross-Cutting Concerns
 
-### Current Sizing
+### Governance
+{governance_description}
 
-| Metric | Current | Expected Growth |
-|--------|---------|-----------------|
-| Data Volume | {X GB} | {Y% per year} |
-| Daily Records | {X records} | {Y% per year} |
-| Concurrent Users | {X} | {Y} |
-
-### Scaling Strategy
-
-1. **Horizontal Scaling**: {approach}
-2. **Partitioning Strategy**: {strategy}
-3. **Caching Strategy**: {approach}
+### Observability & SLO
+{observability_description}
 
 ---
 
-## Monitoring & Operations
+## Architecture Decisions (ADRs)
 
-### Key Metrics
+### ADR-001 — {title}
+**Decision:** {decision_statement}
+**Rationale:** {rationale}
 
-| Metric | Description | Alert Threshold |
-|--------|-------------|-----------------|
-| Pipeline Success Rate | % of successful runs | < 99% |
-| Data Freshness | Time since last update | > SLA |
-| Query Performance | P95 latency | > 5s |
-| Storage Growth | Daily delta | > 20% |
+### ADR-002 — {title}
+**Decision:** {decision_statement}
+**Rationale:** {rationale}
 
-### Monitoring Tools
+### ADR-003 — {title}
+**Decision:** {decision_statement}
+**Rationale:** {rationale}
 
-- {tool_1}: {purpose}
-- {tool_2}: {purpose}
+### ADR-004 — {title}
+**Decision:** {decision_statement}
+**Rationale:** {rationale}
 
----
+### ADR-005 — {title}
+**Decision:** {decision_statement}
+**Rationale:** {rationale}
 
-## Disaster Recovery
-
-| Metric | Target |
-|--------|--------|
-| **RTO** | {time} |
-| **RPO** | {time} |
-| **Backup Frequency** | {frequency} |
-| **Backup Retention** | {period} |
-
----
-
-## Architecture Decisions
-
-See `decisions.md` for detailed ADRs:
-- ADR-001: {decision_title}
-- ADR-002: {decision_title}
-- ADR-003: {decision_title}
+### ADR-006 — {title}
+**Decision:** {decision_statement}
+**Rationale:** {rationale}
 
 ---
 
-## Next Steps
-
-1. Create data model - `*create-data-model`
-2. Document decisions - `*document-decisions`
-3. Proceed to Gate 2 validation
-
----
-
-*Document generated by DataArchitect Agent*
+*Generated by DataArchitect Agent · Gate 2 · {date}*
 ```
+
+> Both files must be saved before the task is considered complete.
+> The HTML is the executive presentation; the Markdown is the
+> machine-readable artifact consumed by downstream agents and CI.
 
 ---
 
@@ -356,3 +282,5 @@ Before completing, verify:
 - [ ] Monitoring approach specified
 - [ ] Aligns with STTM requirements
 - [ ] Supports all analytical questions
+- [ ] `architecture.md` generated and saved to outputs/midstream/
+- [ ] `architecture.md` contains all sections: layers, stack, SLAs, ADRs, security
