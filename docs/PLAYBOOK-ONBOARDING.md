@@ -1,28 +1,28 @@
-# Playbook de Onboarding — Novo Projeto
+# Onboarding Playbook — New Project
 
-> **Tipo:** Tutorial — do zero ao primeiro wave executável  
-> **Público:** Novos membros do time (analistas, engenheiros, coordenadores)  
-> **Tempo estimado:** Onboarding completo em ~2 horas de leitura + setup
-
----
-
-## O Que Você Vai Aprender
-
-Ao final deste guia você saberá:
-
-1. Como funciona o modelo de operação (fases, gates, agentes)
-2. Como configurar o ambiente local
-3. Como ativar e usar os agentes no VS Code
-4. Como executar sua primeira wave simulada
-5. Onde encontrar ajuda quando travar
+> **Type:** Tutorial — from zero to first executable wave  
+> **Audience:** New team members (analysts, engineers, coordinators)  
+> **Estimated time:** Full onboarding in ~2 hours of reading + setup
 
 ---
 
-## Seção 1 — Entenda o Método Antes de Configurar Qualquer Coisa
+## What You Will Learn
 
-### 1.1 — A ideia central
+By the end of this guide you will know:
 
-Este projeto é uma **fábrica de migração agentica**: em vez de scripts avulsos e processo manual, todo o lifecycle de uma migração de dados é orquestrado por agentes de IA especializados, validados por gates obrigatórios com critérios mensuráveis.
+1. How the operating model works (phases, gates, agents)
+2. How to set up the local environment
+3. How to activate and use agents in VS Code
+4. How to run your first simulated wave
+5. Where to find help when you get stuck
+
+---
+
+## Section 1 — Understand the Method Before Configuring Anything
+
+### 1.1 — The core idea
+
+This project is an **agentic migration factory**: instead of standalone scripts and manual processes, the entire data migration lifecycle is orchestrated by specialized AI agents, validated by mandatory gates with measurable criteria.
 
 ```
 
@@ -31,124 +31,124 @@ UPSTREAM          MIDSTREAM         DOWNSTREAM
     │                 │                  │
   Gate 1           Gate 2             Gate 3
     │                 │                  │
- Catalogar         Arquitetar         Executar
- Mapear            Modelar            Reconciliar
- Estratégiar       Validar            Documentar
+ Catalog           Architect          Execute
+ Map               Model              Reconcile
+ Strategize        Validate           Document
 
 ```
 
-**Regra que você precisa internalizar:** nada avança de fase sem score de gate calculado e decisão registrada. Gate não é checklist de honra — é bloqueador técnico.
+**Rule you need to internalize:** nothing advances to the next phase without a calculated gate score and a recorded decision. A gate is not an honor checklist — it is a technical blocker.
 
-### 1.2 — Os três papéis que você provavelmente vai exercer
+### 1.2 — The three roles you will likely perform
 
-| Papel | O que faz | Agentes mais usados |
+| Role | What it does | Most used agents |
 | --- | --- | --- |
 
-| **Migration Coordinator** | Orquestra waves, valida gates, decide aprovação | `master-agent`, `migration-coordinator` |
-| **Data Engineer / Architect** | Projeta, modela, gera código, valida qualidade | `data-architect`, `data-modeler`, `code-generator`, `quality-gate` |
-| **Downstream Executor** | Executa waves, reconcilia, documenta | `downstream-executor`, `reconciliation`, `documentation` |
+| **Migration Coordinator** | Orchestrates waves, validates gates, decides approval | `master-agent`, `migration-coordinator` |
+| **Data Engineer / Architect** | Designs, models, generates code, validates quality | `data-architect`, `data-modeler`, `code-generator`, `quality-gate` |
+| **Downstream Executor** | Executes waves, reconciles, documents | `downstream-executor`, `reconciliation`, `documentation` |
 
-Em projetos menores uma pessoa pode exercer todos os papéis. Em projetos enterprise cada papel tem um owner.
+In smaller projects one person may perform all roles. In enterprise projects each role has a dedicated owner.
 
-### 1.3 — Os agentes do projeto
+### 1.3 — The project agents
 
-Temos 19 agentes organizados por fase. A regra é sempre começar pelo `master-agent` se você não sabe por onde ir:
+We have 19 agents organized by phase. The rule is to always start with `master-agent` if you don't know where to go:
 
-| Fase | Agentes Core |
+| Phase | Core Agents |
 | --- | --- |
 
 | Pre-wave | `master-agent`, `migration-coordinator` |
 | UPSTREAM (Gate 1) | `discovery-scout`, `data-strategist`, `business-analyst`, `logic-extractor` |
 | MIDSTREAM (Gate 2) | `data-architect`, `data-modeler`, `data-steward`, `quality-gate`, `security-compliance` |
 | DOWNSTREAM (Gate 3) | `downstream-executor`, `reconciliation`, `self-healing`, `documentation` |
-| Pós-wave | `iteration-improvement` |
+| Post-wave | `iteration-improvement` |
 
-Agentes opcionais: `bi-semantic`, `code-generator`, `inventory-scout`, `agent-designer`
+Optional agents: `bi-semantic`, `code-generator`, `inventory-scout`, `agent-designer`
 
-### 1.4 — Leitura recomendada antes de colocar a mão na massa
+### 1.4 — Recommended reading before getting hands-on
 
-Execute esta leitura na ordem:
+Complete this reading in order:
 
-1. [README.md](../README.md) — visão geral do projeto (5 min)
-2. Este playbook até o fim (você está aqui)
-3. [COPILOT-AGENTS-GUIDE.md](COPILOT-AGENTS-GUIDE.md) — referência de comandos (leia as seções das fases em que você vai atuar)
-4. [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) — quando for executar sua primeira wave real
+1. [README.md](../README.md) — project overview (5 min)
+2. This playbook to the end (you are here)
+3. [COPILOT-AGENTS-GUIDE.md](COPILOT-AGENTS-GUIDE.md) — command reference (read the sections for the phases you will work in)
+4. [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) — when you are ready to run your first real wave
 
-Documentos avançados (leia quando necessário):
+Advanced documents (read when needed):
 
-- [PRD-Agentic-Data-Migration-Factory.md](PRD-Agentic-Data-Migration-Factory.md) — requisitos e critérios de aceite
+- [PRD-Agentic-Data-Migration-Factory.md](PRD-Agentic-Data-Migration-Factory.md) — requirements and acceptance criteria
 
-- [OPERATING-MODEL-CANVAS-v2.md](OPERATING-MODEL-CANVAS-v2.md) — modelo operacional e permissões por agente
+- [OPERATING-MODEL-CANVAS-v2.md](OPERATING-MODEL-CANVAS-v2.md) — operating model and agent permissions
 
-- [SKILLS-BLUEPRINT-BY-GATE.md](SKILLS-BLUEPRINT-BY-GATE.md) — skills disponíveis por gate
+- [SKILLS-BLUEPRINT-BY-GATE.md](SKILLS-BLUEPRINT-BY-GATE.md) — available skills per gate
 
 ---
 
-## Seção 2 — Configure o Ambiente Local
+## Section 2 — Set Up the Local Environment
 
-### Pré-requisitos
+### Prerequisites
 
-Antes de começar, verifique que você tem instalado:
+Before starting, verify that you have the following installed:
 
-| Ferramenta | Versão mínima | Como verificar |
+| Tool | Minimum version | How to verify |
 | --- | --- | --- |
 
 | Python | 3.13+ | `python --version` |
-| Git | qualquer | `git --version` |
-| VS Code | qualquer | abrir o app |
-| GitHub Copilot | extensão ativa | ícone no VS Code |
+| Git | any | `git --version` |
+| VS Code | any | open the app |
+| GitHub Copilot | active extension | icon in VS Code |
 
-### Passo 2.1 — Clone e abra o workspace
+### Step 2.1 — Clone and open the workspace
 
 ```powershell
-# Clone o repositório (substitua pela URL real)
-git clone <URL-DO-REPOSITÓRIO>
+# Clone the repository (replace with the actual URL)
+git clone <REPOSITORY-URL>
 
-# Entre na pasta do projeto
+# Navigate to the project folder
 cd "Data-Migration v3"
 
-# Abra no VS Code
+# Open in VS Code
 code .
 
 ```
 
-> Se o projeto já está clonado, simplesmente abra a pasta no VS Code: `File → Open Folder`.
+> If the project is already cloned, simply open the folder in VS Code: `File → Open Folder`.
 
-### Passo 2.2 — Crie e ative o ambiente virtual
+### Step 2.2 — Create and activate the virtual environment
 
 ```powershell
-# Crie o venv
+# Create the venv
 python -m venv .venv
 
-# Ative no Windows (PowerShell)
+# Activate on Windows (PowerShell)
 .\.venv\Scripts\Activate.ps1
 
-# Ative no Linux/Mac
+# Activate on Linux/Mac
 source .venv/bin/activate
 
 ```
 
-Você verá `(.venv)` no início do prompt — isso confirma que o venv está ativo.
+You will see `(.venv)` at the beginning of the prompt — this confirms the venv is active.
 
-> **Importante:** sempre ative o venv antes de rodar qualquer script Python. Se o terminal foi fechado e reaberto, execute o Activate novamente.
+> **Important:** always activate the venv before running any Python script. If the terminal was closed and reopened, run Activate again.
 
-### Passo 2.3 — Instale as dependências
+### Step 2.3 — Install dependencies
 
 ```powershell
 pip install pytest pyyaml
 
 ```
 
-Não há `requirements.txt` no momento — estas duas são as únicas dependências do framework de governança.
+There is no `requirements.txt` at this time — these two are the only dependencies of the governance framework.
 
-### Passo 2.4 — Valide a instalação
+### Step 2.4 — Validate the installation
 
 ```powershell
 python -m pytest tests/ -q
 
 ```
 
-Resultado esperado:
+Expected result:
 
 ```
 
@@ -156,41 +156,41 @@ Resultado esperado:
 
 ```
 
-Se você ver `189 passed`, o ambiente está funcionando corretamente. Qualquer falha indica problema de configuração — veja a Seção 6 (Troubleshooting).
+If you see `189 passed`, the environment is working correctly. Any failure indicates a configuration problem — see Section 6 (Troubleshooting).
 
 ---
 
-## Seção 3 — Ative os Agentes no VS Code
+## Section 3 — Activate the Agents in VS Code
 
-### Passo 3.1 — Confirme que o GitHub Copilot está ativo
+### Step 3.1 — Confirm that GitHub Copilot is active
 
-1. Abra o VS Code
-2. Pressione `Ctrl+Alt+I` para abrir o GitHub Copilot Chat
-3. O painel de chat deve aparecer à esquerda ou à direita
+1. Open VS Code
+2. Press `Ctrl+Alt+I` to open GitHub Copilot Chat
+3. The chat panel should appear on the left or right side
 
-Se não aparecer, instale a extensão **GitHub Copilot Chat** pelo Marketplace do VS Code.
+If it does not appear, install the **GitHub Copilot Chat** extension from the VS Code Marketplace.
 
-### Passo 3.2 — Selecione um agente
+### Step 3.2 — Select an agent
 
-1. No painel do Copilot Chat, clique no seletor de modo no canto superior esquerdo:
+1. In the Copilot Chat panel, click the mode selector in the upper left corner:
    ```
 
-   [ Ask ▼ ]  ← clique aqui
+   [ Ask ▼ ]  ← click here
    ```
 
-2. Você verá a lista de agentes disponíveis (os `.chatmode.md` da pasta `.github/agents/`)
-3. Selecione o agente desejado
+2. You will see the list of available agents (the `.chatmode.md` files in the `.github/agents/` folder)
+3. Select the desired agent
 
-### Passo 3.3 — Teste com o master-agent
+### Step 3.3 — Test with master-agent
 
 ```
 
-[Selecione: master-agent]
-> olá
+[Select: master-agent]
+> hello
 
 ```
 
-O agente deve se apresentar com seu menu de comandos. Se não aparecer a apresentação, tente:
+The agent should introduce itself with its command menu. If the introduction does not appear, try:
 
 ```
 
@@ -198,9 +198,9 @@ O agente deve se apresentar com seu menu de comandos. Se não aparecer a apresen
 
 ```
 
-### Passo 3.4 — Explore os comandos disponíveis
+### Step 3.4 — Explore available commands
 
-Cada agente tem comandos com o prefixo `*`. Para ver todos:
+Each agent has commands prefixed with `*`. To see all of them:
 
 ```
 
@@ -208,77 +208,77 @@ Cada agente tem comandos com o prefixo `*`. Para ver todos:
 
 ```
 
-Para navegar pelo projeto sem saber qual agente usar:
+To navigate the project without knowing which agent to use:
 
 ```
 
-[Selecione: master-agent]
+[Select: master-agent]
 > *route
-Contexto: [descreva o que você quer fazer]
+Context: [describe what you want to do]
 
 ```
 
-O `master-agent` vai recomendar o agente correto.
+The `master-agent` will recommend the correct agent.
 
 ---
 
-## Seção 4 — Entenda a Estrutura do Projeto
+## Section 4 — Understand the Project Structure
 
 ```
 
 Data-Migration v3/
 ├── .github/
-│   ├── agents/          ← 19 agentes (arquivos .chatmode.md)
-│   └── skills/          ← 26 skills instaladas
-├── scripts/             ← 23 módulos Python de governança
-├── tests/               ← 189 testes automatizados
-├── docs/                ← Documentação do projeto
-│   ├── PRD-...          ← Requisitos do produto
-│   ├── OPERATING-MODEL  ← Modelo operacional
-│   ├── COPILOT-AGENTS-GUIDE ← Referência de comandos
-│   ├── SKILLS-BLUEPRINT ← Skills por gate
-│   ├── PLAYBOOK-MIGRATION-OPERATIONS.md ← Operação de waves
-│   └── PLAYBOOK-ONBOARDING.md ← Este arquivo
-├── <nome>-agent/        ← Pasta de cada agente com seus outputs
-│   ├── <agent>-outputs/ ← Artefatos gerados pelo agente
+│   ├── agents/          ← 19 agents (.chatmode.md files)
+│   └── skills/          ← 26 installed skills
+├── scripts/             ← 23 Python governance modules
+├── tests/               ← 189 automated tests
+├── docs/                ← Project documentation
+│   ├── PRD-...          ← Product requirements
+│   ├── OPERATING-MODEL  ← Operating model
+│   ├── COPILOT-AGENTS-GUIDE ← Command reference
+│   ├── SKILLS-BLUEPRINT ← Skills per gate
+│   ├── PLAYBOOK-MIGRATION-OPERATIONS.md ← Wave operations
+│   └── PLAYBOOK-ONBOARDING.md ← This file
+├── <name>-agent/        ← Each agent's folder with its outputs
+│   ├── <agent>-outputs/ ← Artifacts generated by the agent
 │   └── README.md
-└── README.md            ← Ponto de entrada do projeto
+└── README.md            ← Project entry point
 
 ```
 
-### Scripts de governança (pasta `scripts/`)
+### Governance scripts (`scripts/` folder)
 
-Os scripts Python implementam as validações que os agentes usam internamente. Como novo membro, você provavelmente vai interagir com:
+The Python scripts implement the validations that agents use internally. As a new member, you will likely interact with:
 
-| Script | O que faz |
+| Script | What it does |
 | --- | --- |
-| `validate_wave_config.py` | Valida o YAML de configuração de uma wave |
-| `gate_score_report.py` | Calcula o GateScore de um gate |
-| `validate_gate1_artifacts.py` | Verifica artefatos obrigatórios do Gate 1 |
-| `validate_gate2_artifacts.py` | Verifica artefatos obrigatórios do Gate 2 |
-| `validate_gate3_artifacts.py` | Verifica artefatos obrigatórios do Gate 3 |
-| `kpi_dashboard_report.py` | Calcula e reporta KPIs do projeto |
-| `wave_status_tracker.py` | Status consolidado da wave nos 3 gates |
-| `governance_policy.py` | Motor de política de tool use por agente |
-| `data_contract_validator.py` | Validação declarativa de contratos de dados |
+| `validate_wave_config.py` | Validates the wave configuration YAML |
+| `gate_score_report.py` | Calculates the GateScore for a gate |
+| `validate_gate1_artifacts.py` | Checks required Gate 1 artifacts |
+| `validate_gate2_artifacts.py` | Checks required Gate 2 artifacts |
+| `validate_gate3_artifacts.py` | Checks required Gate 3 artifacts |
+| `kpi_dashboard_report.py` | Calculates and reports project KPIs |
+| `wave_status_tracker.py` | Consolidated wave status across all 3 gates |
+| `governance_policy.py` | Tool-use policy engine per agent |
+| `data_contract_validator.py` | Declarative data contract validation |
 
-Consulte [scripts/README.md](../scripts/README.md) para a lista completa dos 23 módulos.
+See [scripts/README.md](../scripts/README.md) for the full list of all 23 modules.
 
 ---
 
-## Seção 5 — Execute Sua Primeira Wave Simulada
+## Section 5 — Run Your First Simulated Wave
 
-Esta seção guia você em uma simulação de wave para aprender o fluxo sem risco. Use dados fictícios.
+This section guides you through a wave simulation to learn the flow without risk. Use fictitious data.
 
-### Passo 5.1 — Crie um wave-config de exemplo
+### Step 5.1 — Create a sample wave-config
 
 ```powershell
-# Crie uma pasta para a wave de teste
+# Create a folder for the test wave
 mkdir wave-test-onboarding
 
 ```
 
-Crie o arquivo `wave-test-onboarding/wave-config.yaml`:
+Create the file `wave-test-onboarding/wave-config.yaml`:
 
 ```yaml
 wave_id: WAVE-ONBOARDING
@@ -292,66 +292,66 @@ source:
   type: sql_server
   database: NORTHWIND_DEV
 target:
-  platform: "destino a definir"
+  platform: "target to be defined"
 discovery_owner: discovery-scout
 status: in_progress
 
 ```
 
-### Passo 5.2 — Valide o config
+### Step 5.2 — Validate the config
 
 ```powershell
 python scripts/validate_wave_config.py
 
 ```
 
-### Passo 5.3 — Simule o Gate 1 com o discovery-scout
+### Step 5.3 — Simulate Gate 1 with discovery-scout
 
 ```text
-[Selecione: discovery-scout]
+[Select: discovery-scout]
 > *scan-repo
-Fonte: SQL Server 2019, banco: NORTHWIND_DEV
-Escopo: tabelas Customers e Orders (simulação de onboarding)
+Source: SQL Server 2019, database: NORTHWIND_DEV
+Scope: Customers and Orders tables (onboarding simulation)
 
 > *classify
-Classifique por complexidade
+Classify by complexity
 
 ```
 
-Observe o formato das saídas — `inventory-report.md` com complexidade Low/Medium/High.
+Observe the output format — `inventory-report.md` with Low/Medium/High complexity.
 
-### Passo 5.4 — Simule o problema de negócio
+### Step 5.4 — Simulate the business problem
 
 ```text
-[Selecione: data-strategist]
+[Select: data-strategist]
 > *define-problem
-Projeto: WAVE-ONBOARDING — migração de teste
-Objetivo: aprender o fluxo da factory
+Project: WAVE-ONBOARDING — test migration
+Objective: learn the factory workflow
 
 ```
 
-### Passo 5.5 — Calcule um GateScore simulado
+### Step 5.5 — Calculate a simulated GateScore
 
 ```text
-[Selecione: migration-coordinator]
+[Select: migration-coordinator]
 > *gate1-validate
 Wave: WAVE-ONBOARDING
 
 ```
 
-Se algum artefato obrigatório estiver faltando, o agente vai apontar o que falta. Isso é o comportamento esperado — aprenda o que cada gate exige observando os bloqueadores.
+If any required artifact is missing, the agent will point out what is needed. This is the expected behavior — learn what each gate requires by observing the blockers.
 
-### Passo 5.6 — Leia o Playbook de Operações
+### Step 5.6 — Read the Operations Playbook
 
-Com o fluxo simulado em mente, leia [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) de ponta a ponta. Agora você vai entender cada passo com contexto prático.
+With the simulated flow in mind, read [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) end to end. Now you will understand each step with practical context.
 
 ---
 
-## Seção 6 — Troubleshooting
+## Section 6 — Troubleshooting
 
-### Problema: `189 passed` não aparece
+### Problem: `189 passed` does not appear
 
-**Causa mais comum:** pyyaml não instalado.
+**Most common cause:** pyyaml not installed.
 
 ```powershell
 pip install pyyaml
@@ -359,104 +359,104 @@ python -m pytest tests/ -q
 
 ```
 
-### Problema: agentes não aparecem no VS Code
+### Problem: agents do not appear in VS Code
 
-**Verifique:**
+**Check:**
 
-1. A extensão GitHub Copilot Chat está instalada e ativa
-2. O workspace aberto é a pasta raiz do projeto (onde fica `.github/`)
-3. Os arquivos `.chatmode.md` existem em `.github/agents/`
+1. The GitHub Copilot Chat extension is installed and active
+2. The open workspace is the project root folder (where `.github/` resides)
+3. The `.chatmode.md` files exist in `.github/agents/`
 
 ```powershell
-# Verifique se os arquivos existem
+# Check if the files exist
 Get-ChildItem .github\agents\ -Filter "*.chatmode.md" | Measure-Object
-# Esperado: 21 arquivos (19 ativos + 1 deprecated + 1 opcional)
+# Expected: 21 files (19 active + 1 deprecated + 1 optional)
 
 ```
 
-### Problema: venv não ativa (PowerShell)
+### Problem: venv does not activate (PowerShell)
 
 ```powershell
-# Se houver erro de execução de scripts:
+# If there is a script execution error:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Depois tente ativar novamente:
+# Then try activating again:
 .\.venv\Scripts\Activate.ps1
 
 ```
 
-### Problema: não sei qual agente usar
+### Problem: I don't know which agent to use
 
 ```text
-[Selecione: master-agent]
+[Select: master-agent]
 > *route
-[descreva o que você quer fazer]
+[describe what you want to do]
 
 ```
 
-O `master-agent` sempre recomenda o agente correto para o contexto.
+The `master-agent` always recommends the correct agent for the context.
 
-### Problema: agente não entende meu contexto
+### Problem: the agent does not understand my context
 
-- Forneça sempre: nome da wave, entidades em escopo, plataforma fonte e destino
+- Always provide: wave name, in-scope entities, source and target platforms
 
-- Use os comandos com `*` em vez de linguagem livre quando disponíveis
+- Use `*` commands instead of free-form language when available
 
-- Se o agente se perder, abra um novo chat e selecione o agente novamente
+- If the agent gets lost, open a new chat and select the agent again
 
 ---
 
-## Seção 7 — Referência Rápida de Comandos de Setup
+## Section 7 — Quick Reference for Setup Commands
 
 ```powershell
-# Setup completo de um novo ambiente
+# Full setup of a new environment
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install pytest pyyaml
-python -m pytest tests/ -q    # deve retornar 189 passed
+python -m pytest tests/ -q    # should return 189 passed
 
-# Comandos do dia a dia
-python -m pytest tests/ -q                                             # todos os testes
-python -m pytest tests/test_gate_score_report.py -v                   # teste específico
-python -m scripts.validate_wave_config WAVE-001.yaml                  # validar wave-config
-python -m scripts.validate_agent_contracts --root .                   # contratos dos agentes
+# Day-to-day commands
+python -m pytest tests/ -q                                             # all tests
+python -m pytest tests/test_gate_score_report.py -v                   # specific test
+python -m scripts.validate_wave_config WAVE-001.yaml                  # validate wave-config
+python -m scripts.validate_agent_contracts --root .                   # agent contracts
 python -m scripts.validate_gate3_artifacts downstream-executor-agent/downstream-outputs
 
 ```
 
 ---
 
-## Seção 8 — Próximos Passos
+## Section 8 — Next Steps
 
-Depois de concluir as seções 1 a 5, você está pronto para:
+After completing sections 1 through 5, you are ready to:
 
-| Objetivo | O que fazer |
+| Goal | What to do |
 | --- | --- |
 
-| Executar uma wave real | Siga [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) |
-| Aprofundar em um agente específico | Leia a seção correspondente em [COPILOT-AGENTS-GUIDE.md](COPILOT-AGENTS-GUIDE.md) |
-| Entender permissões e governança | Leia [OPERATING-MODEL-CANVAS-v2.md](OPERATING-MODEL-CANVAS-v2.md) |
-| Ver o modelo de qualidade (GateScore) | Leia [PRD-Agentic-Data-Migration-Factory.md](PRD-Agentic-Data-Migration-Factory.md) seção 4 |
-| Explorar skills disponíveis | Leia [SKILLS-BLUEPRINT-BY-GATE.md](SKILLS-BLUEPRINT-BY-GATE.md) |
+| Run a real wave | Follow [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) |
+| Deep dive into a specific agent | Read the corresponding section in [COPILOT-AGENTS-GUIDE.md](COPILOT-AGENTS-GUIDE.md) |
+| Understand permissions and governance | Read [OPERATING-MODEL-CANVAS-v2.md](OPERATING-MODEL-CANVAS-v2.md) |
+| See the quality model (GateScore) | Read [PRD-Agentic-Data-Migration-Factory.md](PRD-Agentic-Data-Migration-Factory.md) section 4 |
+| Explore available skills | Read [SKILLS-BLUEPRINT-BY-GATE.md](SKILLS-BLUEPRINT-BY-GATE.md) |
 
 ---
 
-## Checklist de Conclusão do Onboarding
+## Onboarding Completion Checklist
 
-- [ ] Li as seções 1 a 5 deste playbook
+- [ ] Read sections 1 through 5 of this playbook
 
-- [ ] Ambiente Python configurado com venv ativo
+- [ ] Python environment configured with active venv
 
-- [ ] `pip install pytest pyyaml` executado
+- [ ] `pip install pytest pyyaml` executed
 
-- [ ] `189 passed` confirmado no `pytest`
+- [ ] `189 passed` confirmed in `pytest`
 
-- [ ] GitHub Copilot Chat aberto no VS Code
+- [ ] GitHub Copilot Chat open in VS Code
 
-- [ ] `master-agent` ativado e `*help` respondido
+- [ ] `master-agent` activated and `*help` responded
 
-- [ ] Wave simulada criada e Gate 1 tentado
+- [ ] Simulated wave created and Gate 1 attempted
 
-- [ ] [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) lido
+- [ ] [PLAYBOOK-MIGRATION-OPERATIONS.md](PLAYBOOK-MIGRATION-OPERATIONS.md) read
 
-- [ ] Sabia qual agente chamar para cada fase
+- [ ] Knew which agent to use for each phase
