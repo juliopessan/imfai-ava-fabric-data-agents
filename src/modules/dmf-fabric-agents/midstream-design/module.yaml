@@ -4,20 +4,20 @@ version: "3.0.0"
 description: "Agentes de arquitetura, modelagem de dados, governança e geração de código"
 agents:
   - id: data-architect
-    file: agents/data-architect.md
-    skill: dmf-data-architect
+    file: agents/data-architect/data-architect.md
+    skill: ava-dmf-data-pipeline
   - id: data-modeler
-    file: agents/data-modeler.md
-    skill: dmf-data-modeler
+    file: agents/data-modeler/data-modeler.md
+    skill: ava-dmf-data-quality
   - id: data-steward
-    file: agents/data-steward.md
-    skill: dmf-data-steward
+    file: agents/data-steward/data-steward.md
+    skill: ava-dmf-agent-governance
   - id: agent-designer
-    file: agents/agent-designer.md
-    skill: dmf-agent-designer
+    file: agents/agent-designer/agent-designer.md
+    skill: ava-dmf-ai-agents-architect
   - id: code-generator
-    file: agents/code-generator.md
-    skill: dmf-code-generator
+    file: agents/code-generator/code-generator.md
+    skill: ava-dmf-data-pipeline
 outputs:
   base_path: "projects/{project_name}/outputs/midstream"
   artifacts:

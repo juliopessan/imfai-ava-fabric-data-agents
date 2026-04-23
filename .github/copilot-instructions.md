@@ -15,9 +15,9 @@ Threshold: >= 0.85 approved | 0.70–0.84 approved with open items | < 0.70 bloc
 
 ## Architecture
 
-- **19 agents** in `.github/agents/` — one per specialization (e.g., `discovery-scout`, `data-architect`, `downstream-executor`). Note: `orchestrator` is deprecated — use `migration-coordinator` instead.
-- **26 skills** in `.github/skills/` — domain knowledge loaded on demand
-- **23 governance scripts** in `scripts/` — Python modules with 189 automated tests
+- **21 agents** in `src/modules/dmf-fabric-agents/` — organized by module (upstream-discovery, midstream-design, midstream-quality, downstream-execution, core-coordination). Note: `orchestrator` is deprecated — use `migration-coordinator` instead.
+- **26 skills** in `.github/skills/` — prefixed `ava-dmf-*`, domain knowledge loaded on demand
+- **23 governance scripts** in `src/shared/scripts/` — Python modules with 189 automated tests
 - **Docs** in `docs/` — playbooks, operating model, agent guide, skills blueprint
 
 See [README.md](../README.md) for project overview.
@@ -37,7 +37,7 @@ python -m venv .venv
 pip install pytest pyyaml
 
 # Run all governance tests
-python -m pytest tests/ -q
+python -m pytest src/shared/tests/ -q
 # Expected: 189 passed
 ```
 
@@ -45,26 +45,26 @@ Always activate `.venv` before running any Python script. If `pyyaml` is missing
 
 ## Scripts Reference
 
-Do not edit scripts without running tests after. All 23 modules in `scripts/` are covered by tests in `tests/`. See [scripts/README.md](../scripts/README.md) for module descriptions.
+Do not edit scripts without running tests after. All 23 modules in `src/shared/scripts/` are covered by tests in `src/shared/tests/`. See [src/shared/scripts/README.md](../src/shared/scripts/README.md) for module descriptions.
 
 Key scripts:
-- `scripts/validate_wave_config.py` — validates wave YAML config
-- `scripts/validate_gate1_artifacts.py` — validates Gate 1 artifact package
-- `scripts/validate_gate2_artifacts.py` — validates Gate 2 artifact package
-- `scripts/validate_gate3_artifacts.py` — validates Gate 3 artifact package (also contains generic `validate_gate_requirements()`)
-- `scripts/gate_score_report.py` — calculates GateScore
-- `scripts/wave_status_tracker.py` — consolidated wave status across gates
-- `scripts/kpi_dashboard_report.py` — wave KPI dashboard report
-- `scripts/quality_thresholds.py` — entity-tier quality thresholds
-- `scripts/validate_agent_contracts.py` — structural contract validator for chatmode agents
-- `scripts/governance_policy.py` — programmatic governance policy engine
-- `scripts/data_contract_validator.py` — declarative data contract validation
+- `src/shared/scripts/validate_wave_config.py` — validates wave YAML config
+- `src/shared/scripts/validate_gate1_artifacts.py` — validates Gate 1 artifact package
+- `src/shared/scripts/validate_gate2_artifacts.py` — validates Gate 2 artifact package
+- `src/shared/scripts/validate_gate3_artifacts.py` — validates Gate 3 artifact package (also contains generic `validate_gate_requirements()`)
+- `src/shared/scripts/gate_score_report.py` — calculates GateScore
+- `src/shared/scripts/wave_status_tracker.py` — consolidated wave status across gates
+- `src/shared/scripts/kpi_dashboard_report.py` — wave KPI dashboard report
+- `src/shared/scripts/quality_thresholds.py` — entity-tier quality thresholds
+- `src/shared/scripts/validate_agent_contracts.py` — structural contract validator for chatmode agents
+- `src/shared/scripts/governance_policy.py` — programmatic governance policy engine
+- `src/shared/scripts/data_contract_validator.py` — declarative data contract validation
 
 ## Conventions
 
 - **Wave config:** every migration wave requires a `wave-config.yaml` validated by `validate_wave_config.py` before Gate 1
 - **Gate decisions:** record in `gate{N}-decision.md` with score, approvers, and open items
-- **Agent outputs:** store in `<agent-name>-agent/<domain>-outputs/`
+- **Agent outputs:** store in `projects/<project-name>/outputs/<phase>/`
 - **Discovery ownership:** each wave has exactly one `discovery_owner` in wave-config; `inventory-scout` is fallback only
 - **Platform agnostic:** do not hardcode Databricks, Fabric, or Snowflake in agent instructions or scripts — use `(inform target platform)` or receive via prompt
 - **Coordinator hierarchy:** `master-agent` = user triage + KB; `migration-coordinator` (Orion) = wave orchestration + gates. Do NOT use `orchestrator` (deprecated).
