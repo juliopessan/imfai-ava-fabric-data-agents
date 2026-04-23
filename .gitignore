@@ -85,19 +85,13 @@ wave-execution-logs/
 reconciliation-reports/
 
 # Exceptions: keep sample/template output folders tracked
-!discovery-scout-agent/inventory-outputs/.gitkeep
-!downstream-executor-agent/downstream-outputs/.gitkeep
-!inventory-scout-agent/inventory-outputs/.gitkeep
-!bi-semantic-agent/bi-outputs/.gitkeep
+# Exceptions: keep sample output folders tracked via project/outputs/
+!project/outputs/**/.gitkeep
 
 # -----------------------------------------------------------------------------
 # VS Code
 # -----------------------------------------------------------------------------
-.vscode/settings.json
-.vscode/launch.json
-.vscode/tasks.json
-.vscode/*.log
-# Keep: .vscode/extensions.json (team extension recommendations)
+.vscode/
 # Keep: .github/ entirely (agents, skills, instructions)
 
 # -----------------------------------------------------------------------------
