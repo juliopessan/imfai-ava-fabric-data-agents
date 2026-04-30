@@ -1,4 +1,4 @@
-# Data Migration Factory v3
+# Data Migration Factory
 
 > **Platform-agnostic, multi-agent migration factory** — 19 specialized AI agents, three quality gates, 23 governance scripts, 189 automated tests. Orchestrates the full lifecycle of data platform migrations from legacy discovery to production reconciliation.
 
