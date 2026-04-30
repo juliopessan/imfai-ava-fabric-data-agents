@@ -57,7 +57,7 @@ Abra um terminal PowerShell e execute:
 
 ```powershell
 # Clone o repositório ETL público (sistema legado simulado)
-git clone https://github.com/phucvn16409/build-etl-using-ssis legacy-etl-lab
+git clone https://github.com/phucvn16409/build-etl-using-ssis project/legacy
 
 # Clone ou abra o projeto Data Migration Factory (se já não estiver aberto)
 cd "Data-Migration v3"
@@ -67,7 +67,7 @@ cd "Data-Migration v3"
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
-python -m pytest tests/ -q    # deve mostrar: 205 passed (confirma ambiente OK)
+python -m pytest src/shared/tests/ -q    # deve mostrar: 205 passed (confirma ambiente OK)
 ```
 
 ### Passo 2.3 — Crie a estrutura da wave em projects/
@@ -187,7 +187,14 @@ human_gates: [gate_1, gate_2, gate_3]
 ### Passo 2.5 — Valide o wave-config
 
 ```powershell
-python -m scripts.validate_wave_config projects/wave-lab-adventureworks/wave-config.yaml
+python -c "
+import sys
+from pathlib import Path
+sys.path.insert(0, 'src/shared')
+from scripts.validate_wave_config import validate_wave_config
+result = validate_wave_config(Path.cwd() / 'projects/wave-lab-adventureworks/wave-config.yaml')
+print(result)
+"
 ```
 
 Resultado esperado: `✓ wave-config.yaml is valid`
