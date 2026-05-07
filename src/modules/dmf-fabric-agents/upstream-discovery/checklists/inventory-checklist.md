@@ -114,6 +114,21 @@ This checklist validates that all inventory artifacts are complete and meet qual
 
 ---
 
+### 🌐 7. asis-platform-landscape.html
+
+- [ ] File generated and saved to `projects/{project_name}/outputs/upstream/`
+- [ ] Opens in browser with no console errors
+- [ ] All 7 sections present (Header, KPIs, Source Platforms, Lineage Flow, Critical Objects, Gaps & Risks, Footer)
+- [ ] Dark theme `#0D0F14` rendered; DM Serif Display + DM Mono + Outfit fonts loaded
+- [ ] Amber `AS-IS Assessment` badge visible in header
+- [ ] All `{{PLACEHOLDER}}` tokens replaced with project data (none remaining)
+- [ ] KPI values consistent with `inventory-report.md`
+- [ ] Hover effects working on cards and table rows
+
+**Pass Criteria:** HTML renders cleanly with project-specific data, no leftover placeholders
+
+---
+
 ## Quality Checks
 
 ### Security

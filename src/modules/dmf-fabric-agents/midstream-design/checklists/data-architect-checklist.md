@@ -139,6 +139,15 @@
 - [ ] `architecture.md` complete
 - [ ] `data-model.md` complete
 - [ ] `decisions.md` complete
+- [ ] `tobe-target-architecture.html` generated and saved to `projects/{project_name}/outputs/midstream/`
+  - [ ] Opens in browser with no console errors
+  - [ ] All 7 sections present (Header, Principles, Medallion, Tech Stack, SLAs, ADRs, Footer)
+  - [ ] Light theme `#F7F8FA` rendered; Playfair Display + JetBrains Mono + Plus Jakarta Sans fonts loaded
+  - [ ] Gradient header top border present (fabric → silver → gold → green)
+  - [ ] Fabric blue `TO-BE Architecture` badge visible
+  - [ ] All `{{PLACEHOLDER}}` tokens replaced with project decisions (none remaining)
+  - [ ] Hover effects working on cards and table rows
+  - [ ] Content consistent with `architecture.md`
 
 ### Quality Criteria
 

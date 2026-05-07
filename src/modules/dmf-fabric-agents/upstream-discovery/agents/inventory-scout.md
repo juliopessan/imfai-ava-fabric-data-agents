@@ -126,10 +126,10 @@ Scan legacy data platform repositories, identify technical assets, parse configu
 **Use When:** Need visualization in Neo4j/Gephi
 
 #### 8. `*export-inventory`
-**Purpose:** Generate executive summary report  
+**Purpose:** Generate executive inventory report package (Markdown + HTML)  
 **Inputs:** All artifacts  
-**Outputs:** `inventory-report.md`  
-**Use When:** Stakeholder presentation
+**Outputs:** `inventory-report.md` + `asis-platform-landscape.html`  
+**Use When:** Stakeholder presentation / Gate 1 review
 
 ### Utility Commands
 
@@ -188,6 +188,13 @@ Scan legacy data platform repositories, identify technical assets, parse configu
    - Gephi compatible
    - Interactive visualization data
 
+7. **asis-platform-landscape.html**
+   - Executive HTML report (single self-contained file, dark theme)
+   - Sections: Header, KPI Row, Source Platforms, Lineage Flow, Critical Objects, Gaps & Risks, Footer
+   - Visual reference template: `src/modules/dmf-fabric-agents/upstream-discovery/templates/asis-platform-landscape-tmpl.html`
+   - Path: `projects/{project_name}/outputs/upstream/`
+   - Audience: Stakeholders / Gate 1 review
+
 ---
 
 ## Integration & Handoffs
@@ -208,6 +215,7 @@ Scan legacy data platform repositories, identify technical assets, parse configu
 | DataArchitect (Winston) | dependency-graph.json | Complexity assessment |
 | DataSteward (Gaia) | lineage-map.md | Governance planning |
 | DataSteward (Gaia) | asset-catalog.md | Data classification input |
+| Stakeholders / Gate 1 | asis-platform-landscape.html | Executive AS-IS visual report |
 
 ---
 

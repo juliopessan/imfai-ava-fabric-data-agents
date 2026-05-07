@@ -35,7 +35,8 @@ Projetar a arquitetura técnica que transforma requisitos em soluções.
 | 7 | `*help` | Ver todos os comandos disponíveis |
 
 📄 **Artefatos que produzo:**
-• architecture.md • data-model.md • decisions.md
+• architecture-spec.json • architecture.md • data-model.md • decisions.md
+• tech-stack.md • security-design.md • tobe-target-architecture.html
 • tech-stack.md • security-design.md
 
 👉 Digite um número ou comando para começar!
@@ -116,6 +117,19 @@ You are responsible for creating:
    - Modeling approach decisions
    - Processing strategy decisions
    - Security model decisions
+
+4. **architecture-spec.json** *(Owner: Winston)*
+   - Machine-readable canonical spec consumida por downstream agents e CI
+   - Contém: metadata, principles, layers, tech_stack, sla_targets, cross_cutting, adrs
+   - **Gerada primeiro** — fonte única de verdade para MD e HTML
+   - Path: `projects/{project_name}/outputs/midstream/`
+
+5. **tobe-target-architecture.html** *(Owner: Winston)*
+   - Apresentação visual executiva para revisão do Gate 2 pelos stakeholders
+   - Seções: Header, Princípios, Medallion Flow, Tech Stack, Tabela SLA, ADRs, Footer
+   - Todos os valores derivados de `architecture-spec.json` — sem dados independentes
+   - **Gerada por último** — após JSON e MD validados
+   - Path: `projects/{project_name}/outputs/midstream/`
 
 ## Architecture Patterns
 
@@ -198,9 +212,11 @@ O que deseja fazer?
 ✅ Artefatos do DataArchitect completos!
 
 📄 Criados:
+• architecture-spec.json ✅
 • architecture.md ✅
 • data-model.md ✅
 • decisions.md ✅
+• tobe-target-architecture.html ✅
 
 📌 Próximos passos:
 1. 🔄 Refinar: Quer revisar algum artefato?

@@ -3,13 +3,37 @@
 ```yaml
 task_id: generate-inventory
 agent: discovery-scout
-version: "4.0"
+version: "4.1"
 command: "*generate-inventory"
 phase: UPSTREAM
 gate: 1
-output: "asis-platform-landscape.html"
+outputs:
+  - file: "inventory-enriched.json"
+    format: json
+    path: "projects/{project_name}/outputs/upstream/inventory/"
+    description: "Enriched inventory data with classifications, waves and dependencies"
+  - file: "inventory-report.md"
+    format: markdown
+    path: "projects/{project_name}/outputs/upstream/inventory/"
+    description: "Human-readable inventory report based on inventory-tmpl.md"
+  - file: "asis-platform-landscape.html"
+    format: html
+    path: "projects/{project_name}/outputs/upstream/"
+    description: "Executive visual report for Gate 1 stakeholder review"
 output_folder: "projects/{project_name}/outputs/upstream/"
 ```
+
+---
+
+## Reference Template
+
+Before executing **Step 4**, load the HTML template as visual reference:
+
+```
+src/modules/dmf-fabric-agents/upstream-discovery/templates/asis-platform-landscape-tmpl.html
+```
+
+Reproduce its structure, CSS variables, fonts, section order and hover patterns exactly. Replace every `{{PLACEHOLDER}}` with project data — never leave placeholders in the final HTML. If a value is unavailable, render `—` or `N/A`.
 
 ---
 
@@ -82,13 +106,65 @@ Generate the final, consolidated inventory report that merges all discovery arti
      - Wave 3+ (complex, deep dependencies)
 ```
 
-### Step 4 — Generate HTML Output
+### Step 4 — Persist Enriched JSON
 
-Produce a single self-contained HTML file (`asis-platform-landscape.html`)
-using all data from Steps 1–3. Do NOT produce Markdown.
-Save to `projects/{project_name}/outputs/upstream/`.
+Save the enriched inventory data as a single structured JSON file.
 
-The file must match this visual specification:
+- **File:** `inventory-enriched.json`
+- **Path:** `projects/{project_name}/outputs/upstream/inventory/`
+
+The file must follow the **Output Schema** defined below.
+Every object processed in Step 2 must appear in the `objects` array.
+Every wave calculated in Step 2 must appear in `migration_waves`.
+Every statistic computed in Step 3 must appear in `summary`.
+
+Do NOT omit fields even when their value is zero or null.
+Use `null` for truly unknown values. Use `0` for numeric zeros.
+
+This JSON is the **canonical data source** for the MD and HTML steps that follow.
+
+---
+
+### Step 5 — Generate Markdown Report
+
+Using the data already computed in Steps 2–3, generate the Markdown report.
+
+- **File:** `inventory-report.md`
+- **Path:** `projects/{project_name}/outputs/upstream/inventory/`
+- **Template:** `src/modules/dmf-fabric-agents/upstream-discovery/templates/inventory-tmpl.md`
+
+Replace every `{{PLACEHOLDER}}` in the template with real values from Steps 2–3.
+The numerical values in this file MUST be identical to the values in `inventory-enriched.json`.
+
+**Required sections (match the template exactly):**
+- Executive Summary (metrics table)
+- Objects by Type (count table)
+- Classification Distribution (count + % table)
+- Per-Database Breakdown (one section per database)
+- Integration Points (upstream sources + downstream consumers)
+- Migration Waves (Wave 1, 2, 3+)
+- Dead Code Summary
+- Dependency Graph Metrics
+- Appendix — Top 10 Most Complex Pipelines
+
+Do NOT include placeholder text like `{{TABLE_NAME}}` in the final output.
+If a section has no data, write `No data available for this section.`
+
+---
+
+### Step 6 — Generate HTML Report
+
+Using the data already computed in Steps 2–3, generate the executive HTML report.
+This step generates HTML only. The Markdown report was already saved in Step 5.
+
+- **File:** `asis-platform-landscape.html`
+- **Path:** `projects/{project_name}/outputs/upstream/`
+
+Before generating, read the reference template:
+`src/modules/dmf-fabric-agents/upstream-discovery/templates/asis-platform-landscape-tmpl.html`
+
+The HTML must be a single self-contained file.
+The numerical values in this file MUST be identical to `inventory-enriched.json` and `inventory-report.md`.
 
 **Style:** Dark theme (#0D0F14 bg). Fonts: DM Serif Display (headings,
 italic accent), DM Mono (labels/tags/values), Outfit (body) via Google Fonts.
@@ -102,14 +178,14 @@ purple #A78BFA (readiness), red #EF4444 (high risk). All as CSS variables.
    italic accent, subtitle, right-aligned metadata block (Trace ID, agents,
    source platform, target platform, date) in DM Mono.
 2. KPI Row — 5 cards with 2px top color bar, large monospace value, uppercase
-   label, sub-line. Values: total objects, physical coverage %, semantic
-   enrichment %, gaps count, target readiness %.
+   label, sub-line. Values: total objects (amber), physical coverage % (teal),
+   semantic enrichment % (blue), gaps count (coral), target readiness % (purple).
 3. Source Platforms Grid — 2-column grid, one card per discovered platform:
    icon square, name, version, 2x2 attribute grid, risk tag (High/Medium/Low).
 4. Data Lineage Flow — horizontal node→arrow chain showing current data flow.
    Each node: system name + tech sub-label. Each arrow: tool label above line.
-5. Critical Objects Table — top objects by complexity. Columns: #, name,
-   type tag (colored), platform, dependencies count, complexity mini-bar,
+5. Critical Objects Table — top objects by complexity (max 15 rows). Columns: #,
+   name, type tag (colored), platform, dependencies count, complexity mini-bar,
    migration strategy badge (Lift / Refactor / Rebuild).
 6. Gaps & Risks Grid — 3-column, each card: impact dot+label, title, desc.
    Border color matches impact (red=high, amber=medium, teal=low).
@@ -118,7 +194,34 @@ purple #A78BFA (readiness), red #EF4444 (high risk). All as CSS variables.
 Section titles use DM Mono, uppercase, letter-spacing 0.14em,
 with ::after pseudo-element line extending to the right.
 Hover effects on all cards and table rows (transition: all 0.2s).
-No external JS. Single <style> block. All content from project data.
+No external JS. Single `<style>` block. No unfilled `{{...}}` placeholders.
+
+---
+
+## Data Consistency Contract
+
+The three output files generated by this task must contain identical data:
+
+| Data point         | JSON source field                  | MD location                   | HTML location             |
+|--------------------|-------------------------------------|-------------------------------|---------------------------|
+| Total objects      | `summary.by_type` total             | Executive Summary table       | KPI card 1                |
+| Physical coverage  | `summary.volume.coverage_pct`       | Dependency Graph Metrics      | KPI card 2                |
+| Total volume (GB)  | `summary.volume.total_gb`           | Executive Summary table       | KPI card or platform card |
+| Gaps count         | `summary.gaps.total`                | Gaps section                  | KPI card 4                |
+
+**RULE:** If a value appears in the JSON, it MUST appear verbatim (same number) in the MD and HTML.
+Never recalculate or approximate. Copy from the JSON values set in Step 4.
+
+---
+
+## Cross-Format Validation
+
+Before finishing, verify:
+
+1. Pick 3 random numeric values from `inventory-enriched.json`.
+2. Find those exact values in `inventory-report.md`.
+3. Find those exact values in `asis-platform-landscape.html`.
+4. If any value is missing or different, fix the discrepancy before proceeding.
 
 ---
 
@@ -191,8 +294,13 @@ No external JS. Single <style> block. All content from project data.
 - [ ] Migration waves calculated
 - [ ] Dead code objects flagged for exclusion
 - [ ] Summary statistics generated
-- [ ] Enriched inventory.json saved
-- [ ] Human-readable report generated
+- [ ] `inventory-enriched.json` saved to `outputs/upstream/inventory/`
+- [ ] `inventory-enriched.json` contains all objects with required fields
+- [ ] `inventory-report.md` saved to `outputs/upstream/inventory/`
+- [ ] `inventory-report.md` — no `{{PLACEHOLDER}}` remaining
+- [ ] `asis-platform-landscape.html` saved to `outputs/upstream/`
+- [ ] `asis-platform-landscape.html` — no `{{PLACEHOLDER}}` remaining
+- [ ] KPI values are identical across all three files
 - [ ] Ready for Gate 1 review
 
 ---

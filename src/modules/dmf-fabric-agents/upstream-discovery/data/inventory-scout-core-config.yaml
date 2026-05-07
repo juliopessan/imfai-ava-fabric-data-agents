@@ -18,7 +18,12 @@ agent:
   
 outputs:
   base_path: "./inventory-outputs"
-  
+
+  formats:
+    - json
+    - markdown
+    - html
+
   required_artifacts:
     - name: "inventory-map.md"
       description: "Complete repository structure and statistics"
@@ -49,6 +54,29 @@ outputs:
       description: "Export for Neo4j/Gephi (GraphML/JSON)"
       priority: "OPTIONAL"
       gate: "Gate 1"
+
+    - name: "inventory-enriched.json"
+      description: "Enriched inventory with classifications, waves and volumes (canonical data source)"
+      priority: "MANDATORY"
+      gate: "Gate 1"
+      generated_by: "generate-inventory"
+      path: "outputs/upstream/inventory/"
+
+    - name: "inventory-report.md"
+      description: "Human-readable consolidated inventory report"
+      priority: "MANDATORY"
+      gate: "Gate 1"
+      generated_by: "generate-inventory"
+      path: "outputs/upstream/inventory/"
+      template: "inventory-tmpl.md"
+
+    - name: "asis-platform-landscape.html"
+      description: "Executive HTML report for Gate 1 stakeholder review"
+      priority: "MANDATORY"
+      gate: "Gate 1"
+      generated_by: "generate-inventory"
+      path: "outputs/upstream/"
+      template: "asis-platform-landscape-tmpl.html"
 
 dependencies:
   upstream_agents:

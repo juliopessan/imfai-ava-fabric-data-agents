@@ -19,6 +19,8 @@ outputs:
     - markdown
     - yaml
     - diagrams
+    - json
+    - html
 
 # Artifact Definitions
 artifacts:
@@ -104,10 +106,32 @@ artifacts:
       - "Encryption"
       - "Compliance"
 
+  architecture-spec:
+    name: "Architecture Specification (JSON)"
+    filename: "architecture-spec.json"
+    required_for_gate: 2
+    generated_by: "create-architecture"
+    description: "Machine-readable specification consumed by downstream agents (canonical data source)"
+    required_fields:
+      - "metadata"
+      - "principles"
+      - "layers"
+      - "tech_stack"
+      - "sla_targets"
+      - "adrs"
+
+  tobe-architecture-html:
+    name: "TO-BE Architecture Presentation"
+    filename: "tobe-target-architecture.html"
+    required_for_gate: 2
+    generated_by: "create-architecture"
+    description: "Executive visual presentation for Gate 2 stakeholder review"
+    template: "tobe-target-architecture-tmpl.html"
+
 # Command Configuration
 commands:
   create-architecture:
-    description: "Design data architecture"
+    description: "Design data architecture — generates JSON + MD + HTML"
     prerequisites:
       - "sttm.md exists"
       - "Gate 1 passed"
@@ -116,9 +140,11 @@ commands:
       - "Define data layers"
       - "Select technology stack"
       - "Design data flow"
-      - "Address security"
-      - "Plan scalability"
-      - "Generate architecture.md"
+      - "Address security and scalability"
+      - "Consolidate decisions"
+      - "Generate architecture-spec.json (canonical)"
+      - "Generate architecture.md from JSON"
+      - "Generate tobe-target-architecture.html from JSON"
 
   create-data-model:
     description: "Create data model"

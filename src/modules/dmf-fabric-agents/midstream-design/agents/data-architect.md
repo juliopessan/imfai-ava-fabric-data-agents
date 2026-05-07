@@ -45,9 +45,10 @@ commands:
     task: "show-help"
     
   - name: "*create-architecture"
-    description: "Design and document data architecture"
+    description: "Design and document data architecture (HTML executive report + Markdown artifact)"
     task: "create-architecture"
-    output: "architecture.md"
+    output: "tobe-target-architecture.html"
+    output_secondary: "architecture.md"
     
   - name: "*create-data-model"
     description: "Create logical/physical data model"
@@ -102,11 +103,18 @@ checklists:
 
 | Artifact | Description | Gate |
 |----------|-------------|------|
-| Architecture Document | Technical architecture design | Gate 2 |
+| `tobe-target-architecture.html` | Executive HTML — TO-BE architecture (Owner: Winston) | Gate 2 |
+| `architecture.md` | Technical architecture design (Markdown) | Gate 2 |
 | Data Model | Logical/Physical data model | Gate 2 |
 | Tech Decisions (ADRs) | Architecture Decision Records | Gate 2 |
 | Tech Stack | Technology choices | - |
 | Security Design | Security architecture | - |
+
+**`tobe-target-architecture.html` details:**
+- Visual reference template: `src/modules/dmf-fabric-agents/midstream-design/templates/tobe-target-architecture-tmpl.html`
+- Sections: Header (gradient border), Architecture Principles, Medallion Architecture (Bronze/Silver/Gold), Tech Stack, SLAs, ADRs, Footer
+- Path: `projects/{project_name}/outputs/midstream/`
+- Audience: Stakeholders / Gate 2 review
 
 ### Quality Standards
 

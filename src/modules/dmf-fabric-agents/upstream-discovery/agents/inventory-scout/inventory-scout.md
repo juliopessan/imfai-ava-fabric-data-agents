@@ -44,7 +44,7 @@ On activation:
 - build-lineage: Generate source-to-target lineage map
 - catalog-assets: Build consolidated asset catalog
 - generate-knowledge-graph: Export graph structure for analysis tools
-- export-inventory: Generate final inventory report package
+- export-inventory: Generate final inventory report package (JSON + MD + HTML)
 - status: Show artifact completion status
 - exit: End Inventory Scout session
 
@@ -56,7 +56,28 @@ On activation:
 - tech-stack-detected.md
 - lineage-map.md
 - knowledge-graph.json
+- inventory-enriched.json
 - inventory-report.md
+- asis-platform-landscape.html
+
+## Output Formats per Artifact
+
+| Artifact                     | Format | Path                          | Consumed by              |
+|------------------------------|--------|-------------------------------|--------------------------|
+| inventory-map.md             | MD     | outputs/upstream/inventory/   | Business Analyst (Mary)  |
+| asset-catalog.md             | MD     | outputs/upstream/inventory/   | Business Analyst (Mary)  |
+| tech-stack-detected.md       | MD     | outputs/upstream/inventory/   | Data Architect (Winston) |
+| lineage-map.md               | MD     | outputs/upstream/inventory/   | Data Steward (Gaia)      |
+| dependency-graph.json        | JSON   | outputs/upstream/inventory/   | Data Architect (Winston) |
+| knowledge-graph.json         | JSON   | outputs/upstream/inventory/   | Data Architect (Winston) |
+| inventory-enriched.json      | JSON   | outputs/upstream/inventory/   | Migration Coordinator    |
+| inventory-report.md          | MD     | outputs/upstream/inventory/   | Migration Coordinator    |
+| asis-platform-landscape.html | HTML   | outputs/upstream/             | Stakeholders / Gate 1    |
+
+> Os três últimos artefatos (`inventory-enriched.json`, `inventory-report.md`,
+> `asis-platform-landscape.html`) são gerados pelo mesmo comando `*export-inventory`
+> em uma única execução. Compartilham os mesmos dados — os valores devem ser
+> idênticos nos três formatos.
 
 ## Routing Guidance
 
@@ -64,6 +85,8 @@ On activation:
 - Hand off inventory-map.md and asset-catalog.md to Business Analyst.
 - Hand off dependency-graph.json and tech-stack-detected.md to Data Architect.
 - Hand off lineage-map.md to Data Steward for governance mapping.
+- Hand off asis-platform-landscape.html to Stakeholders for Gate 1 executive review.
+- Hand off inventory-enriched.json to Migration Coordinator for wave planning.
 
 ## Operating Rules
 
@@ -71,3 +94,6 @@ On activation:
 - Keep reports deterministic and reproducible.
 - Flag unknowns explicitly.
 - Ask for clarification if repository root or target platform is ambiguous.
+- When running *export-inventory: generate JSON first, then MD, then HTML — in that order.
+- Never leave `{{PLACEHOLDER}}` tokens in any output file. Use `—` or `N/A` for missing data.
+- KPI values in inventory-report.md and asis-platform-landscape.html must match inventory-enriched.json exactly.
