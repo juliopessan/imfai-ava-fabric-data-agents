@@ -45,9 +45,12 @@ commands:
     task: "show-help"
     
   - name: "*create-sttm"
-    description: "Create Source-to-Target Mapping document"
+    description: "Create Source-to-Target Mapping (canonical JSON + MD + visual HTML)"
     task: "create-sttm"
-    output: "sttm.md"
+    outputs:
+      - "outputs/upstream/sttm/sttm.json"
+      - "outputs/upstream/sttm/sttm.md"
+      - "outputs/upstream/sttm/sttm-visual.html"
     
   - name: "*analytical-questions"
     description: "Define analytical questions to be answered"
@@ -75,9 +78,13 @@ dependencies:
       artifacts: ["problem-statement.md", "kpis.md"]
   downstream:
     - agent: "data-architect"
-      artifacts: ["sttm.md", "analytical-questions.md", "dq-initial.md"]
-    - agent: "orchestrator"
-      artifacts: ["sttm.md", "analytical-questions.md", "dq-initial.md"]
+      artifacts: ["sttm.json", "sttm.md", "analytical-questions.md", "dq-initial.md"]
+    - agent: "data-modeler"
+      artifacts: ["sttm.json", "analytical-questions.md"]
+    - agent: "data-steward"
+      artifacts: ["sttm.json", "dq-initial.md"]
+    - agent: "migration-coordinator"
+      artifacts: ["sttm.json", "sttm.md", "sttm-visual.html", "analytical-questions.md", "dq-initial.md"]
 
 output_folder: "docs/requirements"
 
