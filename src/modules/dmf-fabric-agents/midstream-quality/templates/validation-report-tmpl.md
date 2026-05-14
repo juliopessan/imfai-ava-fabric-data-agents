@@ -2,7 +2,13 @@
 
 > **Template ID:** validation-report-tmpl
 > **Agent:** Vera (Quality Gate)
-> **Output:** `validation-outputs/validation-reports/{pipeline_id}.json`
+> **Output:** `validation-outputs/validation-reports/{pipeline_id}.md`
+>
+> **Source of truth:** This Markdown report is *derived* from the canonical
+> [`quality-scores-tmpl.json`](./quality-scores-tmpl.json) scorecard. The visual
+> stakeholder rendering is [`validation-scorecard-tmpl.html`](./validation-scorecard-tmpl.html).
+> All three artifacts must agree — the JSON is the only file read by
+> `validate_gate2_artifacts.py` for Gate 2 promotion.
 
 ---
 

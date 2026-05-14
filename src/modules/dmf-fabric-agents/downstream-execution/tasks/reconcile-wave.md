@@ -84,60 +84,49 @@ Execute a full reconciliation suite for a migration wave. Run all checks (row co
 
 ### Step 7 — Generate Reconciliation Report
 
-```json
-{
-  "report_type": "wave_reconciliation",
-  "wave": 1,
-  "timestamp": "2026-02-13T12:00:00Z",
-  "duration_minutes": 45,
-  "summary": {
-    "total_tables": 450,
-    "overall_parity_pct": 99.97,
-    "sign_off_eligible": false,
-    "critical_issues": 1,
-    "warnings": 2,
-    "info": 3
-  },
-  "checks": {
-    "row_count": {
-      "tables_passed": 449,
-      "tables_failed": 1,
-      "status": "FAIL"
-    },
-    "checksum": {
-      "tables_passed": 450,
-      "tables_failed": 0,
-      "status": "PASS"
-    },
-    "schema_diff": {
-      "tables_identical": 450,
-      "tables_with_diffs": 0,
-      "status": "PASS"
-    },
-    "data_profile": {
-      "tables_no_drift": 448,
-      "tables_with_drift": 2,
-      "status": "WARNING"
-    }
-  },
-  "critical_issues": [
-    {
-      "table": "MARD",
-      "check": "row_count",
-      "detail": "Source: 456789, Target: 456786, Delta: -3",
-      "action_required": "Investigate missing 3 rows in MARD"
-    }
-  ],
-  "warnings": [
-    {
-      "table": "EKPO",
-      "check": "data_profile",
-      "detail": "avg(NETWR) drift 1.66%",
-      "action_required": "Review rounding logic for NETWR"
-    }
-  ]
-}
+Generation MUST happen in this order:
+
 ```
+1. Persist canonical JSON (source of truth):
+     Template: templates/reconciliation-report-tmpl.json
+     Output:   reconciliation-outputs/{wave_id}/reconciliation-report.json
+
+   Required transformations BEFORE writing the file:
+     - Remove the _template_metadata block.
+     - Replace every {{...}} placeholder with computed values.
+     - parity_pct and status MUST be top-level fields with the exact names
+       (validate_gate3_artifacts.py / Diego's wave-report depend on them).
+     - Recompute summary, levels.L*.tables_passed/failed and tables[]
+       aggregates from the actual check results; do not trust template defaults.
+     - sign_off_eligible MUST be true only when status = APPROVED,
+       parity_pct >= sign_off_threshold_pct AND critical_count = 0.
+
+2. Render Markdown report (derived):
+     Template: templates/reconciliation-report-tmpl.md
+     Output:   reconciliation-outputs/{wave_id}/reconciliation-report.md
+
+3. Render HTML dashboard (derived, stakeholder-facing):
+     Template: templates/reconciliation-dashboard-tmpl.html
+     Output:   reconciliation-outputs/{wave_id}/reconciliation-dashboard.html
+
+   Rendering rules (see template header comment for full spec):
+     - Substitute every {{...}} placeholder; never leave placeholders in output.
+     - Gauge: stroke-dashoffset = 691 * (1 - parity_pct / 100), rounded to integer.
+     - Parity color (PARITY_COLOR_VAR):
+         parity_pct >= 99.9    → teal
+         95.0 <= parity < 99.9 → amber
+         parity_pct < 95.0     → red
+     - Status pill class: status-approved | status-partial | status-failed.
+     - Level --c color map: L1→blue, L2→teal, L3→amber, L4→coral, L5→purple.
+     - Level status pill: pill-pass | pill-warn | pill-fail | pill-manual.
+     - Table row class: row-pass | row-warn | row-fail.
+     - Issue card class: critical | warning.
+     - Render CRITICAL_BLOCK / WARNINGS_BLOCK / TREND_BLOCK /
+       RECOMMENDATIONS_BLOCK empty-state when their source arrays are empty.
+     - SIGN_OFF_ELIGIBLE_LOWER = sign_off_eligible ? "yes" : "no".
+```
+
+For the JSON example shape, see [`templates/reconciliation-report-tmpl.json`](../templates/reconciliation-report-tmpl.json).
 
 ### Step 8 — Flag Critical Discrepancies
 

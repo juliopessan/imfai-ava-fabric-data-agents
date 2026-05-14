@@ -59,9 +59,12 @@ commands:
     
   - name: "*data-model"
     alias: "*DM"
-    description: "Create logical data model"
+    description: "Create logical data model (canonical JSON + Markdown report + visual ER HTML)"
     task: "create-data-model"
-    output: "data-model.md"
+    outputs:
+      - "data-model.json"   # canonical source of truth (consumed by Coda, Diego, Gaia, Bianca)
+      - "data-model.md"     # derived Markdown report
+      - "data-model-er.html" # derived stakeholder ER diagram
     
   - name: "*data-contracts"
     alias: "*DC"
@@ -103,7 +106,9 @@ dependencies:
 output_folder: "docs/model"
 
 templates:
-  - "data-model-tmpl.md"
+  - "data-model-tmpl.json"      # canonical source of truth
+  - "data-model-tmpl.md"        # derived Markdown report
+  - "data-model-er-tmpl.html"   # derived visual ER diagram
   - "data-contract-tmpl.yaml"
   - "metrics-catalog-tmpl.md"
 
@@ -139,7 +144,9 @@ checklists:
 
 | Artifact | Description | Status |
 |----------|-------------|--------|
-| data-model.md | Logical dimensional model | Required |
+| data-model.json | Canonical machine-readable logical model (source of truth for Coda / Diego / Gaia / Bianca) | Required |
+| data-model.md | Markdown report derived from `data-model.json` | Required |
+| data-model-er.html | Visual stakeholder ER diagram derived from `data-model.json` | Required |
 | data-contracts.md | Data contracts for I/O | Required |
 | metrics-catalog.md | Business metrics catalog | Required |
 
@@ -165,6 +172,8 @@ flowchart TB
 
 | To Agent | Artifacts | Purpose |
 |----------|-----------|---------|
-| DataArchitect (Winston) | data-model.md | Technical validation |
-| DataEngineerExec (Diego) | data-model.md, data-contracts.md | DDL/ETL implementation |
-| DataSteward (Gaia) | data-model.md, metrics-catalog.md | Governance and DQ rules |
+| DataArchitect (Winston) | data-model.json, data-model-er.html | Technical validation |
+| DataEngineerExec (Diego) | data-model.json, data-contracts.md | DDL/ETL implementation |
+| DataSteward (Gaia) | data-model.json, metrics-catalog.md | Governance and DQ rules |
+| BI-Semantic (Bianca) | data-model.json | Semantic layer build |
+| Stakeholders | data-model-er.html | Gate 2 visual review |

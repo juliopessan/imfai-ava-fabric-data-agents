@@ -153,9 +153,20 @@
 
 ### Required Artifacts
 
-- [ ] data-model.md complete
-- [ ] data-contracts.md complete
-- [ ] metrics-catalog.md complete
+- [ ] `data-model.json` (canonical) complete — no `{{...}}` placeholders, `_template_metadata` removed
+- [ ] `data-model.md` (derived) complete and consistent with JSON
+- [ ] `data-model-er.html` (derived) complete and renders without missing placeholders
+- [ ] `data-contracts.md` complete
+- [ ] `metrics-catalog.md` complete
+
+### Multi-Format Consistency
+
+- [ ] Naming follows `brz_` / `slv_` / `gld_fact_` / `gld_dim_` conventions in all three formats
+- [ ] KPIs in JSON `kpis` block recomputed from `layers[*]` arrays
+- [ ] Every `relationships[].from` / `.to` resolves to an existing entity name
+- [ ] `pk_fk` ∈ { PK, FK, NK, '-' }; PK unique per entity
+- [ ] `scd_type` ∈ { 1, 2, 3 } for dimensions; null for facts
+- [ ] HTML ER SVG block renders entities grouped by layer with relationship lines
 
 ### Validation
 

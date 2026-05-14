@@ -1,13 +1,17 @@
 # Task: Create Data Model
 
 **Command:** `*data-model` / `*DM`  
-**Output:** `data-model.md`
+**Outputs:**
+- `design-outputs/{wave_id}/data-model.json` — canonical source of truth (consumed by Coda, Diego, Gaia, Bianca)
+- `design-outputs/{wave_id}/data-model.md` — derived Markdown report
+- `design-outputs/{wave_id}/data-model-er.html` — derived visual ER diagram (Gate 2 stakeholder review)
 
 ---
 
 ## Objective
 
-Create a comprehensive logical data model based on requirements from STTM and architecture documents.
+Create a comprehensive logical data model based on requirements from STTM and architecture documents,
+persisted in three aligned formats (JSON canonical, Markdown report, HTML ER diagram).
 
 ---
 
@@ -63,50 +67,66 @@ For each dimension:
 - Document relationship type
 - Create bridge tables if needed
 
-### Step 6: Document Model
+### Step 6: Persist Multi-Format Outputs
 
-Create `data-model.md` with:
-- Model overview
-- Entity definitions
-- Relationships diagram (Mermaid)
-- Granularity table
-- SCD specifications
+Generation MUST happen in this order:
 
----
-
-## Output Template
-
-```markdown
-# Data Model
-
-## Overview
-[Brief description of the model]
-
-## Entities
-
-### Facts
-| Table | Grain | Measures | Keys |
-|-------|-------|----------|------|
-| fact_X | ... | ... | ... |
-
-### Dimensions
-| Table | Grain | SCD Type | Attributes |
-|-------|-------|----------|------------|
-| dim_X | ... | ... | ... |
-
-## Relationships
-[Mermaid ER diagram]
-
-## Granularity
-[Table showing grain per layer]
 ```
+1. Persist canonical JSON (source of truth):
+     Template: templates/data-model-tmpl.json
+     Output:   design-outputs/{wave_id}/data-model.json
+
+   Required transformations BEFORE writing the file:
+     - Remove the _template_metadata block.
+     - Replace every {{...}} placeholder with computed values.
+     - Naming MUST follow the naming_conventions block:
+         bronze=brz_, silver=slv_, gold_facts=gld_fact_, gold_dims=gld_dim_.
+     - Recompute kpis from layers[*] arrays before persisting.
+     - Every relationships[].from / .to MUST reference an existing entity name.
+     - scd_type ∈ {1,2,3} for dimensions; null for facts.
+     - column[].pk_fk ∈ {PK, FK, NK, '-'}; pk MUST be unique per entity.
+
+2. Render Markdown report (derived):
+     Template: templates/data-model-tmpl.md
+     Output:   design-outputs/{wave_id}/data-model.md
+
+3. Render HTML ER diagram (derived, stakeholder-facing):
+     Template: templates/data-model-er-tmpl.html
+     Output:   design-outputs/{wave_id}/data-model-er.html
+
+   Rendering rules (see template header comment for full spec):
+     - Substitute every {{...}} placeholder; never leave placeholders in output.
+     - Layer color map (LAYER_COLOR / --c on .entity-card and .layer-band):
+         bronze     → bronze
+         silver     → silver
+         gold_facts → gold
+         gold_dims  → green
+     - Inline ER SVG: group entities by layer column, draw <g class="er-entity"> with
+       a header band and one <text> per visible column (limit to PK/FK + 4 attributes
+       to keep the diagram readable). Connect with <g class="er-rel"><line> showing
+       cardinality.
+     - col-key class map: PK→key-pk, FK→key-fk, NK→key-nk, '-'→key-none.
+     - Relationship type pill class: pill-identifying | pill-non-identifying | pill-bridge.
+```
+
+**Pass Criteria:** JSON validates against template structure (all required keys present,
+all relationships resolve to existing entities, naming conventions honored).
 
 ---
 
 ## Validation
 
+### Content
 - [ ] All STTM entities covered
 - [ ] Granularity defined for all tables
-- [ ] Relationships complete
-- [ ] SCD types assigned
+- [ ] Relationships complete (every `from`/`to` resolves to an existing entity)
+- [ ] SCD types assigned (`scd_type` ∈ {1,2,3} for dims; null for facts)
 - [ ] Model supports all analytical questions
+- [ ] PK unique per entity; FKs reference valid PKs
+
+### Multi-Format Alignment
+- [ ] `data-model.json` has no `{{...}}` placeholders and no `_template_metadata` block
+- [ ] `data-model.md` reflects the same entities, columns and relationships as the JSON
+- [ ] `data-model-er.html` renders without leftover `{{...}}` placeholders
+- [ ] Naming uses `brz_` / `slv_` / `gld_fact_` / `gld_dim_` / `gld_bridge_` consistently
+- [ ] `kpis` block in JSON matches the count of entries in `layers[*]` and `relationships[]`

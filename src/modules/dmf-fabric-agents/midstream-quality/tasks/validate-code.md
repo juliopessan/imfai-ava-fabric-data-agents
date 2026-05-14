@@ -273,23 +273,35 @@ else:
 
 ### Step 9: Generate Validation Report
 
-Create comprehensive validation report and save to output folder.
+Create comprehensive validation report and save to output folder. Generation MUST happen in this order:
 
 ```
-Output: validation-outputs/validation-reports/{pipeline_id}.json
-Format: JSON with all dimension results, scores, decision, and evidence
-Template: templates/validation-report-tmpl.md
+1. Persist canonical JSON (source of truth):
+     Template: templates/quality-scores-tmpl.json
+     Output:   validation-outputs/scorecards/{pipeline_id}-quality-scores.json
+
+2. Render Markdown report (derived):
+     Template: templates/validation-report-tmpl.md
+     Output:   validation-outputs/validation-reports/{pipeline_id}.md
+
+3. Render HTML scorecard (derived, stakeholder-facing):
+     Template: templates/validation-scorecard-tmpl.html
+     Output:   validation-outputs/scorecards/{pipeline_id}-scorecard.html
 ```
+
+See `tasks/score-pipeline.md` Steps 7–9 for the full rendering specification (gauge math, dimension color map, decision class mapping, empty-state handling). The canonical JSON is the only artifact read by `validate_gate2_artifacts.py` for gate promotion.
 
 ---
 
 ## Output Artifacts
 
-| Artifact                                              | Description                         |
-|-------------------------------------------------------|-------------------------------------|
-| `validation-outputs/validation-reports/{pipeline_id}.json` | Full validation report         |
-| `validation-outputs/test-results/{pipeline_id}_test_results.json` | Test execution results   |
-| `validation-outputs/performance-reports/{pipeline_id}_perf.json` | Performance analysis report |
+| Artifact                                                                | Description                                       |
+|-------------------------------------------------------------------------|---------------------------------------------------|
+| `validation-outputs/scorecards/{pipeline_id}-quality-scores.json`       | Canonical scorecard (single source of truth)      |
+| `validation-outputs/validation-reports/{pipeline_id}.md`                | Human-readable validation report                  |
+| `validation-outputs/scorecards/{pipeline_id}-scorecard.html`            | Visual scorecard (stakeholder review)             |
+| `validation-outputs/test-results/{pipeline_id}_test_results.json`       | Test execution results                            |
+| `validation-outputs/performance-reports/{pipeline_id}_perf.json`        | Performance analysis report                       |
 
 ---
 

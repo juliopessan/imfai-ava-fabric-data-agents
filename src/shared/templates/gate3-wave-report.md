@@ -9,6 +9,12 @@ discovery_owner_primary: discovery-scout
 discovery_owner_fallback: inventory-scout
 ---
 
+> **Derived artifact:** Prefer the agent-owned templates at
+> `src/modules/dmf-fabric-agents/downstream-execution/templates/wave-report-tmpl.{json,md}`
+> and `wave-execution-report-tmpl.html`. The JSON is the single source of truth
+> read by Orion for Gate 3 promotion and by Scribe for the migration-report.
+> This shared file is kept as the minimal contract for `validate_gate3_artifacts.py`.
+
 # Gate 3: Wave Report
 
 ## Wave Identification

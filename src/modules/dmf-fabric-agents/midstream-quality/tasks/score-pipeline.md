@@ -182,9 +182,71 @@ IF decision in ["REJECTED", "NEEDS_REVIEW"]:
 
 ---
 
-### Step 7: Record Decision and Route
+### Step 7: Persist Canonical Scorecard JSON (source of truth)
 
-Save the final decision and route to the appropriate downstream agent.
+Render the canonical scorecard from `templates/quality-scores-tmpl.json`. This file is the SINGLE SOURCE OF TRUTH consumed by Orion (gate promotion), Phoenix (rejection feedback), Balance (downstream eligibility) and `validate_gate2_artifacts.py` in CI.
+
+```
+Template:  templates/quality-scores-tmpl.json
+Output:    validation-outputs/scorecards/{pipeline_id}-quality-scores.json
+
+Required transformations BEFORE writing the file:
+  - Remove the _template_metadata block.
+  - Replace every {{...}} placeholder with computed values.
+  - Recompute kpis from objects_evaluated[] (do not trust template defaults).
+  - Set decision = "REJECTED" if hard_blockers[] is non-empty (regardless of score).
+  - Populate feedback.failing_dimensions[] for every dimension whose status != PASS.
+  - Persist score rounded to 1 decimal place.
+```
+
+**Pass Criteria:** JSON validates against the template structure (all required keys present, weights sum to 1.00, decision ∈ {APPROVED, NEEDS_REVIEW, REJECTED}).
+
+---
+
+### Step 8: Render Markdown Validation Report
+
+Generate the human-readable report consumed by reviewers and Scribe.
+
+```
+Template:  templates/validation-report-tmpl.md
+Input:     validation-outputs/scorecards/{pipeline_id}-quality-scores.json
+Output:    validation-outputs/validation-reports/{pipeline_id}.md
+```
+
+The MD report MUST cite the canonical JSON it was derived from in its header so readers can trace back to the source of truth.
+
+---
+
+### Step 9: Render HTML Scorecard (stakeholder-facing)
+
+Generate the visual scorecard for Gate 2 stakeholder review.
+
+```
+Template:  templates/validation-scorecard-tmpl.html
+Input:     validation-outputs/scorecards/{pipeline_id}-quality-scores.json
+Output:    validation-outputs/scorecards/{pipeline_id}-scorecard.html
+
+Rendering rules (see template header comment for full spec):
+  - Substitute every {{...}} placeholder; never leave placeholders in output.
+  - Gauge: stroke-dashoffset = 691 * (1 - final_score / 10), rounded to integer.
+  - Decision color (--c on .hero-gauge) and DECISION_COLOR_VAR:
+      APPROVED      → teal
+      NEEDS_REVIEW  → amber
+      REJECTED      → red
+  - Decision pill class: decision-approved | decision-review | decision-rejected.
+  - Dimension bar fill width = score * 10 (e.g. 9.3 → 93%).
+  - Dimension status pill: status-pass | status-warn | status-fail (based on score vs threshold).
+  - Dimension --c color map: syntax→red, lint→coral, semantic→blue, tests→teal,
+    performance→amber, security→purple.
+  - Render BLOCKERS_BLOCK and FAILING_BLOCK empty-state when their source arrays are empty.
+  - Aggregate findings across all dimensions[].findings[] in FINDINGS_BLOCK.
+```
+
+---
+
+### Step 10: Record Decision and Route
+
+Route to the appropriate downstream agent and update the migration tracker.
 
 ```
 Save: validation-outputs/validation-reports/{pipeline_id}.json
