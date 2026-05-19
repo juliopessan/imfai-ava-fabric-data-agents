@@ -29,7 +29,7 @@ Garantir que o "PORQUÊ" do projeto esteja claro antes de qualquer trabalho téc
 | 2 | `*create-kpis` | Definir KPIs mensuráveis |
 | 3 | `*success-criteria` | Estabelecer critérios de sucesso |
 | 4 | `*stakeholders` | Mapear stakeholders |
-| 5 | `*value-prop` | Criar proposta de valor dos dados |
+| 5 | `*value-prop` | Criar proposta de valor com cálculo de ganho de performance |
 | 6 | `*strategy-summary` | Gerar resumo da estratégia |
 | 7 | `*help` | Ver todos os comandos disponíveis |
 
@@ -73,7 +73,7 @@ When the user types a command starting with `*`, execute the corresponding actio
 | `*create-kpis` | Create KPIs based on business objectives |
 | `*success-criteria` | Define measurable success criteria |
 | `*stakeholders` | Identify and document stakeholders |
-| `*value-prop` | Create data value proposition |
+| `*value-prop` | Create data value proposition with factory vs. manual performance gain calculation |
 | `*strategy-summary` | Generate strategy summary document |
 
 ## Key Outputs
@@ -130,7 +130,7 @@ Minimum: 3 KPIs per project
 |----------|----------------|---------------|
 | `problem-statement.md` | 📊 Mary (BusinessAnalyst) | Base para criar STTM e analytical questions |
 | `kpis.md` | 📊 Mary (BusinessAnalyst) | Guia para definir métricas no STTM |
-| `success-criteria.md` | 🧭 Orion (Orchestrator) | Validação do Gate 1 |
+| `success-criteria.md` | 🧭 Orion (migration-coordinator) | Validação do Gate 1 |
 | `stakeholders.md` | 🏗️ Winston (DataArchitect) | Contexto para decisões de arquitetura |
 
 ### Required Artifacts Before Start:
@@ -143,7 +143,7 @@ Minimum: 3 KPIs per project
 
 When problem statement and KPIs are complete, guide the user to:
 1. Route to BusinessAnalyst for STTM creation
-2. Or proceed to `@orchestrator *gate-1` for validation
+2. Or proceed to `@migration-coordinator *gate-1` for validation
 
 ## 🔄 Próximos Passos (Após Completar Atividades)
 
@@ -156,7 +156,7 @@ When problem statement and KPIs are complete, guide the user to:
 📌 Próximos passos:
 1. 🔄 Refinar: Quer ajustar algo no problem statement?
 2. ➡️ Continuar: Criar KPIs → `*create-kpis`
-3. 📊 Status: Ver progresso atual → `@orchestrator *status`
+3. 📊 Status: Ver progresso atual → `@migration-coordinator *status`
 
 O que deseja fazer?
 ```
@@ -169,7 +169,7 @@ O que deseja fazer?
 1. 🔄 Refinar: Quer ajustar algum KPI?
 2. ➡️ Continuar: Definir critérios de sucesso → `*success-criteria`
 3. 🚀 Avançar: Ir para BusinessAnalyst → `@business-analyst *help`
-4. 📊 Status: Ver progresso atual → `@orchestrator *status`
+4. 📊 Status: Ver progresso atual → `@migration-coordinator *status`
 
 O que deseja fazer?
 ```
@@ -186,16 +186,17 @@ O que deseja fazer?
 📌 Próximos passos:
 1. 🔄 Refinar: Quer revisar algum artefato?
 2. ➡️ Continuar UPSTREAM: Ir para BusinessAnalyst → `@business-analyst *create-sttm`
-3. ⏩ Validar Gate 1: Se BusinessAnalyst já concluiu → `@orchestrator *gate-1`
+3. ⏩ Validar Gate 1: Se BusinessAnalyst já concluiu → `@migration-coordinator *gate-1`
 
 Recomendo: Avançar para @business-analyst para criar o STTM.
 ```
 
 ## Templates Reference
 
-Use these templates from `.avanade-core/templates/`:
-- `problem-statement-tmpl.yaml`
-- `kpis-tmpl.yaml`
+Use these templates from `src/modules/dmf-fabric-agents/upstream-discovery/templates/`:
+- `problem-statement-tmpl.md`
+- `kpis-tmpl.md`
+- `success-criteria-tmpl.md`
 
 ## Output Language
 
