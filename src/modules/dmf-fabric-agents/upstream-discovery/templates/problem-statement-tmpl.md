@@ -21,10 +21,14 @@ sections:
         default: "DataStrategist"
       - field: "Version"
         default: "1.0"
+      - field: "Wave ID"
+        required: false
+      - field: "Target Platform"
+        required: false
 
   executive_summary:
     title: "Executive Summary"
-    description: "2-3 sentence summary of problem and impact"
+    description: "Concise summary (2–3 sentences) describing the problem, impact and desired outcome."
     required: true
     max_length: 500
 
@@ -36,10 +40,10 @@ sections:
         prompt: "What is the business domain/area?"
       - name: "Current Situation"
         required: true
-        prompt: "Describe the current state of the business"
+        prompt: "Describe the current state, including key pain points and context."
       - name: "Systems Involved"
         required: false
-        prompt: "What systems or processes are relevant?"
+        prompt: "List relevant systems, data sources and processes."
 
   problem_description:
     title: "Problem Description"
@@ -58,7 +62,7 @@ sections:
         min_items: 1
       - name: "Duration"
         required: false
-        prompt: "How long has this been a problem?"
+        prompt: "How long has this been observed? (estimate if unknown)"
 
   impact_analysis:
     title: "Impact Analysis"
@@ -67,7 +71,7 @@ sections:
         required: true
         format: "table"
         columns: ["Category", "Impact", "Annual Estimate"]
-        validation: "Must include at least one quantified value"
+        validation: "Must include at least one quantified value (numeric). Use estimates if exact values unavailable."
       - name: "Operational Impact"
         required: true
         format: "bullet_list"
@@ -76,7 +80,7 @@ sections:
         format: "bullet_list"
       - name: "Risk of Inaction"
         required: true
-        prompt: "What happens if we don't solve this?"
+        prompt: "Describe probable consequences if the issue is not addressed."
 
   scope_definition:
     title: "Scope Definition"
@@ -133,13 +137,13 @@ sections:
 
 validation_rules:
   - name: "executive_summary_present"
-    check: "executive_summary is not empty"
+    check: "executive_summary is not empty AND executive_summary_sentences >= 2"
     severity: "error"
   
   - name: "impact_quantified"
     check: "financial_impact contains numbers"
     severity: "error"
-    message: "Financial impact must be quantified"
+    message: "Financial impact must include numeric estimates (use ranges if needed)"
   
   - name: "stakeholders_complete"
     check: "stakeholders.rows >= 4"
@@ -149,13 +153,18 @@ validation_rules:
   - name: "scope_defined"
     check: "in_scope.items >= 2 AND out_scope.items >= 1"
     severity: "error"
-    message: "Scope must be clearly defined"
+    message: "Scope must be clearly defined (In Scope and Out of Scope)"
+
+  - name: "success_vision_measurable"
+    check: "success_vision.Key_Outcomes contains measurable items"
+    severity: "warning"
+    message: "At least one Key Outcome should be measurable or tied to a KPI"
 
 prompts:
   gather_context:
-    - "What is your business area and what it does?"
-    - "What is the current situation you want to change?"
-    - "Who is affected by this situation?"
+    - "What is the business domain and primary function?"
+    - "Briefly describe the current situation and main pain points (1–3 lines)."
+    - "Who are the primary users or customers affected?"
   
   identify_problem:
     - "What is the specific problem you're trying to solve?"
@@ -163,16 +172,16 @@ prompts:
     - "What do you believe is the root cause?"
   
   quantify_impact:
-    - "How much is this problem costing (time, money, resources)?"
-    - "How many people/transactions are affected?"
-    - "What opportunities are being missed?"
+    - "Provide numeric estimates for cost (annual) or time lost; use ranges if exact values unknown."
+    - "Estimate affected volume (users, transactions per period)."
+    - "Describe missed opportunities or revenue at stake."
   
   define_scope:
-    - "What specifically should this project address?"
-    - "What should this project NOT address?"
-    - "What constraints do we need to work within?"
+    - "List items IN SCOPE (2+)."
+    - "List items OUT OF SCOPE (1+)."
+    - "List key constraints (time, budget, systems)."
   
   identify_stakeholders:
-    - "Who is the business owner of this initiative?"
-    - "Who will be the primary users of the solution?"
-    - "Who needs to sign off on key decisions?"
+    - "Name the business owner (person or role)."
+    - "Name the primary user group(s)."
+    - "Name approvers or decision-makers."
