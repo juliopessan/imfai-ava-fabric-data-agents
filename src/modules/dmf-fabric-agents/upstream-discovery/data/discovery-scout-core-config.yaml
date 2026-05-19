@@ -42,7 +42,11 @@ commands:
   generate-inventory:
     description: "Generate complete inventory report"
     task: "generate-inventory"
-    output: "inventory.json"
+    outputs:
+      - "inventory-enriched.json"
+      - "inventory-report.md"
+      - "asis-platform-landscape.html"
+      - "all-objects-inventory.csv"
 
 dependencies:
   upstream:

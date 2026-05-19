@@ -84,9 +84,30 @@ service-principal.json
 wave-execution-logs/
 reconciliation-reports/
 
-# Exceptions: keep sample/template output folders tracked
-# Exceptions: keep sample output folders tracked via project/outputs/
-!project/outputs/**/.gitkeep
+# -----------------------------------------------------------------------------
+# Projects — generated outputs and legacy source material
+# Rule: track context/ (config), ignore outputs/ and legacy/ (runtime artifacts)
+# -----------------------------------------------------------------------------
+
+# Ignore generated output content inside any project folder
+# Strategy: ignore specific generated file types rather than entire outputs/ tree
+# (git cannot negate files inside a ** glob-ignored directory)
+projects/*/outputs/**/*.json
+projects/*/outputs/**/*.csv
+projects/*/outputs/**/*.html
+projects/*/outputs/**/*.sql
+projects/*/outputs/**/*.md
+projects/*/outputs/**/*.parquet
+
+# Ignore all legacy source material (SQL dumps, ISPAC packages, binary sources)
+projects/*/legacy/**
+!projects/*/legacy/.gitkeep
+
+# Ignore project-specific generated scripts (PowerShell scan/ETL scripts per project)
+projects/*/scripts/**
+
+# Legacy root project/ folder (renamed to projects/einstein-hiae/ — keep ignored)
+project/
 
 # -----------------------------------------------------------------------------
 # VS Code

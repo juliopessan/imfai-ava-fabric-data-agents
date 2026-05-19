@@ -142,12 +142,13 @@ commands:
       - "Generate stakeholders.md"
 
   value-prop:
-    description: "Create data value proposition"
+    description: "Create data value proposition with factory vs. manual performance gain"
     steps:
       - "Document current state"
       - "Define desired future state"
       - "Identify value drivers"
       - "Estimate ROI"
+      - "Calculate factory vs. manual performance gain percentage"
       - "Generate value-proposition.md"
 
 # Integration Settings

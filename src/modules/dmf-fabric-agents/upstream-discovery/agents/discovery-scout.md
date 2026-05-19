@@ -170,7 +170,7 @@ expertise:
 | `*map-dependencies`   | `map-dependencies.md`    | `dependency-graph.json`     | Gerar grafo de dependências              |
 | `*detect-dead-code`   | `detect-dead-code.md`    | `dead-code-report.md`       | Encontrar objetos órfãos e sem uso       |
 | `*estimate-volume`    | `estimate-volume.md`     | `data-volume-estimate.json` | Estimar volumes e tempos de transferência |
-| `*generate-inventory` | `generate-inventory.md`  | `inventory.json`            | Gerar relatório completo de inventário   |
+| `*generate-inventory` | `generate-inventory.md`  | `inventory-enriched.json`, `inventory-report.md`, `asis-platform-landscape.html`, `all-objects-inventory.csv` | Gerar relatório completo de inventário   |
 | `*exit`               | —                        | —                           | Encerrar sessão do agente                |
 
 ---

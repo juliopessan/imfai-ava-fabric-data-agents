@@ -3,7 +3,7 @@
 ```yaml
 task_id: generate-inventory
 agent: discovery-scout
-version: "4.1"
+version: "4.2"
 command: "*generate-inventory"
 phase: UPSTREAM
 gate: 1
@@ -20,6 +20,10 @@ outputs:
     format: html
     path: "projects/{project_name}/outputs/upstream/"
     description: "Executive visual report for Gate 1 stakeholder review"
+  - file: "all-objects-inventory.csv"
+    format: csv
+    path: "projects/{project_name}/outputs/upstream/inventory/"
+    description: "Complete per-object CSV listing every discovered object with metadata"
 output_folder: "projects/{project_name}/outputs/upstream/"
 ```
 
@@ -40,6 +44,19 @@ Reproduce its structure, CSS variables, fonts, section order and hover patterns 
 ## Purpose
 
 Generate the final, consolidated inventory report that merges all discovery artifacts — scan results, classifications, dependency data, dead code findings, and volume estimates — into a single, authoritative inventory document. This is the master artifact that Gate 1 reviews and all downstream agents consume.
+
+### Mandatory Outputs Checklist
+
+All four outputs below are **required** and must be generated in a **single execution** of `*generate-inventory`. The task is not complete until every file exists and passes validation.
+
+| # | File | Format | Status |
+|---|------|--------|--------|
+| 1 | `inventory-enriched.json` | JSON | Required |
+| 2 | `inventory-report.md` | Markdown | Required |
+| 3 | `asis-platform-landscape.html` | HTML | Required |
+| 4 | `all-objects-inventory.csv` | CSV | Required |
+
+> **CRITICAL:** Do NOT skip the HTML or CSV steps. All four outputs must be written to disk before presenting the completion message to the user. If any step fails, retry it before proceeding to the next step.
 
 ---
 
@@ -195,6 +212,37 @@ Section titles use DM Mono, uppercase, letter-spacing 0.14em,
 with ::after pseudo-element line extending to the right.
 Hover effects on all cards and table rows (transition: all 0.2s).
 No external JS. Single `<style>` block. No unfilled `{{...}}` placeholders.
+
+---
+
+### Step 7 — Generate CSV Summary
+
+Using the data from Steps 2–3, generate a complete per-object CSV listing every individual object discovered during the inventory mapping.
+
+- **File:** `all-objects-inventory.csv`
+- **Path:** `projects/{project_name}/outputs/upstream/inventory/`
+
+**Required columns (in this order):**
+
+| Column | Description |
+|--------|-------------|
+| `Database` | Source database name (e.g., DWHIAE, BI_STAGE) |
+| `Schema` | Schema or namespace (e.g., dbo, PGP) |
+| `ObjectName` | Full object name |
+| `ObjectType` | One of: Table, View, Procedure, Function, Index |
+| `Layer` | Classification layer (e.g., Stage, ODS, DW, Mart, Operational) |
+| `Complexity` | Complexity tier: Low, Medium, or High |
+| `SourceFile` | Source file where the object was discovered |
+
+**Rules:**
+- One row per object — every table, view, procedure, function, and index must appear
+- Use UTF-8 encoding with BOM for Excel compatibility
+- No duplicate rows
+- Sort by Database, ObjectType, Schema, ObjectName
+- The total row count must match the `total_objects` field in `inventory-enriched.json`
+- Use `Export-Csv` (PowerShell) or equivalent with `-NoTypeInformation`
+
+This CSV is the **canonical flat-file inventory** for stakeholder review, Excel filtering, and import into external tools. It complements the JSON (machine-readable) and Markdown (human-readable) outputs.
 
 ---
 

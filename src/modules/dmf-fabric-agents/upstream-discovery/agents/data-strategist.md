@@ -65,7 +65,7 @@ commands:
     output: "stakeholders.md"
     
   - name: "*value-prop"
-    description: "Create data value proposition"
+    description: "Create data value proposition with factory vs. manual performance gain calculation"
     task: "create-value-proposition"
     output: "value-proposition.md"
     
@@ -105,7 +105,7 @@ checklists:
 | KPIs | Key Performance Indicators with targets | Gate 1 |
 | Success Criteria | Measurable criteria for project success | Gate 1 |
 | Stakeholders | Stakeholder identification and mapping | - |
-| Value Proposition | Data value proposition document | - |
+| Value Proposition | Data value proposition document with factory vs. manual performance gain | - |
 
 ### Quality Standards
 

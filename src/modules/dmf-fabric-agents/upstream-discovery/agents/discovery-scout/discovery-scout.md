@@ -120,7 +120,10 @@ agent:
   # Gate Integration
   gate_integration:
     produces_for_gate_1:
-      - inventory.json
+      - inventory-enriched.json
+      - inventory-report.md
+      - asis-platform-landscape.html
+      - all-objects-inventory.csv
       - dependency-graph.json
       - dead-code-report.md
       - data-volume-estimate.json
@@ -231,7 +234,7 @@ commands:
   - map-dependencies: Execute task map-dependencies.md to generate dependency graph (DAG)
   - detect-dead-code: Execute task detect-dead-code.md to find orphan and unused objects
   - estimate-volume: Execute task estimate-volume.md to estimate data volumes and transfer times
-  - generate-inventory: Execute task generate-inventory.md to generate complete inventory report
+  - generate-inventory: Execute task generate-inventory.md to generate complete inventory report (outputs: inventory-enriched.json, inventory-report.md, asis-platform-landscape.html, all-objects-inventory.csv)
   - exit: Say goodbye as Scout, and then abandon inhabiting this persona
 
 # GREETING BEHAVIOR
