@@ -25,28 +25,28 @@ Guide the user through creating a comprehensive problem statement that clearly d
 ### Step 1: Gather Business Context
 
 Ask the user for:
-1. What is the business domain/area?
-2. What is the current situation?
-3. Who are the main users/customers affected?
-4. What systems/processes are involved?
+1. What is the business domain and primary function?
+2. What is the current situation, including main pain points?
+3. Who are the primary users or customers affected?
+4. What systems, data sources and processes are involved?
 
 **Prompts:**
-- "Describe your business area and what it does."
-- "What is happening today that you want to change?"
-- "Who is affected by this situation?"
+- "What is the business domain and primary function?"
+- "Briefly describe the current situation and main pain points (1–3 lines)."
+- "Who are the primary users or customers affected?"
 
 ### Step 2: Identify the Core Problem
 
 Ask the user for:
 1. What specifically is the problem?
-2. How long has this been a problem?
-3. What are the symptoms vs. root causes?
-4. What happens if nothing is done?
+2. How long has this been observed?
+3. What are the visible symptoms?
+4. What are the suspected root causes?
 
 **Prompts:**
-- "What is the specific problem you're trying to solve?"
-- "What are the visible symptoms of this problem?"
-- "What do you believe is the root cause?"
+- "State the specific problem in one sentence."
+- "List the visible symptoms (2–4 bullets)."
+- "List suspected root causes (1–3 bullets)."
 
 ### Step 3: Quantify the Impact
 
@@ -54,12 +54,12 @@ Ask the user for:
 1. What is the financial impact?
 2. What is the operational impact?
 3. What is the customer/user impact?
-4. What are the opportunity costs?
+4. What opportunities or revenue are at stake?
 
 **Prompts:**
-- "How much is this problem costing (time, money, resources)?"
-- "How many people/transactions are affected?"
-- "What opportunities are being missed?"
+- "Provide numeric estimates for cost (annual) or time lost; use ranges if exact values unknown."
+- "Estimate affected volume (users, transactions per period)."
+- "Describe missed opportunities or revenue at stake."
 
 ### Step 4: Define Scope Boundaries
 
@@ -70,9 +70,9 @@ Ask the user for:
 4. What are the assumptions?
 
 **Prompts:**
-- "What specifically should this project address?"
-- "What should this project NOT address?"
-- "What constraints do we need to work within?"
+- "List items IN SCOPE (2+)."
+- "List items OUT OF SCOPE (1+)."
+- "List key constraints (time, budget, systems)."
 
 ### Step 5: Identify Stakeholders
 
@@ -83,9 +83,9 @@ Ask the user for:
 4. Who provides the data?
 
 **Prompts:**
-- "Who is the business owner of this initiative?"
-- "Who will be the primary users of the solution?"
-- "Who needs to sign off on key decisions?"
+- "Name the business owner (person or role)."
+- "Name the primary user group(s)."
+- "Name approvers or decision-makers."
 
 ### Step 6: Generate Problem Statement
 
@@ -101,7 +101,9 @@ Using gathered information, generate the document.
 **Project:** {project_name}  
 **Date:** {date}  
 **Author:** DataStrategist  
-**Version:** 1.0
+**Version:** 1.0  
+**Wave ID:** {wave_id}  
+**Target Platform:** {target_platform}
 
 ---
 
@@ -229,7 +231,7 @@ Before completing, verify:
 
 - [ ] Business context is clearly described
 - [ ] Problem is specific, not vague
-- [ ] Impact is quantified with numbers
+- [ ] Impact is quantified with numbers or numeric estimates
 - [ ] Scope boundaries are explicit
 - [ ] At least 4 stakeholders identified
 - [ ] Future state is described
