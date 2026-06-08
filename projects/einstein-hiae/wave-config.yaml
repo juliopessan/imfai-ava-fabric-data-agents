@@ -4,6 +4,7 @@ project_id: "einstein-healthcare-001"
 description: "Healthcare Analytics Platform Modernization - Data Migration to Microsoft Fabric"
 organization: "HIAE"
 target_platform: "fabric"  # fabric | databricks
+migration_scope: "Full modernization: SQL Server → Microsoft Fabric Medallion (Bronze/Silver/Gold)"
 
 # Wave Configuration
 wave_number: 1

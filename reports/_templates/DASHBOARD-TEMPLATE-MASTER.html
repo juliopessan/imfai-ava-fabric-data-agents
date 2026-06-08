@@ -14,7 +14,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1f3a93 0%, #0f1d4d 100%);
+            background: #f4f5f8;
             color: #333;
             padding: 20px;
             min-height: 100vh;
@@ -30,7 +30,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            background: linear-gradient(135deg, #5c2d91 0%, #ff6b35 100%);
             padding: 40px 30px;
             color: white;
             position: relative;
@@ -108,7 +108,7 @@
         .kpi-value {
             font-size: 2.5em;
             font-weight: bold;
-            color: #ff6b35;
+            color: #5c2d91;
             margin: 15px 0;
         }
         
@@ -131,7 +131,7 @@
         
         .section-title {
             font-size: 1.8em;
-            color: #1f3a93;
+            color: #5c2d91;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 3px solid #ff6b35;
@@ -160,7 +160,7 @@
         }
         
         .metrics-table th {
-            background: linear-gradient(135deg, #1f3a93 0%, #0f1d4d 100%);
+            background: linear-gradient(135deg, #5c2d91 0%, #3a1f5f 100%);
             color: white;
             padding: 15px;
             text-align: left;
@@ -178,7 +178,7 @@
         
         .metrics-table .tier {
             font-weight: 600;
-            color: #1f3a93;
+            color: #5c2d91;
         }
         
         .status-pass {
@@ -263,8 +263,8 @@
         }
         
         .badge-info {
-            background: #d6eaf8;
-            color: #1f3a93;
+            background: #efe6fb;
+            color: #5c2d91;
         }
         
         .badge-warning {
@@ -332,6 +332,12 @@
         
         <!-- CONTENT -->
         <div class="content">
+            <!-- KPI METRICS SECTION -->
+            <div class="kpi-grid">
+                {{KPI_METRICS}}
+            </div>
+            
+            <!-- MAIN CONTENT -->
             {{MAIN_CONTENT}}
         </div>
         
@@ -339,8 +345,8 @@
         <div class="footer">
             <p>
                 <strong>{{PROJECT_NAME}}</strong> | Generated: {{GENERATED_DATE}}<br>
-                Powered by Avanade's Data Migration Factory v3 | 
-                <span style="color: #ff6b35; font-weight: bold;">100% Autonomous Execution</span>
+                <strong>Avanade Data Migration Factory v3</strong> — Autonomous migration orchestration<br>
+                <a href="https://www.avanade.com" target="_blank">Avanade</a> • Template: Data Migration Factory • Version: v3
             </p>
         </div>
     </div>

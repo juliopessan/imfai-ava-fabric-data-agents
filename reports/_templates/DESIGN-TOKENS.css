@@ -1,0 +1,331 @@
+/**
+ * AVANADE DESIGN TOKENS
+ * ─────────────────────────────────────────────────────────────────
+ * Single source of truth for all design decisions.
+ * Import this file into all dashboards and components.
+ * 
+ * Usage: <div style="color: var(--ava-orange-primary);">Text</div>
+ * 
+ * Version: 1.0.0
+ * Last Updated: 2026-06-08
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════
+     PRIMARY BRAND COLORS (PRESERVED — Avanade Registered)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-orange-primary: #ff6b35;      /* Main CTA, primary accents */
+  --ava-blue-secondary: #1f3a93;      /* Headers, secondary elements */
+
+  /* ═══════════════════════════════════════════════════════════════
+     ACCENT COLORS (NEW — Orange DNA Integration)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-yellow-accent: #FFB414;       /* Warning, secondary status */
+  --ava-peach-highlight: #FFE6D3;     /* Active states, hover backgrounds */
+
+  /* ═══════════════════════════════════════════════════════════════
+     NEUTRAL COLORS (ALIGNED)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-gray-border: #e0e0e0;         /* Borders, dividers */
+  --ava-gray-bg-light: #f9f9f9;       /* Page backgrounds */
+  --ava-gray-bg-lighter: #fafafa;     /* Alternate backgrounds */
+  --ava-gray-text-secondary: #666666; /* Secondary text */
+  --ava-gray-text-dark: #333333;      /* Primary text */
+  --ava-gray-emphasis: #888888;       /* Emphasis gray */
+
+  /* ═══════════════════════════════════════════════════════════════
+     STATUS & SEMANTIC COLORS
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-status-success: #00A650;      /* Green — Approved, ✓ */
+  --ava-status-warning: #FFB414;      /* Yellow — In review, ⚠️ */
+  --ava-status-error: #C80000;        /* Red — Blocked, ✗ */
+  --ava-status-neutral: #888888;      /* Gray — Neutral, disabled */
+
+  /* ═══════════════════════════════════════════════════════════════
+     SPACING SCALE (8px Base Unit)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-space-1: 4px;                 /* Micro spacing (rare) */
+  --ava-space-2: 8px;                 /* Tight spacing */
+  --ava-space-3: 12px;                /* Small spacing */
+  --ava-space-4: 16px;                /* Default spacing */
+  --ava-space-6: 24px;                /* Medium spacing */
+  --ava-space-8: 32px;                /* Large spacing */
+  --ava-space-12: 48px;               /* Extra large spacing */
+  --ava-space-16: 64px;               /* Huge spacing */
+
+  /* ═══════════════════════════════════════════════════════════════
+     BORDER RADIUS (Soft, Modern, Accessible)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-radius-sm: 4px;               /* Minimal rounding */
+  --ava-radius-md: 8px;               /* Buttons, inputs */
+  --ava-radius-lg: 12px;              /* Cards, panels */
+  --ava-radius-xl: 20px;              /* Toast, modals, prominent elements */
+
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS (3-Level Hierarchy)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --ava-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --ava-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.15);
+
+  /* ═══════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  
+  /* Font Sizes */
+  --ava-font-size-h1: 32px;
+  --ava-font-size-h2: 24px;
+  --ava-font-size-h3: 18px;
+  --ava-font-size-h4: 16px;
+  --ava-font-size-h5: 14px;
+  --ava-font-size-body: 14px;
+  --ava-font-size-small: 12px;
+  --ava-font-size-xs: 11px;
+  
+  /* Font Weights */
+  --ava-font-weight-bold: 700;
+  --ava-font-weight-semibold: 600;
+  --ava-font-weight-medium: 500;
+  --ava-font-weight-regular: 400;
+  
+  /* Line Heights */
+  --ava-line-height-tight: 1.2;
+  --ava-line-height-normal: 1.3;
+  --ava-line-height-relaxed: 1.5;
+
+  /* ═══════════════════════════════════════════════════════════════
+     TRANSITIONS & ANIMATIONS
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-transition-quick: 150ms ease-in-out;
+  --ava-transition-normal: 300ms ease-in-out;
+  --ava-transition-slow: 500ms ease-in-out;
+
+  /* ═══════════════════════════════════════════════════════════════
+     LAYOUT DIMENSIONS (Orange DNA)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-sidebar-width: 248px;         /* Left sidebar navigation */
+  --ava-topbar-height: 56px;          /* Top bar / header */
+
+  /* ═══════════════════════════════════════════════════════════════
+     BREAKPOINTS (Responsive)
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-breakpoint-mobile: 320px;
+  --ava-breakpoint-tablet: 640px;
+  --ava-breakpoint-desktop: 1024px;
+
+  /* ═══════════════════════════════════════════════════════════════
+     Z-INDEX SCALE
+     ═══════════════════════════════════════════════════════════════ */
+  
+  --ava-z-base: 0;
+  --ava-z-elevated: 10;
+  --ava-z-dropdown: 50;
+  --ava-z-modal: 100;
+  --ava-z-notification: 1000;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK MODE OVERRIDES (Prefers Color Scheme)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Background & Surface */
+    --ava-gray-bg-light: #1a1f37;
+    --ava-gray-bg-lighter: #0f1d4d;
+
+    /* Text */
+    --ava-gray-text-secondary: #b0b0b0;
+    --ava-gray-text-dark: #ffffff;
+
+    /* Borders */
+    --ava-gray-border: #2a2f4f;
+
+    /* Shadows (more pronounced in dark mode) */
+    --ava-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --ava-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --ava-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITY CLASSES (Optional — for convenience)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Color Classes */
+.text-primary { color: var(--ava-orange-primary); }
+.text-secondary { color: var(--ava-blue-secondary); }
+.text-body { color: var(--ava-gray-text-dark); }
+.text-muted { color: var(--ava-gray-text-secondary); }
+
+/* Background Classes */
+.bg-light { background-color: var(--ava-gray-bg-light); }
+.bg-lighter { background-color: var(--ava-gray-bg-lighter); }
+
+/* Status Classes */
+.status-success { color: var(--ava-status-success); }
+.status-warning { color: var(--ava-status-warning); }
+.status-error { color: var(--ava-status-error); }
+
+/* Spacing Classes */
+.p-2 { padding: var(--ava-space-2); }
+.p-4 { padding: var(--ava-space-4); }
+.p-6 { padding: var(--ava-space-6); }
+.m-2 { margin: var(--ava-space-2); }
+.m-4 { margin: var(--ava-space-4); }
+.m-6 { margin: var(--ava-space-6); }
+.gap-2 { gap: var(--ava-space-2); }
+.gap-4 { gap: var(--ava-space-4); }
+.gap-6 { gap: var(--ava-space-6); }
+
+/* Shadow Classes */
+.shadow-sm { box-shadow: var(--ava-shadow-sm); }
+.shadow-md { box-shadow: var(--ava-shadow-md); }
+.shadow-lg { box-shadow: var(--ava-shadow-lg); }
+
+/* Border Radius Classes */
+.rounded-md { border-radius: var(--ava-radius-md); }
+.rounded-lg { border-radius: var(--ava-radius-lg); }
+.rounded-xl { border-radius: var(--ava-radius-xl); }
+
+/* Typography Classes */
+.h1 { font-size: var(--ava-font-size-h1); font-weight: var(--ava-font-weight-bold); line-height: var(--ava-line-height-tight); }
+.h2 { font-size: var(--ava-font-size-h2); font-weight: var(--ava-font-weight-semibold); line-height: var(--ava-line-height-normal); }
+.h3 { font-size: var(--ava-font-size-h3); font-weight: var(--ava-font-weight-semibold); line-height: var(--ava-line-height-normal); }
+.body { font-size: var(--ava-font-size-body); font-weight: var(--ava-font-weight-regular); line-height: var(--ava-line-height-relaxed); }
+.small { font-size: var(--ava-font-size-small); font-weight: var(--ava-font-weight-regular); line-height: var(--ava-line-height-normal); }
+
+/* Transition Classes */
+.transition-quick { transition: all var(--ava-transition-quick); }
+.transition-normal { transition: all var(--ava-transition-normal); }
+
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--ava-font-family);
+  font-size: var(--ava-font-size-body);
+  font-weight: var(--ava-font-weight-regular);
+  line-height: var(--ava-line-height-relaxed);
+  color: var(--ava-gray-text-dark);
+  background-color: var(--ava-gray-bg-light);
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1 { font-size: var(--ava-font-size-h1); font-weight: var(--ava-font-weight-bold); }
+h2 { font-size: var(--ava-font-size-h2); font-weight: var(--ava-font-weight-semibold); }
+h3 { font-size: var(--ava-font-size-h3); font-weight: var(--ava-font-weight-semibold); }
+h4 { font-size: var(--ava-font-size-h4); font-weight: var(--ava-font-weight-semibold); }
+h5 { font-size: var(--ava-font-size-h5); font-weight: var(--ava-font-weight-medium); }
+
+/* Buttons */
+button {
+  font-family: var(--ava-font-family);
+  font-size: var(--ava-font-size-body);
+  font-weight: var(--ava-font-weight-semibold);
+  padding: var(--ava-space-2) var(--ava-space-4);
+  border-radius: var(--ava-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: var(--ava-transition-quick);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ava-shadow-md);
+}
+
+/* Inputs */
+input, textarea, select {
+  font-family: var(--ava-font-family);
+  font-size: var(--ava-font-size-body);
+  padding: var(--ava-space-2) var(--ava-space-3);
+  border: 1px solid var(--ava-gray-border);
+  border-radius: var(--ava-radius-md);
+  background-color: white;
+  color: var(--ava-gray-text-dark);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--ava-orange-primary);
+  outline-offset: 2px;
+}
+
+/* Links */
+a {
+  color: var(--ava-orange-primary);
+  text-decoration: none;
+  transition: var(--ava-transition-quick);
+}
+
+a:hover {
+  color: var(--ava-blue-secondary);
+  text-decoration: underline;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: var(--ava-radius-lg);
+  padding: var(--ava-space-4);
+  box-shadow: var(--ava-shadow-sm);
+  transition: var(--ava-transition-quick);
+}
+
+.card:hover {
+  box-shadow: var(--ava-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ava-font-size-body);
+}
+
+thead {
+  background-color: var(--ava-gray-bg-light);
+  font-weight: var(--ava-font-weight-semibold);
+  border-bottom: 1px solid var(--ava-gray-border);
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--ava-gray-border);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--ava-gray-bg-lighter);
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 107, 53, 0.05);
+}
+
+td, th {
+  padding: var(--ava-space-3) var(--ava-space-4);
+  text-align: left;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   END OF DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════ */
