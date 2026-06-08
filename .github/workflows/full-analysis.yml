@@ -1,0 +1,70 @@
+name: Full Analysis Orchestrator
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Path to project or artifact package (default: .)'
+        required: false
+      mode:
+        description: 'Run mode: autonomous or hitl (human-in-the-loop)'
+        required: false
+        default: 'autonomous'
+      stages:
+        description: 'Comma-separated stages to run (optional)'
+        required: false
+      resume_from:
+        description: 'Stage name to resume from (exclusive)'
+        required: false
+
+jobs:
+  run-orchestrator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - id: run-full-analysis
+        name: Run full analysis
+        run: |
+          set -euo pipefail
+          TARGET="${{ github.event.inputs.target }}"
+          if [ -z "$TARGET" ]; then TARGET='.'; fi
+          ARGS=()
+          if [ -n "${{ github.event.inputs.stages }}" ]; then ARGS+=("--stages" "${{ github.event.inputs.stages }}"); fi
+          if [ -n "${{ github.event.inputs.resume_from }}" ]; then ARGS+=("--resume-from" "${{ github.event.inputs.resume_from }}"); fi
+          if [ -n "${{ github.event.inputs.mode }}" ]; then ARGS+=("--mode" "${{ github.event.inputs.mode }}"); fi
+          python -m src.shared.scripts.run_full_analysis "$TARGET" "${ARGS[@]}" || rc=$?
+          rc=${rc:-0}
+          if [ "$rc" -eq 2 ]; then
+            echo "hitl_paused=true" >> "$GITHUB_OUTPUT"
+            echo "HITL pause detected: human review required. Re-run workflow with resume_from set to the last completed stage." 
+          elif [ "$rc" -ne 0 ]; then
+            echo "Script exited with code $rc" >&2
+            exit $rc
+          fi
+        env:
+          CI: true
+      - name: Run analysis with telemetry
+        run: |
+          set -euo pipefail
+          python projects/bradesco/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
+        env:
+          CI: true
+      - name: Upload telemetry reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: telemetry-analysis-${{ github.run_number }}
+          path: |
+            projects/bradesco/outputs/telemetry.json
+            projects/bradesco/outputs/01_EXECUTION_TELEMETRY.html
+            projects/bradesco/outputs/00_CONSOLIDATED_MIGRATION_REPORT.html
+            projects/bradesco/outputs/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
+          retention-days: 30

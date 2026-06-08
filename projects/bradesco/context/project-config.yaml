@@ -1,0 +1,24 @@
+project_name: "bradesco"
+source_platform: "on-premise"
+target_platform: "databricks"
+legacy_technology: "java/scala"
+trace_id: "brd-wave-001-2026"
+scope_modules: "upstream-discovery"
+client_name: "Bradesco"
+pm_name: "(a definir)"
+tech_lead_name: "(a definir)"
+gate_thresholds:
+  gate_1_min_score: 70
+  gate_2_min_score: 85
+  gate_3_parity_min: 99.9
+outputs_base_path: "projects/bradesco/outputs"
+context_base_path: "projects/bradesco/context"
+legacy_packages:
+  - name: "aaar-srv-calc-rentabilidade-script"
+    branch: "develop"
+    commit: "6a0cc010a62"
+    description: "Serviço de cálculo de rentabilidade"
+  - name: "aadg-srv-d4960-algoritmo-procedencia"
+    branch: "master"
+    commit: "46d6d6a9ac4"
+    description: "Algoritmo de procedência de dados"

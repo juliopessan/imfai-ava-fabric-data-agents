@@ -219,6 +219,21 @@ Wave: WAVE-002
 
 **Checklist mínimo do Gate 1 (artefatos obrigatórios):**
 
+---
+
+## Run Full Analysis (Orquestrador)
+
+Use o orquestrador sequencial para executar todas as validações e relatórios de gate de forma programática.
+
+Comando de exemplo (rodar na raiz do repositório apontando para a pasta da wave):
+
+```powershell
+python -m src.shared.scripts.run_full_analysis projects/<project>/outputs/WAVE-002
+```
+
+O orquestrador está implementado em `src/shared/scripts/run_full_analysis.py` e seguirá a sequência definida em `docs/ORCHESTRATOR-FULL-ANALYSIS.md`.
+
+
 - [ ] `inventory-report.md` — completo
 
 - [ ] `gate1-problem-statement.md` — aprovado

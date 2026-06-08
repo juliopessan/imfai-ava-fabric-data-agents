@@ -13,6 +13,7 @@ Dependencies: `pip install pytest pyyaml`
 | Single test       | `python -m pytest tests/test_<module>.py -v`               |
 | Validate wave     | `python -m scripts.validate_wave_config <file>.yaml`       |
 | Validate Gate N   | `python -m scripts.validate_gate{1,2,3}_artifacts <dir>`   |
+| Run full analysis  | `python -m src.shared.scripts.run_full_analysis projects/<project>/outputs/WAVE-XXX` |
 | Chatmode align    | `python -m scripts.check_chatmode_alignment --root .`      |
 | Lint              | `ruff check scripts/ tests/`                               |
 

@@ -1,0 +1,60 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  pythonVersion: '3.11'
+
+stages:
+  - stage: BuildAndTest
+    displayName: Lint, Test, Validate
+    jobs:
+      - job: Tests
+        displayName: Run tests and validators
+        steps:
+          - checkout: self
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: $(pythonVersion)
+          - script: |
+              python -m pip install --upgrade pip
+              python -m pip install -r requirements-dev.txt
+            displayName: 'Install dev requirements'
+          - script: |
+              python -m pytest src/shared/tests -q --junitxml=reports/junit.xml
+            displayName: 'Run PyTest'
+          - script: |
+              python -m src.shared.scripts.validate_gate2_artifacts . || true
+            displayName: 'Run gate2 validator (scaffold)'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFiles: 'reports/junit.xml'
+              testRunTitle: 'pytest'
+  - stage: AnalysisWithTelemetry
+    displayName: Full Analysis with Telemetry
+    dependsOn: BuildAndTest
+    condition: succeeded()
+    jobs:
+      - job: RunAnalysisWithTelemetry
+        displayName: Run analysis and generate telemetry
+        steps:
+          - checkout: self
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: $(pythonVersion)
+          - script: |
+              python -m pip install --upgrade pip
+              python -m pip install -r requirements-dev.txt
+            displayName: 'Install dependencies'
+          - script: |
+              python projects/bradesco/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
+            displayName: 'Run master pipeline with telemetry'
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: 'projects/bradesco/outputs'
+              artifactName: 'telemetry-reports-$(Build.BuildNumber)'
+            displayName: 'Publish telemetry artifacts'

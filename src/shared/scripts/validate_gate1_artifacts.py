@@ -1,41 +1,35 @@
-"""
-validate_gate1_artifacts.py
-Convenience module — validates Gate 1 artifact package (UPSTREAM discovery
-outputs) before promoting to MIDSTREAM.
+#!/usr/bin/env python3
+"""Validator for Gate 1 artifacts.
 
-Delegates to validate_gate_requirements(1, path) in validate_gate3_artifacts.
-
-Required artifacts: problem-statement.md, kpis.md, analytical-questions.md,
-sttm.md, dq-initial.md
-
-Usage (standalone):
-    python -m scripts.validate_gate1_artifacts <artifact_dir>
+Checks presence of STTM, DQ rules, problem statement and inventory report.
+Prints JSON: {path, valid, completeness, missing} and returns 0/2.
 """
 from __future__ import annotations
 
 import argparse
-import sys
+import json
 from pathlib import Path
 
-from scripts.validate_gate3_artifacts import ValidationResult, validate_gate_requirements
+
+REQUIRED = ["sttm.md", "dq-rules.md", "gate1-problem-statement.md", "inventory-report.md"]
 
 
-def validate_gate1_artifacts(artifact_root: Path) -> ValidationResult:
-    """Validate Gate 1 (UPSTREAM) artifacts."""
-    return validate_gate_requirements(1, artifact_root)
+def validate_gate1(path: Path) -> dict:
+    p = path
+    missing = [r for r in REQUIRED if not (p / r).exists()]
+    found = len(REQUIRED) - len(missing)
+    completeness = found / len(REQUIRED)
+    return {"path": str(p), "valid": len(missing) == 0, "completeness": completeness, "missing": missing}
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Validate Gate 1 artifact package before MIDSTREAM promotion"
-    )
-    parser.add_argument("path", help="Directory containing Gate 1 artifacts")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path", nargs="?", default=".")
     args = parser.parse_args(argv)
-
-    result = validate_gate1_artifacts(Path(args.path).resolve())
-    print(result)
-    return 0 if result.is_valid else 1
+    res = validate_gate1(Path(args.path))
+    print(json.dumps(res))
+    return 0 if res["valid"] else 2
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

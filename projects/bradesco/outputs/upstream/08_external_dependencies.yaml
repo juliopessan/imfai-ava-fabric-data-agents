@@ -1,0 +1,274 @@
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: pyspark
+  type: python_package
+  used_by_assets:
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 214e69d5d5239ff6
+  - 45b57871457577ad
+  - 45b57871457577ad
+  used_by_count: 308
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: 'yes'
+    fabric: 'yes'
+    snowflake: 'no'
+  name: spark
+  type: external_system
+  used_by_assets:
+  - 214e69d5d5239ff6
+  - 45b57871457577ad
+  - fba523073a04e6a6
+  - 7c6ee0e1a12b5e76
+  - d3116f8162140966
+  - c7786804cc554e20
+  - 2c473f7986ac9e4f
+  - b69afc3ad5408803
+  - 85870bc0ae31c69c
+  - 32e8ab75bbca0255
+  used_by_count: 46
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: 'yes'
+    fabric: 'no'
+    snowflake: 'no'
+  name: hive
+  type: external_system
+  used_by_assets:
+  - 214e69d5d5239ff6
+  - 45b57871457577ad
+  - fba523073a04e6a6
+  - 7c6ee0e1a12b5e76
+  - d3116f8162140966
+  - c7786804cc554e20
+  - 2c473f7986ac9e4f
+  - b69afc3ad5408803
+  - 85870bc0ae31c69c
+  - 32e8ab75bbca0255
+  used_by_count: 43
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: time
+  type: python_package
+  used_by_assets:
+  - 70a6a890de8c0997
+  - 08bddb33da824ecc
+  - 2045ec5cb46423a8
+  - d2e0dd797c1d6a9a
+  - 932b7410b2d70f42
+  - eee021267a7b3d43
+  - d0673964a28c92c3
+  - 63788e4dd74f54d0
+  - 1b6027fcc592df2a
+  - 2980584d8a91716a
+  used_by_count: 26
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: src
+  type: python_package
+  used_by_assets:
+  - 2045ec5cb46423a8
+  - d2e0dd797c1d6a9a
+  - d0673964a28c92c3
+  - 1b6027fcc592df2a
+  - 2980584d8a91716a
+  - f4caf8214a70dfdb
+  - 586e3da3ffa17432
+  - ca66871ad16f1c28
+  - 67ddd547a941fa20
+  - 67ddd547a941fa20
+  used_by_count: 16
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: copy
+  type: python_package
+  used_by_assets:
+  - 8108cfc448062c72
+  - 08bddb33da824ecc
+  - 932b7410b2d70f42
+  - eee021267a7b3d43
+  - 63788e4dd74f54d0
+  - 30ab3b4a197184eb
+  - 67ddd547a941fa20
+  - b671747c75c123e9
+  - 7fc9b81f773a264c
+  - 3c8146340b00deae
+  used_by_count: 12
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: sklearn
+  type: python_package
+  used_by_assets:
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  - 63081add1f90337c
+  used_by_count: 10
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: dateutil
+  type: python_package
+  used_by_assets:
+  - 08bddb33da824ecc
+  - 8a262845a3d75e16
+  - d736ebd6792b8387
+  - 63081add1f90337c
+  used_by_count: 4
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: pandas
+  type: python_package
+  used_by_assets:
+  - 6c64f0364bf41511
+  - b244c491ad9b2939
+  - 63081add1f90337c
+  used_by_count: 3
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: lightgbm
+  type: python_package
+  used_by_assets:
+  - 6c64f0364bf41511
+  - 63081add1f90337c
+  - 63081add1f90337c
+  used_by_count: 3
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: 'yes'
+    fabric: 'no'
+    snowflake: 'no'
+  name: hdfs
+  type: external_system
+  used_by_assets:
+  - 70a6a890de8c0997
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: setuptools
+  type: python_package
+  used_by_assets:
+  - fc0327110c503a05
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: joblib
+  type: python_package
+  used_by_assets:
+  - 63081add1f90337c
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: numpy
+  type: python_package
+  used_by_assets:
+  - 63081add1f90337c
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: requests
+  type: python_package
+  used_by_assets: []
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: zstd
+  type: python_package
+  used_by_assets: []
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: pytest
+  type: python_package
+  used_by_assets: []
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: pytest-cov
+  type: python_package
+  used_by_assets: []
+  used_by_count: 1
+  version: null
+- evidence: []
+  migration_target_compat:
+    databricks: unknown
+    fabric: unknown
+    snowflake: unknown
+  name: flake8
+  type: python_package
+  used_by_assets: []
+  used_by_count: 1
+  version: null

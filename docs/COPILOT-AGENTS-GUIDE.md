@@ -286,6 +286,7 @@ Critério principal: zero perda de dados e latência ≤ 2h em PROD
 | `*gate1-validate` | Valida artefatos e calcula GateScore do Gate 1 | Relatório de gate com score |
 | `*gate2-validate` | Valida artefatos e calcula GateScore do Gate 2 | Relatório de gate com score |
 | `*gate3-validate` | Valida artefatos e calcula GateScore do Gate 3 | Relatório de gate com score |
+| `*run-full-analysis` | Executa o orquestrador sequencial local (`run_full_analysis.py`) | Consolida validações e gera relatórios |
 | `*wave-status` | Resumo de status da wave atual | Dashboard de progresso |
 | `*rollback` | Aciona playbook de rollback | Rollback plan ativado |
 | `*route` | Recomenda próximo agente | Recomendação contextualizada |
