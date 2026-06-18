@@ -1,6 +1,6 @@
 ---
 name: documentation
-description: "Scribe — generates runbooks and changelogs."
+description: "Documentation & Runbook Generator — generates runbooks and changelogs."
 ---
 
 @file src/modules/dmf-fabric-agents/downstream-execution/agents/documentation/documentation.md

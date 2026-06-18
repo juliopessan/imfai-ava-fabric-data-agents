@@ -67,8 +67,8 @@ Key scripts:
 - **Agent outputs:** store in `projects/<project-name>/outputs/<phase>/`
 - **Discovery ownership:** each wave has exactly one `discovery_owner` in wave-config; `inventory-scout` is fallback only
 - **Platform agnostic:** do not hardcode Databricks, Fabric, or Snowflake in agent instructions or scripts — use `(inform target platform)` or receive via prompt
-- **Coordinator hierarchy:** `master-agent` = user triage + KB; `migration-coordinator` (Orion) = wave orchestration + gates. Do NOT use `orchestrator` (deprecated).
-- **Artifact ownership:** Winston (DataArchitect) owns `architecture.md`, `decisions.md`, `monitoring-spec.md`. Sofia (DataModeler) owns `data-model.md`, `data-contracts.md`, `metrics-catalog.md`.
+- **Coordinator hierarchy:** `master-agent` = user triage + KB; `migration-coordinator` = wave orchestration + gates. Do NOT use `orchestrator` (deprecated).
+- **Artifact ownership:** `data-architect` owns `architecture.md`, `decisions.md`, `monitoring-spec.md`. `data-modeler` owns `data-model.md`, `data-contracts.md`, `metrics-catalog.md`.
 
 ## Docs Index
 

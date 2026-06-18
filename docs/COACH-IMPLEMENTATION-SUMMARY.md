@@ -256,7 +256,7 @@ imfai-ava-fabric-data-agents/
 - [ ] Check anti-pattern detection test
 
 ### **Priority 2: Integrate** (This week)
-- [ ] Decide on hook point with Orion (migration-coordinator)
+- [ ] Decide on hook point with migration-coordinator (Migration Wave Orchestrator)
 - [ ] Create `.coach/rules/` YAMLs for all 6 anti-patterns
 - [ ] Add telemetry hook to migration-coordinator
 - [ ] Run on historical data (bradesco Wave 2)

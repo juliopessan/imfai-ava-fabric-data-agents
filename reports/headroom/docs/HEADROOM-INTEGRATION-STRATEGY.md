@@ -2,7 +2,7 @@
 
 **Data:** 2026-06-15  
 **Status:** 📋 Blueprint (pronto para implementação)  
-**Owner:** Migration Coordinator (Orion)
+**Owner:** Migration Wave Orchestrator (migration-coordinator)
 
 ---
 
@@ -42,9 +42,9 @@
 
 **Antes (sem Headroom):**
 ```
-Winston (Data Architect) output: 45K tokens (schema completo)
-  → raw para Coda (Code Generator)
-  → Coda envia para LLM: 45K + 12K contexto = 57K tokens
+Data Architecture Designer (data-architect) output: 45K tokens (schema completo)
+  → raw para Code & ETL Generator (code-generator)
+  → Code & ETL Generator envia para LLM: 45K + 12K contexto = 57K tokens
   
 Total: 57K tokens
 Custo: ~$0.085 USD
@@ -52,9 +52,9 @@ Custo: ~$0.085 USD
 
 **Depois (com Headroom CCR):**
 ```
-Winston output: 45K tokens → compress() → 5.4K tokens (88% redução)
-  → Coda recebe 5.4K + headroom_retrieve tool
-  → Se Coda precisa detalhe: usa headroom_retrieve (hit de cache)
+Data Architecture Designer output: 45K tokens → compress() → 5.4K tokens (88% redução)
+  → Code & ETL Generator recebe 5.4K + headroom_retrieve tool
+  → Se Code & ETL Generator precisa detalhe: usa headroom_retrieve (hit de cache)
   
 Total (sem retrieve): 5.4K tokens
 Custo: ~$0.008 USD

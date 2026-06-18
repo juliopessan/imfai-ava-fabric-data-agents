@@ -1,6 +1,6 @@
 ---
 name: data-architect
-description: "Winston — defines target architecture."
+description: "Data Architecture Designer — defines target architecture."
 ---
 
 @file src/modules/dmf-fabric-agents/midstream-design/agents/data-architect/data-architect.md
