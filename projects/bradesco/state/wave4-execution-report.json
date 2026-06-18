@@ -1,0 +1,116 @@
+{
+  "wave_id": "wave4",
+  "status": "[OK] GREEN",
+  "timestamp": "2026-06-16T11:59:51.933985",
+  "pipeline_summary": {
+    "total_pipeline_duration_seconds": 146.03791999816895,
+    "total_pipeline_duration_minutes": 2.4339653333028157,
+    "gate_scores": {
+      "gate1": 0.9390000000000001,
+      "gate2": 0.9594999999999998,
+      "gate3": 0.9774999999999998,
+      "average": 0.9586666666666664
+    },
+    "ml_discoveries_count": 6,
+    "total_issues_healed": 66
+  },
+  "gate_scores": {
+    "gate1": 0.9390000000000001,
+    "gate2": 0.9594999999999998,
+    "gate3": 0.9774999999999998,
+    "average": 0.9586666666666664
+  },
+  "timing_minutes": 2.4340010126431784,
+  "cost_analysis": {
+    "baseline_cost": 1350.0,
+    "ml_overhead": 300,
+    "rule_savings": 540,
+    "estimated_cost": 1110.0,
+    "total_savings": 240.0,
+    "savings_pct": 17.77777777777778
+  },
+  "ml_discoveries": [
+    {
+      "rule_id": "R36",
+      "pattern_name": "Risk Threshold Normalization",
+      "error_signature": "risk_score_mismatch",
+      "fix_logic": "Normalize risk_score to [0,1] range",
+      "sample_count": 1456,
+      "confidence_pct": 94.0,
+      "estimated_effectiveness": 0.9579302535665215,
+      "priority": "medium",
+      "source_gate": "gate1"
+    },
+    {
+      "rule_id": "R37",
+      "pattern_name": "Compliance Date Format",
+      "error_signature": "compliance_date_invalid",
+      "fix_logic": "Convert to ISO 8601 format",
+      "sample_count": 1092,
+      "confidence_pct": 96.0,
+      "estimated_effectiveness": 0.9856058886861296,
+      "priority": "medium",
+      "source_gate": "gate1"
+    },
+    {
+      "rule_id": "R38",
+      "pattern_name": "Regulatory Field Mapping",
+      "error_signature": "regulatory_code_mismatch",
+      "fix_logic": "Map legacy codes to Regulatory framework",
+      "sample_count": 2184,
+      "confidence_pct": 88.0,
+      "estimated_effectiveness": 0.9697156641887089,
+      "priority": "high",
+      "source_gate": "gate1"
+    },
+    {
+      "rule_id": "R36",
+      "pattern_name": "Risk Threshold Normalization",
+      "error_signature": "risk_score_mismatch",
+      "fix_logic": "Normalize risk_score to [0,1] range",
+      "sample_count": 1456,
+      "confidence_pct": 94.0,
+      "estimated_effectiveness": 0.937693794066415,
+      "priority": "medium",
+      "source_gate": "gate2"
+    },
+    {
+      "rule_id": "R37",
+      "pattern_name": "Compliance Date Format",
+      "error_signature": "compliance_date_invalid",
+      "fix_logic": "Convert to ISO 8601 format",
+      "sample_count": 1092,
+      "confidence_pct": 96.0,
+      "estimated_effectiveness": 0.9116514586731927,
+      "priority": "medium",
+      "source_gate": "gate2"
+    },
+    {
+      "rule_id": "R38",
+      "pattern_name": "Regulatory Field Mapping",
+      "error_signature": "regulatory_code_mismatch",
+      "fix_logic": "Map legacy codes to Regulatory framework",
+      "sample_count": 2184,
+      "confidence_pct": 88.0,
+      "estimated_effectiveness": 0.9514518671275075,
+      "priority": "medium",
+      "source_gate": "gate2"
+    }
+  ],
+  "active_rules_count": 9,
+  "telemetry": {
+    "wave_id": "wave4",
+    "total_duration_seconds": 146.0400607585907,
+    "total_duration_minutes": 2.4340010126431784,
+    "gate_scores": [
+      0.9390000000000001,
+      0.9594999999999998,
+      0.9774999999999998
+    ],
+    "avg_gate_score": 0.9586666666666664,
+    "total_issues_healed": 66,
+    "ml_rules_discovered": 6,
+    "active_rules": 0,
+    "timestamp": "2026-06-16T11:59:51.904342"
+  }
+}

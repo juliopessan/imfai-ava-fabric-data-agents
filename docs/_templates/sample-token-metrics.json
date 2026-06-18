@@ -1,0 +1,88 @@
+{
+  "by_agent": {
+    "discovery-scout": {
+      "tokens": 45000,
+      "calls": 8,
+      "phase": "upstream"
+    },
+    "inventory-scout": {
+      "tokens": 38000,
+      "calls": 6,
+      "phase": "upstream"
+    },
+    "data-strategist": {
+      "tokens": 32000,
+      "calls": 5,
+      "phase": "upstream"
+    },
+    "data-architect": {
+      "tokens": 56000,
+      "calls": 9,
+      "phase": "midstream"
+    },
+    "data-modeler": {
+      "tokens": 48000,
+      "calls": 7,
+      "phase": "midstream"
+    },
+    "code-generator": {
+      "tokens": 72000,
+      "calls": 12,
+      "phase": "midstream"
+    },
+    "downstream-executor": {
+      "tokens": 41000,
+      "calls": 6,
+      "phase": "downstream"
+    },
+    "reconciliation": {
+      "tokens": 32000,
+      "calls": 5,
+      "phase": "downstream"
+    }
+  },
+  "by_phase": {
+    "upstream": 115000,
+    "midstream": 176000,
+    "downstream": 73000
+  },
+  "by_wave": {
+    "WAVE-001": 364000
+  },
+  "by_section": {
+    "discovery": {
+      "tokens": 45000,
+      "phase": "upstream"
+    },
+    "inventory": {
+      "tokens": 38000,
+      "phase": "upstream"
+    },
+    "strategy": {
+      "tokens": 32000,
+      "phase": "upstream"
+    },
+    "architecture": {
+      "tokens": 56000,
+      "phase": "midstream"
+    },
+    "modeling": {
+      "tokens": 48000,
+      "phase": "midstream"
+    },
+    "code_generation": {
+      "tokens": 72000,
+      "phase": "midstream"
+    },
+    "execution": {
+      "tokens": 41000,
+      "phase": "downstream"
+    },
+    "reconciliation": {
+      "tokens": 32000,
+      "phase": "downstream"
+    }
+  },
+  "total": 364000,
+  "timestamp": "2026-06-05T15:31:48Z"
+}

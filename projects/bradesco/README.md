@@ -4,8 +4,9 @@
 > 
 > Single entry point: `python projects/bradesco/scripts/00_MASTER_PIPELINE.py`
 >
+> **📁 Organization:** All scripts in `scripts/`, all outputs in `outputs/`  
 > **🧠 Memory System**: Project knowledge captured in `/memories/repo/MEMORY-INDEX.md`  
-> Reference this for architecture, lessons learned, best practices, and roadmap.
+> **📍 Quick Reference**: See [`../../REPOSITORY-QUICK-REFERENCE.md`](../../REPOSITORY-QUICK-REFERENCE.md)
 
 ## 🎯 Project Overview
 
@@ -69,7 +70,28 @@ python -m http.server 8000 --directory projects/bradesco/outputs
 ```
 
 ---
-## 🎯 Project Status
+## 📁 Project Structure
+
+```
+projects/bradesco/
+├── 📂 scripts/                      # ✅ All executable scripts
+│   ├── 00_MASTER_PIPELINE.py       # Master orchestrator
+│   └── [other workflow scripts]
+│
+├── 📂 outputs/                      # ✅ All generated deliverables
+│   ├── 00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
+│   ├── dashboards/                 # 11 interactive dashboards
+│   ├── docs/                        # Technical documentation
+│   └── [other generated files]
+│
+├── 📂 state/                        # Admin files (configs, logs)
+├── 📂 legacy/                       # Original source data
+├── 📂 context/                      # Analysis context
+├── 📂 docs/                         # Project documentation (8 guides)
+├── README.md                        # This file
+├── PROJECT_STATUS.md                # Detailed status
+└── wave-config.yaml                 # Project configuration
+```
 
 ✅ **PRODUCTION READY** — [📊 Full Status Report](PROJECT_STATUS.md)
 

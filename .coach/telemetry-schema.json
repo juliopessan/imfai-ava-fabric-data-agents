@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Execution Event (DMF Coach Telemetry)",
+  "description": "Telemetry schema for Data Migration Factory agent execution tracking",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "wave",
+    "gate",
+    "agent_id",
+    "execution",
+    "tokens",
+    "artifact"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event creation timestamp (ISO 8601)"
+    },
+    "wave": {
+      "type": "string",
+      "pattern": "^[a-z_0-9]+_wave_\\d+$",
+      "description": "Wave identifier (e.g., 'bradesco_wave_2')"
+    },
+    "gate": {
+      "type": "integer",
+      "enum": [1, 2, 3],
+      "description": "Migration gate (1=Discovery, 2=Design, 3=Execution)"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Agent identifier (e.g., 'data-architect', 'discovery-scout')"
+    },
+    "agent_role": {
+      "type": "string",
+      "description": "Human-readable role description"
+    },
+    "model": {
+      "type": "object",
+      "required": ["provider", "name"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["anthropic", "openai", "google", "azure"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Model name (e.g., 'claude-opus-4-1')"
+        },
+        "input_tokens_per_mille": {
+          "type": "number",
+          "description": "Cost per 1000 input tokens (USD)"
+        },
+        "output_tokens_per_mille": {
+          "type": "number",
+          "description": "Cost per 1000 output tokens (USD)"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["start_time", "end_time", "duration_sec", "status"],
+      "properties": {
+        "start_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "duration_sec": {
+          "type": "number",
+          "description": "Total execution time in seconds"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "partial", "error", "timeout"]
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Error details if status != success"
+        }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "required": ["input", "output", "total"],
+      "properties": {
+        "input": {
+          "type": "integer",
+          "description": "Input tokens consumed"
+        },
+        "output": {
+          "type": "integer",
+          "description": "Output tokens generated"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Sum of input + output"
+        },
+        "cost_usd": {
+          "type": "number",
+          "description": "Calculated cost in USD"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["filename", "size_bytes"],
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Output artifact filename (e.g., 'architecture.md')"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "description": "Artifact size in bytes"
+        },
+        "line_count": {
+          "type": "integer"
+        },
+        "section_count": {
+          "type": "integer",
+          "description": "Number of main sections/headers"
+        },
+        "references_entities": {
+          "type": "integer",
+          "description": "Count of unique entity references"
+        },
+        "validation_passed": {
+          "type": "boolean",
+          "description": "Does artifact pass schema validation?"
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "context_window_used_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of context window consumed"
+        },
+        "auto_compactions": {
+          "type": "integer",
+          "description": "Number of automatic context compactions during execution"
+        },
+        "context_resets": {
+          "type": "integer",
+          "description": "Number of context window resets"
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "completion_reason": {
+          "type": "string",
+          "enum": ["end_turn", "max_tokens", "stop_sequence"]
+        },
+        "stop_reason": {
+          "type": "string",
+          "description": "Reason model stopped generating"
+        }
+      }
+    }
+  }
+}

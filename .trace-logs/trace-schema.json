@@ -1,0 +1,258 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Trace Event Schema",
+  "description": "Unified schema for all trace events (JSONL format)",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "trace_id",
+    "trace_type",
+    "context",
+    "operation"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp with millisecond precision"
+    },
+    "trace_id": {
+      "type": "string",
+      "pattern": "^tr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+      "description": "Unique trace identifier (UUID v4 with tr_ prefix)"
+    },
+    "trace_type": {
+      "type": "string",
+      "enum": [
+        "agent_execution",
+        "workflow_execution",
+        "etl_operation",
+        "gate_scoring",
+        "migration_event",
+        "performance_metric",
+        "error_event",
+        "custom"
+      ],
+      "description": "Type of trace event"
+    },
+    "context": {
+      "type": "object",
+      "required": ["category"],
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": ["agents", "workflows", "etl", "gates", "migrations", "analytics"],
+          "description": "Trace category for file organization"
+        },
+        "agent_id": {
+          "type": "string",
+          "description": "Agent identifier (for agent_execution traces)"
+        },
+        "wave": {
+          "type": "string",
+          "description": "Migration wave name (e.g., 'bradesco-wave2')"
+        },
+        "gate": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Quality gate number (1, 2, or 3)"
+        },
+        "user": {
+          "type": "string",
+          "format": "email",
+          "description": "User email who triggered the trace"
+        },
+        "pipeline": {
+          "type": "string",
+          "description": "Pipeline or workflow name"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Custom tags for filtering (e.g., ['critical', 'gate-1-validation'])"
+        }
+      },
+      "additionalProperties": true
+    },
+    "operation": {
+      "type": "object",
+      "required": ["name", "status"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name (e.g., 'spawn_agent', 'validate_artifacts')"
+        },
+        "duration_sec": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Duration in seconds"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "failure", "partial", "timeout", "pending"],
+          "description": "Operation status"
+        },
+        "error": {
+          "type": ["string", "null"],
+          "description": "Error message if status != 'success'"
+        },
+        "error_type": {
+          "type": ["string", "null"],
+          "description": "Error class or type"
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of retries"
+        }
+      },
+      "additionalProperties": true
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "tokens_in": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Input tokens (for LLM operations)"
+        },
+        "tokens_out": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Output tokens (for LLM operations)"
+        },
+        "cost_usd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Estimated cost in USD"
+        },
+        "artifacts_generated": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of artifacts created"
+        },
+        "artifact_size_kb": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total artifact size in KB"
+        },
+        "rows_processed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Rows processed (for ETL operations)"
+        },
+        "rows_failed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Rows that failed (for ETL operations)"
+        },
+        "error_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Error rate as fraction (0.0 to 1.0)"
+        },
+        "throughput": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Operations per second"
+        }
+      },
+      "additionalProperties": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom tags for filtering and analysis"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source file and line number (e.g., 'migration-coordinator.py:1245')"
+        },
+        "version": {
+          "type": "string",
+          "description": "Schema version (e.g., '1.0.0')"
+        },
+        "environment": {
+          "type": "string",
+          "enum": ["dev", "staging", "production"],
+          "description": "Environment where trace was generated"
+        },
+        "host": {
+          "type": "string",
+          "description": "Hostname or pod name"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "timestamp": "2026-06-18T14:32:15.123456Z",
+      "trace_id": "tr_bdf3e2c1-8f9a-42eb-b012-1a2b3c4d5e6f",
+      "trace_type": "agent_execution",
+      "context": {
+        "category": "agents",
+        "agent_id": "migration-coordinator",
+        "wave": "bradesco-wave2",
+        "gate": 1,
+        "user": "data-engineer@company.com",
+        "tags": ["critical", "gate-1-validation"]
+      },
+      "operation": {
+        "name": "spawn_agent",
+        "duration_sec": 45.23,
+        "status": "success"
+      },
+      "metrics": {
+        "tokens_in": 2048,
+        "tokens_out": 1024,
+        "artifacts_generated": 3,
+        "artifact_size_kb": 245
+      },
+      "metadata": {
+        "source": "migration-coordinator.py:1245",
+        "version": "1.0.0",
+        "environment": "production"
+      }
+    },
+    {
+      "timestamp": "2026-06-18T14:35:02.654321Z",
+      "trace_id": "tr_a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6",
+      "trace_type": "gate_scoring",
+      "context": {
+        "category": "gates",
+        "gate": 1,
+        "wave": "bradesco-wave2",
+        "user": "qa-lead@company.com",
+        "tags": ["validation", "auto-adjustment"]
+      },
+      "operation": {
+        "name": "calculate_gatescore",
+        "duration_sec": 12.5,
+        "status": "success"
+      },
+      "metrics": {
+        "artifacts_evaluated": 5,
+        "base_score": 0.88,
+        "score_adjustment": -0.05,
+        "final_score": 0.83,
+        "anti_patterns_detected": 2
+      },
+      "metadata": {
+        "source": "quality-gate.py:892",
+        "version": "1.0.0"
+      }
+    }
+  ]
+}

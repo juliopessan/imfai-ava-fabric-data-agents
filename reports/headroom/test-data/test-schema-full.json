@@ -1,0 +1,84 @@
+{
+  "tables": [
+    {
+      "name": "customers",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT",
+          "primary_key": true
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(255)",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "name": "orders",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT",
+          "primary_key": true
+        },
+        {
+          "name": "customer_id",
+          "type": "INT",
+          "foreign_key": "customers.id"
+        },
+        {
+          "name": "amount",
+          "type": "DECIMAL(10,2)"
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR(50)"
+        }
+      ]
+    },
+    {
+      "name": "transactions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT",
+          "primary_key": true
+        },
+        {
+          "name": "order_id",
+          "type": "INT",
+          "foreign_key": "orders.id"
+        },
+        {
+          "name": "amount",
+          "type": "DECIMAL(10,2)"
+        },
+        {
+          "name": "timestamp",
+          "type": "DATETIME"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "FOREIGN_KEY",
+      "table": "orders",
+      "column": "customer_id",
+      "references": "customers.id"
+    },
+    {
+      "type": "FOREIGN_KEY",
+      "table": "transactions",
+      "column": "order_id",
+      "references": "orders.id"
+    }
+  ]
+}

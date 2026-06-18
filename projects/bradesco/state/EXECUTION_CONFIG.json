@@ -1,0 +1,27 @@
+{
+  "project": "Bradesco Legacy Migration",
+  "source_platform": "Cloudera",
+  "target_platform": "Databricks",
+  "legacy_projects": [
+    "aaar-srv-calc-rentabilidade-script",
+    "aadg-srv-d4960-algoritmo-procedencia"
+  ],
+  "phases": {
+    "B": "Upstream Discovery (Legacy Analysis)",
+    "C": "Midstream Design (Data Modeling)",
+    "D": "Downstream Deployment (ETL & Validation)",
+    "E": "Consolidation (Reports & Dashboards)",
+    "F": "Publication (Template Normalization)"
+  },
+  "headroom_enabled": true,
+  "compression_targets": {
+    "upstream_to_midstream": "50-70%",
+    "midstream_to_downstream": "50-70%",
+    "downstream_to_docs": "40-60%"
+  },
+  "expected_outputs": {
+    "dashboards": 11,
+    "reports": 6,
+    "artifacts": "500+"
+  }
+}

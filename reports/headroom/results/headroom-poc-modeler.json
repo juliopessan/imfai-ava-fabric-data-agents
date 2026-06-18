@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-06-15T13:41:02.967156",
+  "input_file": "test-schema-large.json",
+  "agent": "data-modeler",
+  "model": "gpt-4o",
+  "compression": {
+    "tokensSaved": 65404,
+    "inputTokens": 130808,
+    "outputTokens": 65404,
+    "compressionRatio": 0.5,
+    "method": "MOCK_ESTIMATE (Headroom not installed)",
+    "warning": "\u26a0\ufe0f  This is an estimate. Install Headroom for real compression: pip install headroom-ai"
+  },
+  "cost_savings_usd": 9.810600000000001e-05
+}

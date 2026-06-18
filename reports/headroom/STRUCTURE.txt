@@ -1,0 +1,68 @@
+﻿headroom/
+│
+├── 📖 README.md                    ← START HERE (This folder overview)
+├── 📄 INDEX.md                     ← Detailed navigation guide
+├── 📋 QUICK-REFERENCE.md           ← One-page cheat sheet
+│
+├── 📁 docs/                        (7 documentation files)
+│   ├── HEADROOM-README.md          (3 min overview)
+│   ├── HEADROOM-ROADMAP.md         (Visual flowcharts)
+│   ├── HEADROOM-POC-QUICK-START.md (How to test)
+│   ├── HEADROOM-INTEGRATION-STRATEGY.md  (Full 4-week plan)
+│   ├── HEADROOM-TOKEN-METRICS-INTEGRATION.md  (Technical)
+│   ├── HEADROOM-POC-DECISION-TEMPLATE.md  (Template)
+│   └── HEADROOM-POC-DECISION.md    (✅ DECISION - GO)
+│
+├── 🛠️ scripts/                     (Utilities)
+│   └── headroom_poc.py             (PoC validation script)
+│
+├── 🧪 test-data/                   (Test datasets)
+│   ├── test-schema-full.json       (1.6 KB - small)
+│   └── test-schema-large.json      (524 KB - realistic)
+│
+└── 📊 results/                      (PoC execution results)
+    ├── headroom-poc-test-results.json
+    ├── headroom-poc-large.json
+    └── headroom-poc-modeler.json
+
+---
+
+QUICK START
+───────────
+
+1. Decision Makers:  README.md + docs/HEADROOM-POC-DECISION.md (5 min)
+2. Developers:       docs/HEADROOM-INTEGRATION-STRATEGY.md (30 min)
+3. Testers:          docs/HEADROOM-POC-QUICK-START.md + scripts/headroom_poc.py
+4. Curious:          QUICK-REFERENCE.md (1 min)
+
+---
+
+KEY STATS
+─────────
+
+✅ Compression:      50% (single) / 87.5% (cascade)
+✅ Latency:          < 100ms
+✅ Decision:         GO (approved 2026-06-15)
+✅ Status:           Phase 1 starts 2026-06-22
+✅ Cost Savings:     –2,430/year
+
+---
+
+WHAT'S INSIDE
+─────────────
+
+📖 docs/              - Strategy, roadmap, decisions, tests guide
+🛠️ scripts/           - Python utilities (PoC)
+🧪 test-data/         - Test JSON files
+📊 results/           - PoC test results (JSON)
+
+---
+
+NEXT STEPS
+──────────
+
+[ ] Read README.md (this folder)
+[ ] Review HEADROOM-POC-DECISION.md (full decision)
+[ ] Identify stakeholders
+[ ] Schedule Phase 1 kickoff (6/22)
+

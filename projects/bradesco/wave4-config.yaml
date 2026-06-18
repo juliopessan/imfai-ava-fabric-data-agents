@@ -1,0 +1,200 @@
+wave_id: bradesco-wave4-2026-06
+project_name: Bradesco — Wave 4 ML-Driven Risk Assessment
+description: |
+  Wave 4: Advanced tri-gate parallelization with ML-driven rule discovery
+  Dataset: Bradesco Risk Assessment (18.2M rows, 89 schemas)
+  Targets: GateScore ≥0.95 | Time ≤60 min | Quality ≥99.5% | Cost ≤$1,100 | Rules 40+
+
+dataset:
+  source_system: Bradesco Risk Management Platform
+  domain: Risk Assessment, Regulatory Compliance, Financial Risk
+  volume:
+    rows: 18_200_000
+    schemas: 89
+    estimated_storage_gb: 750
+    growth_vs_wave3_pct: 15.2
+    schema_complexity_vs_wave3_pct: 32.8
+    
+  complexity_indicators:
+    max_schemas_count: 89
+    schema_nesting_depth: 7
+    nested_arrays_count: 34
+    custom_types_count: 12
+
+targets:
+  gatescore_avg: 0.95
+  gatescore_target_min: 0.85
+  execution_time_minutes: 60
+  execution_time_max_minutes: 75
+  quality_score_pct: 99.5
+  quality_score_min_pct: 99.0
+  cost_usd: 1100
+  cost_usd_max: 1200
+  self_healing_rules_min: 40
+  
+expected_improvements_vs_wave3:
+  time_reduction_pct: 22
+  cost_reduction_pct: 18.5
+  undetected_issues_reduction_pct: 15
+  ml_discoveries: 2-5
+  downstream_issues_reduction_pct: 10
+
+optimizations:
+  - id: O1
+    name: Tri-gate parallelization
+    description: Gates 1→2→3 in pipeline (I/O overlap)
+    expected_time_savings_pct: 20
+    implementation_status: active
+    
+  - id: O2
+    name: ML-driven rule discovery
+    description: Analyze error patterns → auto-generate R36-R40
+    expected_new_rules: 2-5
+    expected_issue_reduction_pct: 15
+    implementation_status: active
+    
+  - id: O3
+    name: Auto-scaling effectiveness
+    description: Rule feedback scoring, disable if < 80%
+    expected_cost_savings_pct: 8
+    implementation_status: active
+    
+  - id: O4
+    name: Real-time async approvals
+    description: Adaptive cards async, zero human blocking
+    expected_time_savings_pct: 5
+    implementation_status: active
+    
+  - id: O5
+    name: Predictive reconciliation
+    description: ML predicts issues BEFORE Gate 3
+    expected_downstream_improvement_pct: 10
+    implementation_status: active
+
+gatescore_formula: |
+  GateScore = 0.35 × Completude + 0.25 × Qualidade + 0.20 × (1 - RiscoResidual) + 0.20 × Reconciliação
+  
+  Components:
+    - Completude: 0-1 (data discovery coverage, schema extraction completeness)
+    - Qualidade: 0-1 (data quality, validation rules passed)
+    - RiscoResidual: 0-1 (remaining risks, unresolved issues)
+    - Reconciliação: 0-1 (reconciliation accuracy, cross-gate consistency)
+
+self_healing_rules:
+  base_rules_from_wave3: 38
+  domain_specific_rules:
+    - R32: Rate Scaling Normalization
+    - R33: Decimal Precision Alignment
+    - R34: Date Range Validation
+    - R35: NULL Handling for Financial Models
+  
+  ml_discovered_rules:
+    R36:
+      pattern: Risk Threshold Normalization
+      description: Normalize risk_score to [0,1] range
+      source: Gate 1 error analysis
+      confidence_target_pct: 94+
+    
+    R37:
+      pattern: Compliance Date Format
+      description: Convert to ISO 8601 format
+      source: Gate 1 error analysis
+      confidence_target_pct: 96+
+    
+    R38:
+      pattern: Regulatory Field Mapping
+      description: Map legacy codes to Regulatory framework
+      source: Gate 2 error analysis
+      confidence_target_pct: 88+
+    
+    R39:
+      pattern: Risk Aggregation Logic
+      description: Ensure consistent roll-up across hierarchies
+      source: Gate 2 error analysis
+      confidence_target_pct: 90+
+    
+    R40:
+      pattern: Compliance Status Reconciliation
+      description: Resolve conflicting compliance markers
+      source: Gate 3 error analysis
+      confidence_target_pct: 92+
+
+ml_rule_discovery:
+  engine: pattern_analysis
+  error_source_gates:
+    - gate1_upstream
+    - gate2_midstream
+  discovery_approach: |
+    1. Extract error patterns (frequency, type, signature)
+    2. Filter patterns: frequency > 5% of errors
+    3. Generate rule candidates with estimated effectiveness
+    4. Validate confidence >= 85%
+    5. Deploy as R36-R40
+  effectiveness_threshold: 0.80
+  auto_disable_if_below_threshold: true
+
+cost_prediction_model:
+  source: wave3-cost-prediction-model.json
+  training_waves: [1, 2, 3]
+  coefficients:
+    base_cost_usd: 500.0
+    cost_per_million_rows_usd: -76.54
+    cost_per_10_minutes_usd: 50.0
+    cost_per_schema_usd: 12.5
+    cost_per_storage_gb_usd: 0.0184
+  
+  wave4_prediction_inputs:
+    data_volume_rows: 18_200_000
+    data_volume_mb: 750_000
+    estimated_execution_minutes: 60
+    schemas_count: 89
+    optimizations_active: 5
+
+parallel_execution:
+  strategy: tri_gate_pipeline
+  gate_submission_order:
+    - gate1_upstream (start immediately)
+    - gate2_midstream (start after gate1 complete)
+    - gate3_downstream (start after gate2 complete)
+  
+  inter_gate_latency:
+    gate1_to_gate2_seconds_target: 5
+    gate2_to_gate3_seconds_target: 5
+    total_inter_gate_delay_seconds_target: 10
+  
+  async_approvals: true
+  approval_method: teams_adaptive_cards
+
+stakeholders:
+  data_owner: julio.cesar.d.pessan@company.example
+  business_sponsor: sponsor@avanade.example
+  quality_lead: qa-lead@avanade.example
+  ops_lead: ops@avanade.example
+
+reporting:
+  reports_directory: projects/bradesco/state
+  
+  deliverables:
+    - wave4-gatescore-reports.md
+    - wave4-tri-gate-parallelization-summary.md
+    - wave4-ml-rules-discovery-report.md
+    - wave4-vs-wave1-2-3-comparison.html
+    - wave4-predictive-reconciliation-model.json
+    - wave4-execution-report.json
+    - wave4-orchestration.log
+
+success_criteria:
+  - gatescore_avg >= 0.95
+  - execution_time <= 60 minutes
+  - quality_score >= 99.5%
+  - cost <= $1,100
+  - ml_discoveries >= 2
+  - active_rules >= 40
+  - no_critical_incidents: true
+
+rollback_triggers:
+  - gatescore < 0.85
+  - execution_time > 90 minutes
+  - cost > $1,400
+  - quality < 98.5%
+  - critical_data_loss: true

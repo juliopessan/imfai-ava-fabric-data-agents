@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-06-16T11:18:17.382849",
+  "wave_id": "bradesco-einstein-2026-06",
+  "project": "Bradesco",
+  "overall_status": "🟢 TODOS OS GATES APROVADOS",
+  "average_gate_score": 0.91,
+  "gates": {
+    "gate1": {
+      "score": 0.88,
+      "status": "🟢 APROVADO"
+    },
+    "gate2": {
+      "score": 0.87,
+      "status": "🟢 APROVADO"
+    },
+    "gate3": {
+      "score": 0.99,
+      "status": "🟢 APROVADO"
+    }
+  },
+  "artifacts": [
+    "gate1-decision.md",
+    "gate2-decision.md",
+    "gate3-decision.md",
+    "wave-status-consolidated.md",
+    "lessons-learned-retrospective.md"
+  ]
+}

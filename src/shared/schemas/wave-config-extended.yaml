@@ -1,0 +1,469 @@
+---
+# Wave Config Extended Schema — DMF v3
+# Version: 2.0 (with Skills Versioning & Spec-as-Executable)
+# Date: 2026-06-16
+
+# This is the CANONICAL wave configuration schema.
+# Every wave must be validated against this schema before Gate 1.
+# Validator: src/shared/scripts/validate_wave_config.py
+
+wave_metadata:
+  # REQUIRED
+  wave_id: "bradesco-g1"  # Format: {project}-{wave_sequence}
+  project: "bradesco"     # Maps to projects/{project}/
+  platform: "fabric"      # Target: fabric | synapse | snowflake | databricks
+  phase: 1                # 1 (initial) | 2 (incremental) | 3 (optimization)
+  
+  # REQUIRED: Ownership & Governance
+  wave_architect: "winston.data-architect@company.com"
+  discovery_owner: "alice.discovery@company.com"
+  data_steward: "gaia.governance@company.com"
+  approvers:
+    - "carlos.cto@company.com"
+    - "compliance.officer@company.com"
+  
+  # OPTIONAL: Wave Metadata
+  description: |
+    Migration of Bradesco financial data warehouse.
+    Phase 1: Core data mart (customers, transactions, products).
+  start_date: "2026-06-01"
+  target_completion: "2026-08-30"
+  risk_level: "medium"  # low | medium | high
+  
+  # Checkpoint before each gate
+  gate_readiness:
+    gate_1:
+      scheduled: "2026-06-30"
+      estimated_effort_days: 5
+    gate_2:
+      scheduled: "2026-07-21"
+      estimated_effort_days: 8
+    gate_3:
+      scheduled: "2026-08-15"
+      estimated_effort_days: 3
+
+harness:
+  # REQUIRED: Harness version
+  version: "1.0.0"  # Semantic versioning of harness schema itself
+  
+  # Static context loaded for all agents in this wave
+  static_context:
+    - file: ".github/copilot-instructions.md"
+      role: "global rules"
+      required: true
+    - file: "projects/bradesco/wave-config.yaml"
+      role: "wave-specific policies"
+      required: true
+  
+  # Tools available to agents; others are blocked
+  tools:
+    allowed:
+      - "validate_wave_config"
+      - "validate_gate1_artifacts"
+      - "validate_gate2_artifacts"
+      - "validate_gate3_artifacts"
+      - "gate_score_report"
+      - "wave_status_tracker"
+      - "kpi_dashboard_report"
+      - "validate_agent_contracts"
+      - "governance_policy"
+      - "data_contract_validator"
+    blocked:
+      - "rm"
+      - "format_disk"
+      - "delete_database"
+  
+  # Execution sandbox
+  sandbox:
+    environment: "ci-pipeline"  # dev-local | ci-pipeline | production
+    network_access: "mcp-only"  # none | mcp-only | internal-vnet | external
+    secret_handling: "entra-id"  # entra-id | vault | none
+    max_duration_sec: 600
+    max_memory_mb: 2048
+  
+  # Guardrails (hooks at lifecycle events)
+  guardrails:
+    pre_tool_call:
+      - rule: "no_hardcoded_secrets"
+        pattern: "password|api_key|secret"
+        action: "block"
+    
+    post_file_write:
+      - rule: "format_bicep"
+        if_file: "*.bicep"
+        action: "auto_format"
+      - rule: "validate_yaml"
+        if_file: "*.yaml"
+        action: "lint"
+    
+    pre_commit:
+      - rule: "gate_validators_pass"
+        check: "validate_gate1_artifacts(files)"
+        action: "block_if_fails"
+
+# ========================================================================
+# SKILLS: Versioned, Progressive Disclosure
+# ========================================================================
+skills:
+  # NEW: Skills are NOW versioned independently
+  # Format: name@version
+  # Fallback: if version unavailable, use fallback_to
+  
+  discovery:
+    - name: "ava-dmf-discovery-scout"
+      version: "2.1.0"  # PINNED to specific version
+      fallback_to: "2.0.5"
+      enabled: true
+      agents: ["discovery-scout", "inventory-scout"]
+      
+    - name: "ava-dmf-data-quality-rules"
+      version: "1.3.2"
+      fallback_to: "1.2.0"
+      enabled: true
+      agents: ["data-steward"]
+  
+  design:
+    - name: "ava-dmf-data-modeler"
+      version: "2.0.1"
+      fallback_to: "1.9.0"
+      enabled: true
+      agents: ["data-modeler"]
+      
+    - name: "ava-dmf-architecture-constraints"
+      version: "1.4.0"
+      fallback_to: "1.3.5"
+      enabled: true
+      agents: ["data-architect"]
+      # Wave-specific constraint: Fabric-only connectors
+      constraints:
+        platform: "fabric"
+        no_cross_region_replication: true
+  
+  implementation:
+    - name: "ava-dmf-code-generation-bicep"
+      version: "1.5.2"
+      fallback_to: "1.4.0"
+      enabled: true
+      agents: ["code-generator"]
+      config:
+        template_library: "projects/bradesco/bicep-templates/"
+        
+    - name: "ava-dmf-etl-patterns"
+      version: "2.1.1"
+      fallback_to: "2.0.0"
+      enabled: true
+      agents: ["code-generator"]
+
+  # Skill upgrade/downgrade policy
+  skill_versioning_policy:
+    breaking_changes_allowed: false  # If true, allow v1→v2 breaking changes
+    auto_patch_updates: true  # Auto-apply v2.1.0 → v2.1.5 patches
+    manual_approval_for_minor: true  # v1.2.x → v1.3.x requires approval
+
+# ========================================================================
+# SPECS: Executable Specifications (Declarative Contracts)
+# ========================================================================
+specifications:
+  # REQUIRED: What does "done" mean? Define formally.
+  
+  entity_scope:
+    # Which entities MUST be migrated?
+    entities:
+      - name: "customer"
+        source_table: "PROD.dbo.CUSTOMER"
+        target_table: "FABRIC.dimensions.DIM_CUSTOMER"
+        business_keys: ["customer_id"]
+        row_count_expected: "~5M"
+        row_count_tolerance_pct: 0.5
+        completeness_threshold: 99.5  # % of rows must migrate
+        
+      - name: "transaction"
+        source_table: "PROD.dbo.TRANSACTION"
+        target_table: "FABRIC.facts.FCT_TRANSACTION"
+        business_keys: ["transaction_id", "source_system"]
+        row_count_expected: "~500M"
+        row_count_tolerance_pct: 0.1
+        completeness_threshold: 99.9
+    
+    # Which entities are OUT OF SCOPE?
+    exclusions:
+      - "staging tables"
+      - "audit tables"
+  
+  data_quality_rules:
+    # Executable assertions that must pass
+    assertions:
+      - entity: "customer"
+        rule_id: "DQ_CUST_001"
+        description: "No NULL customer_ids"
+        sql: "SELECT COUNT(*) FROM target_table WHERE customer_id IS NULL"
+        expected_result: 0
+        severity: "critical"
+        
+      - entity: "transaction"
+        rule_id: "DQ_TXN_001"
+        description: "transaction_amount > 0"
+        sql: "SELECT COUNT(*) FROM target_table WHERE amount <= 0"
+        expected_result: 0
+        severity: "high"
+        
+      - entity: "transaction"
+        rule_id: "DQ_TXN_002"
+        description: "No future-dated transactions"
+        sql: "SELECT COUNT(*) FROM target_table WHERE transaction_date > GETDATE()"
+        expected_result: 0
+        severity: "medium"
+  
+  data_contracts:
+    # Formal contracts between source & target
+    contracts:
+      - entity: "customer"
+        dimensions:
+          - name: "customer_id"
+            source_column: "CUSTOMER_ID"
+            target_column: "CUSTOMER_ID"
+            data_type: "BIGINT"
+            nullable: false
+            
+          - name: "customer_name"
+            source_column: "NAME"
+            target_column: "CUSTOMER_NAME"
+            data_type: "NVARCHAR(255)"
+            nullable: true
+            encoding: "UTF-8"
+          
+          - name: "created_date"
+            source_column: "CREATE_DATE"
+            target_column: "CREATED_DATE"
+            data_type: "DATE"
+            nullable: false
+            partition_key: true
+        
+        reconciliation:
+          type: "hash_match"
+          tolerances:
+            row_count: 0.1  # Allow 0.1% variance
+            checksum: 0  # Must match exactly
+  
+  performance_targets:
+    # Non-functional requirements
+    targets:
+      - metric: "etl_duration"
+        entity: "customer"
+        threshold_minutes: 15
+        
+      - metric: "etl_duration"
+        entity: "transaction"
+        threshold_minutes: 45
+      
+      - metric: "query_latency_p95"
+        query: "SELECT * FROM DIM_CUSTOMER WHERE customer_id = ?"
+        threshold_ms: 100
+  
+  security_requirements:
+    # Compliance & security specs
+    requirements:
+      - "All PII (customer_name, email) must be encrypted at rest"
+      - "Row-level security (RLS) for region-based access"
+      - "Audit logs enabled on all tables"
+      - "Data residency: Europe-only (GDPR compliant)"
+  
+  # Acceptance Criteria (for UAT)
+  acceptance_criteria:
+    gate_1:
+      - "STTM complete for all 47 entities"
+      - "DQ rule rubric finalized (>= 30 rules)"
+      - "Risk register documented (>= 12 risks)"
+      - "GateScore >= 0.85"
+    
+    gate_2:
+      - "All DDL validated (syntax + naming conventions)"
+      - "All ETL code reviewed (logic + performance)"
+      - "Data contracts signed by architect & data steward"
+      - "GateScore >= 0.85"
+    
+    gate_3:
+      - "Reconciliation: row count variance < 0.1%"
+      - "All DQ assertions passing"
+      - "Performance benchmarks met (etl_duration <= target)"
+      - "No data anomalies in quality dashboard"
+      - "Post-deployment monitoring configured"
+
+# ========================================================================
+# QUALITY GATES: Thresholds & Checkpoints
+# ========================================================================
+quality_gates:
+  gate_1:
+    # Upstream: Discovery Complete
+    approval_criteria:
+      gate_score_min: 0.85
+      completude_weight: 0.35
+      qualidade_weight: 0.25
+      risco_residual_weight: 0.20
+      reconciliacao_weight: 0.20  # N/A for Gate 1; set to 0
+    
+    escalation_thresholds:
+      tier_2_human_review: 0.75
+      tier_3_critical: 0.50
+    
+    timeout_sec: 3600  # 1 hour max for discovery
+  
+  gate_2:
+    # Midstream: Design & Code Complete
+    approval_criteria:
+      gate_score_min: 0.85
+      completude_weight: 0.35
+      qualidade_weight: 0.25
+      risco_residual_weight: 0.20
+      reconciliacao_weight: 0.20  # N/A for Gate 2; set to 0
+    
+    escalation_thresholds:
+      tier_2_human_review: 0.75
+      tier_3_critical: 0.50
+    
+    timeout_sec: 7200  # 2 hours max for design
+  
+  gate_3:
+    # Downstream: Deployment & Reconciliation
+    approval_criteria:
+      gate_score_min: 0.85
+      completude_weight: 0.35
+      qualidade_weight: 0.25
+      risco_residual_weight: 0.20
+      reconciliacao_weight: 0.20  # THIS MATTERS for Gate 3
+    
+    escalation_thresholds:
+      tier_2_human_review: 0.80  # Higher threshold for production
+      tier_3_critical: 0.60
+    
+    timeout_sec: 5400  # 1.5 hours max for reconciliation
+
+# ========================================================================
+# AGENTS: Which agents run, in what order?
+# ========================================================================
+agent_orchestration:
+  gate_1:
+    sequence:
+      - agent: "discovery-scout"
+        skill: "ava-dmf-discovery-scout@2.1.0"
+        goal: "Map source entities to target entities"
+        
+      - agent: "data-modeler"
+        skill: "ava-dmf-data-modeler@2.0.1"
+        goal: "Build logical data model"
+        
+      - agent: "data-steward"
+        skill: "ava-dmf-data-quality-rules@1.3.2"
+        goal: "Define DQ ruleset (>= 30 rules)"
+    
+    # Checkpoint after gate 1
+    checkpoint:
+      eval_rule: "gate_score >= 0.85"
+      escalation_rule:
+        - if: "output_quality < 0.75"
+          then: "escalate_to_discovery_owner"
+  
+  gate_2:
+    sequence:
+      - agent: "data-architect"
+        skill: "ava-dmf-architecture-constraints@1.4.0"
+        goal: "Validate architecture decisions"
+      
+      - agent: "code-generator"
+        skills:
+          - "ava-dmf-code-generation-bicep@1.5.2"
+          - "ava-dmf-etl-patterns@2.1.1"
+        goal: "Generate DDL + ETL code"
+    
+    checkpoint:
+      eval_rule: "gate_score >= 0.85"
+      escalation_rule:
+        - if: "trajectory_quality < 0.70"
+          then: "escalate_to_architect"
+  
+  gate_3:
+    sequence:
+      - agent: "downstream-executor"
+        skill: "ava-dmf-code-generation-bicep@1.5.2"
+        goal: "Deploy DDL to target"
+      
+      - agent: "reconciliation"
+        skill: "ava-dmf-reconciliation@2.0.0"
+        goal: "Validate data + reconcile row counts"
+    
+    checkpoint:
+      eval_rule: "gate_score >= 0.85 AND reconciliation_score >= 0.90"
+      escalation_rule:
+        - if: "reconciliation_score < 0.80"
+          then: "block_deployment + alert_ops"
+
+# ========================================================================
+# OBSERVABILITY & COST TRACKING
+# ========================================================================
+observability:
+  enable_traces: true
+  trace_sampling_rate: 1.0  # 100% of traces (production: 0.1)
+  
+  metrics:
+    - metric_name: "agent_invocation_count"
+      aggregation: "sum"
+      period_sec: 300
+    
+    - metric_name: "agent_success_rate"
+      aggregation: "avg"
+      period_sec: 300
+    
+    - metric_name: "wave_total_cost_usd"
+      aggregation: "sum"
+      period_sec: 300
+  
+  dashboards:
+    - name: "Wave Observatory"
+      type: "powerbi"
+      refresh_min: 5
+    
+    - name: "Agent Performance"
+      type: "powerbi"
+      refresh_min: 10
+  
+  alerts:
+    - alert: "cost_spike"
+      condition: "cost_usd_last_hour > cost_avg_daily * 1.5"
+      severity: "high"
+    
+    - alert: "agent_failure"
+      condition: "success_rate < 0.75"
+      severity: "critical"
+
+# ========================================================================
+# DEPLOYMENT & ROLLBACK
+# ========================================================================
+deployment:
+  strategy: "blue_green"  # blue_green | canary | rolling
+  rollback_plan: |
+    If Gate 3 deployment fails:
+    1. Stop all data pipelines
+    2. Restore from pre-migration snapshot
+    3. Investigate root cause in sandbox
+    4. Re-plan Gate 3
+  
+  post_deployment_validation:
+    - name: "dq_assertions"
+      check: "All DQ rules passing"
+    - name: "performance_sla"
+      check: "Query latencies < thresholds"
+    - name: "no_anomalies"
+      check: "Quality dashboard shows no red zones"
+
+# ========================================================================
+# CHANGE LOG (This file's history)
+# ========================================================================
+changelog:
+  "2026-06-16":
+    - "Added skills versioning (names@versions)"
+    - "Added data contracts + acceptance criteria"
+    - "Added escalation thresholds per gate"
+    - "Added post-deployment validation"
+  
+  "2026-05-20":
+    - "Initial wave-config.yaml created"

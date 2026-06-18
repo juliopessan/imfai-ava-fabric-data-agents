@@ -1,0 +1,125 @@
+{
+  "gate1": {
+    "extract_inventory": {
+      "duration_ms": 7000,
+      "cpu_percent": 45.3,
+      "memory_percent": 62.1,
+      "io_mb": 285.4,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.036882"
+    },
+    "risk_analysis": {
+      "duration_ms": 5200,
+      "cpu_percent": 38.2,
+      "memory_percent": 51.3,
+      "io_mb": 142.1,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.040410"
+    },
+    "artifact_lineage": {
+      "duration_ms": 4100,
+      "cpu_percent": 32.1,
+      "memory_percent": 44.8,
+      "io_mb": 98.3,
+      "errors_count": 1,
+      "self_healed_count": 1,
+      "timestamp": "2026-06-16T11:38:02.041195"
+    }
+  },
+  "gate2": {
+    "ddl_generation": {
+      "duration_ms": 6800,
+      "cpu_percent": 52.1,
+      "memory_percent": 58.4,
+      "io_mb": 176.2,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.047486"
+    },
+    "data_contracts": {
+      "duration_ms": 4500,
+      "cpu_percent": 41.2,
+      "memory_percent": 45.3,
+      "io_mb": 89.5,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.047701"
+    },
+    "reconciliation_sample_10k": {
+      "duration_ms": 3200,
+      "cpu_percent": 48.7,
+      "memory_percent": 52.1,
+      "io_mb": 42.1,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.047879"
+    },
+    "stakeholder_checkpoint": {
+      "duration_ms": 1200,
+      "cpu_percent": 0.0,
+      "memory_percent": 0.0,
+      "io_mb": 0.0,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.052215"
+    }
+  },
+  "gate3": {
+    "load_with_healing": {
+      "duration_ms": 15300,
+      "cpu_percent": 76.4,
+      "memory_percent": 84.2,
+      "io_mb": 2140.5,
+      "errors_count": 18,
+      "self_healed_count": 18,
+      "timestamp": "2026-06-16T11:38:02.059512"
+    },
+    "reconciliation_full": {
+      "duration_ms": 9200,
+      "cpu_percent": 58.3,
+      "memory_percent": 62.1,
+      "io_mb": 1840.2,
+      "errors_count": 2,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.063120"
+    },
+    "integrity_validation": {
+      "duration_ms": 4100,
+      "cpu_percent": 42.1,
+      "memory_percent": 48.3,
+      "io_mb": 125.4,
+      "errors_count": 0,
+      "self_healed_count": 0,
+      "timestamp": "2026-06-16T11:38:02.082082"
+    }
+  },
+  "summary": {
+    "gate1": {
+      "total_duration_ms": 16300,
+      "phase_count": 3,
+      "total_errors": 1,
+      "total_healed": 1,
+      "avg_cpu_percent": 38.53333333333333,
+      "avg_memory_percent": 52.73333333333333
+    },
+    "gate2": {
+      "total_duration_ms": 15700,
+      "phase_count": 4,
+      "total_errors": 0,
+      "total_healed": 0,
+      "avg_cpu_percent": 35.5,
+      "avg_memory_percent": 38.95
+    },
+    "gate3": {
+      "total_duration_ms": 28600,
+      "phase_count": 3,
+      "total_errors": 20,
+      "total_healed": 18,
+      "avg_cpu_percent": 58.93333333333334,
+      "avg_memory_percent": 64.86666666666666
+    },
+    "total_execution_seconds": 0.05796384811401367
+  }
+}

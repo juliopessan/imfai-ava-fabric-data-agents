@@ -1,0 +1,103 @@
+wave_id: bradesco-einstein-wave2-2026-07
+project_name: "Bradesco Wave 2 — Einstein HIAE Migration (Optimized)"
+description: "Wave 2 applying optimizations from Wave 1 (GateScore 0.91). Dataset: Einstein HIAE (backup/contingency)"
+discovery_owner_primary: julio.cesar.d.pessan@company.example
+discovery_owner_secondary: data-architect@avanade.example
+
+# Dataset Profile (vs Wave 1)
+source_platform: cloudera
+target_platform: databricks
+migration_pattern: lift-and-shift-optimized
+dataset:
+  name: "Einstein HIAE"
+  type: "contingency/backup"
+  data_volume_gb: 380
+  data_volume_rows: 8200000  # vs 12.4M Wave 1 = -33.8%
+  schema_count: 42  # vs 43 Wave 1 = -1 schema
+  expected_improvement_time: "-20%"
+  expected_improvement_quality: "+5%"
+  expected_improvement_cost: "-10%"
+
+scope:
+  - einstein-hiae-core-tables
+  - einstein-hiae-staging
+  - einstein-hiae-aggregates
+
+legacy_path: legacy/einstein-hiae
+outputs_path: outputs/wave2
+
+# Wave 2 Optimizations (from improvement-roadmap.md)
+optimizations:
+  reconciliation_early_gate2:
+    enabled: true
+    sampling_rows: 10000
+    description: "Early reconciliation with 10K sample in Gate 2 (vs 8.2M in Gate 3)"
+    expected_savings_hours: 40
+  
+  self_healing_expanded:
+    enabled: true
+    rule_count_base: 23
+    rule_count_new: 31
+    new_rules:
+      - "R24: Schema column auto-add"
+      - "R25: Type coercion (String→Integer)"
+      - "R26: Null handling consistency"
+      - "R27: Partition key backfill"
+      - "R28: Exact row deduplication"
+      - "R29: Date format auto-convert"
+      - "R30: Encoding normalization"
+      - "R31: Out-of-range clipping"
+    expected_savings_hours: 16-32
+  
+  telemetry_complete:
+    enabled: true
+    metrics:
+      - "phase_duration_ms"
+      - "cpu_percent"
+      - "memory_percent"
+      - "io_throughput_mb"
+      - "error_count"
+      - "self_healing_count"
+    destination: "azure_appinsights"
+    description: "Full observability to identify bottlenecks"
+  
+  assumptions_template:
+    enabled: true
+    created_at: "Gate 1"
+    description: "Formalize assumptions from start, not retroactively"
+  
+  stakeholder_checkpoint_gate2:
+    enabled: true
+    description: "Early feedback checkpoint before Downstream phase"
+
+# GateScore Targets (vs Wave 1 Baseline)
+targets:
+  gate1_score_minimum: 0.85
+  gate2_score_minimum: 0.85
+  gate3_score_minimum: 0.85
+  average_score_minimum: 0.85
+  wave1_average_baseline: 0.91
+  wave2_target: 0.90  # Maintain within 1% of Wave 1
+
+# Execution Timeline (from baseline-metrics.json + optimizations)
+timeline:
+  gate1_upstream_minutes: 30  # vs 40 Wave 1 (-25% for fewer schemas)
+  gate2_midstream_minutes: 28  # vs 35 Wave 1 (-20% for fewer contracts)
+  gate3_downstream_minutes: 35  # vs 45 Wave 1 (-22% for smaller dataset)
+  total_expected_minutes: 93  # vs 120 Wave 1 = -23% time savings
+  buffer_percent: 20
+  total_with_buffer_minutes: 111
+
+quality_targets:
+  validation_score_minimum: 0.95
+  row_count_accuracy_minimum: 0.99
+  schema_correctness_minimum: 0.98
+  data_type_matching_minimum: 0.98
+  null_handling_minimum: 0.95
+
+notes:
+  - "REUSE 100% of patterns/templates from Wave 1"
+  - "Apply early reconciliation in Gate 2 (8 new rules)"
+  - "Telemetry active from start for baseline comparison"
+  - "GateScore >= 0.85 for approval (vs Wave 1: 0.88-0.99)"
+  - "Target: quantify time/quality/cost improvements"

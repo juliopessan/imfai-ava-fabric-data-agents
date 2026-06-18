@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Avanade Dashboard | Orange DNA</title>
+    
+    <!-- Import Design System Tokens -->
+    <link rel="stylesheet" href="DESIGN-TOKENS.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    
+    <!-- Lucide Icons (via CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* ============================================
+           LAYOUT STRUCTURE: Sidebar + Top Bar
+           ============================================ */
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background: var(--ava-light-bg);
+        }
+
+        /* Top Bar (56px fixed) */
+        .topbar {
+            height: 56px;
+            background: var(--ava-white);
+            border-bottom: 1px solid var(--ava-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--ava-space-4);
+            flex-shrink: 0;
+            box-shadow: var(--ava-shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-3);
+        }
+
+        .topbar-logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ava-blue-secondary);
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-2);
+        }
+
+        .topbar-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--ava-orange-primary);
+            border-radius: var(--ava-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ava-white);
+            font-weight: 700;
+        }
+
+        .topbar-title {
+            font-size: 14px;
+            color: var(--ava-text-secondary);
+            margin-left: var(--ava-space-2);
+        }
+
+        .topbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .topbar-search {
+            width: 300px;
+            max-width: 100%;
+            padding: var(--ava-space-2) var(--ava-space-3);
+            background: var(--ava-light-bg);
+            border: 1px solid var(--ava-border);
+            border-radius: var(--ava-radius-md);
+            font-size: 14px;
+            font-family: var(--ava-font-family);
+            color: var(--ava-text-primary);
+        }
+
+        .topbar-search::placeholder {
+            color: var(--ava-text-tertiary);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-3);
+        }
+
+        .topbar-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--ava-text-primary);
+            font-size: 18px;
+            padding: var(--ava-space-2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar-icon-btn:hover {
+            color: var(--ava-orange-primary);
+        }
+
+        .topbar-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            background: #C80000;
+            color: var(--ava-white);
+            font-size: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .topbar-user {
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-2);
+            padding-left: var(--ava-space-3);
+            border-left: 1px solid var(--ava-border);
+        }
+
+        .topbar-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--ava-orange-primary);
+            color: var(--ava-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Main Container (flex grow) */
+        .main-container {
+            display: flex;
+            flex: 1;
+            margin-top: 56px;
+            overflow: hidden;
+        }
+
+        /* Sidebar Navigation (248px fixed) */
+        .sidebar {
+            width: 248px;
+            background: var(--ava-white);
+            border-right: 1px solid var(--ava-border);
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: var(--ava-space-4);
+            border-bottom: 1px solid var(--ava-border);
+        }
+
+        .sidebar-header-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ava-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--ava-space-2);
+        }
+
+        .sidebar-workspace {
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-2);
+            padding: var(--ava-space-2);
+            background: var(--ava-light-bg);
+            border-radius: var(--ava-radius-md);
+            cursor: pointer;
+        }
+
+        .sidebar-workspace-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--ava-orange-primary);
+            border-radius: var(--ava-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ava-white);
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-workspace-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ava-text-primary);
+        }
+
+        .sidebar-workspace-sub {
+            font-size: 11px;
+            color: var(--ava-text-tertiary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: var(--ava-space-2);
+            display: flex;
+            flex-direction: column;
+            gap: var(--ava-space-1);
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ava-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: var(--ava-space-3) var(--ava-space-2);
+            margin-top: var(--ava-space-2);
+        }
+
+        .sidebar-nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-2);
+            padding: var(--ava-space-2) var(--ava-space-3);
+            font-size: 14px;
+            color: var(--ava-text-primary);
+            cursor: pointer;
+            border-radius: var(--ava-radius-sm);
+            text-decoration: none;
+            transition: all 200ms ease;
+            position: relative;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-nav-item:hover {
+            background: rgba(255, 107, 53, 0.05);
+            color: var(--ava-orange-primary);
+        }
+
+        .sidebar-nav-item.active {
+            background: #FFE6D3;
+            color: var(--ava-blue-secondary);
+            font-weight: 500;
+            border-left-color: var(--ava-orange-primary);
+        }
+
+        .sidebar-nav-item-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-nav-item-label {
+            flex: 1;
+        }
+
+        .sidebar-nav-item-badge {
+            font-size: 11px;
+            background: var(--ava-light-bg);
+            color: var(--ava-text-secondary);
+            padding: 2px 6px;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        .sidebar-nav-item.active .sidebar-nav-item-badge {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--ava-orange-primary);
+        }
+
+        .sidebar-footer {
+            padding: var(--ava-space-4);
+            border-top: 1px solid var(--ava-border);
+            margin-top: auto;
+        }
+
+        .sidebar-nav-item.footer-item {
+            padding: var(--ava-space-2) var(--ava-space-2);
+            margin: 0;
+        }
+
+        /* Main Content Area */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--ava-space-4);
+            background: var(--ava-light-bg);
+        }
+
+        .content-header {
+            margin-bottom: var(--ava-space-4);
+        }
+
+        .content-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ava-text-primary);
+            margin-bottom: var(--ava-space-2);
+        }
+
+        .content-subtitle {
+            font-size: 14px;
+            color: var(--ava-text-secondary);
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--ava-space-3);
+            margin-bottom: var(--ava-space-4);
+        }
+
+        .kpi-card {
+            background: var(--ava-white);
+            border: 1px solid var(--ava-border);
+            border-radius: var(--ava-radius-md);
+            padding: var(--ava-space-4);
+            box-shadow: var(--ava-shadow-sm);
+            transition: all 200ms ease;
+        }
+
+        .kpi-card:hover {
+            box-shadow: var(--ava-shadow-md);
+            border-color: var(--ava-orange-primary);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--ava-space-3);
+        }
+
+        .kpi-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ava-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--ava-light-bg);
+            border-radius: var(--ava-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ava-orange-primary);
+        }
+
+        .kpi-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--ava-text-primary);
+            margin-bottom: var(--ava-space-2);
+        }
+
+        .kpi-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--ava-space-1);
+            font-size: 13px;
+            color: var(--ava-text-secondary);
+        }
+
+        .kpi-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            font-weight: 500;
+        }
+
+        .kpi-indicator.positive {
+            color: #00A650;
+        }
+
+        .kpi-indicator.negative {
+            color: #C80000;
+        }
+
+        /* Section Container */
+        .section {
+            background: var(--ava-white);
+            border: 1px solid var(--ava-border);
+            border-radius: var(--ava-radius-md);
+            padding: var(--ava-space-4);
+            margin-bottom: var(--ava-space-4);
+            box-shadow: var(--ava-shadow-sm);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ava-text-primary);
+            margin-bottom: var(--ava-space-3);
+            padding-bottom: var(--ava-space-3);
+            border-bottom: 2px solid var(--ava-orange-primary);
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        table thead {
+            background: var(--ava-light-bg);
+            border-bottom: 1px solid var(--ava-border);
+        }
+
+        table th {
+            padding: var(--ava-space-3);
+            text-align: left;
+            font-weight: 600;
+            color: var(--ava-text-tertiary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table td {
+            padding: var(--ava-space-3);
+            border-bottom: 1px solid var(--ava-border);
+            color: var(--ava-text-primary);
+        }
+
+        table tbody tr:hover {
+            background: rgba(255, 107, 53, 0.02);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--ava-space-1);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.success {
+            background: rgba(0, 166, 80, 0.1);
+            color: #00A650;
+        }
+
+        .status-badge.warning {
+            background: rgba(255, 180, 20, 0.1);
+            color: #FFB414;
+        }
+
+        .status-badge.error {
+            background: rgba(200, 0, 0, 0.1);
+            color: #C80000;
+        }
+
+        .status-badge.neutral {
+            background: rgba(136, 136, 136, 0.1);
+            color: #888888;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 200px;
+                border-right: none;
+                border-bottom: 1px solid var(--ava-border);
+                display: none; /* Hide sidebar on mobile by default */
+            }
+
+            .sidebar.mobile-open {
+                display: flex;
+                position: absolute;
+                left: 0;
+                top: 56px;
+                height: calc(100vh - 56px);
+                z-index: 99;
+            }
+
+            .topbar-search {
+                width: 100%;
+                max-width: none;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: var(--ava-space-3);
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ava-white: #1a1a1a;
+                --ava-light-bg: #0d0d0d;
+                --ava-border: #333333;
+                --ava-text-primary: #ffffff;
+                --ava-text-secondary: #cccccc;
+                --ava-text-tertiary: #999999;
+            }
+
+            .topbar {
+                background: #1a1a1a;
+            }
+
+            .sidebar {
+                background: #1a1a1a;
+            }
+
+            table thead {
+                background: #2a2a2a;
+            }
+
+            table tbody tr:hover {
+                background: rgba(255, 107, 53, 0.1);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .topbar,
+            .sidebar {
+                display: none;
+            }
+
+            .main-container {
+                margin-top: 0;
+            }
+
+            .content {
+                padding: 0;
+            }
+        }
+
+        /* Utility Classes */
+        .text-success { color: #00A650; }
+        .text-warning { color: #FFB414; }
+        .text-error { color: #C80000; }
+        .bg-light { background: var(--ava-light-bg); }
+        .rounded { border-radius: var(--ava-radius-md); }
+        .shadow { box-shadow: var(--ava-shadow-sm); }
+    </style>
+</head>
+<body>
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <div class="topbar-logo">
+                <div class="topbar-logo-icon">A</div>
+                <div>
+                    <div class="topbar-title">Avanade Dashboard</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="topbar-center">
+            <input type="text" class="topbar-search" placeholder="Buscar projetos, clientes, métricas...">
+        </div>
+
+        <div class="topbar-right">
+            <button class="topbar-icon-btn">
+                <span style="font-size: 18px;">❓</span>
+            </button>
+            <button class="topbar-icon-btn">
+                <span style="font-size: 18px;">🔔</span>
+                <div class="topbar-badge">3</div>
+            </button>
+            <div class="topbar-user">
+                <div class="topbar-avatar">RC</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER: SIDEBAR + CONTENT -->
+    <div class="main-container">
+        <!-- SIDEBAR NAVIGATION -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-header-title">Workspace</div>
+                <div class="sidebar-workspace">
+                    <div class="sidebar-workspace-icon">AB</div>
+                    <div>
+                        <div class="sidebar-workspace-name">Atlantic Bank</div>
+                        <div class="sidebar-workspace-sub">EMEA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-nav">
+                <div class="sidebar-section-title">Menu</div>
+
+                <a href="#" class="sidebar-nav-item active">
+                    <div class="sidebar-nav-item-icon">📊</div>
+                    <div class="sidebar-nav-item-label">Dashboard</div>
+                </a>
+
+                <a href="#" class="sidebar-nav-item">
+                    <div class="sidebar-nav-item-icon">📁</div>
+                    <div class="sidebar-nav-item-label">Projects</div>
+                    <div class="sidebar-nav-item-badge">12</div>
+                </a>
+
+                <a href="#" class="sidebar-nav-item">
+                    <div class="sidebar-nav-item-icon">🤖</div>
+                    <div class="sidebar-nav-item-label">AI Assistant</div>
+                    <div class="sidebar-nav-item-badge">new</div>
+                </a>
+
+                <a href="#" class="sidebar-nav-item">
+                    <div class="sidebar-nav-item-icon">📈</div>
+                    <div class="sidebar-nav-item-label">Insights</div>
+                </a>
+
+                <a href="#" class="sidebar-nav-item">
+                    <div class="sidebar-nav-item-icon">👥</div>
+                    <div class="sidebar-nav-item-label">Team</div>
+                </a>
+
+                <div class="sidebar-section-title">Account</div>
+
+                <a href="#" class="sidebar-nav-item">
+                    <div class="sidebar-nav-item-icon">⚙️</div>
+                    <div class="sidebar-nav-item-label">Settings</div>
+                </a>
+
+                <a href="#" class="sidebar-nav-item">
+                    <div class="sidebar-nav-item-icon">❓</div>
+                    <div class="sidebar-nav-item-label">Help & Docs</div>
+                </a>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="sidebar-nav-item" style="width: 100%; justify-content: center; background: var(--ava-orange-primary); color: var(--ava-white); border: none; border-radius: var(--ava-radius-md); padding: var(--ava-space-2); cursor: pointer; font-weight: 500;">
+                    ➕ Novo Projeto
+                </button>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <div class="content-header">
+                <h1 class="content-title">Bem-vindo, Rachel.</h1>
+                <p class="content-subtitle">Cinco projetos atualizados desde ontem • 24 engajamentos ativos em seu espaço.</p>
+            </div>
+
+            <!-- KPI Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">Projetos Ativos</div>
+                        <div class="kpi-icon">📊</div>
+                    </div>
+                    <div class="kpi-value">24</div>
+                    <div class="kpi-meta">
+                        <span class="kpi-indicator positive">▲ 3 vs trimestre anterior</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">Assentos Copilot Ativos</div>
+                        <div class="kpi-icon">🎯</div>
+                    </div>
+                    <div class="kpi-value">18,420</div>
+                    <div class="kpi-meta">
+                        <span class="kpi-indicator positive">▲ 6.2% MoM</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">Adoção - Atlântico</div>
+                        <div class="kpi-icon">📈</div>
+                    </div>
+                    <div class="kpi-value">78%</div>
+                    <div class="kpi-meta">
+                        <span class="kpi-indicator positive">▲ 4 pts em relação a 75% alvo</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">Tempo Médio para Piloto</div>
+                        <div class="kpi-icon">⏱️</div>
+                    </div>
+                    <div class="kpi-value">41d</div>
+                    <div class="kpi-meta">
+                        <span class="kpi-indicator negative">▼ 5d melhorando</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Active Engagements -->
+            <div class="section">
+                <div class="section-title">Engajamentos Ativos</div>
+
+                <div style="margin-bottom: var(--ava-space-3); display: flex; gap: var(--ava-space-2);">
+                    <button style="padding: var(--ava-space-2) var(--ava-space-3); border: 1px solid var(--ava-border); background: var(--ava-white); border-radius: var(--ava-radius-md); cursor: pointer; color: var(--ava-text-primary); font-weight: 500;">Todos · 24</button>
+                    <button style="padding: var(--ava-space-2) var(--ava-space-3); border: none; background: var(--ava-light-bg); border-radius: var(--ava-radius-md); cursor: pointer; color: var(--ava-text-secondary);">Meus · 6</button>
+                    <button style="padding: var(--ava-space-2) var(--ava-space-3); border: none; background: var(--ava-light-bg); border-radius: var(--ava-radius-md); cursor: pointer; color: var(--ava-text-secondary);">Observando · 3</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente & Engajamento</th>
+                                <th>Status</th>
+                                <th>Lead</th>
+                                <th>Progresso</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: var(--ava-space-2);">
+                                        <div style="width: 32px; height: 32px; background: var(--ava-orange-primary); border-radius: var(--ava-radius-sm); display: flex; align-items: center; justify-content: center; color: var(--ava-white); font-weight: 600; font-size: 12px;">AB</div>
+                                        <div>
+                                            <div style="font-weight: 500;">Atlantic Bank</div>
+                                            <div style="font-size: 12px; color: var(--ava-text-secondary);">Copilot rollout</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge success">✓ Em dia</span></td>
+                                <td>R. Chen</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: var(--ava-space-2);">
+                                        <div style="flex: 1; height: 4px; background: var(--ava-light-bg); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 78%; height: 100%; background: var(--ava-orange-primary);"></div>
+                                        </div>
+                                        <span style="font-size: 12px; font-weight: 500;">78%</span>
+                                    </div>
+                                </td>
+                                <td style="font-size: 12px; color: var(--ava-text-secondary);">2h atrás</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: var(--ava-space-2);">
+                                        <div style="width: 32px; height: 32px; background: var(--ava-blue-secondary); border-radius: var(--ava-radius-sm); display: flex; align-items: center; justify-content: center; color: var(--ava-white); font-weight: 600; font-size: 12px;">ER</div>
+                                        <div>
+                                            <div style="font-weight: 500;">E-Repúblika</div>
+                                            <div style="font-size: 12px; color: var(--ava-text-secondary);">Digital transformation</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge warning">⚠ Em revisão</span></td>
+                                <td>M. Silva</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: var(--ava-space-2);">
+                                        <div style="flex: 1; height: 4px; background: var(--ava-light-bg); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 65%; height: 100%; background: #FFB414;"></div>
+                                        </div>
+                                        <span style="font-size: 12px; font-weight: 500;">65%</span>
+                                    </div>
+                                </td>
+                                <td style="font-size: 12px; color: var(--ava-text-secondary);">1d atrás</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: var(--ava-space-2);">
+                                        <div style="width: 32px; height: 32px; background: #00A650; border-radius: var(--ava-radius-sm); display: flex; align-items: center; justify-content: center; color: var(--ava-white); font-weight: 600; font-size: 12px;">TN</div>
+                                        <div>
+                                            <div style="font-weight: 500;">Telecom Brasil</div>
+                                            <div style="font-size: 12px; color: var(--ava-text-secondary);">Cloud infrastructure</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge success">✓ Completo</span></td>
+                                <td>J. Costa</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: var(--ava-space-2);">
+                                        <div style="flex: 1; height: 4px; background: var(--ava-light-bg); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 100%; height: 100%; background: #00A650;"></div>
+                                        </div>
+                                        <span style="font-size: 12px; font-weight: 500;">100%</span>
+                                    </div>
+                                </td>
+                                <td style="font-size: 12px; color: var(--ava-text-secondary);">3h atrás</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile sidebar toggle (optional)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add mobile menu toggle if needed
+        });
+    </script>
+</body>
+</html>

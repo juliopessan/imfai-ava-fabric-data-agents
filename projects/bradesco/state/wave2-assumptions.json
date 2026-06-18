@@ -1,0 +1,30 @@
+[
+  {
+    "gate": "GATE_1",
+    "category": "data_quality",
+    "assumption": "NULL semantics match Databricks target platform",
+    "risk_level": "medium",
+    "timestamp": "2026-06-16T11:38:02.040358"
+  },
+  {
+    "gate": "GATE_1",
+    "category": "performance",
+    "assumption": "Partition strategy optimizes on date_load",
+    "risk_level": "high",
+    "timestamp": "2026-06-16T11:38:02.040389"
+  },
+  {
+    "gate": "GATE_1",
+    "category": "governance",
+    "assumption": "Data contracts enforced via quality rules",
+    "risk_level": "high",
+    "timestamp": "2026-06-16T11:38:02.040397"
+  },
+  {
+    "gate": "GATE_1",
+    "category": "migration",
+    "assumption": "Cloudera YARN jobs \u2192 Databricks jobs (1:1 mapping)",
+    "risk_level": "low",
+    "timestamp": "2026-06-16T11:38:02.040402"
+  }
+]

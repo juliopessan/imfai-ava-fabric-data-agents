@@ -1,0 +1,1035 @@
+---
+project_name: "Multi-Platform Data Migration Wave"
+project_id: "multi-platform-migration-2026"
+description: "Unified inventory and migration planning for 6 heterogeneous legacy platforms (Cloudera, Airflow, SAP BO, PowerCenter, Snowflake, SSS)"
+organization: "Avanade"
+target_platform: "fabric"  # Primary target; some systems may have secondary targets (Synapse, ACA)
+migration_scope: "Full lift-and-shift + modernization. Inventory all artefatos críticos, validate data contracts, execute phased migration."
+
+# ============================================================================
+# WAVE CONFIGURATION
+# ============================================================================
+wave_number: 1
+wave_name: "Multi-Platform Discovery & Inventory"
+wave_start_date: "2026-06-09"
+wave_target_completion: "2026-12-31"
+
+# Ownership & RACI
+discovery_owner_primary: "discovery-scout"
+discovery_owner_secondary: "inventory-scout"
+architecture_owner: "data-architect"
+data_model_owner: "data-modeler"
+business_analyst_owner: "business-analyst"
+code_generator_owner: "code-generator"
+quality_gate_owner: "quality-gate"
+security_owner: "security-compliance"
+
+# ============================================================================
+# MIGRATION PLATFORMS — DETAILED INVENTORY
+# ============================================================================
+
+platforms:
+
+  # 1. CLOUDERA (Hadoop/Hive) — HIGH PRIORITY
+  # ============================================================================
+  cloudera:
+    platform_id: "cloudera-001"
+    status: "pending_inventory"
+    criticality: "HIGH"
+    source_tier: "tier-1"
+    target_platform: "fabric"  # Synapse as alternate
+
+    # Artifacts to inventory
+    artifacts:
+      primary:
+        - artifact_type: "hive_ddl"
+          format: ".hql"
+          priority: "CRITICAL"
+          description: "Hive schema definitions — all databases, tables, partitions"
+          inventory_method: "SHOW DATABASES; SHOW TABLES; SHOW CREATE TABLE <table>"
+          estimated_count: "200-500 tables"
+          blocker: true
+          blocker_reason: "DDL export is non-negotiable — defines scope of migration"
+        
+        - artifact_type: "ranger_security_policy"
+          format: ".json"
+          priority: "CRITICAL"
+          description: "Ranger authorization policies, ACLs, role-based security"
+          inventory_method: "Ranger Admin API export + pmrep equivalent"
+          estimated_count: "50-200 policies"
+          risk: "Security regression if policies not mapped 1:1 to target"
+        
+        - artifact_type: "avro_schema"
+          format: ".avsc"
+          priority: "HIGH"
+          description: "Schema Registry schemas for Kafka topics and structured data"
+          inventory_method: "Schema Registry API export"
+          estimated_count: "30-100 schemas"
+      
+      secondary:
+        - artifact_type: "physical_data"
+          formats: [".parquet", ".orc", ".csv"]
+          priority: "MEDIUM"
+          description: "Data files — volume, row counts, partitioning strategy"
+          note: "Separate from metadata — handle via reconciliation gate"
+        
+        - artifact_type: "oozie_orchestration"
+          format: ".xml"
+          priority: "HIGH"
+          description: "Oozie job definitions, dependencies, scheduling"
+          estimated_count: "20-50 workflows"
+        
+        - artifact_type: "spark_pyspark_code"
+          formats: [".py", ".scala"]
+          priority: "HIGH"
+          description: "PySpark/Scala jobs — capture version, dependencies, spark.conf"
+          estimated_count: "10-30 jobs"
+      
+      config:
+        - artifact_type: "shell_scripts"
+          format: ".sh"
+          priority: "MEDIUM"
+          description: "ETL orchestration, data movement scripts"
+        
+        - artifact_type: "environment_config"
+          formats: [".conf", ".properties", ".env"]
+          priority: "HIGH"
+          description: "Hadoop config, Hive metastore, Spark settings, connection strings"
+    
+    # Identified Risks
+    risks:
+      - risk_id: "CDR-001-SCHEMA-LOCK"
+        name: "Schema/Business Layer Loss"
+        severity: "CRITICAL"
+        likelihood: "low"
+        impact: "CATASTROPHIC (100% rework of semantic layer)"
+        description: "Losing Hive DDL = redesigning all schemas + rebuilding metadata. Single point of failure."
+        mitigation: "Export all DDLs BEFORE any migration begins. Cross-verify export count vs. production catalog."
+        owner: "discovery-scout"
+        status: "pending"
+      
+      - risk_id: "CDR-002-PARTITION-LOSS"
+        name: "Partitioning/Bucketing Strategy Loss"
+        severity: "HIGH"
+        likelihood: "medium"
+        impact: "Performance cliff in target (queries 10-100x slower)"
+        description: "Hive partitioning + bucketing is a physical optimization — if not documented, performance fails in Fabric."
+        mitigation: "Extract SHOW CREATE TABLE for all tables; parse partition/bucket clauses into mapping document."
+        owner: "data-architect"
+        status: "pending"
+      
+      - risk_id: "CDR-003-ACL-GRANULARITY"
+        name: "Ranger ACL Mapping Complexity"
+        severity: "HIGH"
+        likelihood: "high"
+        impact: "Security misconfiguration; unauthorized access or over-restriction"
+        description: "Ranger policies are complex (resource masks, conditions, deny/allow precedence). 1:1 mapping to Fabric RLS/ACL requires expertise."
+        mitigation: "Audit Ranger policies early (Gate 1); create RBAC matrix for target. Plan 2-week security mapping sprint."
+        owner: "security-compliance"
+        status: "pending"
+    
+    # Discovery TODO
+    discovery_tasks:
+      - "[PHASE 1] Export all Hive databases: `hive -e 'SHOW DATABASES' | tee databases.log`"
+      - "[PHASE 1] For each database, export DDL: `SHOW CREATE TABLE <table_name>` (save as .hql per table)"
+      - "[PHASE 1] Catalog partitioning/bucketing: `SHOW CREATE TABLE <table>` (parse PARTITIONED BY, CLUSTERED BY)"
+      - "[PHASE 1] Export Ranger policies via Admin API (JSON format)"
+      - "[PHASE 1] Export Avro schemas from Schema Registry (if present)"
+      - "[PHASE 1] Inventory Oozie workflows: extract .xml job definitions + dependencies"
+      - "[PHASE 1] List all Spark/PySpark jobs: capture source, version, dependencies"
+      - "[PHASE 1] Sample physical data: row counts, file formats (Parquet/ORC ratio)"
+      - "[PHASE 1] Document Hadoop/Hive configuration files (hdfs-site.xml, hive-site.xml, spark-defaults.conf)"
+      - "[PHASE 1] Map external connections: Kafka, HBase, S3/object storage integration points"
+      - "[GATE 1] Validate: #DDL tables = #production catalog count (reconciliation)"
+      - "[GATE 1] Risk assessment: identify critical vs. non-critical schemas for phasing"
+    
+    # Ownership
+    owner: "discovery-scout"
+    secondary_owner: "inventory-scout"
+    estimated_effort_weeks: 2
+    estimated_artifacts_count: 500  # tables + policies + schemas + workflows
+
+  # 2. APACHE AIRFLOW — BLOCKING VERSION CHECK
+  # ============================================================================
+  airflow:
+    platform_id: "airflow-001"
+    status: "BLOCKED_VERSION_UNKNOWN"
+    criticality: "HIGH"
+    source_tier: "tier-1"
+    target_platform: "data-factory"  # Azure Data Factory for orchestration layer
+
+    # CRITICAL BLOCKER
+    blocker: true
+    blocker_priority: "IMMEDIATE"
+    blocker_message: |
+      ⚠️  AIRFLOW VERSION UNKNOWN — Cannot proceed with migration planning.
+      
+      AIRFLOW 1.x → 2.x = BREAKING CHANGES (DAG syntax, operators, TaskFlow API, provider split).
+      
+      ACTION REQUIRED BEFORE GATE 1:
+      1. Run: `airflow version` on production scheduler
+      2. Provide output + confirm version
+      3. If 1.x: budget 2-week refactoring sprint for TaskFlow API + operator rewrite
+      4. If 2.x: proceed with export (backwards-compatible)
+
+    artifacts:
+      primary:
+        - artifact_type: "dag_definitions"
+          format: ".py"
+          priority: "CRITICAL"
+          description: "DAG Python files from dags/ directory"
+          inventory_method: "airflow dags list --output table"
+          blocker: true
+          blocker_reason: "DAG syntax differs 1.x vs 2.x — cannot safely export without version confirmation"
+        
+        - artifact_type: "connections"
+          priority: "CRITICAL"
+          description: "Database, API, SSH, cloud connections"
+          export_method: "airflow connections export --file-format json"
+          estimated_count: "20-50 connections"
+        
+        - artifact_type: "variables"
+          priority: "HIGH"
+          description: "Global variables, secrets, environment-specific configs"
+          export_method: "airflow variables export --file-format json"
+          estimated_count: "30-100 variables"
+      
+      secondary:
+        - artifact_type: "custom_operators"
+          format: ".py"
+          location: "plugins/"
+          priority: "HIGH"
+          description: "Custom hooks, operators, sensors (version-dependent!)"
+          warning: "2.x requires provider registration; 1.x uses legacy plugin mechanism"
+        
+        - artifact_type: "requirements_dependencies"
+          format: "requirements.txt"
+          priority: "HIGH"
+          description: "Python dependencies, provider versions (locked)"
+        
+        - artifact_type: "docker_image"
+          format: "Dockerfile"
+          priority: "MEDIUM"
+          description: "Airflow base image, custom operators in container"
+      
+      config:
+        - artifact_type: "airflow_config"
+          formats: [".cfg", ".env"]
+          priority: "HIGH"
+          description: "airflow.cfg settings, executor type (local/celery/k8s), pool/queue configs"
+        
+        - artifact_type: "xcom_catalog"
+          priority: "MEDIUM"
+          description: "Critical XCom variables used between DAGs/tasks (high risk in 2.x)"
+          note: "XCom behavior changed in 2.x — validate pull/push logic"
+    
+    risks:
+      - risk_id: "AFW-001-OPERATOR-DEPRECATION"
+        name: "Operator Deprecation in 2.x"
+        severity: "CRITICAL"
+        likelihood: "high"
+        impact: "DAG execution failure; tasks cannot run"
+        example: |
+          1.x: PythonOperator(task_id='t', python_callable=func, op_args=[...])
+          2.x: TaskFlow @task decorator OR PythonOperator with different signature
+        mitigation: "Identify all custom operators early; plan 2-week refactoring sprint if upgrading 1.x→2.x"
+        owner: "business-analyst"
+        status: "pending"
+      
+      - risk_id: "AFW-002-DAG-SYNTAX"
+        name: "DAG Definition Syntax Changes"
+        severity: "CRITICAL"
+        likelihood: "high"
+        impact: "DAGs fail to parse in 2.x"
+        description: "1.x: set_upstream(), set_downstream(); 2.x: >> operator + TaskFlow @dag"
+        mitigation: "Audit all DAG definitions; migrate syntax per Airflow upgrade guide"
+        owner: "code-generator"
+        status: "pending"
+      
+      - risk_id: "AFW-003-PROVIDER-SPLIT"
+        name: "Provider Package Versioning"
+        severity: "HIGH"
+        likelihood: "high"
+        impact: "Operators not found; missing dependencies at runtime"
+        description: "2.x split providers from core Airflow. Dependencies must be explicitly pinned."
+        mitigation: "Lock provider versions in requirements.txt; test imports before migration"
+        owner: "business-analyst"
+        status: "pending"
+      
+      - risk_id: "AFW-004-XCOM-BEHAVIOR"
+        name: "XCom Pull/Push Logic Changes"
+        severity: "MEDIUM"
+        likelihood: "medium"
+        impact: "Data passing between tasks fails in 2.x"
+        description: "XCom serialization + deserialization behavior differs. Custom XCom backends may not be compatible."
+        mitigation: "Catalog all XCom usage; validate after migration with dual-run"
+        owner: "business-analyst"
+        status: "pending"
+    
+    discovery_tasks:
+      - "[BLOCKER] ⚠️  CONFIRM AIRFLOW VERSION: `airflow version` + document output"
+      - "[IF VERSION CONFIRMED] Export all DAGs: `airflow dags list --output json` → save to file"
+      - "[IF VERSION CONFIRMED] Export Connections: `airflow connections export --file-format json > connections.json`"
+      - "[IF VERSION CONFIRMED] Export Variables: `airflow variables export --file-format json > variables.json`"
+      - "[PHASE 1] Inventory custom operators in plugins/ (count + complexity assessment)"
+      - "[PHASE 1] Capture requirements.txt — lock provider package versions"
+      - "[PHASE 1] Document DAG schedule intervals + timezones (for target orchestrator)"
+      - "[PHASE 1] Catalog XCom usage — identify critical inter-task data flows"
+      - "[PHASE 1] Verify Airflow Pools + Queues configuration"
+      - "[IF 1.x UPGRADE] Plan 2-week refactoring: TaskFlow API, operator rewrites, provider pinning"
+      - "[GATE 1] Risk assessment: identify breaking changes + refactoring effort"
+    
+    owner: "discovery-scout"
+    secondary_owner: "code-generator"
+    estimated_effort_weeks: "3-4 (if 1.x → 2.x; +2 weeks refactoring)"
+    estimated_artifacts_count: "50-100 DAGs + 20-50 connections + custom operators"
+
+  # 3. SSS (UNKNOWN SYSTEM) — HARD BLOCKER
+  # ============================================================================
+  sss:
+    platform_id: "sss-unknown-001"
+    status: "BLOCKED_SYSTEM_UNKNOWN"
+    criticality: "UNKNOWN"
+    source_tier: "unknown"
+    target_platform: "unknown"
+
+    blocker: true
+    blocker_priority: "CRITICAL"
+    blocker_message: |
+      ⚠️  'SSS' IS NOT A RECOGNIZED DATA PLATFORM.
+      
+      This is a HARD BLOCKER for any migration planning.
+      
+      Possible interpretations:
+      - Internal proprietary system (legacy monolith)
+      - Acronym for Salesforce / Sapiens / Spectrum / ???
+      - Typo or abbreviation not yet documented
+      
+      REQUIRED BEFORE PROCEEDING:
+      1. Confirm: What is SSS? (product name, vendor, version)
+      2. Provide: System documentation, data dictionary, export capabilities
+      3. Provide: Sample metadata/config files for analysis
+      4. Provide: Access to dev/test environment for proof-of-concept export
+
+    action_required:
+      - item: "Stakeholder confirmation"
+        description: "Data owner must confirm system identity"
+        owner: "discovery-scout"
+        status: "pending"
+      
+      - item: "Documentation collection"
+        description: "Gather technical docs, API specs, export tools"
+        owner: "business-analyst"
+        status: "pending"
+      
+      - item: "System assessment"
+        description: "Once confirmed, re-route to appropriate specialized agent"
+        owner: "data-architect"
+        status: "pending"
+
+    discovery_tasks:
+      - "[CRITICAL] STOP: Confirm what 'SSS' is before any other work"
+      - "[CRITICAL] Obtain system documentation + admin access"
+      - "[PHASE 1] Assess data volume, schema complexity, export tooling"
+      - "[PHASE 1] Proof-of-concept export: verify sample data + metadata can be extracted"
+
+    owner: "discovery-scout"
+    estimated_effort_weeks: "2 (assessment only; no migration until system confirmed)"
+    estimated_artifacts_count: "unknown"
+
+  # 4. SAP BUSINESSOBJECTS (BOBJ) — VERY HIGH RISK
+  # ============================================================================
+  businessobjects:
+    platform_id: "bobj-001"
+    status: "pending_inventory"
+    criticality: "VERY_HIGH"
+    source_tier: "tier-1"
+    target_platform: "power-bi"  # Power BI / Analysis Services with semantic model refactor
+
+    artifacts:
+      primary:
+        - artifact_type: "universe_bundle_lcm"
+          format: ".lcmbiar"
+          priority: "CRITICAL"
+          description: "LCM (Lifecycle Management) bundle — complete metadata export"
+          inventory_method: "BOBJ Admin Tools > LCM > Export"
+          blocker: true
+          blocker_reason: "LCM bundle = complete semantic layer snapshot. Loss = 100% rework of data models."
+        
+        - artifact_type: "universes"
+          formats: [".unv", ".unx"]
+          priority: "CRITICAL"
+          description: "Universe definitions (Business Layer + Data Foundation)"
+          export_method: "Information Design Tool (IDT)"
+          estimated_count: "10-30 universes"
+          complexity: "VERY_HIGH"
+          note: "Business Layer is the semantic layer — most complex BOBJ objects"
+        
+        - artifact_type: "web_intelligence_reports"
+          formats: [".webi"]
+          priority: "HIGH"
+          description: "Web Intelligence report definitions"
+          estimated_count: "50-200 reports"
+        
+        - artifact_type: "crystal_reports"
+          format: ".rpt"
+          priority: "MEDIUM"
+          description: "Legacy pixel-perfect reports (if still in use)"
+          estimated_count: "10-50 reports"
+          note: "Lower priority; may be deprecated post-migration"
+      
+      metadata:
+        - artifact_type: "connectivity_config"
+          format: ".xml"
+          priority: "HIGH"
+          description: "Data source connections, connection strings, query filters"
+          estimated_count: "5-15 connections"
+        
+        - artifact_type: "security_rbac"
+          export_method: "Roles/Groups XML export"
+          priority: "HIGH"
+          description: "User roles, folder permissions, object-level ACLs"
+        
+        - artifact_type: "scheduled_reports"
+          priority: "MEDIUM"
+          description: "Report scheduling, distribution lists, execution history"
+          note: "Not portable — must reconfigure in target BI tool"
+    
+    risks:
+      - risk_id: "BOBJ-001-BUSINESS-LAYER"
+        name: "Business Layer Destruction"
+        severity: "CRITICAL"
+        likelihood: "low"
+        impact: "CATASTROPHIC (months of semantic layer redesign)"
+        description: "Universe Business Layer = semantic layer. Loss = complete data model rework."
+        mitigation: "Export .lcmbiar LCM bundle + all .unv/.unx files BEFORE migration. Verify row counts vs. production."
+        owner: "discovery-scout"
+        status: "pending"
+      
+      - risk_id: "BOBJ-002-DERIVED-TABLE-LOGIC"
+        name: "Derived Table & Custom SQL Loss"
+        severity: "HIGH"
+        likelihood: "medium"
+        impact: "Report logic broken; formulas must be reconstructed"
+        description: "Custom SQL + derived tables in Universes = complex business logic. If not extracted, logic is lost."
+        mitigation: "Extract SHOW CREATE TABLE equivalent for each derived object; document formula logic in ADR."
+        owner: "business-analyst"
+        status: "pending"
+      
+      - risk_id: "BOBJ-003-SCHEDULED-REPORTS"
+        name: "Report Scheduling Non-Portability"
+        severity: "MEDIUM"
+        likelihood: "high"
+        impact: "Reports don't execute on schedule in target"
+        description: "BOBJ scheduling is proprietary — must reconfigure in target BI tool (Power BI, Tableau, etc.)"
+        mitigation: "Catalog all scheduled reports + execution frequency + distribution lists. Plan 1-week reconfiguration."
+        owner: "business-analyst"
+        status: "pending"
+    
+    discovery_tasks:
+      - "[PHASE 1] Export LCM bundle (.lcmbiar) from BOBJ Admin Console"
+      - "[PHASE 1] Export all Universes (.unv/.unx) via Information Design Tool"
+      - "[PHASE 1] Inventory Web Intelligence reports by folder/category (count + complexity)"
+      - "[PHASE 1] Catalog Crystal Reports (.rpt) + data sources (if legacy reports exist)"
+      - "[PHASE 1] Export Universe connections (databases, connection strings, query filters)"
+      - "[PHASE 1] Export Security configuration: roles, groups, folder permissions (XML export)"
+      - "[PHASE 1] Identify Business Layer dependencies: which Universes are critical vs. optional?"
+      - "[PHASE 1] Document derived tables + custom SQL per Universe (extract formulas)"
+      - "[PHASE 1] List scheduled reports + execution frequency + distribution lists"
+      - "[PHASE 1] Verify dependencies: reports → Universes → data connections"
+      - "[GATE 1] Validate: all Universes exported, no Business Layer corruption detected"
+      - "[GATE 1] Risk assessment: identify high-complexity Universes requiring extended design phase"
+    
+    owner: "discovery-scout"
+    secondary_owner: "data-architect"
+    estimated_effort_weeks: 2
+    estimated_artifacts_count: "50-100 universes + 100-300 reports + 10-30 connections"
+
+  # 5. INFORMATICA POWERCENTER — PARAMETER FILE HIDDEN BLOCKER
+  # ============================================================================
+  powercenter:
+    platform_id: "powercenter-001"
+    status: "pending_inventory"
+    criticality: "HIGH"
+    source_tier: "tier-1"
+    target_platform: "data-factory"  # ADF + Synapse Pipelines
+
+    artifacts:
+      primary:
+        - artifact_type: "repository_export"
+          export_method: "pmrep export -o xml"
+          format: ".xml"
+          priority: "CRITICAL"
+          description: "Complete repository dump — source of truth for all mappings"
+          blocker: true
+          blocker_reason: "Repository is the only complete artifact inventory. Loss = manual mapping reconstruction."
+      
+      mappings:
+        - artifact_type: "mapping_definitions"
+          format: ".xml"
+          priority: "CRITICAL"
+          description: "All data transformation mappings (source → target logic)"
+          estimated_count: "50-200 mappings"
+          export_method: "pmrep export + mapping objects"
+        
+        - artifact_type: "transformations"
+          types: ["Expression", "Lookup", "Aggregator", "Joiner", "Custom SQL", "Stored Procedure"]
+          priority: "HIGH"
+          description: "Custom transformation logic — validate pushdown optimization eligibility"
+        
+        - artifact_type: "parameter_files"
+          format: ".par"
+          priority: "CRITICAL"
+          description: "Runtime parameter mappings — FREQUENTLY FORGOTTEN"
+          warning: |
+            ⚠️  COMMON BLOCKER: .par files are often 'hidden' in subdirectories.
+            Missing .par files = silent runtime failure in production.
+          inventory_method: "Find all .par files in repository; cross-check against Workflows"
+      
+      config:
+        - artifact_type: "connections"
+          types: ["Relational", "File", "App", "Database", "Flat File"]
+          priority: "HIGH"
+          description: "Data source connections — capture all connection strings"
+        
+        - artifact_type: "workflow_scheduling"
+          format: ".xml (Workflow scheduling config)"
+          priority: "HIGH"
+          description: "Workflow schedules, dependencies, triggers"
+        
+        - artifact_type: "lookup_caches"
+          priority: "MEDIUM"
+          description: "Static vs. Dynamic lookup configurations + cache strategies"
+    
+    risks:
+      - risk_id: "PC-001-PARAMETER-FILES"
+        name: "Parameter File Loss (Hidden Blocker)"
+        severity: "CRITICAL"
+        likelihood: "HIGH"
+        impact: "Silent runtime failure in production; workflows fail without error logs"
+        description: |
+          .par files are runtime parameter overrides (e.g., db credentials, file paths, filter values).
+          If not exported + validated, production workflows fail silently.
+        mitigation: |
+          1. Audit repository structure: find ALL .par files (use: find . -name "*.par")
+          2. Cross-check: for each Workflow, verify corresponding .par exists
+          3. Extract .par content + validate against production runtime env
+          4. Store in version control before migration
+        owner: "inventory-scout"
+        status: "pending"
+      
+      - risk_id: "PC-002-PUSHDOWN-OPTIMIZATION"
+        name: "Pushdown Optimization Loss"
+        severity: "HIGH"
+        likelihood: "medium"
+        impact: "Performance cliff: complex SQL may not run natively in target (ELT instead of ETL)"
+        description: "PowerCenter transformations may use Pushdown Optimization (native SQL). Not all are eligible for cloud ELT."
+        mitigation: "Identify mappings with Pushdown enabled; validate SQL translates to target SQL dialect; plan optimization review."
+        owner: "data-architect"
+        status: "pending"
+      
+      - risk_id: "PC-003-LOOKUP-CACHE-STRATEGY"
+        name: "Lookup Cache Strategy Mismatch"
+        severity: "MEDIUM"
+        likelihood: "medium"
+        impact: "Performance regression or memory bloat in target"
+        description: "Static vs. Dynamic lookup caches have very different performance characteristics. Must reconfigure per target."
+        mitigation: "Document lookup cache strategy per mapping; validate memory constraints in Fabric/Synapse; tune after migration."
+        owner: "data-architect"
+        status: "pending"
+    
+    discovery_tasks:
+      - "[PHASE 1] Export full repository: `pmrep export -o xml -r <repo_name> -f repository-export.xml`"
+      - "[PHASE 1] ⚠️  AUDIT: Find all .par files: `find . -name \"*.par\" -type f > par-files-inventory.log`"
+      - "[PHASE 1] ⚠️  VALIDATE: Cross-check .par files vs. Workflows (ensure coverage 100%)"
+      - "[PHASE 1] Inventory all Mappings — count + categorize by complexity + transformation types"
+      - "[PHASE 1] Extract custom SQL from Expression/Lookup/Custom SQL transformations"
+      - "[PHASE 1] Identify Pushdown Optimization eligible mappings (flag for performance tuning)"
+      - "[PHASE 1] Map source/target connections: Relational, File, DB, App connections"
+      - "[PHASE 1] Document Lookup Cache strategy: static vs. dynamic per mapping"
+      - "[PHASE 1] Extract Workflow scheduling + dependencies (DAG validation)"
+      - "[PHASE 1] Catalog mapping variables + workflow variables (runtime parameters)"
+      - "[PHASE 1] Verify partitioning strategy per session (scalability assessment)"
+      - "[GATE 1] CRITICAL: Validate .par file coverage = 100% (no orphaned Workflows)"
+      - "[GATE 1] Risk assessment: Identify Pushdown-dependent mappings (performance-critical)"
+    
+    owner: "inventory-scout"
+    secondary_owner: "code-generator"
+    estimated_effort_weeks: 2
+    estimated_artifacts_count: "200+ mappings + 50-100 .par files + 50-100 workflows"
+
+  # 6. SNOWFLAKE — NEWER FEATURES UNDOCUMENTED
+  # ============================================================================
+  snowflake:
+    platform_id: "snowflake-001"
+    status: "pending_inventory"
+    criticality: "HIGH"
+    source_tier: "tier-2"
+    target_platform: "fabric"  # Retain Snowflake for federated queries if hybrid model
+
+    artifacts:
+      primary:
+        - artifact_type: "ddl_complete"
+          export_method: "SELECT GET_DDL('DATABASE', '<db_name>'); -- per database"
+          format: ".sql"
+          priority: "CRITICAL"
+          description: "Complete schema definitions — databases, schemas, tables, views"
+          estimated_count: "100-500 tables + views"
+      
+      tables_and_views:
+        - artifact_type: "tables"
+          priority: "HIGH"
+          description: "Permanent, temporary, transient, dynamic tables"
+          estimated_count: "100-300 tables"
+        
+        - artifact_type: "materialized_views"
+          priority: "HIGH"
+          description: "Materialized views + incremental refresh policy + clustering keys"
+          estimated_count: "10-50 mviews"
+        
+        - artifact_type: "views"
+          priority: "MEDIUM"
+          description: "Standard views, secure views, dynamic views"
+          estimated_count: "20-100 views"
+        
+        - artifact_type: "dynamic_tables"
+          priority: "HIGH"
+          description: "⚠️  NEWER FEATURE — often undocumented. Export refresh policy."
+          warning: "Dynamic Tables are relatively new (Snowflake feature). Verify refresh SLOs + target platform support."
+          estimated_count: "5-20 dynamic tables"
+      
+      automation:
+        - artifact_type: "streams"
+          priority: "CRITICAL"
+          description: "Change Data Capture (CDC) metadata + consumer lag + TTL"
+          warning: "⚠️  BLOCKER: Streams have 14-day TTL. If migration >14 days, active consumers fail."
+          estimated_count: "5-20 streams"
+        
+        - artifact_type: "tasks"
+          priority: "HIGH"
+          description: "Scheduled jobs + DAG dependencies + error handling"
+          estimated_count: "10-50 tasks"
+        
+        - artifact_type: "pipes"
+          format: ".sql"
+          priority: "HIGH"
+          description: "Continuous data loading from S3/Azure Blob/GCS (Snowpipe)"
+          estimated_count: "5-20 pipes"
+      
+      code:
+        - artifact_type: "stored_procedures"
+          languages: ["SQL", "Python", "JavaScript"]
+          format: ".sql / .py / .js"
+          priority: "HIGH"
+          description: "Stored procedure definitions"
+          estimated_count: "10-30 sprocs"
+        
+        - artifact_type: "udfs"
+          languages: ["SQL", "Python", "JavaScript"]
+          priority: "HIGH"
+          description: "User-Defined Functions"
+          estimated_count: "10-30 udfs"
+      
+      security_and_sharing:
+        - artifact_type: "roles_and_grants"
+          export_method: "SHOW ROLES; SHOW GRANTS;"
+          priority: "CRITICAL"
+          description: "Role hierarchy, database grants, table-level access, warehouse grants"
+          estimated_count: "10-30 roles"
+        
+        - artifact_type: "row_level_access_policies"
+          export_method: "SELECT GET_DDL('POLICY', '<policy_name>');"
+          priority: "HIGH"
+          description: "Row Access Control (RAC) + masking policies"
+          estimated_count: "5-15 policies"
+        
+        - artifact_type: "snowflake_shares"
+          priority: "MEDIUM"
+          description: "Data Sharing (outbound/inbound shares) — metadata only"
+          estimated_count: "2-5 shares"
+      
+      infrastructure:
+        - artifact_type: "warehouses"
+          export_method: "SHOW WAREHOUSES;"
+          priority: "HIGH"
+          description: "Warehouse definitions, cluster size, auto-suspend, scaling policies"
+          estimated_count: "3-10 warehouses"
+        
+        - artifact_type: "resource_monitors"
+          export_method: "SHOW RESOURCE MONITORS;"
+          priority: "HIGH"
+          description: "Credit budgets + alert thresholds per warehouse"
+          estimated_count: "3-10 monitors"
+        
+        - artifact_type: "external_stages"
+          priority: "MEDIUM"
+          description: "S3, Azure Blob, GCS integration paths + credentials"
+          estimated_count: "5-15 stages"
+        
+        - artifact_type: "integrations"
+          priority: "MEDIUM"
+          description: "API integrations, partner integrations (Datadog, Segment, etc.)"
+          estimated_count: "2-5 integrations"
+      
+      replication:
+        - artifact_type: "replication_config"
+          export_method: "SHOW REPLICATION ACCOUNTS;"
+          priority: "MEDIUM"
+          description: "Database replication (Business Critical + Enterprise editions)"
+          estimated_count: "0-3 replications"
+    
+    risks:
+      - risk_id: "SF-001-DYNAMIC-TABLE-UNDOCUMENTED"
+        name: "Dynamic Table Complexity & Documentation Gap"
+        severity: "MEDIUM"
+        likelihood: "high"
+        impact: "Refresh SLOs not met in target; stale data"
+        description: "Dynamic Tables are a newer Snowflake feature. Often lack documentation. Refresh policies + dependencies may not be clear."
+        mitigation: "Identify all Dynamic Tables early; validate refresh SLOs + upstream dependencies; test refresh schedule in target."
+        owner: "data-architect"
+        status: "pending"
+      
+      - risk_id: "SF-002-STREAM-TTL"
+        name: "Stream Consumer TTL (14 days)"
+        severity: "HIGH"
+        likelihood: "high"
+        impact: "CDC fails after 14 days of inactivity; data loss if consumers not re-initialized"
+        description: "Snowflake Streams expire after 14 days without consumer. If migration takes >14d, active consumers fail."
+        mitigation: |
+          1. Document all active Stream consumers
+          2. If migration >14d: plan consumer re-initialization
+          3. Dual-run strategy: keep source Streams active during transition
+        owner: "business-analyst"
+        status: "pending"
+      
+      - risk_id: "SF-003-TASKS-DAG-VALIDATION"
+        name: "Tasks DAG Validation Post-Migration"
+        severity: "MEDIUM"
+        likelihood: "medium"
+        impact: "Task dependencies broken; jobs fail to run in sequence"
+        description: "Task DAG (precedence relationships) must be re-validated after migration. Timing assumptions may not hold in target."
+        mitigation: "Extract Task DAG + validate in target environment; test with sample data before production cutover."
+        owner: "business-analyst"
+        status: "pending"
+      
+      - risk_id: "SF-004-EXTERNAL-STAGE-PATHS"
+        name: "External Stage Path Reconfiguration"
+        severity: "MEDIUM"
+        likelihood: "medium"
+        impact: "Pipes fail to load data; Snowpipe jobs drop"
+        description: "External stage paths (S3, Blob) must be reconfigured if storage account/credentials change during migration."
+        mitigation: "Validate S3/Blob paths + credentials in target; update Pipes + stages before cutover."
+        owner: "data-architect"
+        status: "pending"
+    
+    discovery_tasks:
+      - "[PHASE 1] Export full DDL: `SELECT GET_DDL('DATABASE', '<db_name>');` per database (save as .sql)"
+      - "[PHASE 1] Inventory Warehouses + cluster sizes + auto-suspend configs"
+      - "[PHASE 1] Document Resource Monitors + credit budgets per warehouse"
+      - "[PHASE 1] Export Streams: capture lag, TTL, active consumers (critical for CDC planning)"
+      - "[PHASE 1] Export Tasks: verify DAG dependencies + schedules (test in target env)"
+      - "[PHASE 1] Catalog Materialized Views + refresh policies (validate refresh SLOs)"
+      - "[PHASE 1] ⚠️  IDENTIFY: All Dynamic Tables — validate refresh policies + target platform support"
+      - "[PHASE 1] Export Pipes + load history (validate S3/Blob paths work in target)"
+      - "[PHASE 1] Export Roles, Grants, Row-Level Access Policies (RLS)"
+      - "[PHASE 1] Inventory UDFs + Stored Procedures (SQL/Python/JS) — validate language support in target"
+      - "[PHASE 1] Map External Stages (S3, Blob, GCS) + integration configs"
+      - "[PHASE 1] Document Replication configurations (if Business Critical edition)"
+      - "[PHASE 1] Verify Snowflake Data Sharing (outbound/inbound Shares) — plan decom/reconfiguration"
+      - "[PHASE 1] Capture sample query performance metrics (queries with >60s execution — flag for tuning)"
+      - "[GATE 1] CRITICAL: Validate Stream TTL + active consumer count (cutover planning)"
+      - "[GATE 1] Risk assessment: Identify performance-critical queries (early tuning required)"
+    
+    owner: "discovery-scout"
+    secondary_owner: "data-architect"
+    estimated_effort_weeks: 2
+    estimated_artifacts_count: "200-600 tables/views + 10-50 streams/tasks + 50-100 roles/policies"
+
+# ============================================================================
+# PHASING & GATES
+# ============================================================================
+
+phases:
+  - phase: 1
+    name: "Discovery & Inventory"
+    gates: [gate-1]
+    agents: [discovery-scout, inventory-scout, data-architect]
+    duration_weeks: 4
+    description: "Comprehensive artifact inventory across all 6 platforms. Identify blockers, validate data contracts, assess scope."
+    
+  - phase: 2
+    name: "Architecture & Design"
+    gates: [gate-2]
+    agents: [data-architect, data-modeler, business-analyst, code-generator]
+    duration_weeks: 6
+    description: "Design target architecture per platform. STTM (Source-Target Mapping). Data contracts. Code generation prep."
+    
+  - phase: 3
+    name: "Execution & Validation"
+    gates: [gate-3]
+    agents: [downstream-executor, code-generator, reconciliation, quality-gate]
+    duration_weeks: 8
+    description: "Parallel migration across platforms. Reconciliation. Data quality validation. Performance tuning."
+
+# ============================================================================
+# QUALITY GATES
+# ============================================================================
+
+gates:
+  gate-1:
+    name: "Discovery & Inventory Completeness Review"
+    min_score: 0.85
+    description: "All platforms inventoried, blockers identified, scope validated."
+    
+    criteria:
+      - criterion: "artifact_completude"
+        weight: 0.35
+        target: 0.90
+        measurement: "Artifacts discovered / Estimated artifacts"
+        description: "All critical artefatos (DDL, policies, configs) must be inventoried."
+      
+      - criterion: "blocker_resolution"
+        weight: 0.25
+        target: 1.00
+        measurement: "Blockers resolved / Total blockers"
+        description: "Airflow version confirmed. SSS system identified. .par files located."
+      
+      - criterion: "risk_assessment"
+        weight: 0.20
+        target: 0.90
+        measurement: "Identified risks / Expected risks"
+        description: "All platform-specific risks documented + mitigation planned."
+      
+      - criterion: "documentation"
+        weight: 0.20
+        target: 0.85
+        measurement: "ADRs + risk register + dependency map coverage"
+        description: "Clear documentation of architecture decisions + assumptions."
+  
+  gate-2:
+    name: "Design & Code Quality Review"
+    min_score: 0.85
+    description: "STTM complete. Data contracts validated. Code generation ready."
+    
+    criteria:
+      - criterion: "sttm_completeness"
+        weight: 0.35
+        target: 0.95
+        measurement: "Mappings documented / Total entities"
+      
+      - criterion: "data_model_quality"
+        weight: 0.25
+        target: 0.90
+        measurement: "Schema normalized, constraints validated, referential integrity verified"
+      
+      - criterion: "code_generation_readiness"
+        weight: 0.20
+        target: 0.85
+        measurement: "DDL templates + ETL logic + validation queries prepared"
+      
+      - criterion: "test_coverage"
+        weight: 0.20
+        target: 0.80
+        measurement: "Unit + integration tests for critical transformations"
+  
+  gate-3:
+    name: "Execution & Reconciliation Validation"
+    min_score: 0.90
+    description: "Data migrated + reconciled. Quality validated. Performance baseline met."
+    
+    criteria:
+      - criterion: "row_count_parity"
+        weight: 0.35
+        target: 0.999
+        measurement: "Target row count / Source row count (per table)"
+        description: "Row counts must match ≥99.9% (allow for CDC delays)"
+      
+      - criterion: "schema_match"
+        weight: 0.25
+        target: 1.00
+        measurement: "Target schema = Source schema (DDL validation)"
+      
+      - criterion: "data_quality"
+        weight: 0.20
+        target: 0.95
+        measurement: "Quality rules passed / Total rules"
+        description: "Null rates, domain validation, referential integrity"
+      
+      - criterion: "performance_baseline"
+        weight: 0.20
+        target: 0.90
+        measurement: "Query latency: Target ≤ 1.5x Source (worst case)"
+        description: "Performance tuning completed; no regressions >50%"
+
+# ============================================================================
+# PROJECT OUTPUTS & LOCATIONS
+# ============================================================================
+
+outputs:
+  base_path: "projects/multi-platform-migration/outputs"
+  
+  phase_1:
+    path: "phase-1-discovery"
+    artifacts:
+      - "DISCOVERY-REPORT.md (per platform)"
+      - "ARTIFACT-INVENTORY.yaml (comprehensive)"
+      - "RISK-REGISTER.md (with mitigation plans)"
+      - "BLOCKER-ASSESSMENT.md (Airflow version, SSS identity, .par files)"
+      - "DATA-CONTRACT-DRAFT.md"
+      - "DEPENDENCY-MAP.md (inter-platform dependencies)"
+  
+  phase_2:
+    path: "phase-2-architecture"
+    artifacts:
+      - "ARCHITECTURE-DESIGN.md (per platform target)"
+      - "STTM-MAPPING.yaml (source-target entity mapping)"
+      - "DATA-MODEL-DESIGN.md"
+      - "DDL-TEMPLATE.sql (per platform)"
+      - "ETL-LOGIC.md (transformation rules)"
+      - "DATA-CONTRACT-VALIDATED.yaml"
+  
+  phase_3:
+    path: "phase-3-execution"
+    artifacts:
+      - "MIGRATION-LOG.md (per platform execution timeline)"
+      - "RECONCILIATION-REPORT.md (row counts, schema validation)"
+      - "DATA-QUALITY-REPORT.md"
+      - "PERFORMANCE-BASELINE.md"
+      - "POST-MIGRATION-VALIDATION.md"
+      - "LESSONS-LEARNED.md"
+
+# ============================================================================
+# GOVERNANCE & COMPLIANCE
+# ============================================================================
+
+governance:
+  pii_fields: ["customer_id", "email", "phone", "ssn", "credit_card", "mrn"]
+  
+  classification:
+    - layer: "raw"
+      sensitivity: "raw"
+      retention_days: 30
+    - layer: "processed"
+      sensitivity: "internal"
+      retention_days: 90
+    - layer: "analytics"
+      sensitivity: "confidential"
+      retention_days: 365
+  
+  dq_rules_catalog: "projects/multi-platform-migration/outputs/phase-2/DQ-RULES.yaml"
+  data_contracts_catalog: "projects/multi-platform-migration/outputs/phase-2/DATA-CONTRACTS.yaml"
+  
+  audit:
+    - "All DDL exports logged + signed"
+    - "Parameter file audits documented"
+    - "Access logs retained per platform"
+    - "Change tracking enabled on source systems during dual-run"
+
+# ============================================================================
+# KPIs & METRICS
+# ============================================================================
+
+kpis:
+  - metric: "artifact_discovery_rate"
+    target: 0.95
+    measurement: "Artifacts discovered / Expected count"
+    description: "Inventory completeness across all 6 platforms"
+  
+  - metric: "blocker_resolution_time"
+    target: 5
+    measurement: "Days to resolve critical blockers (Airflow version, SSS ID, .par files)"
+  
+  - metric: "data_parity"
+    target: 0.999
+    measurement: "Target row count = Source row count (% match)"
+    description: "Must be ≥99.9% for production cutover approval"
+  
+  - metric: "migration_effort"
+    target: 18
+    measurement: "Total weeks (Phase 1 + Phase 2 + Phase 3)"
+  
+  - metric: "cost_optimization"
+    target: 0.30
+    measurement: "Target annual cost / Legacy annual cost"
+    description: "30% cost reduction goal post-migration"
+
+# ============================================================================
+# MILESTONES
+# ============================================================================
+
+milestones:
+  - name: "Wave Planning & Kickoff"
+    date: "2026-06-09"
+    status: "complete"
+    deliverable: "wave-config.yaml (this file)"
+  
+  - name: "Phase 1: Discovery (Gate 1)"
+    date: "2026-07-07"
+    status: "pending"
+    deliverable: "DISCOVERY-REPORT.md + ARTIFACT-INVENTORY.yaml + BLOCKER-ASSESSMENT.md"
+  
+  - name: "Phase 2: Architecture (Gate 2)"
+    date: "2026-08-18"
+    status: "pending"
+    deliverable: "ARCHITECTURE-DESIGN.md + STTM-MAPPING.yaml + DATA-MODEL-DESIGN.md"
+  
+  - name: "Phase 3: Execution (Gate 3)"
+    date: "2026-10-13"
+    status: "pending"
+    deliverable: "RECONCILIATION-REPORT.md + DATA-QUALITY-REPORT.md + PERFORMANCE-BASELINE.md"
+  
+  - name: "Cutover & Go-Live"
+    date: "2026-11-01"
+    status: "pending"
+    deliverable: "Production cutover + hypercare response team activated"
+
+# ============================================================================
+# ASSUMPTIONS & RISKS
+# ============================================================================
+
+assumptions:
+  - "All 6 platforms have accessible dev/test environments for inventory"
+  - "Airflow version will be confirmed within 1 week (blocker resolution)"
+  - "SSS system will be identified within 1 week (blocker resolution)"
+  - "All .par files for PowerCenter will be located in central repository"
+  - "LCM bundle for SAP BO can be exported without production downtime"
+  - "Cloudera cluster DDLs are current (no schema drift from source)"
+  - "Snowflake Streams consumers will be identified + documented"
+  - "Network connectivity to all platforms available throughout migration"
+
+risks:
+  - risk_id: "MUL-001-PLATFORM-INTERDEPENDENCIES"
+    name: "Cross-Platform Data Dependencies"
+    likelihood: "medium"
+    impact: "high"
+    severity: "HIGH"
+    description: "If one platform fails to migrate, downstream platforms are blocked (e.g., Cloudera DDLs feed Airflow ETL)."
+    mitigation: "Build dependency map in Phase 1. Sequence migration per criticality. Run parallel migrations with circuit breakers."
+  
+  - risk_id: "MUL-002-SKILL-GAP"
+    name: "Technical Skill Gap (6 platforms)"
+    likelihood: "high"
+    impact: "high"
+    severity: "VERY_HIGH"
+    description: "Team may lack expertise in all 6 platforms (Hive, Airflow, PowerCenter, BOBJ, Snowflake + SSS unknown)."
+    mitigation: "Hire platform specialists OR engage managed services partners. Budget 4-week CoE + training."
+  
+  - risk_id: "MUL-003-TIMELINE-COMPRESSION"
+    name: "18-Week Timeline May Be Compressed"
+    likelihood: "high"
+    impact: "medium"
+    severity: "HIGH"
+    description: "If blockers (Airflow version, SSS ID, .par files) not resolved in first 2 weeks, timeline slips 4-6 weeks."
+    mitigation: "Immediate stakeholder alignment on blocker resolution. Parallel discovery tracks for each platform."
+
+# ============================================================================
+# NOTES & CONTEXT
+# ============================================================================
+
+notes:
+  - "This wave-config is a MASTER plan for 6 platforms. Each platform has dedicated inventory tasks + blockers."
+  - "Platform priority order: Cloudera (Tier-1, highest data volume) → PowerCenter (highest complexity) → SAP BO → Airflow → Snowflake → SSS (unknown)."
+  - "Blockers must be resolved before Gate 1: Airflow version, SSS system ID, PowerCenter .par files."
+  - "Use migration-coordinator agent to orchestrate multi-platform execution. Do NOT run platforms in parallel if inter-dependencies exist."
+  - "All agents use discovery-scout as fallback for platform-specific inventory. Escalate to specialized agents (code-generator, data-architect) as needed."
+  - "Quality gate scoring formula: 0.35×completude + 0.25×blocker_resolution + 0.20×risk + 0.20×documentation."
