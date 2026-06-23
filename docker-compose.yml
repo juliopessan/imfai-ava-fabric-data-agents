@@ -1,0 +1,12 @@
+services:
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
+    env_file:
+      - .env
+    volumes:
+      - ./projects:/app/projects
+      - ./tenant-config.yaml:/app/config/tenant-config.yaml:ro
+    command: ["python", "-m", "pytest", "src/shared/tests/", "-q"]

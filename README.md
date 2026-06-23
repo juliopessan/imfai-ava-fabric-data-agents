@@ -347,6 +347,32 @@ imfai-ava-fabric-data-agents/
 3. **Phase 2 Design:** Architecture & STTM mapping
 4. **Phase 3 Execution:** Parallel migrations + reconciliation
 
+### Running with Docker
+
+A container image is built and published automatically to GHCR by
+[`.github/workflows/docker-build.yml`](.github/workflows/docker-build.yml).
+
+```bash
+# Build locally
+docker build -t imfai-ava-fabric-data-agents .
+
+# Configure tenant/environment
+cp .env.example .env
+cp tenant-config.example.yaml tenant-config.yaml
+# edit .env and tenant-config.yaml with your tenant values
+
+# Run the default test suite inside the container
+docker run --rm --env-file .env \
+  -v "$(pwd)/tenant-config.yaml:/app/config/tenant-config.yaml:ro" \
+  imfai-ava-fabric-data-agents
+
+# Or with docker compose
+docker compose up --build
+
+# Pull the published image from GHCR
+docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
+```
+
 ---
 
 ## 🧠 Memory System
