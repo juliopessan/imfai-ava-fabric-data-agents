@@ -368,7 +368,7 @@ def wave_report(wave: str):
     report["agents_involved"] = list(report["agents_involved"])
     return report
 
-report = wave_report("bradesco-wave2")
+report = wave_report("clientebanco-wave2")
 print(f"📋 Wave Report: {report['wave']}")
 print(f"  Traces: {report['traces_count']}")
 print(f"  Duration: {report['total_duration']:.1f}s")

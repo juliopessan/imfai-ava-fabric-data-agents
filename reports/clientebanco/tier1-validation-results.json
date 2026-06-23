@@ -1,0 +1,136 @@
+{
+  "timestamp": "2026-06-09T09:05:45.916616",
+  "project": "clientebanco",
+  "status": "complete",
+  "validations": {
+    "wave_config": {
+      "status": "invalid",
+      "score": 0.55,
+      "errors": [
+        "Missing required field: discovery_owner",
+        "Missing required field: entities",
+        "Missing required field: gates"
+      ],
+      "warnings": []
+    },
+    "gate_1": {
+      "status": "invalid",
+      "completude": 0.0,
+      "quality": 0.0,
+      "errors": [
+        "Missing required artifact: discovery_inventory.md",
+        "Missing required artifact: data_lineage_map.md",
+        "Missing required artifact: STTM_BUSINESS_REQUIREMENTS.md",
+        "Missing required artifact: as_is_architecture.md",
+        "Missing required artifact: risk_assessment.json"
+      ],
+      "warnings": [
+        "Optional artifact missing: schemas_catalog.json",
+        "Optional artifact missing: orchestration_inventory.json",
+        "Optional artifact missing: cleanup_recommendations.json"
+      ],
+      "artifacts_found": [],
+      "artifacts_missing": [
+        "discovery_inventory.md",
+        "data_lineage_map.md",
+        "STTM_BUSINESS_REQUIREMENTS.md",
+        "as_is_architecture.md",
+        "risk_assessment.json"
+      ]
+    },
+    "gate_2": {
+      "status": "invalid",
+      "completude": 0.0,
+      "quality": 0.0,
+      "errors": [
+        "Missing required artifact: logical_data_model.json",
+        "Missing required artifact: target_architecture.json",
+        "Missing required artifact: ARCHITECTURE.md",
+        "Missing required artifact: ARCHITECTURE_DECISIONS.md",
+        "Missing required artifact: MONITORING_SPEC.md",
+        "Missing required artifact: DATA_CONTRACTS.md"
+      ],
+      "warnings": [
+        "Optional artifact missing: DATA_QUALITY_RULES.md",
+        "Optional artifact missing: GOVERNANCE_POLICY.md",
+        "Optional artifact missing: METRICS_CATALOG.md",
+        "Optional artifact missing: code_generation_metadata.json",
+        "gate2-decision.md not yet created (expected after gate review)"
+      ],
+      "artifacts_found": [],
+      "artifacts_missing": [
+        "logical_data_model.json",
+        "target_architecture.json",
+        "ARCHITECTURE.md",
+        "ARCHITECTURE_DECISIONS.md",
+        "MONITORING_SPEC.md",
+        "DATA_CONTRACTS.md"
+      ]
+    },
+    "gate_3": {
+      "status": "invalid",
+      "completude": 0.0,
+      "quality": 0.0,
+      "reconciliation": 0.0,
+      "errors": [
+        "Missing required artifact: DDL_DELTA_TABLES.sql",
+        "Missing required artifact: ETL_CONSOLIDACAO_DATABRICKS_JOB.py",
+        "Missing required artifact: deployment_execution.json",
+        "Missing required artifact: validation_reconciliation.json",
+        "Missing required artifact: ROW_COUNT_RECONCILIATION.md",
+        "Missing required artifact: SCHEMA_DIFF_VALIDATION.md",
+        "validation_reconciliation.json not found (CRITICAL)"
+      ],
+      "warnings": [
+        "Optional artifact missing: DBT_MODELS_TESTS.sql",
+        "Optional artifact missing: GREAT_EXPECTATIONS_VALIDATION.py",
+        "Optional artifact missing: DATABRICKS_ALERTS_RUNBOOK.md",
+        "Optional artifact missing: MD5_RECONCILIATION.md",
+        "gate3-decision.md not yet created (expected after gate review)"
+      ],
+      "artifacts_found": [],
+      "artifacts_missing": [
+        "DDL_DELTA_TABLES.sql",
+        "ETL_CONSOLIDACAO_DATABRICKS_JOB.py",
+        "deployment_execution.json",
+        "validation_reconciliation.json",
+        "ROW_COUNT_RECONCILIATION.md",
+        "SCHEMA_DIFF_VALIDATION.md"
+      ]
+    }
+  },
+  "gate_scores": {
+    "gate_1": {
+      "score": 0.22000000000000003,
+      "status": "blocked",
+      "recommendations": [
+        "\u26a0\ufe0f Completude is low (0%). Ensure all required artifacts are generated.",
+        "\u26a0\ufe0f Quality score is low (0%). Review artifacts for content gaps and errors.",
+        "\ud83d\udd34 High residual risk detected (10%). Escalate to decision board.",
+        "\ud83d\uded1 Gate is blocked. Resolve critical issues before resubmission."
+      ]
+    },
+    "gate_2": {
+      "score": 0.22000000000000003,
+      "status": "blocked",
+      "recommendations": [
+        "\u26a0\ufe0f Completude is low (0%). Ensure all required artifacts are generated.",
+        "\u26a0\ufe0f Quality score is low (0%). Review artifacts for content gaps and errors.",
+        "\ud83d\udd34 High residual risk detected (10%). Escalate to decision board.",
+        "\ud83d\uded1 Gate is blocked. Resolve critical issues before resubmission."
+      ]
+    },
+    "gate_3": {
+      "score": 0.020000000000000004,
+      "status": "blocked",
+      "recommendations": [
+        "\u26a0\ufe0f Completude is low (0%). Ensure all required artifacts are generated.",
+        "\u26a0\ufe0f Quality score is low (0%). Review artifacts for content gaps and errors.",
+        "\ud83d\udd34 High residual risk detected (10%). Escalate to decision board.",
+        "\ud83d\udd34 Reconciliation incomplete (0%). Validate row counts and schemas before go-live.",
+        "\ud83d\uded1 Gate is blocked. Resolve critical issues before resubmission."
+      ]
+    }
+  },
+  "overall_status": "[FAIL] ONE OR MORE GATES BLOCKED"
+}

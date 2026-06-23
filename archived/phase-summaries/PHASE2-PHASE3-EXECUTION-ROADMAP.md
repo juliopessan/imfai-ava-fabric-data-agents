@@ -18,7 +18,7 @@
 - ✅ Workflow chain validated end-to-end
 - ✅ Token reduction ≥ 70%
 - ✅ Zero hallucinations verified
-- ✅ Bradesco wave ready for Phase 4 deployment
+- ✅ ClienteBanco wave ready for Phase 4 deployment
 
 ---
 
@@ -126,7 +126,7 @@ Open 3 agent files and verify:
 
 - [ ] Phase 2 integration complete ✅ (will be done)
 - [ ] `test_specs_system.py` ready ✅ (Done)
-- [ ] Bradesco wave-config.yaml exists
+- [ ] ClienteBanco wave-config.yaml exists
 - [ ] Test environment ready
 - [ ] Performance baseline recorded
 
@@ -218,14 +218,14 @@ Expected Output:
 
 ---
 
-### Test 6: Bradesco Workflow Readiness (3 min)
+### Test 6: ClienteBanco Workflow Readiness (3 min)
 ```bash
 python .github/scripts/test_specs_system.py --test-workflow
 
 Expected Output:
-  🧪 TEST 6: Test Workflow with Bradesco Wave
-  ✅ Wave config found: projects/bradesco/wave-config.yaml
-  ✅ Wave config valid: bradesco
+  🧪 TEST 6: Test Workflow with ClienteBanco Wave
+  ✅ Wave config found: projects/clientebanco/wave-config.yaml
+  ✅ Wave config valid: clientebanco
   ✅ Legacy folder found: 309 files
   ✅ Workflow ready ✅
 ```
@@ -250,7 +250,7 @@ Expected Output:
   ✅ Workflow Chain: Valid
   ✅ Token Reduction: 70.0% (target: 70%)
   ✅ Hallucination Prevention: Valid
-  ✅ Bradesco Workflow: Workflow ready
+  ✅ ClienteBanco Workflow: Workflow ready
   
   ============================================================
   🎉 PHASE 3 TESTING: ALL TESTS PASSED ✅
@@ -263,7 +263,7 @@ Expected Output:
 - [ ] Workflow chain valid ✅
 - [ ] Token reduction ≥ 70% ✅
 - [ ] Hallucination prevention verified ✅
-- [ ] Bradesco wave ready ✅
+- [ ] ClienteBanco wave ready ✅
 
 ---
 
@@ -291,7 +291,7 @@ Output: PHASE3-TEST-REPORT.json
 | Workflow Chain | Valid | ___ | ⏳ |
 | Token Reduction | ≥70% | ___ | ⏳ |
 | Hallucination Prevention | Valid | ___ | ⏳ |
-| Bradesco Wave | Ready | ___ | ⏳ |
+| ClienteBanco Wave | Ready | ___ | ⏳ |
 | Overall | PASS | ___ | ⏳ |
 
 ---
@@ -321,7 +321,7 @@ Output: PHASE3-TEST-REPORT.json
 | 2026-06-20 | Test 3: Workflow chain | automation | 3 min |
 | 2026-06-20 | Test 4: Token reduction | automation | 2 min |
 | 2026-06-20 | Test 5: Hallucination prevention | automation | 2 min |
-| 2026-06-20 | Test 6: Bradesco workflow | automation | 3 min |
+| 2026-06-20 | Test 6: ClienteBanco workflow | automation | 3 min |
 | 2026-06-20 | Test 7: Complete suite | automation | 5 min |
 | 2026-06-20 | Generate test report | automation | 2 min |
 | 2026-06-20 | Manual verification | human | 5 min |
@@ -349,7 +349,7 @@ Output: PHASE3-TEST-REPORT.json
 - [ ] Workflow chain validates end-to-end
 - [ ] Token reduction ≥ 70%
 - [ ] Hallucination prevention keywords found
-- [ ] Bradesco wave config validated
+- [ ] ClienteBanco wave config validated
 - [ ] Legacy folder with sample data present
 - [ ] Test report generated
 - [ ] All tests marked: PASSED ✅
@@ -420,7 +420,7 @@ Record these before Phase 2 starts:
 | Workflow chain valid | 100% | Pending | 100% ✅ |
 | Token reduction | ≥70% | Baseline | ≥70% ✅ |
 | Hallucination keywords | Found | Pending | Found ✅ |
-| Bradesco ready | Yes | Pending | Yes ✅ |
+| ClienteBanco ready | Yes | Pending | Yes ✅ |
 
 ---
 
@@ -453,7 +453,7 @@ python .github/scripts/test_specs_system.py --report
 
 # Validation
 python .github/scripts/validate_agent_contracts.py --check-links
-python .github/scripts/validate_agent_contracts.py --validate-wave bradesco
+python .github/scripts/validate_agent_contracts.py --validate-wave clientebanco
 
 # Git commit
 git add .github/agents/* .github/specs/*

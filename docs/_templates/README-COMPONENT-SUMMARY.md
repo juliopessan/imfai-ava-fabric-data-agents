@@ -1,8 +1,8 @@
-# 🎯 Avanade Google Drive Uploader Component — Summary
+# 🎯 Consultoria Google Drive Uploader Component — Summary
 
 ## ✅ Deliverables
 
-Your **Avanade-branded Google Drive uploader React component** has been created and is ready to use.
+Your **Consultoria-branded Google Drive uploader React component** has been created and is ready to use.
 
 ---
 
@@ -12,18 +12,18 @@ Located in: `reports/_templates/`
 
 | File | Purpose | Size |
 |------|---------|------|
-| `google-drive-uploader-toast-avanade.tsx` | Main React component with Avanade branding | ~8KB |
+| `google-drive-uploader-toast-consultoria.tsx` | Main React component with Consultoria branding | ~8KB |
 | `demo-uploader.tsx` | Demo examples (DemoOne, DemoTwo) | ~1KB |
 | `UPLOADER-COMPONENT-GUIDE.md` | Complete technical documentation | ~12KB |
 | `SETUP-GUIDE.md` | Step-by-step setup instructions | ~8KB |
-| `BRAND-GUIDELINES.md` | Avanade brand color & style guide | ~10KB |
+| `BRAND-GUIDELINES.md` | Consultoria brand color & style guide | ~10KB |
 | `README-COMPONENT-SUMMARY.md` | This file | ~5KB |
 
 **Total:** 6 files, ~44KB of component + documentation
 
 ---
 
-## 🎨 Avanade Branding Applied
+## 🎨 Consultoria Branding Applied
 
 ### Colors
 ```
@@ -34,7 +34,7 @@ Dark:        #0f1d4d (Dark Blue) - Dark mode
 ```
 
 ### Visual Elements
-✅ **Avanade header** with orange underline bar  
+✅ **Consultoria header** with orange underline bar  
 ✅ **Orange progress indicators** for uploads  
 ✅ **Blue toast container** borders  
 ✅ **Professional spacing** and typography  
@@ -53,12 +53,12 @@ npm install lucide-react
 ### 2. Copy Component
 ```bash
 # From template
-cp reports/_templates/google-drive-uploader-toast-avanade.tsx src/components/ui/
+cp reports/_templates/google-drive-uploader-toast-consultoria.tsx src/components/ui/
 ```
 
 ### 3. Import & Use
 ```tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function Page() {
   return <Component />;
@@ -71,7 +71,7 @@ npm run dev
 # Visit http://localhost:3000
 ```
 
-**Done!** You should see the Avanade-branded component with:
+**Done!** You should see the Consultoria-branded component with:
 - Orange upload buttons
 - Blue headers
 - Interactive progress tracking
@@ -113,7 +113,7 @@ npm run dev
 
 ### Pattern 1: Standalone Page
 ```tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function UploadPage() {
   return <Component />;
@@ -122,7 +122,7 @@ export default function UploadPage() {
 
 ### Pattern 2: In Dashboard
 ```tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export function Dashboard() {
   return (
@@ -166,10 +166,10 @@ const handleUpload = async (file: File) => {
 
 ## ✨ Key Features Explained
 
-### 1. Avanade Header
+### 1. Consultoria Header
 ```tsx
 <div style={{ color: "#1f3a93", fontSize: "32px" }}>
-  AVANADE
+  CONSULTORIA
   <div style={{ backgroundColor: "#ff6b35", height: "4px" }} />
 </div>
 ```
@@ -183,7 +183,7 @@ style={{
   border: "2px solid #ff6b35",
 }}
 ```
-Avanade orange for primary CTAs with subtle background.
+Consultoria orange for primary CTAs with subtle background.
 
 ### 3. Blue Toast Container
 ```tsx
@@ -197,7 +197,7 @@ Blue border distinguishes toast as important UI element.
 
 ### 4. Progress Circle
 ```tsx
-// SVG circle with Avanade orange stroke
+// SVG circle with Consultoria orange stroke
 style={{ stroke: "#ff6b35" }}
 ```
 Shows upload progress with brand color.
@@ -223,13 +223,13 @@ Seamless adaptation to user's system preference.
 - [ ] Dark mode toggle works
 - [ ] Responsive on mobile/tablet/desktop
 - [ ] Orange and blue colors visible
-- [ ] Avanade header displays correctly
+- [ ] Consultoria header displays correctly
 
 ---
 
 ## 🎯 Use Cases
 
-### 1. **Data Migration Dashboard** (Bradesco)
+### 1. **Data Migration Dashboard** (ClienteBanco)
 Upload data files for migration to Databricks
 ```tsx
 // Perfect for the migration factory
@@ -262,7 +262,7 @@ Upload data files for analysis
 ## 🔄 Next Steps
 
 1. **Review** `SETUP-GUIDE.md` for installation
-2. **Copy** `google-drive-uploader-toast-avanade.tsx` to your project
+2. **Copy** `google-drive-uploader-toast-consultoria.tsx` to your project
 3. **Install** `npm install lucide-react`
 4. **Import** component into your page
 5. **Test** by clicking upload buttons
@@ -275,9 +275,9 @@ Upload data files for analysis
 ## 💡 Customization Tips
 
 ### Change Brand Colors
-Edit `AVANADE_COLORS` object:
+Edit `CONSULTORIA_COLORS` object:
 ```typescript
-const AVANADE_COLORS = {
+const CONSULTORIA_COLORS = {
   primary: "#YOUR_ORANGE",
   secondary: "#YOUR_BLUE",
   // ...
@@ -350,7 +350,7 @@ const UPLOAD_DURATION = {
 
 After setup, verify:
 
-- [ ] Component renders with Avanade branding
+- [ ] Component renders with Consultoria branding
 - [ ] Orange (#ff6b35) buttons visible
 - [ ] Blue (#1f3a93) headers visible
 - [ ] Upload progress shows orange circle
@@ -365,7 +365,7 @@ After setup, verify:
 
 ## 🎉 Ready to Use!
 
-Your Avanade-branded Google Drive uploader component is **production-ready** and includes:
+Your Consultoria-branded Google Drive uploader component is **production-ready** and includes:
 
 ✅ Component code (TypeScript + React)  
 ✅ Full technical documentation  
@@ -385,7 +385,7 @@ Your Avanade-branded Google Drive uploader component is **production-ready** and
 ```
 reports/
 └── _templates/
-    ├── google-drive-uploader-toast-avanade.tsx   (Component)
+    ├── google-drive-uploader-toast-consultoria.tsx   (Component)
     ├── demo-uploader.tsx                          (Demo)
     ├── UPLOADER-COMPONENT-GUIDE.md                (Tech Guide)
     ├── SETUP-GUIDE.md                             (Setup)
@@ -396,8 +396,8 @@ reports/
 ---
 
 **Created:** 2026-06-05  
-**Project:** Avanade Data Migration Factory  
-**Component Version:** 1.0 (Avanade Branded)  
+**Project:** Consultoria Data Migration Factory  
+**Component Version:** 1.0 (Consultoria Branded)  
 **Status:** ✅ Production Ready  
 
 ---

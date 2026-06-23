@@ -1,4 +1,4 @@
-# 🎨 Quick Reference — Padrão Ouro Avanade
+# 🎨 Quick Reference — Padrão Ouro Consultoria
 
 **Uso Rápido | Componentes | Cores | Troubleshooting**
 
@@ -11,7 +11,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Seu Dashboard | Avanade</title>
+    <title>Seu Dashboard | Consultoria</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         /* Copiar CSS completo de GOLDEN-STANDARD-TEMPLATE.html */
@@ -41,7 +41,7 @@
     </div>
 
     <div class="footer">
-        <strong class="brand-color">DMF</strong> — Avanade
+        <strong class="brand-color">DMF</strong> — Consultoria
     </div>
 
     <script>
@@ -246,9 +246,9 @@ document.body.style.colorScheme = 'dark';
 ## 🎓 Exemplos em Repositório
 
 ```
-reports/bradesco/
-├── bradesco-executive-dashboard.html       ← Full example
-├── bradesco-3tier-dashboard.html           ← With charts
+reports/clientebanco/
+├── clientebanco-executive-dashboard.html       ← Full example
+├── clientebanco-3tier-dashboard.html           ← With charts
 └── ROI_ANALYSIS_VISUAL.html                ← With metrics
 
 reports/_templates/
@@ -259,4 +259,4 @@ reports/_templates/
 ---
 
 **Última atualização:** 9 de Junho de 2026  
-**Padrão:** Avanade Orange DNA v3.0.0
+**Padrão:** Consultoria Orange DNA v3.0.0

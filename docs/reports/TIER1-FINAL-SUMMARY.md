@@ -2,7 +2,7 @@
 
 **Status:** ✅ **COMPLETE AND VALIDATED** (2026-06-09)  
 **Test Pass Rate:** 32/32 (100%)  
-**Bradesco Validation:** Executed successfully  
+**ClienteBanco Validation:** Executed successfully  
 **Production Ready:** YES
 
 ---
@@ -44,7 +44,7 @@
 
 ### 1.3 Execution Runner
 
-✅ **run_bradesco_tier1_validation.py** - Automated validator runner
+✅ **run_clientebanco_tier1_validation.py** - Automated validator runner
 - Executes all 5 validators against a project
 - Generates JSON report with detailed findings
 - Calculates GateScores for each gate
@@ -54,11 +54,11 @@
 
 ✅ **TIER1-COMPLETION-REPORT.md** - Full technical documentation
 ✅ **TIER1-FINAL-SUMMARY.md** - This file
-✅ **BRADESCO-TIER1-EXECUTION-PLAN.md** - Execution playbook
+✅ **CLIENTEBANCO-TIER1-EXECUTION-PLAN.md** - Execution playbook
 
 ---
 
-## 2. Bradesco Project Validation Results
+## 2. ClienteBanco Project Validation Results
 
 **Validation Date:** 2026-06-09 09:05:45  
 **Project Status:** ⏳ **BLOCKED AT ALL GATES** (Expected for new project)
@@ -74,7 +74,7 @@ Issues:
   ✗ Missing gates
 ```
 
-**Action:** Update `projects/bradesco/wave-config.yaml` with missing fields
+**Action:** Update `projects/clientebanco/wave-config.yaml` with missing fields
 
 ### 2.2 Gate 1 (Upstream) Status
 
@@ -92,7 +92,7 @@ Missing Artifacts:
   ✗ risk_assessment.json
 ```
 
-**Action:** Generate Gate 1 artifacts for Bradesco
+**Action:** Generate Gate 1 artifacts for ClienteBanco
 
 ### 2.3 Gate 2 (Midstream) Status
 
@@ -111,7 +111,7 @@ Missing Artifacts:
   ✗ DATA_CONTRACTS.md
 ```
 
-**Action:** Generate Gate 2 artifacts for Bradesco
+**Action:** Generate Gate 2 artifacts for ClienteBanco
 
 ### 2.4 Gate 3 (Downstream) Status - CRITICAL
 
@@ -169,9 +169,9 @@ This is expected for a new project. Next phase is to:
 
 ### 4.1 Immediate Actions (Day 1-2)
 
-1. **Complete Bradesco Wave Config** — Add discovery_owner, entities, gates fields
+1. **Complete ClienteBanco Wave Config** — Add discovery_owner, entities, gates fields
 2. **Run Validators Again** — Baseline the project status
-3. **Document Current Artifacts** — Create inventory of what's in `projects/bradesco/outputs/`
+3. **Document Current Artifacts** — Create inventory of what's in `projects/clientebanco/outputs/`
 
 ### 4.2 TIER 2 Implementation (Week 2)
 
@@ -239,14 +239,14 @@ src/shared/tests/
 
 ### Utility Scripts
 ```
-run_bradesco_tier1_validation.py                 ~280 lines
+run_clientebanco_tier1_validation.py                 ~280 lines
 ```
 
 ### Documentation
 ```
 TIER1-COMPLETION-REPORT.md                       ~400 lines
 TIER1-FINAL-SUMMARY.md                           This file (~300 lines)
-BRADESCO-TIER1-EXECUTION-PLAN.md                 ~200 lines
+CLIENTEBANCO-TIER1-EXECUTION-PLAN.md                 ~200 lines
 ```
 
 **Total TIER 1 Deliverables:** ~2,000 lines (production + test + documentation + scripts)
@@ -258,12 +258,12 @@ BRADESCO-TIER1-EXECUTION-PLAN.md                 ~200 lines
 ### Quick Start
 
 ```bash
-# Run Bradesco validation
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python run_bradesco_tier1_validation.py
+# Run ClienteBanco validation
+cd ~/projects/imfai-ava-fabric-data-agents
+python run_clientebanco_tier1_validation.py
 
 # View results
-cat reports/bradesco/tier1-validation-results.json
+cat reports/clientebanco/tier1-validation-results.json
 ```
 
 ### Programmatic Usage
@@ -274,15 +274,15 @@ from src.shared.scripts.validate_gate1_artifacts import Gate1ArtifactsValidator
 from src.shared.scripts.gate_score_report import GateScoreCalculator
 
 # Validate wave config
-wave_val = WaveConfigValidator("projects/bradesco/wave-config.yaml")
+wave_val = WaveConfigValidator("projects/clientebanco/wave-config.yaml")
 wave_result = wave_val.validate()
 
 # Validate Gate 1 artifacts
-gate1_val = Gate1ArtifactsValidator("projects/bradesco/outputs/upstream")
+gate1_val = Gate1ArtifactsValidator("projects/clientebanco/outputs/upstream")
 gate1_result = gate1_val.validate()
 
 # Calculate GateScore
-calculator = GateScoreCalculator(gate_number=1, wave_id="bradesco-wave-001")
+calculator = GateScoreCalculator(gate_number=1, wave_id="clientebanco-wave-001")
 score = calculator.calculate(
     completude=gate1_result.completude,
     quality=gate1_result.quality,
@@ -312,7 +312,7 @@ python -m pytest src/shared/tests/ -q
 | Test Pass Rate | 100% | 32/32 | ✅ |
 | Code Coverage | >90% | ~95% | ✅ |
 | Execution Time | <5s | ~1s | ✅ |
-| Bradesco Validated | Yes | Yes | ✅ |
+| ClienteBanco Validated | Yes | Yes | ✅ |
 | Documentation | Complete | Complete | ✅ |
 
 *Note: 32 tests for TIER 1 core logic (Gates 1-3 + scoring). Additional 12 tests deferred to TIER 2 (edge cases, integration flows).
@@ -327,7 +327,7 @@ python -m pytest src/shared/tests/ -q
 - ✅ 5 production-grade validators
 - ✅ 32 passing test cases
 - ✅ Automated runner for projects
-- ✅ Bradesco baseline validation
+- ✅ ClienteBanco baseline validation
 - ✅ Complete documentation
 
 **Recommendation:** 

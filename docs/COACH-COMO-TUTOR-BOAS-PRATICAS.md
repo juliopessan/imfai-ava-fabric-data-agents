@@ -43,7 +43,7 @@
 
 **Exemplo:**
 ```
-Wave: bradesco_wave_2 | Gate: 1
+Wave: clientebanco_wave_2 | Gate: 1
 ├─ 14:00 discovery-scout      15 min | 12.5k tokens | $0.045
 ├─ 14:20 data-architect       15 min | 11.2k tokens | $0.042
 ├─ 14:40 business-analyst     30 min | 18.3k tokens | $0.068 ⚠️ (regenerated 3x)
@@ -62,7 +62,7 @@ Wave: bradesco_wave_2 | Gate: 1
 
 **Exemplo:**
 ```
-MEDIDAS — Bradesco Wave 2
+MEDIDAS — ClienteBanco Wave 2
 ├─ Tokens gerados: 78.7K (vs 65K em Wave 1) ↑21%
 ├─ Custo total: $0.289 (vs $0.245 em Wave 1) ↑18%
 ├─ Tempo Gate 1: 120 min (vs 105 min em Wave 1) ↑14%
@@ -83,7 +83,7 @@ MEDIDAS — Bradesco Wave 2
 
 **Exemplo:**
 ```
-🚨 PROBLEMAS DETECTADOS — Bradesco Wave 2
+🚨 PROBLEMAS DETECTADOS — ClienteBanco Wave 2
 
 1. STTM Instabilidade (Score -10)
    Problem: Regenerada 3 vezes em 2 horas
@@ -112,7 +112,7 @@ MEDIDAS — Bradesco Wave 2
 
 **Exemplo:**
 ```
-💡 SKILLS DESCOBERTAS — Bradesco + Einstein + Headroom
+💡 SKILLS DESCOBERTAS — ClienteBanco + ClienteSaude + Headroom
 
 1. PII Validation Pattern (encontrado 7×)
    Prompts recorrentes: "Validate if column X contains PII"
@@ -249,13 +249,13 @@ Coach captura telemetria automaticamente. Métricas calculadas ao fim de cada on
 
 ```python
 # Ao fim da onda
-coach_report = telemetry_collector.summarize_wave('bradesco_wave_2')
+coach_report = telemetry_collector.summarize_wave('clientebanco_wave_2')
 # Retorna: event_count, agents_used, gates_covered, total_tokens, total_cost_usd, total_time_sec
 
-anti_patterns = anti_pattern_detector.generate_report('bradesco_wave_2')
+anti_patterns = anti_pattern_detector.generate_report('clientebanco_wave_2')
 # Retorna: [list of AntiPattern objects com evidence + action]
 
-trend = compare_waves(['bradesco_wave_1', 'bradesco_wave_2', 'bradesco_wave_3'])
+trend = compare_waves(['clientebanco_wave_1', 'clientebanco_wave_2', 'clientebanco_wave_3'])
 # Retorna: WoW/MoM trends, regressions, improvements
 ```
 

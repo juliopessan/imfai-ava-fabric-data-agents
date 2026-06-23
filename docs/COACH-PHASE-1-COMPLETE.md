@@ -104,7 +104,7 @@ imfai-ava-fabric-data-agents/
 **Thursday–Friday (Jul 4–5)**
 - [ ] Build HTML dashboard (Chart.js)
 - [ ] Create CLI wrapper (`coach analyze --wave ...`)
-- [ ] Final validation on bradesco Wave 2 history
+- [ ] Final validation on clientebanco Wave 2 history
 - [ ] Standup: Sprint 1 COMPLETE ✅
 
 **Deliverable:** Telemetry flowing + GateScore adjusting + basic dashboard

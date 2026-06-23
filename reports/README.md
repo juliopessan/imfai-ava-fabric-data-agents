@@ -11,19 +11,19 @@ reports/
 ├── README.md                         (este arquivo)
 ├── INDEX.md                          (índice de todos os relatórios)
 │
-├── bradesco/                         ← CLIENTE: Bradesco
-│   ├── bradesco-3tier-dashboard.html          (Dashboard 3-tier migration)
-│   ├── bradesco-autonomous-test-report.html   (Relatório de teste autônomo)
+├── clientebanco/                         ← CLIENTE: ClienteBanco
+│   ├── clientebanco-3tier-dashboard.html          (Dashboard 3-tier migration)
+│   ├── clientebanco-autonomous-test-report.html   (Relatório de teste autônomo)
 │   └── ROI_ANALYSIS_VISUAL.html               (Dashboard ROI com benchmarks)
 │
-├── einstein-hiae/                    ← CLIENTE: Einstein HIAE (planejado)
+├── ClienteSaude/                    ← CLIENTE: ClienteSaude ClienteSaude (planejado)
 │   └── (relatórios por cliente)
 │
 └── _templates/                       ← TEMPLATES & FERRAMENTAS COMPARTILHADAS
     ├── dashboard_server.py                    (Flask server para servir dashboards)
     ├── token_metrics_collector.py             (Coleta de métricas de tokens)
     ├── generate-dashboard.py                  (Gerador de dashboards HTML)
-    ├── validate-compliance.py                 (Validador Avanade compliance)
+    ├── validate-compliance.py                 (Validador Consultoria compliance)
     │
     ├── executive-dashboard.html               (Template dashboard executivo)
     ├── example-dashboard.html                 (Dashboard exemplo)
@@ -49,8 +49,8 @@ reports/
 reports/[CLIENT_NAME]/
 ```
 
-Exemplo: `reports/bradesco/`
-- Todos os dashboards e relatórios do Bradesco
+Exemplo: `reports/clientebanco/`
+- Todos os dashboards e relatórios do ClienteBanco
 - Fácil localização e manutenção
 
 ### 2. **Usar Templates & Ferramentas**
@@ -78,9 +78,9 @@ mkdir reports/[novo-cliente]/
 [cliente]-[tipo]-[titulo?].html
 
 Exemplos:
-- bradesco-3tier-dashboard.html       (Dashboard de migração 3-tier)
-- bradesco-autonomous-test-report.html (Relatório de teste)
-- einstein-roi-analysis.html          (Análise de ROI)
+- clientebanco-3tier-dashboard.html       (Dashboard de migração 3-tier)
+- clientebanco-autonomous-test-report.html (Relatório de teste)
+- clientesaude-roi-analysis.html          (Análise de ROI)
 ```
 
 ### Para Ferramentas Compartilhadas:
@@ -96,15 +96,15 @@ Exemplos:
 
 ## 📊 Dashboards Disponíveis
 
-### **Bradesco** (`reports/bradesco/`)
+### **ClienteBanco** (`reports/clientebanco/`)
 
 1. **3-Tier Migration Dashboard**
-   - Arquivo: `bradesco-3tier-dashboard.html`
+   - Arquivo: `clientebanco-3tier-dashboard.html`
    - Status: Upstream + Midstream + Downstream
    - Métricas: 13 fases, 22 artefatos, Gate scores
 
 2. **Autonomous Test Report**
-   - Arquivo: `bradesco-autonomous-test-report.html`
+   - Arquivo: `clientebanco-autonomous-test-report.html`
    - Status: Teste autônomo completo
    - Métricas: Execution time, validations, artifacts
 
@@ -152,7 +152,7 @@ python _templates/generate-dashboard.py \
 ## 🚀 Próximas Etapas
 
 1. [X] Criar estrutura por cliente
-2. [ ] Adicionar novo cliente (Einstein HIAE)
+2. [ ] Adicionar novo cliente (ClienteSaude ClienteSaude)
 3. [ ] Automatizar geração de dashboards no pipeline CI/CD
 4. [ ] Versionar relatórios com timestamps
 5. [ ] Integrar com Data Viewer para visualização interativa
@@ -161,7 +161,7 @@ python _templates/generate-dashboard.py \
 
 ## 📞 Referências
 
-- **Bradesco Reports:** `reports/bradesco/`
+- **ClienteBanco Reports:** `reports/clientebanco/`
 - **Templates & Tools:** `reports/_templates/`
 - **Índice Completo:** Ver `INDEX.md`
 

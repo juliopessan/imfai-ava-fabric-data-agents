@@ -109,7 +109,7 @@ WEEK 2: GateScore Adjustment + Dashboard (Jul 1–5)
 ├─ Integrate gate_scorer.adjust_score() call
 ├─ Build HTML dashboard (Chart.js)
 ├─ Create CLI wrapper (coach analyze --wave ...)
-└─ Test on bradesco Wave 2 history
+└─ Test on clientebanco Wave 2 history
    Owner: [Assign]
    Deliverable: ✅ Scoring adjusted + Dashboard
 

@@ -110,7 +110,7 @@ src/shared/schemas/
 ```
 [ ] Implement skill versioning (@v1.2.3 syntax)
 [ ] Update wave-config schema
-[ ] Migrate Bradesco wave
+[ ] Migrate ClienteBanco wave
 [ ] Test fallback logic
 ```
 **Output:** wave-config-extended.yaml em produção.

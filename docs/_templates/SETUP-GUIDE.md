@@ -1,8 +1,8 @@
-# 🚀 Setup Guide — Avanade Uploader Component
+# 🚀 Setup Guide — Consultoria Uploader Component
 
 ## For Next.js / React Projects
 
-This guide shows how to integrate the Avanade-branded Google Drive uploader component into your React/Next.js project.
+This guide shows how to integrate the Consultoria-branded Google Drive uploader component into your React/Next.js project.
 
 ---
 
@@ -80,14 +80,14 @@ New-Item -ItemType Directory -Path "src\components\ui" -Force
 ## 📋 Step 3: Copy Component Files
 
 ### Option A: Manual Copy-Paste
-1. Copy `google-drive-uploader-toast-avanade.tsx` content
-2. Create file: `src/components/ui/google-drive-uploader-toast-avanade.tsx`
+1. Copy `google-drive-uploader-toast-consultoria.tsx` content
+2. Create file: `src/components/ui/google-drive-uploader-toast-consultoria.tsx`
 3. Paste the code
 
 ### Option B: Command Line
 ```bash
 # Copy from template
-cp ./reports/_templates/google-drive-uploader-toast-avanade.tsx src/components/ui/
+cp ./reports/_templates/google-drive-uploader-toast-consultoria.tsx src/components/ui/
 ```
 
 **File structure after:**
@@ -96,7 +96,7 @@ your-project/
 ├── src/
 │   ├── components/
 │   │   └── ui/
-│   │       └── google-drive-uploader-toast-avanade.tsx ✓
+│   │       └── google-drive-uploader-toast-consultoria.tsx ✓
 │   ├── pages/ (or app/ for Next.js 13+)
 │   └── ...
 └── package.json
@@ -109,7 +109,7 @@ your-project/
 ### Next.js 13+ (App Router)
 ```tsx
 // app/upload/page.tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function UploadPage() {
   return (
@@ -124,7 +124,7 @@ export default function UploadPage() {
 ### Next.js 12 or Create React App
 ```tsx
 // pages/upload.tsx or src/pages/Upload.tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function UploadPage() {
   return (
@@ -139,7 +139,7 @@ export default function UploadPage() {
 ### Traditional React
 ```tsx
 // src/pages/Upload.tsx
-import { Component } from '../components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '../components/ui/google-drive-uploader-toast-consultoria';
 
 export function Upload() {
   return (
@@ -186,7 +186,7 @@ npm run dev
 ### Quick Test
 ```tsx
 // test-upload.tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function TestPage() {
   return <Component />;
@@ -196,7 +196,7 @@ export default function TestPage() {
 Visit: `http://localhost:3000/test-upload` (or your dev port)
 
 **Expected behavior:**
-✓ Orange/blue Avanade branding  
+✓ Orange/blue Consultoria branding  
 ✓ Upload buttons visible  
 ✓ Click buttons to simulate uploads  
 ✓ Toast appears bottom-right  
@@ -208,11 +208,11 @@ Visit: `http://localhost:3000/test-upload` (or your dev port)
 ## 🔧 Step 7: Customization (Optional)
 
 ### Change Brand Colors
-In `google-drive-uploader-toast-avanade.tsx`, modify:
+In `google-drive-uploader-toast-consultoria.tsx`, modify:
 ```typescript
-const AVANADE_COLORS = {
-  primary: "#ff6b35",      // Avanade Orange → Change this
-  secondary: "#1f3a93",    // Avanade Blue
+const CONSULTORIA_COLORS = {
+  primary: "#ff6b35",      // Consultoria Orange → Change this
+  secondary: "#1f3a93",    // Consultoria Blue
   accent: "#f7931e",       // Light Orange
   dark: "#0f1d4d",         // Dark Blue
   light: "#f9f9f9",        // Light Gray
@@ -306,10 +306,10 @@ return (
 **Solution:** Check import path matches your file location
 ```tsx
 // ✓ Correct
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 // ✗ Wrong
-import { Component } from './google-drive-uploader-toast-avanade';
+import { Component } from './google-drive-uploader-toast-consultoria';
 ```
 
 ### Issue: Tailwind classes not applying
@@ -355,7 +355,7 @@ npm run type-check
 - [ ] Component file copied to `/components/ui/`
 - [ ] Component imported correctly
 - [ ] Dev server running without errors
-- [ ] Component renders with Avanade branding
+- [ ] Component renders with Consultoria branding
 - [ ] Upload buttons functional
 - [ ] Progress bar animates
 - [ ] Dark mode works (optional)
@@ -401,4 +401,4 @@ npm run type-check
 ---
 
 Generated: 2026-06-05  
-Project: Avanade Data Migration Factory
+Project: Consultoria Data Migration Factory

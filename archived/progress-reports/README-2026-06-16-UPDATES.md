@@ -138,7 +138,7 @@ Week 4: Checkpoints & Specs
 
 **Week 2 (Skills Versioning)**
 - [ ] Implement skills @version syntax
-- [ ] Migrate Bradesco wave to wave-config-extended.yaml
+- [ ] Migrate ClienteBanco wave to wave-config-extended.yaml
 - [ ] Test fallback logic
 
 **Week 3 (Observability)**

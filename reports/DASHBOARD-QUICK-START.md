@@ -16,9 +16,9 @@ Criada estratégia 2-layer para dashboards:
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  LAYER 2: Dashboards de Projeto (mantidos separados)        │
-│  ├─ Bradesco (4 dashboards)                                 │
+│  ├─ ClienteBanco (4 dashboards)                                 │
 │  │  └─ Detalhes técnicos, testing, ROI                      │
-│  └─ Einstein-HIAE (a criar)                                 │
+│  └─ ClienteSaude (a criar)                                 │
 │     └─ Discovery, design, healthcare-specific               │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -35,10 +35,10 @@ reports/
 │   └── README-GOLDEN-STANDARD.md                 (referência)
 ├── DASHBOARD-CONSOLIDATION-STRATEGY.md           ✅ NOVO (docs)
 │
-└── bradesco/
-    ├── bradesco-executive-dashboard.html         (fonte de KPIs)
-    ├── bradesco-3tier-dashboard.html             (fase técnica)
-    ├── bradesco-autonomous-test-report.html      (testes)
+└── clientebanco/
+    ├── clientebanco-executive-dashboard.html         (fonte de KPIs)
+    ├── clientebanco-3tier-dashboard.html             (fase técnica)
+    ├── clientebanco-autonomous-test-report.html      (testes)
     └── ROI_ANALYSIS_VISUAL.html                  (financeiro)
 ```
 
@@ -55,7 +55,7 @@ open reports/_templates/DASHBOARD-EXECUTIVE-UNIFIED.html
 
 **O que você vê**:
 - ✅ 6 KPIs globais (Projetos, Completude, Agentes, Qualidade, Artefatos, Gates)
-- ✅ 2 Cards de projeto (Bradesco + Einstein-HIAE)
+- ✅ 2 Cards de projeto (ClienteBanco + ClienteSaude)
 - ✅ Tabela consolidada de métricas
 - ✅ Status dos 3 Gates de qualidade
 
@@ -71,11 +71,11 @@ python reports/_templates/consolidate_dashboards.py --dry-run
 python reports/_templates/consolidate_dashboards.py
 
 # Filtrar projeto específico
-python reports/_templates/consolidate_dashboards.py --projects=bradesco
+python reports/_templates/consolidate_dashboards.py --projects=clientebanco
 ```
 
 **O que faz**:
-1. Extrai KPIs do dashboard de Bradesco (completude, qualidade, etc)
+1. Extrai KPIs do dashboard de ClienteBanco (completude, qualidade, etc)
 2. Calcula métricas globais (médias)
 3. Atualiza cards de projeto no Executivo
 4. Gera relatório JSON com timestamp
@@ -88,7 +88,7 @@ python reports/_templates/consolidate_dashboards.py --projects=bradesco
 
 🔍 Extraindo KPIs de 2 projeto(s)...
 
-   📁 🏦 Bradesco
+   📁 🏦 ClienteBanco
       ✓ Completude: 98.7%
       ✓ Qualidade: 0.92/1.00
       ✓ Status: ✓ Completo
@@ -105,12 +105,12 @@ python reports/_templates/consolidate_dashboards.py --projects=bradesco
 
 ### 3️⃣ **Manter Dashboards de Projeto Separados**
 
-**Bradesco** (4 dashboards — não consolidam):
+**ClienteBanco** (4 dashboards — não consolidam):
 ```
-reports/bradesco/bradesco-executive-dashboard.html
-reports/bradesco/bradesco-3tier-dashboard.html
-reports/bradesco/bradesco-autonomous-test-report.html
-reports/bradesco/ROI_ANALYSIS_VISUAL.html
+reports/clientebanco/clientebanco-executive-dashboard.html
+reports/clientebanco/clientebanco-3tier-dashboard.html
+reports/clientebanco/clientebanco-autonomous-test-report.html
+reports/clientebanco/ROI_ANALYSIS_VISUAL.html
 ```
 
 **Cada um tem**:
@@ -120,16 +120,16 @@ reports/bradesco/ROI_ANALYSIS_VISUAL.html
 
 ---
 
-### 4️⃣ **Criar Dashboard para Novo Projeto (Einstein)**
+### 4️⃣ **Criar Dashboard para Novo Projeto (ClienteSaude)**
 
 ```bash
 # 1. Copiar template base
 cp reports/_templates/DASHBOARD-EXECUTIVE-UNIFIED.html \
-   reports/einstein/einstein-executive-dashboard.html
+   reports/clientesaude/clientesaude-executive-dashboard.html
 
 # 2. Editar título, descrição, KPIs
 # 3. Executar consolidação
-python reports/_templates/consolidate_dashboards.py --projects=einstein
+python reports/_templates/consolidate_dashboards.py --projects=clientesaude
 ```
 
 ---
@@ -139,8 +139,8 @@ python reports/_templates/consolidate_dashboards.py --projects=einstein
 ```
 ┌───────────────────────────────────────────────────────────────┐
 │ Data Teams: Atualizam dashboards de projeto (EOD)            │
-│ ├─ Bradesco: completude, qualidade, artifacts               │
-│ └─ Einstein: discovery%, schema%, validation%               │
+│ ├─ ClienteBanco: completude, qualidade, artifacts               │
+│ └─ ClienteSaude: discovery%, schema%, validation%               │
 └───────────────┬─────────────────────────────────────────────┘
                 │
                 ↓ Python Script (automático ou manual)
@@ -167,7 +167,7 @@ python reports/_templates/consolidate_dashboards.py --projects=einstein
 ### Extração de KPIs
 
 ```python
-# Procura valores em tabelas (Bradesco format):
+# Procura valores em tabelas (ClienteBanco format):
 regex: <td><strong>Quality Score</strong></td>
        <td>0.92/1.00</td>
 
@@ -187,7 +187,7 @@ avg_quality = (0.92 + 0.85) / 2 = 0.885
 
 ```python
 # Injeta HTML dos cards no Executivo
-old_html: <!-- Project: bradesco -->...
+old_html: <!-- Project: clientebanco -->...
 new_html: <div class="project-card">...(com KPIs novos)
 ```
 
@@ -195,21 +195,21 @@ new_html: <div class="project-card">...(com KPIs novos)
 
 ## 📈 KPIs Extraídos por Projeto
 
-### Bradesco (Status Atual)
+### ClienteBanco (Status Atual)
 
 | KPI | Valor | Fonte |
 |-----|-------|-------|
-| Completude | 98.7% | bradesco-executive-dashboard.html |
-| Qualidade | 0.92/1.00 | bradesco-3tier-dashboard.html |
+| Completude | 98.7% | clientebanco-executive-dashboard.html |
+| Qualidade | 0.92/1.00 | clientebanco-3tier-dashboard.html |
 | Entidades | 146 | (ou N/A se não encontrado) |
 | Artefatos | 21+ | Dashboard principal |
 | Status | ✓ Completo | HTML badge |
 
-### Einstein-HIAE (Status Futuro)
+### ClienteSaude (Status Futuro)
 
 | KPI | Valor | Fonte |
 |-----|-------|-------|
-| Completude | 68% | einstein-discovery-dashboard.html |
+| Completude | 68% | clientesaude-discovery-dashboard.html |
 | Qualidade | 0.85/1.00 | (TBD) |
 | Bases Mapeadas | 7/7 | wave-config.yaml |
 | Tabelas Catalogadas | 2,641 | (TBD) |
@@ -230,9 +230,9 @@ new_html: <div class="project-card">...(com KPIs novos)
 
 ## 📌 Próximas Ações
 
-- [ ] Executar script para atualizar Executivo com Bradesco (agora)
+- [ ] Executar script para atualizar Executivo com ClienteBanco (agora)
 - [ ] Integrar com CI/CD pipeline (CI: trigger daily)
-- [ ] Criar dashboard Einstein-HIAE (próx. semana)
+- [ ] Criar dashboard ClienteSaude (próx. semana)
 - [ ] Adicionar trending histórico (próx. 2 sem)
 - [ ] Alertas automáticos se quality < threshold (próx. mês)
 
@@ -247,5 +247,5 @@ new_html: <div class="project-card">...(com KPIs novos)
 
 ---
 
-**Avanade DMF** — Data Migration Factory v3  
+**Consultoria DMF** — Data Migration Factory v3  
 **Last Updated**: 09 de Junho, 2026

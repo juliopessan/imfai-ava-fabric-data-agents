@@ -11,7 +11,7 @@ Validates that:
 Usage:
   python validate_agent_contracts.py --all-specs
   python validate_agent_contracts.py --spec 02-discovery-scout.md
-  python validate_agent_contracts.py --validate-wave bradesco
+  python validate_agent_contracts.py --validate-wave clientebanco
 """
 
 import os

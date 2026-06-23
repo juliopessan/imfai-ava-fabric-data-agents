@@ -1,0 +1,14 @@
+{
+  "project": "clientebanco",
+  "generated": "2026-06-05T16:42:52.535044",
+  "screenshots": [
+    {
+      "stage": "downstream",
+      "label": "3-Tier Dashboard - Estado Final",
+      "file": "downstream_3-tier_dashboard_-_estado_final.png",
+      "timestamp": "2026-06-05T16:43:04.472447",
+      "url": "file:///path/to/imfai-ava-fabric-data-agents/reports/clientebanco/clientebanco-3tier-dashboard.html",
+      "viewport": "1920x1080"
+    }
+  ]
+}

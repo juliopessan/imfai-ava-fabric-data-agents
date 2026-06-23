@@ -9,7 +9,7 @@ Usage:
 
 Example:
     python headroom_poc.py \\
-        --input projects/bradesco/outputs/midstream/architecture.json \\
+        --input projects/clientebanco/outputs/midstream/architecture.json \\
         --agent data-architect \\
         --output reports/headroom-poc-results.json
 """
@@ -129,7 +129,7 @@ def format_report(
     
     usd_saved = calculate_cost_savings(tokens_saved)
     
-    # Annualize for monthly usage pattern (Bradesco ~18K tokens/month)
+    # Annualize for monthly usage pattern (ClienteBanco ~18K tokens/month)
     if annualized:
         monthly_tokens = input_tokens
         annual_tokens = monthly_tokens * 12

@@ -24,7 +24,7 @@
 ```
 
 ### 2. **Workflow Master Pipeline** ✓
-- Location: `projects/bradesco/scripts/00_MASTER_PIPELINE.py`
+- Location: `projects/clientebanco/scripts/00_MASTER_PIPELINE.py`
 - Status: **Validated, executable, autonomous**
 - Execution: 28.1 seconds (6 phases, end-to-end)
 
@@ -33,15 +33,15 @@ Phase B: Upstream Discovery     [12.9s] ✓ 27/27 validation checks PASS
 Phase C: Midstream Design       [4.9s]  ✓ 3/3 sub-phases OK
 Phase D: Downstream Deployment  [5.1s]  ✓ 12.45M rows validated (98.7%)
 Phase E: Consolidation          [3.8s]  ✓ ROI calculated
-Phase F: Normalization          [1.3s]  ✓ Avanade branding applied
+Phase F: Normalization          [1.3s]  ✓ Consultoria branding applied
 Archive Non-HTML                [1s]    ✓ outputs/ cleaned
 ```
 
 ### 3. **Casos Operacionais** ✓
-- **Bradesco** (Cloudera → Databricks): Fully operational, proven
-- **Einstein-HIAE** (SQL Server → Fabric): Setup complete, ready for execution
+- **ClienteBanco** (Cloudera → Databricks): Fully operational, proven
+- **ClienteSaude** (SQL Server → Fabric): Setup complete, ready for execution
 
-### 4. **Avanade Branding Completo** ✓
+### 4. **Consultoria Branding Completo** ✓
 - Template: `DASHBOARD-TEMPLATE-MASTER.html`
 - Colors: #5c2d91 (purple) + #ff6b35 (orange)
 - Placeholders: {{TITLE}}, {{MAIN_CONTENT}}, {{KPI_METRICS}}
@@ -73,8 +73,8 @@ WORKFLOW INTEGRATION CHECK v2.0
 Data: 2026-06-08 09:30:45
 
 [1] ESTRUTURA DE CASES              ✓ 2/2 PASSED
-    ✓ Case: bradesco
-    ✓ Case: einstein-hiae
+    ✓ Case: clientebanco
+    ✓ Case: ClienteSaude
 
 [2] MASTER PIPELINE & SCRIPTS       ✓ 7/7 PASSED
     ✓ 00_MASTER_PIPELINE.py
@@ -119,13 +119,13 @@ TOTAL: 22/22 PASSED
 
 ### Executar Master Pipeline (Imediato)
 ```powershell
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+cd ~/projects/imfai-ava-fabric-data-agents
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Resultado esperado**:
 - Runtime: ~28 segundos
-- Output: 3 HTML dashboards (Avanade-branded)
+- Output: 3 HTML dashboards (Consultoria-branded)
 - Metrics: 545 legacy files, 146 entities, 12.45M rows
 - ROI: $167,049 calculated
 - Gate scores: 27/27 Pass (Upstream) + 98.7% (Downstream)
@@ -146,7 +146,7 @@ Time: ~1 hour setup + 30 sec execution
 |-------|----------|--------|
 | markdown not installed | `pip install markdown` | ✓ Fixed |
 | wave-config.yaml missing migration_scope | Added field | ✓ Fixed |
-| einstein-hiae missing scripts/ & context/ | Created folders + README | ✓ Fixed |
+| ClienteSaude missing scripts/ & context/ | Created folders + README | ✓ Fixed |
 | Template missing {{KPI_METRICS}} | Added placeholder + section | ✓ Fixed |
 
 ---
@@ -171,7 +171,7 @@ How to add case:         /memories/repo/fabricae-best-practices.md
 Architecture rationale:  /memories/repo/fabricae-architecture-decisions.md
 What's next:            /memories/repo/fabricae-TODO.md
 Lessons learned:        /memories/repo/fabricae-lessons-learned.md
-Execute pipeline:       python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+Execute pipeline:       python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
 ---
@@ -180,7 +180,7 @@ Execute pipeline:       python projects/bradesco/scripts/00_MASTER_PIPELINE.py
 
 1. ✅ **Test master pipeline** (verify outputs in browser)
 2. ⏳ **Document test results** (add to WORKFLOW-INTEGRATION-STATUS.md)
-3. ⏳ **Test new case onboarding** (einstein-hiae as second case)
+3. ⏳ **Test new case onboarding** (ClienteSaude as second case)
 4. ⏳ **Setup Azure CI/CD** (if deployment automation needed)
 
 ---
@@ -210,4 +210,4 @@ Execute pipeline:       python projects/bradesco/scripts/00_MASTER_PIPELINE.py
 ---
 
 *Fabricae v3 — Autonomous Data Migration Factory*  
-*Avanade Data Platform Solutions*
+*Consultoria Data Platform Solutions*

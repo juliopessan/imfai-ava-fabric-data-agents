@@ -7,9 +7,9 @@ reports/
 ├── 📄 README.md ..................... Guia completo (LEIA ISTO)
 ├── 📄 INDEX.md ...................... Índice de todos relatórios
 │
-├── 📁 bradesco/ ..................... CLIENTE: Bradesco
-│   ├── 🎨 bradesco-3tier-dashboard.html ........... Dashboard migração 3-tier
-│   ├── 📋 bradesco-autonomous-test-report.html ... Resultado teste autônomo  
+├── 📁 clientebanco/ ..................... CLIENTE: ClienteBanco
+│   ├── 🎨 clientebanco-3tier-dashboard.html ........... Dashboard migração 3-tier
+│   ├── 📋 clientebanco-autonomous-test-report.html ... Resultado teste autônomo  
 │   └── 💰 ROI_ANALYSIS_VISUAL.html ............... ROI com benchmarks
 │
 ├── 📁 _templates/ ................... FERRAMENTAS COMPARTILHADAS
@@ -19,7 +19,7 @@ reports/
 │   ├── 🎨 executive-dashboard.html ............... Template executivo
 │   └── 📚 *.md ................................... Guias e documentação
 │
-└── 📁 einstein-hiae/ ................ Planejado para futuro
+└── 📁 ClienteSaude/ ................ Planejado para futuro
 ```
 
 ---
@@ -36,9 +36,9 @@ reports/
 
 ## 🚀 Como Usar
 
-### 1️⃣ Acessar Relatórios Bradesco
+### 1️⃣ Acessar Relatórios ClienteBanco
 ```
-reports/bradesco/
+reports/clientebanco/
 └── 3 dashboards HTML prontos para visualizar
 ```
 
@@ -65,7 +65,7 @@ mkdir reports/[novo-cliente]/
 
 ## 📊 Relatórios Disponíveis
 
-### **Bradesco** (3 dashboards)
+### **ClienteBanco** (3 dashboards)
 
 | Dashboard | Descrição | Metrics |
 |-----------|-----------|---------|
@@ -77,7 +77,7 @@ mkdir reports/[novo-cliente]/
 
 ## 📝 Próximas Adições
 
-- [ ] Einstein HIAE relatórios → `reports/einstein-hiae/`
+- [ ] ClienteSaude ClienteSaude relatórios → `reports/ClienteSaude/`
 - [ ] Novos clientes → criar pasta em `reports/[nome]/`
 - [ ] Versioning → adicionar timestamps aos dashboards
 
@@ -92,4 +92,4 @@ mkdir reports/[novo-cliente]/
 
 ---
 
-🎉 **Estrutura pronta! Comece acessando `reports/bradesco/`**
+🎉 **Estrutura pronta! Comece acessando `reports/clientebanco/`**

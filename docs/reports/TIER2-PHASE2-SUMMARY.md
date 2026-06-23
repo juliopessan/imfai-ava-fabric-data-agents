@@ -271,7 +271,7 @@ TIER 3 OPERATIONS (Not yet implemented)
 ✅ 100% type hints
 ✅ 100% docstrings
 ✅ No external dependencies beyond stdlib
-✅ Follows Avanade conventions
+✅ Follows Consultoria conventions
 ✅ Error handling on edge cases
 ✅ JSON/dict serialization
 

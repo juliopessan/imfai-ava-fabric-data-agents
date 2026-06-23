@@ -106,7 +106,7 @@ projects/*/legacy/**
 # Ignore project-specific generated scripts (PowerShell scan/ETL scripts per project)
 projects/*/scripts/**
 
-# Legacy root project/ folder (renamed to projects/einstein-hiae/ — keep ignored)
+# Legacy root project/ folder (renamed to projects/ClienteSaude/ — keep ignored)
 project/
 
 # -----------------------------------------------------------------------------

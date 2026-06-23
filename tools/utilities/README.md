@@ -75,7 +75,7 @@ Testing Telemetry System...
 ### Erro de Importação
 ```bash
 # Garantir que está no diretório correto
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 
 # Reinstalar dependências
 pip install --upgrade -r config/requirements-dev.txt

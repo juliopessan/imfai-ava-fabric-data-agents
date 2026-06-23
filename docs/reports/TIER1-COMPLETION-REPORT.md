@@ -69,7 +69,7 @@ Completed TIER 1 governance validators and automated test infrastructure for Dat
 ```python
 from src.shared.scripts.validate_wave_config import WaveConfigValidator
 
-validator = WaveConfigValidator("projects/bradesco/wave-config.yaml")
+validator = WaveConfigValidator("projects/clientebanco/wave-config.yaml")
 result = validator.validate()
 print(f"Valid: {result.valid}, Score: {result.score:.2f}, Errors: {len(result.errors)}")
 ```
@@ -207,10 +207,10 @@ Score = (completude × 0.35) + (quality × 0.25) + (residual_risk × 0.20) + (re
 
 ## 5. Usage Examples
 
-### 5.1 Validate Bradesco Wave Config
+### 5.1 Validate ClienteBanco Wave Config
 
 ```bash
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 python -m pytest src/shared/tests/ -q
 # Expected output: 32 passed in ~1s
 ```
@@ -223,20 +223,20 @@ from src.shared.scripts.validate_gate1_artifacts import Gate1ArtifactsValidator
 from src.shared.scripts.gate_score_report import GateScoreCalculator
 
 # Validate wave config
-wave_validator = WaveConfigValidator("projects/bradesco/wave-config.yaml")
+wave_validator = WaveConfigValidator("projects/clientebanco/wave-config.yaml")
 wave_result = wave_validator.validate()
 
 # Validate Gate 1 artifacts
 gate1_validator = Gate1ArtifactsValidator(
-    "projects/bradesco/outputs/upstream",
-    wave_id="bradesco-wave-001"
+    "projects/clientebanco/outputs/upstream",
+    wave_id="clientebanco-wave-001"
 )
 gate1_result = gate1_validator.validate()
 
 # Calculate GateScore
 calculator = GateScoreCalculator(
     gate_number=1,
-    wave_id="bradesco-wave-001"
+    wave_id="clientebanco-wave-001"
 )
 score_result = calculator.calculate(
     completude=gate1_result.completude,
@@ -267,16 +267,16 @@ python -m pytest src/shared/tests/test_gate_validators.py::TestGateScoreCalculat
 
 ---
 
-## 6. Integration with Bradesco Project
+## 6. Integration with ClienteBanco Project
 
 ### Ready for Integration
-✅ `projects/bradesco/wave-config.yaml` — Can be validated with `validate_wave_config.py`  
-✅ `projects/bradesco/outputs/upstream/` — Can be validated with `validate_gate1_artifacts.py`  
-✅ `projects/bradesco/outputs/midstream/` — Can be validated with `validate_gate2_artifacts.py`  
-✅ `projects/bradesco/outputs/downstream/` — Can be validated with `validate_gate3_artifacts.py`  
+✅ `projects/clientebanco/wave-config.yaml` — Can be validated with `validate_wave_config.py`  
+✅ `projects/clientebanco/outputs/upstream/` — Can be validated with `validate_gate1_artifacts.py`  
+✅ `projects/clientebanco/outputs/midstream/` — Can be validated with `validate_gate2_artifacts.py`  
+✅ `projects/clientebanco/outputs/downstream/` — Can be validated with `validate_gate3_artifacts.py`  
 
 ### Next Steps for Integration
-1. Run validators against Bradesco artifacts
+1. Run validators against ClienteBanco artifacts
 2. Generate GateScore reports for current state
 3. Document any missing artifacts (will inform TIER 2 work)
 4. Create sample gate-decision.md files using score results
@@ -375,8 +375,8 @@ src/shared/tests/__init__.py
 **Prepared by:** GitHub Copilot  
 **Date:** 2026-06-09  
 **Status:** Ready for TIER 2 implementation  
-**Recommendation:** Proceed with Bradesco artifact validation using completed validators. Results will inform TIER 2 scope adjustments.
+**Recommendation:** Proceed with ClienteBanco artifact validation using completed validators. Results will inform TIER 2 scope adjustments.
 
 ---
 
-**Next Action:** Execute validators against Bradesco project and document results in separate "Bradesco-TIER1-Validation-Report.md"
+**Next Action:** Execute validators against ClienteBanco project and document results in separate "ClienteBanco-TIER1-Validation-Report.md"

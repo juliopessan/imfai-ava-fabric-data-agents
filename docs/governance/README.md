@@ -175,7 +175,7 @@ Result: ✅ Issue tracked
 - Timeline prioritization
 
 ### **Compliance**
-- Standards adherence (Microsoft, Avanade)
+- Standards adherence (Microsoft, Consultoria)
 - Policy requirements
 - Security controls
 - Data governance

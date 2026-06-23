@@ -238,7 +238,7 @@ TIER 3 OPERATIONS (Downstream - not yet implemented)
 
 ### Test Execution Results
 ```powershell
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 python -m pytest src/shared/tests/ -q
 
 Result: 140 passed in 1.01s ✅
@@ -287,7 +287,7 @@ Result: 140 passed in 1.01s ✅
 
 ## Production Readiness
 
-✅ All scripts follow Avanade conventions  
+✅ All scripts follow Consultoria conventions  
 ✅ 100% test coverage for happy paths  
 ✅ Error handling on missing data  
 ✅ JSON/dict serialization for persistence  

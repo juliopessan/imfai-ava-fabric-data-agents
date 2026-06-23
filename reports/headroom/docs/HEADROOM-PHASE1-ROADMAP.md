@@ -130,7 +130,7 @@ reports/headroom/
 **Deliverable:** ✅ Live metrics dashboard
 
 ### **Week 7-8 (7/28-8/10): Validation & Handoff**
-- [ ] **Day 1-2:** Run full Bradesco WAVE-001 with compression
+- [ ] **Day 1-2:** Run full ClienteBanco WAVE-001 with compression
 - [ ] **Day 2-3:** Verify cost savings calculation
 - [ ] **Day 3-4:** Performance benchmarking
 - [ ] **Day 4-5:** Documentation & runbooks
@@ -177,7 +177,7 @@ reports/headroom/
 - ✅ Latency: < 500ms (achieved < 100ms in PoC)
 
 ### Cost Impact
-- ✅ Bradesco annual: $243 → $29 (-88%)
+- ✅ ClienteBanco annual: $243 → $29 (-88%)
 - ✅ 10 projects: ~$2.4K saved annually
 
 ### System Health
@@ -301,7 +301,7 @@ reports/headroom/
 **Live System:**
 ```
 ┌─────────────────────────────────────────────┐
-│  Bradesco Wave-001 with Headroom Active     │
+│  ClienteBanco Wave-001 with Headroom Active     │
 ├─────────────────────────────────────────────┤
 │  ✅ Tokens Saved:     114,457 per wave      │
 │  ✅ Compression:      87.5% (cascaded)      │

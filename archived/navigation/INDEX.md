@@ -16,7 +16,7 @@ Bem-vindo ao repositório da **Data Migration Factory (DMF)** — um orquestrado
 1. **Leia primeiro:** [`README.md`](../README.md) (root)
 2. **Entenda a estrutura:** [`REPOSITORY-ORGANIZATION.md`](./REPOSITORY-ORGANIZATION.md) | [`REPOSITORY-QUICK-REFERENCE.md`](../REPOSITORY-QUICK-REFERENCE.md)
 3. **Setup local:** [`config/README.md`](./config/README.md)
-4. **Comece com um projeto:** [`projects/bradesco/README.md`](./projects/bradesco/README.md) ou [`projects/einstein-hiae/README.md`](./projects/einstein-hiae/README.md)
+4. **Comece com um projeto:** [`projects/clientebanco/README.md`](./projects/clientebanco/README.md) ou [`projects/ClienteSaude/README.md`](./projects/ClienteSaude/README.md)
 5. **Comece a codificar:** [`src/shared/README.md`](./src/shared/README.md)
 
 ### Já Familiarizado?
@@ -50,7 +50,7 @@ imfai-ava-fabric-data-agents/
 │   └── README.md
 │
 ├── 📂 projects/                             # Projetos de Migração (Reorganizado!)
-│   ├── 📂 bradesco/
+│   ├── 📂 clientebanco/
 │   │   ├── 📂 scripts/                      # ✅ Todos scripts centralizados
 │   │   ├── 📂 outputs/                      # ✅ Todos outputs aqui
 │   │   ├── 📂 state/                        # Configuração & logs
@@ -58,7 +58,7 @@ imfai-ava-fabric-data-agents/
 │   │   ├── README.md
 │   │   └── wave-config.yaml
 │   │
-│   ├── 📂 einstein-hiae/
+│   ├── 📂 ClienteSaude/
 │   │   ├── 📂 scripts/                      # ✅ 7 scripts organizados
 │   │   │   ├── orchestrator.py
 │   │   │   ├── deep_legacy_analyzer.py
@@ -89,7 +89,7 @@ imfai-ava-fabric-data-agents/
 │
 ├── 📂 reports/                              # Relatórios Dinâmicos
 │   ├── 📂 _templates/
-│   ├── 📂 bradesco/
+│   ├── 📂 clientebanco/
 │   └── README.md
 │
 ├── 📂 scripts/                              # Scripts Legados
@@ -145,22 +145,22 @@ python validate_repo_structure.py
 
 ### 3. Executar um Projeto (30-50 segundos)
 
-#### Opção A: Bradesco Migration
+#### Opção A: ClienteBanco Migration
 ```bash
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
-# Outputs: projects/bradesco/outputs/
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
+# Outputs: projects/clientebanco/outputs/
 ```
 
-#### Opção B: Einstein-HIAE KPI Portal
+#### Opção B: ClienteSaude KPI Portal
 ```bash
-python projects/einstein-hiae/scripts/generate_kpi_portal.py
-# Portal gerado em: projects/einstein-hiae/outputs/KPI_PORTAL_MASTER.html
+python projects/ClienteSaude/scripts/generate_kpi_portal.py
+# Portal gerado em: projects/ClienteSaude/outputs/KPI_PORTAL_MASTER.html
 ```
 
 ### 4. Visualizar Resultados (30 segundos)
 ```bash
 # Serve os outputs localmente
-python -m http.server 8000 --directory projects/einstein-hiae/outputs
+python -m http.server 8000 --directory projects/ClienteSaude/outputs
 # Abra: http://localhost:8000/KPI_PORTAL_MASTER.html
 ```
 
@@ -219,9 +219,9 @@ Gate Score >= 0.85 required for promotion
 ### Para Começar com um Projeto
 | Recurso | Localização | Tempo |
 |---------|-------------|-------|
-| Bradesco Setup | [`projects/bradesco/README.md`](./projects/bradesco/README.md) | 5 min |
-| Einstein-HIAE Portal | [`projects/einstein-hiae/README.md`](./projects/einstein-hiae/README.md) | 5 min |
-| Scripts Reference | [`projects/einstein-hiae/scripts/README.md`](./projects/einstein-hiae/scripts/README.md) | 10 min |
+| ClienteBanco Setup | [`projects/clientebanco/README.md`](./projects/clientebanco/README.md) | 5 min |
+| ClienteSaude Portal | [`projects/ClienteSaude/README.md`](./projects/ClienteSaude/README.md) | 5 min |
+| Scripts Reference | [`projects/ClienteSaude/scripts/README.md`](./projects/ClienteSaude/scripts/README.md) | 10 min |
 | Multi-Platform Wave | [`projects/multi-platform-migration/README.md`](./projects/multi-platform-migration/README.md) | 10 min |
 
 ### Para Usar Ferramentas
@@ -274,8 +274,8 @@ python tools/validation/WORKFLOW-INTEGRATION-CHECK.py
 # Validação completa (v2)
 python tools/validation/WORKFLOW-INTEGRATION-CHECK-v2.py
 
-# Validação específica (Bradesco)
-python tools/validation/run_bradesco_tier1_validation.py
+# Validação específica (ClienteBanco)
+python tools/validation/run_clientebanco_tier1_validation.py
 ```
 
 ### Explorar Governança
@@ -350,7 +350,7 @@ Para questões ou contribuições:
 | **Status** | ✅ Produção-Ready (TIER 1-2) |
 | **Testes** | 315 passing (100%) |
 | **Documentação** | Completa (TIER 1-2) |
-| **Responsável** | GitHub Copilot + Avanade DMF Team |
+| **Responsável** | GitHub Copilot + Consultoria DMF Team |
 
 ---
 

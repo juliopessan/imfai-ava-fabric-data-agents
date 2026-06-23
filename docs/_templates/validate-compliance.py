@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Validator: Avanade Style Guide Compliance Check
+Validator: Consultoria Style Guide Compliance Check
 Audits executive-dashboard.html for brand compliance.
 """
 from __future__ import annotations
@@ -11,11 +11,11 @@ from pathlib import Path
 from typing import List, Tuple
 
 
-class AvanadeComplianceValidator:
-    """Validate HTML against Avanade Style Guide."""
+class ConsultoriaComplianceValidator:
+    """Validate HTML against Consultoria Style Guide."""
 
     REQUIRED_COLORS = {
-        "#FF5800": "Avanade Orange (primary)",
+        "#FF5800": "Consultoria Orange (primary)",
         "#DC4600": "Dark Orange (hover)",
         "#890078": "Aurora (gradient end)",
         "#333333": "Grey 80 (text primary)",
@@ -45,7 +45,7 @@ class AvanadeComplianceValidator:
 
     REQUIRED_TEXT = [
         "Do what matters",      # Tagline (mandatory)
-        "Avanade",              # Brand name
+        "Consultoria",              # Brand name
         "Data Migration Factory",  # Product
         "Executive Dashboard",  # Page title
     ]
@@ -73,7 +73,7 @@ class AvanadeComplianceValidator:
         return self._report()
 
     def _check_colors(self):
-        """Verify all required Avanade colors present."""
+        """Verify all required Consultoria colors present."""
         print("🎨 Checking Colors...")
         missing = []
         for color, name in self.REQUIRED_COLORS.items():
@@ -218,7 +218,7 @@ class AvanadeComplianceValidator:
     def _report(self) -> bool:
         """Print compliance report."""
         print("\n" + "=" * 70)
-        print("AVANADE COMPLIANCE REPORT")
+        print("CONSULTORIA COMPLIANCE REPORT")
         print("=" * 70 + "\n")
 
         # Issues (blocking)
@@ -244,7 +244,7 @@ class AvanadeComplianceValidator:
             print(f"⚠️  PASSED with {len(self.warnings)} warning(s)")
             return True
         else:
-            print("✅ PASSED: 100% Avanade Style Guide Compliant")
+            print("✅ PASSED: 100% Consultoria Style Guide Compliant")
             return True
 
 
@@ -253,7 +253,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Validate HTML dashboard against Avanade Style Guide"
+        description="Validate HTML dashboard against Consultoria Style Guide"
     )
     parser.add_argument(
         "html_file",
@@ -263,7 +263,7 @@ def main():
     )
     args = parser.parse_args()
 
-    validator = AvanadeComplianceValidator(args.html_file)
+    validator = ConsultoriaComplianceValidator(args.html_file)
     success = validator.validate()
     return 0 if success else 1
 

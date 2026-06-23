@@ -2,7 +2,7 @@
 project_name: "Multi-Platform Data Migration Wave"
 project_id: "multi-platform-migration-2026"
 description: "Unified inventory and migration planning for 6 heterogeneous legacy platforms (Cloudera, Airflow, SAP BO, PowerCenter, Snowflake, SSS)"
-organization: "Avanade"
+organization: "Consultoria"
 target_platform: "fabric"  # Primary target; some systems may have secondary targets (Synapse, ACA)
 migration_scope: "Full lift-and-shift + modernization. Inventory all artefatos críticos, validate data contracts, execute phased migration."
 

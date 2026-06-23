@@ -10,7 +10,7 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 
-BASE = Path("c:\\Users\\julio.cesar.d.pessan\\Downloads\\imfai-ava-fabric-data-agents")
+BASE = Path("c:\\Users\\data.owner\\Downloads\\imfai-ava-fabric-data-agents")
 
 class RepoAudit:
     def __init__(self):
@@ -105,14 +105,14 @@ imfai-ava-fabric-data-agents/
 │   ├── project-plans/             # Planning documents
 │   └── README.md
 ├── projects/                      # Case studies
-│   ├── bradesco/
+│   ├── clientebanco/
 │   │   ├── legacy/               # Original data/scripts
 │   │   ├── scripts/              # Analysis scripts
 │   │   ├── context/              # Analysis context
 │   │   ├── outputs/              # Generated artifacts
 │   │   ├── docs/                 # Project docs
 │   │   └── wave-config.yaml
-│   ├── einstein-hiae/
+│   ├── ClienteSaude/
 │   │   └── [same structure]
 │   └── multi-platform-migration/
 ├── src/                           # Framework code

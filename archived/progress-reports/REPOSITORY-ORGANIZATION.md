@@ -30,8 +30,8 @@ imfai-ava-fabric-data-agents/
 │   │   ├── PROJECT-COMPLETION-SUMMARY.md
 │   │   ├── REPOSITORY-STRUCTURE.md
 │   │   ├── INTEGRATION-CHECKLIST.md
-│   │   ├── BRADESCO-TIER1-EXECUTION-PLAN.md
-│   │   ├── BRADESCO-TIER1-VALIDATION-REPORT.md
+│   │   ├── CLIENTEBANCO-TIER1-EXECUTION-PLAN.md
+│   │   ├── CLIENTEBANCO-TIER1-VALIDATION-REPORT.md
 │   │   └── GAP-ANALYSIS-REPORT.md
 │   │
 │   └── 📄 README.md                           # Índice de documentação
@@ -40,7 +40,7 @@ imfai-ava-fabric-data-agents/
 │   ├── 📂 validation/
 │   │   ├── WORKFLOW-INTEGRATION-CHECK.py
 │   │   ├── WORKFLOW-INTEGRATION-CHECK-v2.py
-│   │   ├── run_bradesco_tier1_validation.py
+│   │   ├── run_clientebanco_tier1_validation.py
 │   │   └── README.md
 │   │
 │   ├── 📂 utilities/
@@ -55,7 +55,7 @@ imfai-ava-fabric-data-agents/
 │   └── README.md
 │
 ├── 📂 projects/                                # Projetos de Migração (✅ Reorganizado!)
-│   ├── 📂 bradesco/
+│   ├── 📂 clientebanco/
 │   │   ├── 📂 scripts/                    # ✅ Todos scripts centralizados
 │   │   │   ├── 00_MASTER_PIPELINE.py
 │   │   │   └── README.md
@@ -67,7 +67,7 @@ imfai-ava-fabric-data-agents/
 │   │   ├── README.md
 │   │   └── wave-config.yaml
 │   │
-│   ├── 📂 einstein-hiae/
+│   ├── 📂 ClienteSaude/
 │   │   ├── 📂 scripts/                    # ✅ 7 scripts organizados
 │   │   │   ├── orchestrator.py
 │   │   │   ├── deep_legacy_analyzer.py
@@ -99,7 +99,7 @@ imfai-ava-fabric-data-agents/
 │
 ├── 📂 reports/                                 # Relatórios de Execução
 │   ├── 📂 _templates/
-│   ├── 📂 bradesco/
+│   ├── 📂 clientebanco/
 │   ├── INDEX.md
 │   ├── QUICK-START.md
 │   └── README.md
@@ -162,8 +162,8 @@ imfai-ava-fabric-data-agents/
 | `PROJECT-COMPLETION-SUMMARY.md` | `docs/project-plans/PROJECT-COMPLETION-SUMMARY.md` |
 | `REPOSITORY-STRUCTURE.md` | `docs/project-plans/REPOSITORY-STRUCTURE.md` |
 | `INTEGRATION-CHECKLIST.md` | `docs/project-plans/INTEGRATION-CHECKLIST.md` |
-| `BRADESCO-TIER1-EXECUTION-PLAN.md` | `docs/project-plans/BRADESCO-TIER1-EXECUTION-PLAN.md` |
-| `BRADESCO-TIER1-VALIDATION-REPORT.md` | `docs/project-plans/BRADESCO-TIER1-VALIDATION-REPORT.md` |
+| `CLIENTEBANCO-TIER1-EXECUTION-PLAN.md` | `docs/project-plans/CLIENTEBANCO-TIER1-EXECUTION-PLAN.md` |
+| `CLIENTEBANCO-TIER1-VALIDATION-REPORT.md` | `docs/project-plans/CLIENTEBANCO-TIER1-VALIDATION-REPORT.md` |
 | `GAP-ANALYSIS-REPORT.md` | `docs/project-plans/GAP-ANALYSIS-REPORT.md` |
 
 ### Scripts de Validação (→ `/tools/validation/`)
@@ -171,7 +171,7 @@ imfai-ava-fabric-data-agents/
 |---|---|
 | `WORKFLOW-INTEGRATION-CHECK.py` | `tools/validation/WORKFLOW-INTEGRATION-CHECK.py` |
 | `WORKFLOW-INTEGRATION-CHECK-v2.py` | `tools/validation/WORKFLOW-INTEGRATION-CHECK-v2.py` |
-| `run_bradesco_tier1_validation.py` | `tools/validation/run_bradesco_tier1_validation.py` |
+| `run_clientebanco_tier1_validation.py` | `tools/validation/run_clientebanco_tier1_validation.py` |
 
 ### Scripts de Utilidade (→ `/tools/utilities/`)
 | Arquivo Atual | Novo Local |
@@ -200,10 +200,10 @@ python validate_repo_structure.py
 
 # Resultado esperado:
 # ✅ PASSED: 15/15 checks
-#   ✓ [bradesco] No Python scripts in root
-#   ✓ [bradesco] Docs organized (except README)
-#   ✓ [bradesco] outputs/ exists
-#   ✓ [bradesco] scripts/ exists
+#   ✓ [clientebanco] No Python scripts in root
+#   ✓ [clientebanco] Docs organized (except README)
+#   ✓ [clientebanco] outputs/ exists
+#   ✓ [clientebanco] scripts/ exists
 #   ... mais 11 checks
 ```
 
@@ -211,7 +211,7 @@ python validate_repo_structure.py
 
 ```powershell
 # Navegar para o repositório
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 
 # 1. Mover relatórios
 mv TIER1-COMPLETION-REPORT.md docs/reports/
@@ -231,14 +231,14 @@ mv PHASE-5-COMPLETION-SUMMARY.md docs/project-plans/
 mv PROJECT-COMPLETION-SUMMARY.md docs/project-plans/
 mv REPOSITORY-STRUCTURE.md docs/project-plans/
 mv INTEGRATION-CHECKLIST.md docs/project-plans/
-mv BRADESCO-TIER1-EXECUTION-PLAN.md docs/project-plans/
-mv BRADESCO-TIER1-VALIDATION-REPORT.md docs/project-plans/
+mv CLIENTEBANCO-TIER1-EXECUTION-PLAN.md docs/project-plans/
+mv CLIENTEBANCO-TIER1-VALIDATION-REPORT.md docs/project-plans/
 mv GAP-ANALYSIS-REPORT.md docs/project-plans/
 
 # 3. Mover scripts de validação
 mv WORKFLOW-INTEGRATION-CHECK.py tools/validation/
 mv WORKFLOW-INTEGRATION-CHECK-v2.py tools/validation/
-mv run_bradesco_tier1_validation.py tools/validation/
+mv run_clientebanco_tier1_validation.py tools/validation/
 
 # 4. Mover scripts de utilidade
 mv test_telemetry_system.py tools/utilities/
@@ -298,7 +298,7 @@ if __name__ == '__main__':
 - Configurações centralizadas e versionáveis
 
 ### ✅ Conformidade Profissional
-- Padrão Avanade/Enterprise
+- Padrão Consultoria/Enterprise
 - Estrutura escalável para novos projetos
 - Git ignores mais eficientes
 
@@ -370,24 +370,24 @@ imfai-ava-fabric-data-agents/
 
 | Atividade | Status | Detalhes |
 |-----------|--------|----------|
-| **Auditoria do Repositório** | ✅ | Identificadas desordenanças em Einstein-HIAE e Bradesco |
-| **Movimento de Scripts (Einstein)** | ✅ | 7 scripts Python movidos para `projects/einstein-hiae/scripts/` |
-| **Movimento de Documentação (Bradesco)** | ✅ | 7+ documentos movidos para `projects/bradesco/outputs/` |
+| **Auditoria do Repositório** | ✅ | Identificadas desordenanças em ClienteSaude e ClienteBanco |
+| **Movimento de Scripts (ClienteSaude)** | ✅ | 7 scripts Python movidos para `projects/ClienteSaude/scripts/` |
+| **Movimento de Documentação (ClienteBanco)** | ✅ | 7+ documentos movidos para `projects/clientebanco/outputs/` |
 | **Criação de Estrutura (Multi)** | ✅ | Estrutura completa criada para `multi-platform-migration` |
 | **Criação de state/ Folders** | ✅ | Adicionado em todos os projetos para admin files |
 | **Criação de Validador** | ✅ | `validate_repo_structure.py` com 15 checks |
 | **Criação de Guia Rápido** | ✅ | `REPOSITORY-QUICK-REFERENCE.md` criado |
-| **Atualização de README** | ✅ | Novo arquivo Einstein-HIAE com todas as informações |
-| **Atualização de Scripts README** | ✅ | Novo arquivo de referência para scripts Einstein |
+| **Atualização de README** | ✅ | Novo arquivo ClienteSaude com todas as informações |
+| **Atualização de Scripts README** | ✅ | Novo arquivo de referência para scripts ClienteSaude |
 | **Atualização de Documentação Geral** | ✅ | README, INDEX, QUICK-START todos atualizados |
 | **Validação Completa** | ✅ | 15/15 checks passando |
 
 ### Resultados
-- **Scripts Organizados:** 7 (Einstein)
-- **Documentação Reorganizada:** 7+ (Bradesco)
-- **Projetos Estruturados:** 3 (bradesco, einstein-hiae, multi-platform-migration)
+- **Scripts Organizados:** 7 (ClienteSaude)
+- **Documentação Reorganizada:** 7+ (ClienteBanco)
+- **Projetos Estruturados:** 3 (clientebanco, ClienteSaude, multi-platform-migration)
 - **Validação Checks:** 15/15 ✅
-- **Documentação Criada:** 3 novos guias (Einstein README, Scripts README, Quick Reference)
+- **Documentação Criada:** 3 novos guias (ClienteSaude README, Scripts README, Quick Reference)
 - **Ferramentas Criadas:** 2 (validator, cleanup report generator)
 
 ---

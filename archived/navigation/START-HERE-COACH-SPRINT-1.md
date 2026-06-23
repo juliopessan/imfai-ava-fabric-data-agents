@@ -45,7 +45,7 @@ ACTION: Understand full design, validate decisions
 
 ### Check Files Exist
 ```bash
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 
 # Should see all 6 docs/COACH-*.md files:
 ls docs/COACH-*
@@ -237,7 +237,7 @@ Before Jun 25 Kickoff:
 - [ ] migration-coordinator.py modified with telemetry_hook call
 - [ ] No syntax errors
 - [ ] Tested with real agent execution
-- [ ] `.coach/telemetry/bradesco_wave_2_*.jsonl` file created
+- [ ] `.coach/telemetry/clientebanco_wave_2_*.jsonl` file created
 - [ ] Events contain: timestamp, agent_id, tokens, cost
 
 **GateScore Adjustment (Week 2):**

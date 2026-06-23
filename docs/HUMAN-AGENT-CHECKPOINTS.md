@@ -274,7 +274,7 @@ Every escalation decision is logged:
   "escalation_id": "esc-a7f3-92c1-4e8b",
   "trace_id": "a7f3-92c1-4e8b-11d7-5fk2m9p0",
   "gate": 2,
-  "wave": "bradesco-g1",
+  "wave": "clientebanco-g1",
   "checkpoint_name": "bad_code_generation",
   "tier": "critical",
   "eval_scores": {
@@ -415,7 +415,7 @@ deadlock_rule:
 - [ ] Test retry loop with sandbox agents
 - [ ] Document runbook for "SLA breach escalation"
 - [ ] Train on-call team on checkpoint decisions
-- [ ] Run dry-run on Bradesco wave; collect feedback
+- [ ] Run dry-run on ClienteBanco wave; collect feedback
 
 ---
 

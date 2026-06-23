@@ -31,7 +31,7 @@ grep -r "def calculate" src/shared/scripts/
 
 **3. Clone o Repositório Coach** (se ainda não tiver)
 ```bash
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 
 # Verifique estrutura
 ls src/shared/coaches/         # Deve ter: integration.py
@@ -114,7 +114,7 @@ return result
 ### Tarefa 4: Testar com Agent Real
 
 ```bash
-# Execute um agente pequeno da bradesco Wave 2
+# Execute um agente pequeno da clientebanco Wave 2
 python -c "
 from src.shared.coaches import telemetry_collector
 
@@ -198,7 +198,7 @@ else:
 - [ ] Copiei o adjustment code entre eles
 - [ ] Passei artifacts corretos (ou deixei como None se não aplicável)
 
-### Tarefa 8: Testar com Dados de bradesco Wave 2
+### Tarefa 8: Testar com Dados de clientebanco Wave 2
 
 ```bash
 # Simule um score que deve ser ajustado
@@ -214,7 +214,7 @@ artifacts = {
 
 adjusted, patterns, log = gate_scorer.adjust_score(
     base_score=0.82,
-    wave='bradesco_wave_2',
+    wave='clientebanco_wave_2',
     gate=2,
     artifacts=artifacts
 )
@@ -249,7 +249,7 @@ for name, impact in log:
 - [ ] Created `.coach/templates/wave-analysis.html` (Chart.js template)
 - [ ] Can read JSONL and generate HTML report
 - [ ] Created `.coach/cli.py` (if time permits)
-- [ ] `python -m src.shared.coaches.cli --wave bradesco_wave_2 --action analyze` works
+- [ ] `python -m src.shared.coaches.cli --wave clientebanco_wave_2 --action analyze` works
 
 ---
 

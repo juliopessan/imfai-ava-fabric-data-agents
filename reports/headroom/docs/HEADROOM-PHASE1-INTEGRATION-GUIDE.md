@@ -162,7 +162,7 @@ Add to `reports/_templates/dashboard_server.py`:
 @app.route("/api/headroom-metrics/<wave_id>")
 def get_headroom_metrics(wave_id: str):
     """Serve Headroom metrics for dashboard."""
-    metrics_file = Path(f"projects/bradesco/outputs/{wave_id}-headroom-metrics.json")
+    metrics_file = Path(f"projects/clientebanco/outputs/{wave_id}-headroom-metrics.json")
     if metrics_file.exists():
         return json.loads(metrics_file.read_text())
     return {"error": "No metrics found"}
@@ -422,7 +422,7 @@ reports/_templates/
 ├── dashboard_server.py                     (MODIFIED - add route)
 └── token_metrics_collector.py              (existing)
 
-projects/bradesco/outputs/
+projects/clientebanco/outputs/
 └── {wave_id}-headroom-metrics.json        (generated per wave)
 ```
 
@@ -486,7 +486,7 @@ projects/bradesco/outputs/
 | **Reversibility** | 100% data recovery | CCR verified ✅ |
 | **Integration** | 3 checkpoint phases | Plan covers all gates ✅ |
 | **Dashboard** | Live metrics widget | HTML template ready ✅ |
-| **Cost Savings** | $243/year (Bradesco) | Calculated in metrics ✅ |
+| **Cost Savings** | $243/year (ClienteBanco) | Calculated in metrics ✅ |
 
 ---
 

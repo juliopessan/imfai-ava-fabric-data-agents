@@ -8,7 +8,7 @@
 
 ```powershell
 # Navigate to repo root
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 
 # Activate virtual environment
 .\.venv\Scripts\Activate.ps1
@@ -21,16 +21,16 @@ pip install -r config/requirements-dev.txt
 
 ## 2️⃣ Run a Case Study (choose one)
 
-### Option A: Bradesco Migration
+### Option A: ClienteBanco Migration
 ```powershell
 # Execute the complete migration pipeline
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
-### Option B: Einstein-HIAE KPI Portal
+### Option B: ClienteSaude KPI Portal
 ```powershell
 # Generate the KPI portal with real legacy metrics
-python projects/einstein-hiae/scripts/generate_kpi_portal.py
+python projects/ClienteSaude/scripts/generate_kpi_portal.py
 ```
 
 **When done, you'll see:**
@@ -43,22 +43,22 @@ python projects/einstein-hiae/scripts/generate_kpi_portal.py
 
 ## 3️⃣ View Dashboards (choose project)
 
-### Bradesco Dashboard
+### ClienteBanco Dashboard
 ```powershell
-python -m http.server 8000 --directory projects/bradesco/outputs
+python -m http.server 8000 --directory projects/clientebanco/outputs
 # Open: http://localhost:8000/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
 ```
 
-### Einstein-HIAE KPI Portal
+### ClienteSaude KPI Portal
 ```powershell
-python -m http.server 8000 --directory projects/einstein-hiae/outputs
+python -m http.server 8000 --directory projects/ClienteSaude/outputs
 # Open: http://localhost:8000/KPI_PORTAL_MASTER.html
 ```
 
 **What you'll see:**
 - 📊 Interactive dashboards
 - 📈 Real-time KPI metrics
-- 🎨 Avanade Orange DNA branding
+- 🎨 Consultoria Orange DNA branding
 - 🌍 Bilingual interface (EN/PT)
 - ✅ Production-ready analytics
 
@@ -79,7 +79,7 @@ python -m pytest src/shared/tests/ -q
 ## 5️⃣ Explore Docs (Optional)
 
 - **Master Index:** [`INDEX.md`](INDEX.md)
-- **Bradesco Case:** [`projects/bradesco/README.md`](projects/bradesco/README.md)
+- **ClienteBanco Case:** [`projects/clientebanco/README.md`](projects/clientebanco/README.md)
 - **Multi-Platform Wave:** [`projects/multi-platform-migration/README.md`](projects/multi-platform-migration/README.md)
 - **Memory System:** [`/memories/repo/MEMORY-INDEX.md`](/memories/repo/MEMORY-INDEX.md)
 
@@ -89,8 +89,8 @@ python -m pytest src/shared/tests/ -q
 
 | Goal | Location |
 |------|----------|
-| **Understand Bradesco workflow** | [`projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md`](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md) |
-| **Learn Einstein-HIAE portal** | [`projects/einstein-hiae/README.md`](projects/einstein-hiae/README.md) |
+| **Understand ClienteBanco workflow** | [`projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md`](projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md) |
+| **Learn ClienteSaude portal** | [`projects/ClienteSaude/README.md`](projects/ClienteSaude/README.md) |
 | **View file locations** | [`REPOSITORY-QUICK-REFERENCE.md`](REPOSITORY-QUICK-REFERENCE.md) |
 | **Learn about 6-platform wave** | [`projects/multi-platform-migration/README.md`](projects/multi-platform-migration/README.md) |
 | **Add a new migration case** | Copy any project folder → `projects/[new-name]/` with same structure |

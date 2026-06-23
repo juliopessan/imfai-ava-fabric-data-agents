@@ -111,7 +111,7 @@
 
 ---
 
-## 💰 Impacto Financeiro (Bradesco)
+## 💰 Impacto Financeiro (ClienteBanco)
 
 ### Cenário 1: Apenas Token Tracking (Hoje)
 
@@ -135,7 +135,7 @@
 └─────────────────────────────────────────────┘
 ```
 
-### Scale: 10 Projects como Bradesco
+### Scale: 10 Projects como ClienteBanco
 
 ```
 Sem Headroom:  10 × $27 = $270/mês = $3,240/ano
@@ -204,7 +204,7 @@ pip install headroom-ai
 
 # Testar
 python src/shared/scripts/headroom_poc.py \
-    --input projects/bradesco/outputs/midstream/architecture.json \
+    --input projects/clientebanco/outputs/midstream/architecture.json \
     --agent data-architect
 ```
 
@@ -226,7 +226,7 @@ R: Não, mas Azure OpenAI é ✅. Open-source MIT license.
 R: Grátis (Headroom) + 32 horas de dev (Phase 1).
 
 **P: Quanto economiza?**  
-R: 75–90% de tokens. Bradesco: $243/ano. Scale: $2.4K+.
+R: 75–90% de tokens. ClienteBanco: $243/ano. Scale: $2.4K+.
 
 **P: Pode perder dados?**  
 R: Não, CCR (Compress-Cache-Retrieve) guarda originals. Reversível 100%.

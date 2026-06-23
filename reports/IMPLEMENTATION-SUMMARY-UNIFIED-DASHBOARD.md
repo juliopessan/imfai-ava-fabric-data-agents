@@ -14,10 +14,10 @@ Implementada estratégia 2-layer de consolidação de dashboards que unifica KPI
 
 **Características**:
 - 🎯 **6 KPIs Globais**: Projetos (2), Completude (98.7%), Agentes (21), Qualidade (0.92), Artefatos (545+), Gates (3)
-- 🏢 **2 Cards de Projeto**: Bradesco ✓ Completo + Einstein-HIAE ⏱ Em Progresso
+- 🏢 **2 Cards de Projeto**: ClienteBanco ✓ Completo + ClienteSaude ⏱ Em Progresso
 - 📊 **Tabelas Consolidadas**: Métricas por projeto + Status Gates 3-tier
 - 📱 **Responsivo**: Desktop, tablet, mobile com dark mode
-- 🎨 **Avanade Orange DNA**: 100% fiel ao design padrão
+- 🎨 **Consultoria Orange DNA**: 100% fiel ao design padrão
 
 **KPIs Exibidos**:
 ```
@@ -27,13 +27,13 @@ Global:
 ├─ Qualidade Média: 0.92
 └─ Status Gates: ✓✓⏱
 
-Bradesco:
+ClienteBanco:
 ├─ Completude: 98.7%
 ├─ Qualidade: 0.92/1.00
 ├─ Status: ✓ Completo
 └─ Fase: Downstream (Execução)
 
-Einstein-HIAE:
+ClienteSaude:
 ├─ Completude: 68% (quando dashboard criado)
 ├─ Qualidade: 0.85/1.00
 ├─ Status: ⏱ Em Progresso
@@ -61,13 +61,13 @@ python reports/_templates/consolidate_dashboards.py
 python reports/_templates/consolidate_dashboards.py --dry-run
 
 # Projeto específico
-python reports/_templates/consolidate_dashboards.py --projects=bradesco
+python reports/_templates/consolidate_dashboards.py --projects=clientebanco
 ```
 
 **Output**:
 ```
 📊 KPIs Extraídos:
-   📁 Bradesco
+   📁 ClienteBanco
       ✓ Completude: 98.7%
       ✓ Qualidade: 0.92/1.00
       ✓ Status: ✓ Completo
@@ -85,7 +85,7 @@ python reports/_templates/consolidate_dashboards.py --projects=bradesco
 - Visão geral da estratégia 2-layer
 - Mapeamento de responsabilidades por camada
 - Fluxo de consolidação diário
-- Exemplos de extração (Bradesco + Einstein)
+- Exemplos de extração (ClienteBanco + ClienteSaude)
 - Automação com Python
 - Status de implementação
 
@@ -118,16 +118,16 @@ reports/
 ├── DASHBOARD-CONSOLIDATION-STRATEGY.md           ✅ NOVO (docs)
 ├── DASHBOARD-QUICK-START.md                      ✅ NOVO (guia)
 │
-├── bradesco/                                     (projeto 1)
-│   ├── bradesco-executive-dashboard.html         (fonte de KPIs)
-│   ├── bradesco-3tier-dashboard.html             (detalhes técnicos)
-│   ├── bradesco-autonomous-test-report.html      (testes)
+├── clientebanco/                                     (projeto 1)
+│   ├── clientebanco-executive-dashboard.html         (fonte de KPIs)
+│   ├── clientebanco-3tier-dashboard.html             (detalhes técnicos)
+│   ├── clientebanco-autonomous-test-report.html      (testes)
 │   └── ROI_ANALYSIS_VISUAL.html                  (financeiro)
 │
-└── einstein/ (future)                            (projeto 2)
-    ├── einstein-executive-dashboard.html         (TBD)
-    ├── einstein-3tier-dashboard.html             (TBD)
-    └── einstein-health-metrics.html              (TBD)
+└── clientesaude/ (future)                            (projeto 2)
+    ├── clientesaude-executive-dashboard.html         (TBD)
+    ├── clientesaude-3tier-dashboard.html             (TBD)
+    └── clientesaude-health-metrics.html              (TBD)
 ```
 
 ---
@@ -145,8 +145,8 @@ reports/
              │
 ┌────────────────────────────────────┐
 │ Extração de KPIs                   │
-│ ├─ Bradesco: 98.7%, 0.92, ✓        │
-│ └─ Einstein: 68%, 0.85, ⏱          │
+│ ├─ ClienteBanco: 98.7%, 0.92, ✓        │
+│ └─ ClienteSaude: 68%, 0.85, ⏱          │
 └────────────┬─────────────────────────┘
              │
              ↓ Agregação
@@ -177,7 +177,7 @@ reports/
 |-----------|--------|---------|
 | Dashboard Executivo | ✅ Ativo | DASHBOARD-EXECUTIVE-UNIFIED.html |
 | Script Consolidação | ✅ Funcional | consolidate_dashboards.py |
-| Bradesco KPIs | ✅ Extraindo | bradesco-executive-dashboard.html |
+| ClienteBanco KPIs | ✅ Extraindo | clientebanco-executive-dashboard.html |
 | Documentação | ✅ Completa | DASHBOARD-CONSOLIDATION-STRATEGY.md |
 | Quick Start | ✅ Pronto | DASHBOARD-QUICK-START.md |
 
@@ -185,7 +185,7 @@ reports/
 
 | Ação | Prioridade |
 |------|-----------|
-| Criar dashboard Einstein-HIAE | 🔴 Alta |
+| Criar dashboard ClienteSaude | 🔴 Alta |
 | Integrar CI/CD (execução diária) | 🔴 Alta |
 | Adicionar trending histórico | 🟡 Média |
 
@@ -201,7 +201,7 @@ reports/
 
 ## 🎨 Design System (Aplicado)
 
-### Cores Avanade (100% Fiel)
+### Cores Consultoria (100% Fiel)
 ```css
 --ava-orange: #FF5800        (Primary)
 --ava-purple: #890078        (Headers)
@@ -238,7 +238,7 @@ open reports/_templates/DASHBOARD-EXECUTIVE-UNIFIED.html
 ### 2. Rodar Consolidação Automática
 
 ```bash
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 
 # Teste
 python reports/_templates/consolidate_dashboards.py --dry-run
@@ -269,16 +269,16 @@ reports/DASHBOARD-QUICK-START.md              (1,200 palavras)
 | Artefatos | 545+ | ≥ 400 ✓ |
 | Gates Ativo | 3 ✓ | 3 ✓ |
 
-### Bradesco (Live - Via Script)
+### ClienteBanco (Live - Via Script)
 
 | KPI | Valor | Fonte |
 |-----|-------|-------|
-| Completude | 98.7% | Tabela bradesco-executive-dashboard.html |
-| Qualidade | 0.92/1.00 | Tabela bradesco-3tier-dashboard.html |
+| Completude | 98.7% | Tabela clientebanco-executive-dashboard.html |
+| Qualidade | 0.92/1.00 | Tabela clientebanco-3tier-dashboard.html |
 | Fase | Downstream | HTML subtitle |
 | Status | ✓ Completo | Badge |
 
-### Einstein-HIAE (Placeholder - TBD)
+### ClienteSaude (Placeholder - TBD)
 
 | KPI | Valor | Nota |
 |-----|-------|------|
@@ -294,7 +294,7 @@ reports/DASHBOARD-QUICK-START.md              (1,200 palavras)
 ✅ **Consolidação**: Um único ponto de vista para decisões executivas  
 ✅ **Automação**: Atualizações diárias via script (CI/CD ready)  
 ✅ **Separação**: Dashboards de projeto mantêm detalhes (não poluem executivo)  
-✅ **Design**: 100% Avanade Orange DNA + responsivo + dark mode  
+✅ **Design**: 100% Consultoria Orange DNA + responsivo + dark mode  
 ✅ **Escalabilidade**: Adicionar novo projeto = copiar + executar script  
 ✅ **Documentação**: Estratégia + Quick Start + Código comentado  
 
@@ -303,7 +303,7 @@ reports/DASHBOARD-QUICK-START.md              (1,200 palavras)
 ## 📞 Próximas Ações (Priority Order)
 
 1. **[ ] Executar consolidação diária** (adicionar ao CI/CD)
-2. **[ ] Criar dashboard Einstein-HIAE** (projeto 2)
+2. **[ ] Criar dashboard ClienteSaude** (projeto 2)
 3. **[ ] Validar com PMO/CTO** (stakeholders)
 4. **[ ] Integrar alertas** (quality < 0.80)
 5. **[ ] Adicionar trending** (histórico 30 dias)
@@ -324,7 +324,7 @@ reports/DASHBOARD-QUICK-START.md              (1,200 palavras)
 
 **Regex Inteligente**:
 ```python
-# Extrai de tabelas (Bradesco format)
+# Extrai de tabelas (ClienteBanco format)
 <td><strong>Quality Score</strong></td><td>0.92/1.00</td>
 
 # Ou de KPI cards (generic format)
@@ -357,7 +357,7 @@ python consolidate_dashboards.py >> logs/consolidation.log
 **Status Final**: ✅ **100% COMPLETO**
 
 Implementação entregue, documentada e testada.  
-Dashboard Executivo unificado operacional e recebendo dados do Bradesco via consolidação automática.
+Dashboard Executivo unificado operacional e recebendo dados do ClienteBanco via consolidação automática.
 
-**Avanade DMF** — Data Migration Factory v3  
+**Consultoria DMF** — Data Migration Factory v3  
 **Última Atualização**: 09 de Junho, 2026

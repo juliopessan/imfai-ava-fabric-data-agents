@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Reconfigurar todos os dashboards para padrão Enterprise Avanade 100%
+Reconfigurar todos os dashboards para padrão Enterprise Consultoria 100%
 - Light mode apenas
 - Spacing, padding, CSS corretos
 - Estrutura HTML limpa
@@ -16,48 +16,48 @@ dashboards = [
         "path": "reports/_templates/executive-dashboard.html",
         "title": "📊 Executive Dashboard Template",
         "subtitle": "Multi-Project Overview",
-        "project": "Avanade Data Migration Factory",
+        "project": "Consultoria Data Migration Factory",
     },
     {
         "path": "reports/_templates/example-dashboard.html",
         "title": "📈 Example Dashboard",
         "subtitle": "Template Example",
-        "project": "Avanade Data Migration Factory",
+        "project": "Consultoria Data Migration Factory",
     },
     {
         "path": "reports/_templates/dashboard-with-metrics.html",
         "title": "📊 Dashboard with Metrics",
         "subtitle": "Metrics Visualization",
-        "project": "Avanade Data Migration Factory",
+        "project": "Consultoria Data Migration Factory",
     },
     {
-        "path": "reports/bradesco/ROI_ANALYSIS_VISUAL.html",
-        "title": "💰 ROI Analysis - Bradesco",
+        "path": "reports/clientebanco/ROI_ANALYSIS_VISUAL.html",
+        "title": "💰 ROI Analysis - ClienteBanco",
         "subtitle": "Financial Impact Assessment",
-        "project": "Bradesco Data Migration",
+        "project": "ClienteBanco Data Migration",
     },
     {
-        "path": "reports/bradesco/bradesco-executive-dashboard.html",
-        "title": "📊 Executive Dashboard - Bradesco",
+        "path": "reports/clientebanco/clientebanco-executive-dashboard.html",
+        "title": "📊 Executive Dashboard - ClienteBanco",
         "subtitle": "Multi-Tier Migration Overview",
-        "project": "Bradesco Data Migration",
+        "project": "ClienteBanco Data Migration",
     },
     {
-        "path": "reports/bradesco/bradesco-autonomous-test-report.html",
-        "title": "✅ Autonomous Test Report - Bradesco",
+        "path": "reports/clientebanco/clientebanco-autonomous-test-report.html",
+        "title": "✅ Autonomous Test Report - ClienteBanco",
         "subtitle": "Comprehensive Testing & Validation",
-        "project": "Bradesco Data Migration",
+        "project": "ClienteBanco Data Migration",
     },
     {
-        "path": "reports/bradesco/bradesco-3tier-dashboard.html",
-        "title": "🏗️ 3-Tier Migration Dashboard - Bradesco",
+        "path": "reports/clientebanco/clientebanco-3tier-dashboard.html",
+        "title": "🏗️ 3-Tier Migration Dashboard - ClienteBanco",
         "subtitle": "Upstream · Midstream · Downstream",
-        "project": "Bradesco Data Migration",
+        "project": "ClienteBanco Data Migration",
     },
 ]
 
 def get_enterprise_css():
-    """Retorna o CSS padrão enterprise Avanade"""
+    """Retorna o CSS padrão enterprise Consultoria"""
     return """
         /* RESET */
         * {
@@ -486,7 +486,7 @@ def generate_html(title, subtitle, project):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | Avanade</title>
+    <title>{title} | Consultoria</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"><\/script>
     <style>{get_enterprise_css()}
     </style>
@@ -582,7 +582,7 @@ def generate_html(title, subtitle, project):
 
         <!-- FOOTER -->
         <div class="footer">
-            <strong>Avanade Data Migration Factory v3</strong> — Multi-Agent Orchestration Platform
+            <strong>Consultoria Data Migration Factory v3</strong> — Multi-Agent Orchestration Platform
             <br>
             Generated: {generated_date} | Project: {project}
         </div>
@@ -609,7 +609,7 @@ def standardize_dashboard(file_path, title, subtitle, project):
 
 def main():
     print("\n" + "="*80)
-    print("  🎨 RECONFIGURAÇÃO ENTERPRISE AVANADE — TODOS OS DASHBOARDS")
+    print("  🎨 RECONFIGURAÇÃO ENTERPRISE CONSULTORIA — TODOS OS DASHBOARDS")
     print("="*80 + "\n")
     
     success_count = 0

@@ -3,25 +3,25 @@
 **Status:** ✅ Active  
 **Version:** 1.0.0  
 **Last Updated:** 2026-06-08  
-**Scope:** Avanade Suite + Orange DNA Design Tokens
+**Scope:** Consultoria Suite + Orange DNA Design Tokens
 
 ---
 
 ## Executive Summary
 
-This document consolidates the **Orange DNA design system** with **Avanade brand standards**. The integration preserves Avanade's core identity (registered orange #ff6b35, blue #1f3a93, 8px spacing grid) while adopting Orange DNA's modern UI patterns (sidebar navigation, top bar, new accent colors).
+This document consolidates the **Orange DNA design system** with **Consultoria brand standards**. The integration preserves Consultoria's core identity (registered orange #ff6b35, blue #1f3a93, 8px spacing grid) while adopting Orange DNA's modern UI patterns (sidebar navigation, top bar, new accent colors).
 
-**Key Decision:** Adopt Orange DNA's layout patterns and new accent colors (#FFB414, #FFE6D3) without replacing Avanade's registered brand colors.
+**Key Decision:** Adopt Orange DNA's layout patterns and new accent colors (#FFB414, #FFE6D3) without replacing Consultoria's registered brand colors.
 
 ---
 
-## 1. Color Palette (Avanade + Orange DNA Integration)
+## 1. Color Palette (Consultoria + Orange DNA Integration)
 
-### Primary Colors (PRESERVED — Avanade Registered)
+### Primary Colors (PRESERVED — Consultoria Registered)
 | Token | Value | Usage | Rationale |
 |-------|-------|-------|-----------|
-| **Avanade Orange** | `#ff6b35` | Primary CTAs, accents, progress indicators | Registered brand — DO NOT REPLACE |
-| **Avanade Blue** | `#1f3a93` | Headers, text, borders, secondary elements | Organizational standard — DO NOT REPLACE |
+| **Consultoria Orange** | `#ff6b35` | Primary CTAs, accents, progress indicators | Registered brand — DO NOT REPLACE |
+| **Consultoria Blue** | `#1f3a93` | Headers, text, borders, secondary elements | Organizational standard — DO NOT REPLACE |
 
 ### Accent Colors (NEW — Orange DNA)
 | Token | Value | RGB | Usage | Notes |
@@ -259,8 +259,8 @@ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 ### Color Contrast
 | Element | Foreground | Background | Ratio | Status |
 |---------|-----------|-----------|-------|--------|
-| Avanade Orange (#ff6b35) | orange | white | 4.5:1 | ✅ AA (large text) |
-| Avanade Blue (#1f3a93) | blue | white | 8.1:1 | ✅ AAA |
+| Consultoria Orange (#ff6b35) | orange | white | 4.5:1 | ✅ AA (large text) |
+| Consultoria Blue (#1f3a93) | blue | white | 8.1:1 | ✅ AAA |
 | Yellow (#FFB414) | yellow | white | 3.2:1 | ⚠️ AA (large text only) |
 | Text Gray (#333333) | dark | white | 12.6:1 | ✅ AAA |
 
@@ -438,7 +438,7 @@ Reference file: `DESIGN-TOKENS.css`
 - [ ] Update all dashboards: executive-dashboard.html, DASHBOARD-ENTERPRISE-STANDARD.html, etc.
 - [ ] Add sidebar navigation (248px) to new templates
 - [ ] Add top bar (56px) to new templates
-- [ ] Update React components (google-drive-uploader-toast-avanade.tsx) to use new variables
+- [ ] Update React components (google-drive-uploader-toast-consultoria.tsx) to use new variables
 - [ ] Test responsive (mobile 320px, tablet 640px, desktop 1024px+)
 - [ ] Test dark mode (if applicable)
 - [ ] Verify WCAG AA contrast (use WebAIM Contrast Checker)
@@ -451,7 +451,7 @@ Reference file: `DESIGN-TOKENS.css`
 1. **Review & Approval** — Stakeholder sign-off on color/spacing updates
 2. **BRAND-GUIDELINES.md Update** — Incorporate this document's findings
 3. **DESIGN-TOKENS.css Creation** — CSS custom properties file (single source of truth)
-4. **Dashboard Refactoring** — Apply to executive-dashboard.html, Bradesco outputs, etc.
+4. **Dashboard Refactoring** — Apply to executive-dashboard.html, ClienteBanco outputs, etc.
 5. **Component Updates** — Update React components to use new tokens
 6. **Testing & Validation** — Visual regression, WCAG AA verification, responsive testing
 
@@ -459,7 +459,7 @@ Reference file: `DESIGN-TOKENS.css`
 
 ## References
 
-- **Avanade Brand Guidelines** — Official color palette, registered trademarks
+- **Consultoria Brand Guidelines** — Official color palette, registered trademarks
 - **Orange DNA Dashboard** — Modern layout patterns, new accent colors
 - **WCAG 2.1 AA Standards** — Accessibility compliance (contrast, interactions, semantic HTML)
 - **CSS Custom Properties** — See DESIGN-TOKENS.css

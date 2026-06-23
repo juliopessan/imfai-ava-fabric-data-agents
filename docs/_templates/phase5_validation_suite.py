@@ -24,7 +24,7 @@ from datetime import datetime
 # ============================================================================
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-BRADESCO_OUTPUTS = PROJECT_ROOT / "projects" / "bradesco" / "outputs"
+CLIENTEBANCO_OUTPUTS = PROJECT_ROOT / "projects" / "clientebanco" / "outputs"
 TEMPLATES_DIR = PROJECT_ROOT / "reports" / "_templates"
 DESIGN_TOKENS_FILE = TEMPLATES_DIR / "DESIGN-TOKENS.css"
 
@@ -105,7 +105,7 @@ def validate_color_tokens() -> Tuple[int, List[str]]:
     
     tokens = extract_color_tokens(css_content)
     
-    # Check for required Avanade colors
+    # Check for required Consultoria colors
     required_colors = {
         'primary-orange': '#ff6b35',
         'secondary-blue': '#1f3a93',
@@ -165,10 +165,10 @@ def validate_layout_structure() -> List[str]:
     """Validate Orange DNA layout is present in all dashboards."""
     issues = []
     
-    if not BRADESCO_OUTPUTS.exists():
-        return ["❌ Bradesco outputs directory not found"]
+    if not CLIENTEBANCO_OUTPUTS.exists():
+        return ["❌ ClienteBanco outputs directory not found"]
     
-    html_files = list(BRADESCO_OUTPUTS.glob("*.html"))
+    html_files = list(CLIENTEBANCO_OUTPUTS.glob("*.html"))
     
     if not html_files:
         return ["❌ No HTML dashboards found"]

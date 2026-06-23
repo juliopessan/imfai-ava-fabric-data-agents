@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dashboard Standardizer — Applies Avanade Golden Standard design to all dashboards
+Dashboard Standardizer — Applies Consultoria Golden Standard design to all dashboards
 Mantém conteúdo único, aplica design padrão CSS + HTML structure
 """
 
@@ -336,7 +336,7 @@ def create_golden_html(title, body_content):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | Avanade DMF</title>
+    <title>{title} | Consultoria DMF</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <style>
@@ -348,7 +348,7 @@ def create_golden_html(title, body_content):
     <div class="header">
         <div class="header-content">
             <h1>📊 {title}</h1>
-            <p>Avanade Data Migration Factory — {datetime.now().strftime('%B %d, %Y')}</p>
+            <p>Consultoria Data Migration Factory — {datetime.now().strftime('%B %d, %Y')}</p>
         </div>
     </div>
 
@@ -360,7 +360,7 @@ def create_golden_html(title, body_content):
     <!-- ========== FOOTER ========== -->
     <div class="footer">
         <strong class="brand-color">DMF</strong> &mdash; Data Migration Factory<br>
-        <span class="sub">Powered by DMF Fabric Agents &middot; Avanade</span>
+        <span class="sub">Powered by DMF Fabric Agents &middot; Consultoria</span>
     </div>
 
     <script>
@@ -416,10 +416,10 @@ def main():
     base_path = Path("reports")
     
     dashboards = [
-        "bradesco/bradesco-autonomous-test-report.html",
-        "bradesco/bradesco-3tier-dashboard.html",
-        "bradesco/bradesco-executive-dashboard.html",
-        "bradesco/ROI_ANALYSIS_VISUAL.html",
+        "clientebanco/clientebanco-autonomous-test-report.html",
+        "clientebanco/clientebanco-3tier-dashboard.html",
+        "clientebanco/clientebanco-executive-dashboard.html",
+        "clientebanco/ROI_ANALYSIS_VISUAL.html",
         "_templates/DASHBOARD-TEMPLATE-ORANGE-DNA.html",
         "_templates/DASHBOARD-ENTERPRISE-STANDARD.html",
         "_templates/dashboard-with-metrics.html",
@@ -427,7 +427,7 @@ def main():
         "_templates/executive-dashboard.html",
     ]
     
-    print("🎨 Avanade Golden Standard Dashboard Standardizer")
+    print("🎨 Consultoria Golden Standard Dashboard Standardizer")
     print("=" * 60)
     
     results = []

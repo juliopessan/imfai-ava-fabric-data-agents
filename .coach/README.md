@@ -43,7 +43,7 @@ result = migration_coordinator.spawn_agent(...)
 
 telemetry_collector.log_execution(
     agent_id="data-architect",
-    wave="bradesco_wave_2",
+    wave="clientebanco_wave_2",
     gate=1,
     model="claude-opus-4-1",
     tokens_in=12500,
@@ -59,8 +59,8 @@ telemetry_collector.log_execution(
 ### Analyze a Wave
 
 ```bash
-python -m src.shared.coaches.cli --wave bradesco_wave_2 --action analyze
-# Output: .coach/reports/bradesco-wave-2-analysis.html
+python -m src.shared.coaches.cli --wave clientebanco_wave_2 --action analyze
+# Output: .coach/reports/clientebanco-wave-2-analysis.html
 ```
 
 ---
@@ -79,10 +79,10 @@ imfai-ava-fabric-data-agents/
 │   │   ├── silent-executor.yaml
 │   │   └── gate-regression.yaml
 │   ├── telemetry/                       Execution logs (JSONL)
-│   │   ├── bradesco_wave_2_2026-06-18.jsonl
+│   │   ├── clientebanco_wave_2_2026-06-18.jsonl
 │   │   └── ...
 │   └── reports/                         Generated analysis reports
-│       ├── bradesco-wave-2-analysis.html
+│       ├── clientebanco-wave-2-analysis.html
 │       └── ...
 │
 ├── src/shared/coaches/                  Coach implementation
@@ -220,12 +220,12 @@ action: "What to do about it"
 
 ```bash
 # View raw JSONL events
-cat .coach/telemetry/bradesco_wave_2_2026-06-18.jsonl | python -m json.tool
+cat .coach/telemetry/clientebanco_wave_2_2026-06-18.jsonl | python -m json.tool
 
 # Summarize wave
 python -c "
 from src.shared.coaches import telemetry_collector
-summary = telemetry_collector.collector.summarize_wave('bradesco_wave_2')
+summary = telemetry_collector.collector.summarize_wave('clientebanco_wave_2')
 import json
 print(json.dumps(summary, indent=2))
 "
@@ -237,7 +237,7 @@ print(json.dumps(summary, indent=2))
 
 1. **Hook telemetry into migration-coordinator** (log every agent spawn)
 2. **Create 6 anti-pattern YAML rules** (parametrize detection thresholds)
-3. **Test on historical data** (bradesco Wave 2 re-analyzed)
+3. **Test on historical data** (clientebanco Wave 2 re-analyzed)
 4. **Build dashboard** (HTML template with Chart.js)
 5. **Integrate into quality-gate** (adjust GateScore)
 6. **Package skills** (promote discovered patterns to `.github/skills/`)

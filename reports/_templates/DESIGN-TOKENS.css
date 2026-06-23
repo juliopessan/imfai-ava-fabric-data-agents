@@ -1,5 +1,5 @@
 /**
- * AVANADE DESIGN TOKENS
+ * CONSULTORIA DESIGN TOKENS
  * ─────────────────────────────────────────────────────────────────
  * Single source of truth for all design decisions.
  * Import this file into all dashboards and components.
@@ -12,7 +12,7 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════
-     PRIMARY BRAND COLORS (PRESERVED — Avanade Registered)
+     PRIMARY BRAND COLORS (PRESERVED — Consultoria Registered)
      ═══════════════════════════════════════════════════════════════ */
   
   --ava-orange-primary: #ff6b35;      /* Main CTA, primary accents */

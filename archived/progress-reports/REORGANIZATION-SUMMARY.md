@@ -12,10 +12,10 @@
 
 | Fase | Ação | Impacto |
 |------|------|--------|
-| **1** | Movidos 7 scripts Python (Einstein) → `scripts/` | Raiz limpa ✅ |
-| **2** | Movidos 7 docs (Bradesco) → `outputs/` | Docs organizadas ✅ |
+| **1** | Movidos 7 scripts Python (ClienteSaude) → `scripts/` | Raiz limpa ✅ |
+| **2** | Movidos 7 docs (ClienteBanco) → `outputs/` | Docs organizadas ✅ |
 | **3** | Criado `state/` para config/logs | Admin centralizado ✅ |
-| **4** | Movidos 2 summaries (Einstein) → `outputs/` | Outputs consolidados ✅ |
+| **4** | Movidos 2 summaries (ClienteSaude) → `outputs/` | Outputs consolidados ✅ |
 | **5** | Criada estrutura multi-platform-migration | Pronto para uso ✅ |
 
 ---
@@ -24,7 +24,7 @@
 
 ```
 projects/
-├── bradesco/
+├── clientebanco/
 │   ├── scripts/          ✅ Organizado
 │   ├── outputs/          ✅ Docs consolidadas
 │   ├── state/            ✅ Config & logs
@@ -33,7 +33,7 @@ projects/
 │   ├── README.md
 │   └── wave-config.yaml
 │
-├── einstein-hiae/
+├── ClienteSaude/
 │   ├── scripts/          ✅ 7 scripts
 │   ├── outputs/          ✅ 40+ arquivos
 │   ├── legacy/
@@ -56,8 +56,8 @@ projects/
 
 ```
 PASSED: 15/15 ✅
-├─ Einstein: All checks passed ✅
-├─ Bradesco: All checks passed ✅
+├─ ClienteSaude: All checks passed ✅
+├─ ClienteBanco: All checks passed ✅
 └─ Multi-platform: All checks passed ✅
 ```
 

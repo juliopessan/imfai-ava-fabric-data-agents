@@ -96,7 +96,7 @@
 ┌─────────────┐
 │  User Request
 └──────┬──────┘
-       │ "Migrate Bradesco legacy to Fabric"
+       │ "Migrate ClienteBanco legacy to Fabric"
        ▼
 ┌──────────────────────┐
 │ master-agent (Spec 01) ◄─ Route to discovery-scout
@@ -175,7 +175,7 @@ python .github/scripts/validate_agent_contracts.py --all-specs
 ### Test Execution
 ```bash
 # Run discovery-scout with test data
-python projects/bradesco/scripts/orchestrator.py --agent discovery-scout --mode test
+python projects/clientebanco/scripts/orchestrator.py --agent discovery-scout --mode test
 
 # Agent loads spec 02-discovery-scout.md
 # Validates inputs against spec
@@ -272,7 +272,7 @@ Every spec has a Changelog section:
 
 1. **Today:** Review HOW-TO-USE-SPECS.md
 2. **This week:** Update all agent files to reference specs (in progress)
-3. **Next week:** Run validation on Bradesco wave
+3. **Next week:** Run validation on ClienteBanco wave
 4. **Ongoing:** Update specs as requirements evolve
 
 ---

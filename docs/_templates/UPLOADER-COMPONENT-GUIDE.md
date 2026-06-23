@@ -1,21 +1,21 @@
-# 🎨 Avanade Google Drive Uploader Toast Component
+# 🎨 Consultoria Google Drive Uploader Toast Component
 
 ## Overview
 
-A modern, accessible React component for managing file uploads with real-time progress tracking. Pre-styled with **Avanade brand identity** and fully responsive.
+A modern, accessible React component for managing file uploads with real-time progress tracking. Pre-styled with **Consultoria brand identity** and fully responsive.
 
-**Location:** `/reports/_templates/google-drive-uploader-toast-avanade.tsx`
+**Location:** `/reports/_templates/google-drive-uploader-toast-consultoria.tsx`
 
 ---
 
-## 🎯 Avanade Brand Integration
+## 🎯 Consultoria Brand Integration
 
 ### Colors
 ```typescript
-// Avanade Official Brand Colors
-const AVANADE_COLORS = {
-  primary: "#ff6b35",      // Avanade Orange
-  secondary: "#1f3a93",    // Avanade Blue
+// Consultoria Official Brand Colors
+const CONSULTORIA_COLORS = {
+  primary: "#ff6b35",      // Consultoria Orange
+  secondary: "#1f3a93",    // Consultoria Blue
   accent: "#f7931e",       // Light Orange
   dark: "#0f1d4d",         // Dark Blue
   light: "#f9f9f9",        // Light Gray
@@ -29,7 +29,7 @@ const AVANADE_COLORS = {
 - **Weight:** Bold (600-700) for headers, Regular (400) for body
 
 ### Visual Identity
-- ✅ Orange accent bar under "AVANADE" header
+- ✅ Orange accent bar under "CONSULTORIA" header
 - ✅ Orange progress indicators
 - ✅ Blue borders on toast container
 - ✅ Professional shadow & depth
@@ -57,7 +57,7 @@ Copy these files to your project:
 src/
 ├── components/
 │   └── ui/
-│       └── google-drive-uploader-toast-avanade.tsx  (Component)
+│       └── google-drive-uploader-toast-consultoria.tsx  (Component)
 └── pages/
     └── demo/
         └── uploader-demo.tsx                        (Demo)
@@ -67,7 +67,7 @@ src/
 
 **Next.js / React App Router:**
 ```tsx
-import { Component } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function Page() {
   return <Component />;
@@ -76,7 +76,7 @@ export default function Page() {
 
 **Traditional React:**
 ```tsx
-import { Component } from './components/ui/google-drive-uploader-toast-avanade';
+import { Component } from './components/ui/google-drive-uploader-toast-consultoria';
 
 function App() {
   return <Component />;
@@ -89,7 +89,7 @@ function App() {
 
 ### Basic Implementation
 ```tsx
-import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export function MyPage() {
   return <UploadManager />;
@@ -215,7 +215,7 @@ const FILE_TYPES = {
 
 ### Pattern 1: Standalone Page
 ```tsx
-import UploadManager from '@/components/ui/google-drive-uploader-toast-avanade';
+import UploadManager from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function UploadPage() {
   return (
@@ -228,7 +228,7 @@ export default function UploadPage() {
 
 ### Pattern 2: Within Dashboard
 ```tsx
-import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export function Dashboard() {
   return (
@@ -245,7 +245,7 @@ export function Dashboard() {
 
 ### Pattern 3: Custom Upload Handler
 ```tsx
-import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export function DataMigrationUpload() {
   // Replace simulateUpload with actual API call
@@ -270,9 +270,9 @@ export function DataMigrationUpload() {
 ## 🎨 Customization Guide
 
 ### Change Primary Color
-In `google-drive-uploader-toast-avanade.tsx`:
+In `google-drive-uploader-toast-consultoria.tsx`:
 ```typescript
-const AVANADE_COLORS = {
+const CONSULTORIA_COLORS = {
   primary: "#YOUR_COLOR", // Change this
   // ... rest
 };
@@ -329,7 +329,7 @@ const FILE_TYPES = {
 ### Example Test Case
 ```typescript
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Component } from './google-drive-uploader-toast-avanade';
+import { Component } from './google-drive-uploader-toast-consultoria';
 
 describe('UploadManager', () => {
   it('should render upload buttons', () => {
@@ -387,12 +387,12 @@ describe('UploadManager', () => {
 
 ---
 
-## 📝 Example Integration in Bradesco Project
+## 📝 Example Integration in ClienteBanco Project
 
 ### Use Case: Data Migration Dashboard
 ```tsx
 // src/pages/migrations/upload.tsx
-import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-avanade';
+import { Component as UploadManager } from '@/components/ui/google-drive-uploader-toast-consultoria';
 
 export default function MigrationUploadPage() {
   return (
@@ -400,7 +400,7 @@ export default function MigrationUploadPage() {
       <header className="bg-white dark:bg-gray-800 shadow">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold" style={{ color: '#1f3a93' }}>
-            Bradesco Data Migration Upload
+            ClienteBanco Data Migration Upload
           </h1>
         </div>
       </header>
@@ -445,11 +445,11 @@ For questions or issues:
 1. Check component props in source code
 2. Review demo files
 3. Refer to customization guide above
-4. Check Avanade brand guidelines for styling questions
+4. Check Consultoria brand guidelines for styling questions
 
 ---
 
 **Generated:** 2026-06-05  
-**Project:** Avanade Data Migration Factory  
-**Component Version:** 1.0 (Avanade Branded)  
+**Project:** Consultoria Data Migration Factory  
+**Component Version:** 1.0 (Consultoria Branded)  
 **Status:** ✅ Ready for Production

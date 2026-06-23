@@ -5,7 +5,7 @@
 [![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-brightgreen)](.)
 [![Tests](https://img.shields.io/badge/tests-189%20passed-brightgreen)](src/shared/tests/)
 [![Python](https://img.shields.io/badge/python-3.13+-blue)](.)
-[![License](https://img.shields.io/badge/license-Avanade%20Internal-blueviolet)](.)
+[![License](https://img.shields.io/badge/license-Consultoria%20Internal-blueviolet)](.)
 
 ---
 
@@ -15,11 +15,11 @@ A **complete orchestration framework** for data platform migrations that:
 
 ✅ **Inventories** legacy systems (6+ platforms supported)  
 ✅ **Designs** target cloud architectures (Microsoft Fabric primary)  
-✅ **Executes** migrations autonomously (28 seconds for Bradesco)  
+✅ **Executes** migrations autonomously (28 seconds for ClienteBanco)  
 ✅ **Validates** data integrity (98.7% accuracy)  
-✅ **Generates** executive dashboards (Avanade-branded)
+✅ **Generates** executive dashboards (Consultoria-branded)
 
-### Real-World Example: Bradesco
+### Real-World Example: ClienteBanco
 
 | Metric | Value |
 |--------|-------|
@@ -39,19 +39,19 @@ A **complete orchestration framework** for data platform migrations that:
 
 ### 1. Setup
 ```powershell
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 .\.venv\Scripts\Activate.ps1
 pip install -r config/requirements-dev.txt
 ```
 
-### 2. Run Bradesco Migration
+### 2. Run ClienteBanco Migration
 ```powershell
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
 ### 3. View Dashboard
 ```powershell
-python -m http.server 8000 --directory projects/bradesco/outputs
+python -m http.server 8000 --directory projects/clientebanco/outputs
 # Open: http://localhost:8000/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
 ```
 
@@ -89,12 +89,12 @@ Start here if you're implementing **harness formalization, skills versioning, ob
 
 ### For Project Managers
 - **[projects/multi-platform-migration/EXEC-SUMMARY.md](projects/multi-platform-migration/EXEC-SUMMARY.md)** — 6-platform wave executive brief
-- **[docs/project-plans/BRADESCO-TIER1-EXECUTION-PLAN.md](docs/project-plans/BRADESCO-TIER1-EXECUTION-PLAN.md)** — Detailed execution plan
+- **[docs/project-plans/CLIENTEBANCO-TIER1-EXECUTION-PLAN.md](docs/project-plans/CLIENTEBANCO-TIER1-EXECUTION-PLAN.md)** — Detailed execution plan
 
 ### For Developers & Architects
-- **[projects/bradesco/README.md](projects/bradesco/README.md)** — How to run the main case
-- **[projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md)** — Complete workflow breakdown
-- **[projects/einstein-hiae/README.md](projects/einstein-hiae/README.md)** — KPI Portal & legacy analysis
+- **[projects/clientebanco/README.md](projects/clientebanco/README.md)** — How to run the main case
+- **[projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md](projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md)** — Complete workflow breakdown
+- **[projects/ClienteSaude/README.md](projects/ClienteSaude/README.md)** — KPI Portal & legacy analysis
 - **[REPOSITORY-QUICK-REFERENCE.md](REPOSITORY-QUICK-REFERENCE.md)** — Script and file locations
 - **[src/shared/scripts/README.md](src/shared/scripts/README.md)** — 23 governance modules
 - **[.github/specs/HOW-TO-USE-SPECS.md](.github/specs/HOW-TO-USE-SPECS.md)** — Specs system (3000+ words)
@@ -114,13 +114,13 @@ imfai-ava-fabric-data-agents/
 ├── 🆕 AGENTIC-ENGINEERING-V1-SUMMARY.md    ⭐ New: Harness formalization + roadmap (4 weeks)
 │
 ├── 🚀 projects/                            Active migration cases
-│   ├── bradesco/                           ⭐ Main case (COMPLETE)
-│   ├── einstein-hiae/                      Reference case
+│   ├── clientebanco/                           ⭐ Main case (COMPLETE)
+│   ├── ClienteSaude/                      Reference case
 │   └── multi-platform-migration/           6-platform wave (IN PROGRESS)
 │
 ├── 📊 reports/                             Dashboards & findings
-│   ├── _templates/                         Avanade branding templates
-│   ├── bradesco/                           Bradesco dashboards
+│   ├── _templates/                         Consultoria branding templates
+│   ├── clientebanco/                           ClienteBanco dashboards
 │   └── [client-specific reports]
 │
 ├── 📚 docs/                                Documentation hub
@@ -221,7 +221,7 @@ imfai-ava-fabric-data-agents/
 
 ## 📊 Key Metrics
 
-### Bradesco Case (Completed ✅)
+### ClienteBanco Case (Completed ✅)
 - **Legacy Artifacts Extracted:** 545 files
 - **Logical Entities Designed:** 146 models
 - **Data Migrated:** 12.4M rows
@@ -285,7 +285,7 @@ imfai-ava-fabric-data-agents/
          │ → Build tabbed HTML dashboard
          ↓
     Phase F: Template Normalization
-         │ → Apply Avanade branding template
+         │ → Apply Consultoria branding template
          │ → Archive non-HTML files
          │ → Publish for stakeholder review
          ↓
@@ -299,7 +299,7 @@ imfai-ava-fabric-data-agents/
 
 ### Autonomous Execution
 - 🔄 Runs end-to-end without manual intervention
-- ⏱️ 28 seconds for complete Bradesco case
+- ⏱️ 28 seconds for complete ClienteBanco case
 - 📊 Generates executive dashboards automatically
 
 ### 3-Tier Governance
@@ -313,8 +313,8 @@ imfai-ava-fabric-data-agents/
 - **Gate 3 (Execution):** Data integrity ≥99.9%, Validation score ≥98%
 
 ### Multi-Client Support
-- Bradesco (completed) → Cloudera to Databricks
-- Einstein HIAE (reference) → SUS healthcare data
+- ClienteBanco (completed) → Cloudera to Databricks
+- ClienteSaude ClienteSaude (reference) → SUS healthcare data
 - Multi-Platform Wave (6 systems in one orchestration)
 
 ### 🎯 Specs System (Phase 1, 2 & 3)
@@ -325,7 +325,7 @@ imfai-ava-fabric-data-agents/
 - **Status:** All automation scripts ready, scheduled execution 2026-06-17 to 06-20
 - **👉 Start here:** [**PHASE2-PHASE3-INDEX.md**](PHASE2-PHASE3-INDEX.md)
 
-### Avanade Branding
+### Consultoria Branding
 - 🎨 Consistent Orange DNA design system
 - 📱 Responsive dashboards (desktop & mobile)
 - ♿ WCAG accessibility compliant
@@ -335,7 +335,7 @@ imfai-ava-fabric-data-agents/
 ## 🚀 Getting Started
 
 ### For New Projects
-1. **Copy structure:** `cp -r projects/bradesco projects/[new-name]`
+1. **Copy structure:** `cp -r projects/clientebanco projects/[new-name]`
 2. **Fill configuration:** Edit `projects/[new-name]/wave-config.yaml`
 3. **Place data:** Add legacy exports to `projects/[new-name]/legacy/`
 4. **Execute:** `python projects/[new-name]/scripts/00_MASTER_PIPELINE.py`
@@ -409,7 +409,7 @@ docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
 ## 📈 Roadmap 2026-06-16 to 06-21
 
 ### ✅ Completed (v3 + Phase 1 Specs)
-- ✓ Bradesco case (autonomous execution)
+- ✓ ClienteBanco case (autonomous execution)
 - ✓ 3-tier governance framework
 - ✓ 189 test cases (100% passing)
 - ✓ Memory system (persistent knowledge)
@@ -477,16 +477,16 @@ docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
 
 ## 🙏 Credits
 
-**Framework:** Avanade Global AI Hub  
+**Framework:** Consultoria Global AI Hub  
 **Lead Architect:** GitHub Copilot (Claude Haiku 4.5)  
 **Quality Assurance:** Multi-agent orchestration system  
-**Branding:** Avanade Orange DNA design system
+**Branding:** Consultoria Orange DNA design system
 
 ---
 
 ## 📄 License
 
-**Avanade Internal Use Only**
+**Consultoria Internal Use Only**
 
 ---
 

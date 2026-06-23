@@ -1,4 +1,4 @@
-# 🎨 Avanade Golden Standard — Dashboard Design System
+# 🎨 Consultoria Golden Standard — Dashboard Design System
 
 **Version:** v3.0.0  
 **Last Updated:** June 9, 2026  
@@ -8,10 +8,10 @@
 
 ## 📋 Overview
 
-Todos os dashboards do repositório agora usam o **Padrão Ouro (Golden Standard) da Avanade**, garantindo:
+Todos os dashboards do repositório agora usam o **Padrão Ouro (Golden Standard) da Consultoria**, garantindo:
 
 - ✅ **Consistência visual** 100% fiel ao Orange DNA
-- ✅ **Design tokens** Avanade (cores, tipografia, spacing)
+- ✅ **Design tokens** Consultoria (cores, tipografia, spacing)
 - ✅ **Responsividade** mobile-first
 - ✅ **Acessibilidade** WCAG 2.1 AA
 - ✅ **Performance** CSS otimizado, zero dependências externas
@@ -20,7 +20,7 @@ Todos os dashboards do repositório agora usam o **Padrão Ouro (Golden Standard
 
 ## 🎯 Design Tokens
 
-### Cores Avanade Primárias
+### Cores Consultoria Primárias
 
 ```css
 --ava-orange: #FF5800;      /* Primary brand color */
@@ -177,10 +177,10 @@ reports/
 │   ├── standardize_dashboards.py          ← Automation script
 │   └── README-GOLDEN-STANDARD.md          ← This file
 │
-└── bradesco/
-    ├── bradesco-autonomous-test-report.html      ← Standardized ✅
-    ├── bradesco-3tier-dashboard.html             ← Standardized ✅
-    ├── bradesco-executive-dashboard.html         ← Standardized ✅
+└── clientebanco/
+    ├── clientebanco-autonomous-test-report.html      ← Standardized ✅
+    ├── clientebanco-3tier-dashboard.html             ← Standardized ✅
+    ├── clientebanco-executive-dashboard.html         ← Standardized ✅
     └── ROI_ANALYSIS_VISUAL.html                  ← Standardized ✅
 ```
 
@@ -224,7 +224,7 @@ This script:
 
 ---
 
-## 🎨 Using Avanade Colors
+## 🎨 Using Consultoria Colors
 
 ### Orange DNA Color System
 
@@ -323,7 +323,7 @@ Update CSS variables in `:root`:
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>My Dashboard | Avanade</title>
+    <title>My Dashboard | Consultoria</title>
     <!-- Copy full <style> from GOLDEN-STANDARD-TEMPLATE.html -->
 </head>
 <body>
@@ -386,7 +386,7 @@ Update CSS variables in `:root`:
 Before deploying a dashboard, verify:
 
 - [ ] Header has correct gradient (`#1a0a00 → #FF5800`)
-- [ ] All colors use Avanade palette
+- [ ] All colors use Consultoria palette
 - [ ] KPI cards are responsive (4+ columns on desktop, 2+ on mobile)
 - [ ] Tables have purple gradient headers
 - [ ] Footer includes DMF branding

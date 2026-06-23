@@ -79,8 +79,8 @@ Repository Root
 │   └── 📂 tests/
 │
 ├── 📂 projects/
-│   ├── bradesco/
-│   ├── einstein-hiae/
+│   ├── clientebanco/
+│   ├── ClienteSaude/
 │   └── multi-platform-migration/
 │
 └── [existing structure unchanged]
@@ -132,7 +132,7 @@ Repository Root
 
 | Component | Has Overview | Has Details | Has Examples | Has Roadmap | Status |
 |-----------|-------------|------------|-------------|------------|--------|
-| Harness | ✅ | ✅ | ✅ (Bradesco) | ✅ | 🟢 |
+| Harness | ✅ | ✅ | ✅ (ClienteBanco) | ✅ | 🟢 |
 | Skills Versioning | ✅ | ✅ | ✅ (YAML) | ✅ | 🟢 |
 | Observability | ✅ | ✅ | ✅ (Code) | ✅ (8 wk) | 🟢 |
 | Escalation | ✅ | ✅ | ✅ (Rules) | ✅ (Gates) | 🟢 |

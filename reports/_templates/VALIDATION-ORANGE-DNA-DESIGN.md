@@ -78,11 +78,11 @@ Display: Flex, align-items: center, justify-content: space-between
 ### 3️⃣ Color Palette — ✅ CONFIRMADO
 
 #### Primary Orange
-- **Button "New project":** #ff6b35 (Avanade orange — NOT Orange DNA's #ff5800)
+- **Button "New project":** #ff6b35 (Consultoria orange — NOT Orange DNA's #ff5800)
 - **Left border (active nav):** Orange accent
 - **Underline under "Active engagements":** Orange bar
 
-**✅ Avanade orange (#ff6b35) PRESERVED** — não foi substituído
+**✅ Consultoria orange (#ff6b35) PRESERVED** — não foi substituído
 
 #### Peach Highlight (NEW — Orange DNA)
 - **Active nav background:** #FFE6D3 (peach/light salmon)
@@ -91,10 +91,10 @@ Display: Flex, align-items: center, justify-content: space-between
 **✅ Orange DNA peach adoption CONFIRMADO**
 
 #### Blue (Secondary)
-- **Headers e texto:** #1f3a93 ou similar (Avanade blue)
+- **Headers e texto:** #1f3a93 ou similar (Consultoria blue)
 - **Breadcrumb:** "Orange DNA / Atlantic Bank / Dashboard" em blue
 
-**✅ Avanade blue PRESERVED**
+**✅ Consultoria blue PRESERVED**
 
 #### Neutrals & Status
 - **Card backgrounds:** #ffffff (white)
@@ -278,7 +278,7 @@ Screenshot é **light mode** (#ffffff backgrounds). Sidebar mostra branco puro, 
 1. **Sidebar navigation** (248px) → Implementado conforme spec
 2. **Top bar** (56px) → Implementado conforme spec
 3. **Peach highlight** (#FFE6D3) → Orange DNA adoption confirmado
-4. **Avanade colors preserved** (#ff6b35, #1f3a93) → NÃO foram substituídos
+4. **Consultoria colors preserved** (#ff6b35, #1f3a93) → NÃO foram substituídos
 5. **Spacing grid** (8px base) → Mantido, NÃO comprimido para 4px
 6. **Border-radius** (8px, soft) → Mantido, NÃO reduzido para 2px
 7. **Typography** (Segoe UI + system fonts) → Hybrid stack implementado
@@ -289,7 +289,7 @@ Screenshot é **light mode** (#ffffff backgrounds). Sidebar mostra branco puro, 
 1. **Phase 2 (Template Refactoring)** — Utilizar este screenshot como **design reference** para:
    - `executive-dashboard.html` — Adicionar sidebar + top bar
    - `DASHBOARD-TEMPLATE-ORANGE-DNA.html` — Criar novo template with all patterns
-   - Bradesco outputs — Regenerate with new template
+   - ClienteBanco outputs — Regenerate with new template
 
 2. **Phase 3 (Component Updates)** — Criar React components para:
    - Sidebar navigation (248px, active state #FFE6D3)
@@ -297,13 +297,13 @@ Screenshot é **light mode** (#ffffff backgrounds). Sidebar mostra branco puro, 
    - KPI card (with status indicators)
    - Status badge (4-color palette)
 
-3. **Phase 4 (Bradesco Integration)** — Aplicar novo design a:
+3. **Phase 4 (ClienteBanco Integration)** — Aplicar novo design a:
    - `consolidated-migration-report.html`
    - `executive-dashboard.html`
    - All project outputs
 
 4. **Phase 5 (Validation)** — Screenshot comparison:
-   - Before: Atual Bradesco dashboards
+   - Before: Atual ClienteBanco dashboards
    - After: New Orange DNA template
    - Visual regression testing (responsive: 320px, 640px, 1024px)
 

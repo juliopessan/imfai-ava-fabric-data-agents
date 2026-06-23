@@ -337,7 +337,7 @@ TESTING & VALIDATION
 ────────────────────
 [ ] Unit tests for telemetry_hook (test_integration_telemetry.py)
 [ ] Unit tests for gate_scorer (test_integration_gatescore.py)
-[ ] Integration test on bradesco Wave 2 historical data
+[ ] Integration test on clientebanco Wave 2 historical data
 [ ] Verify anti-pattern detection accuracy
 [ ] Validate scoring impact (< 0.30 total deduction)
 

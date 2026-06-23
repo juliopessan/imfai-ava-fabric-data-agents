@@ -92,8 +92,8 @@ Repository Root
 │   └── 🆕 spec-as-executable.md               DataContractValidator guide
 │
 ├── projects/
-│   ├── bradesco/
-│   ├── einstein-hiae/
+│   ├── clientebanco/
+│   ├── ClienteSaude/
 │   └── multi-platform-migration/
 │
 └── [existing structure unchanged]
@@ -152,7 +152,7 @@ Total: 15 min
 1. AGENTIC-ENGINEERING-V1-SUMMARY.md (5 min)
 2. HARNESS-MANIFEST.md (20 min)
 3. HUMAN-AGENT-CHECKPOINTS.md (15 min)
-4. projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md (15 min)
+4. projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md (15 min)
 Total: 55 min → Ready to approve Week 1
 ```
 
@@ -219,7 +219,7 @@ Week 1 — Harness Formalization
 Week 2 — Skills Versioning
 ├─ Schema: wave-config-extended.yaml
 ├─ Impl: Skills @version syntax
-└─ Test: Bradesco migration
+└─ Test: ClienteBanco migration
 
 Week 3 — Observability & Traces
 ├─ Docs: OBSERVABILITY-AND-TRACES.md
@@ -260,7 +260,7 @@ After reading these updates, you should be able to:
 **A:** Week 1 only requires review & approval. See [docs/HARNESS-MANIFEST.md](docs/HARNESS-MANIFEST.md).
 
 ### Q: Where are the examples?
-**A:** All docs include practical examples (Bradesco wave-config, Python pseudocode, YAML schemas).
+**A:** All docs include practical examples (ClienteBanco wave-config, Python pseudocode, YAML schemas).
 
 ### Q: Is implementation mandatory?
 **A:** The framework is ready. Implementation is recommended but optional; start with Week 1 (Harness review).

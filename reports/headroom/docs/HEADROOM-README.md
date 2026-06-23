@@ -25,7 +25,7 @@ Economia: $0.059 USD por handoff
 | **Compressão** ❌ | ✅ Incluído | 75–90% economia |
 | **Cache Otimizado** ❌ | ✅ Prefixo estável | +90% cache hits |
 | **Dados Recuperáveis** ❌ | ✅ CCR system | Sem perda |
-| **Custo Mensal** | — | 💰 -$20/mês (Bradesco) |
+| **Custo Mensal** | — | 💰 -$20/mês (ClienteBanco) |
 
 ---
 
@@ -57,7 +57,7 @@ Headroom.retrieve() → original (no cache, rápido)
 
 ---
 
-## 📊 Números (Bradesco)
+## 📊 Números (ClienteBanco)
 
 **Hoje:**
 ```
@@ -70,7 +70,7 @@ Headroom.retrieve() → original (no cache, rápido)
 Economia: $20.25/mês = $243/ano
 ```
 
-**10 Projects como Bradesco:**
+**10 Projects como ClienteBanco:**
 ```
 $2,430/ano + latência reduzida (ciclos mais rápidos)
 ```
@@ -87,7 +87,7 @@ pip install headroom-ai
 ### Step 2: Testar PoC
 ```bash
 python src/shared/scripts/headroom_poc.py \
-    --input projects/bradesco/outputs/midstream/architecture.json \
+    --input projects/clientebanco/outputs/midstream/architecture.json \
     --agent data-architect
 ```
 
@@ -131,7 +131,7 @@ python src/shared/scripts/headroom_poc.py \
 
 | Pergunta | Resposta |
 |----------|----------|
-| **Quanto economiza?** | 75–90% de tokens (= $200+/ano em Bradesco) |
+| **Quanto economiza?** | 75–90% de tokens (= $200+/ano em ClienteBanco) |
 | **Quanto custa?** | Grátis (open-source) |
 | **Quanto tempo integrar?** | 4 semanas (priorizada 32 horas) |
 | **Risco?** | Baixo — PoC é 2–3 dias |

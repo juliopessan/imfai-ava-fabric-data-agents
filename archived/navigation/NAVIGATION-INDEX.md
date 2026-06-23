@@ -20,7 +20,7 @@ Start here to understand the project:
 Understand the architecture:
 - **[docs/HARNESS-MANIFEST.md](docs/HARNESS-MANIFEST.md)** — Harness components & policies
 - **[docs/HUMAN-AGENT-CHECKPOINTS.md](docs/HUMAN-AGENT-CHECKPOINTS.md)** — Escalation rules (3-tier)
-- **[projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md)** — Migration pipeline
+- **[projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md](projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md)** — Migration pipeline
 - **[AGENTIC-ENGINEERING-V1-SUMMARY.md](AGENTIC-ENGINEERING-V1-SUMMARY.md)** — New framework overview
 - **[src/shared/schemas/wave-config-extended.yaml](src/shared/schemas/wave-config-extended.yaml)** — Configuration schema
 
@@ -56,7 +56,7 @@ Validate & monitor quality:
 Work with data models & specs:
 - **[.github/specs/HOW-TO-USE-SPECS.md](.github/specs/HOW-TO-USE-SPECS.md)** — Specs system (3000+ words)
 - **[src/shared/schemas/spec-as-executable.md](src/shared/schemas/spec-as-executable.md)** — Write data contracts
-- **[projects/bradesco/](projects/bradesco/)** — See examples
+- **[projects/clientebanco/](projects/clientebanco/)** — See examples
 
 ---
 
@@ -85,13 +85,13 @@ Work with data models & specs:
 → **[src/shared/schemas/spec-as-executable.md](src/shared/schemas/spec-as-executable.md)** (DataContractValidator)  
 → **[.github/specs/HOW-TO-USE-SPECS.md](.github/specs/HOW-TO-USE-SPECS.md)** (general specs info)
 
-#### ...run a Bradesco migration
+#### ...run a ClienteBanco migration
 → **[QUICK-START.md](QUICK-START.md)** (5 min)  
-→ **[projects/bradesco/README.md](projects/bradesco/README.md)** (detailed)
+→ **[projects/clientebanco/README.md](projects/clientebanco/README.md)** (detailed)
 
 #### ...understand the wave configuration
 → **[src/shared/schemas/wave-config-extended.yaml](src/shared/schemas/wave-config-extended.yaml)** (full schema)  
-→ **[/memories/repo/bradesco-migration-setup.md](/memories/repo/bradesco-migration-setup.md)** (context)
+→ **[/memories/repo/clientebanco-migration-setup.md](/memories/repo/clientebanco-migration-setup.md)** (context)
 
 #### ...find a script or module
 → **[REPOSITORY-QUICK-REFERENCE.md](REPOSITORY-QUICK-REFERENCE.md)** (file locations)  
@@ -123,7 +123,7 @@ Work with data models & specs:
 - **[docs/HARNESS-MANIFEST.md](docs/HARNESS-MANIFEST.md)** — Harness components & policies
 - **[docs/HUMAN-AGENT-CHECKPOINTS.md](docs/HUMAN-AGENT-CHECKPOINTS.md)** — Escalation architecture
 - **[docs/OBSERVABILITY-AND-TRACES.md](docs/OBSERVABILITY-AND-TRACES.md)** — Observability architecture
-- **[projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md)** — Pipeline architecture
+- **[projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md](projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md)** — Pipeline architecture
 
 ### Quick References
 - **[QUICK-START.md](QUICK-START.md)** — Get running in 5 min
@@ -177,7 +177,7 @@ Work with data models & specs:
 **A migration wave:**  
 1. Check wave config template → `src/shared/schemas/wave-config-extended.yaml`
 2. Learn specs format → `src/shared/schemas/spec-as-executable.md`
-3. Understand orchestration → `projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md`
+3. Understand orchestration → `projects/clientebanco/WORKFLOW_AND_ARCHITECTURE.md`
 
 **Harness improvements:**  
 1. Understand current harness → `docs/HARNESS-MANIFEST.md`

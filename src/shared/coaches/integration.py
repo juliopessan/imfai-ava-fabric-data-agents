@@ -33,7 +33,7 @@ class TelemetryHook:
         hook = TelemetryHook()
         hook.log_agent_execution(
             agent_id='data-architect',
-            wave='bradesco_wave_2',
+            wave='clientebanco_wave_2',
             gate=1,
             result=agent_result
         )
@@ -118,7 +118,7 @@ class AntiPatternGateScoringAdjustment:
         adjuster = AntiPatternGateScoringAdjustment()
         adjusted_score = adjuster.adjust_score(
             base_score=0.82,
-            wave='bradesco_wave_2',
+            wave='clientebanco_wave_2',
             gate=1,
             artifacts={...}
         )

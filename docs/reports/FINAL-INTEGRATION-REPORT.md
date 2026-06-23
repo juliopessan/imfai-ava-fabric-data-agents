@@ -26,7 +26,7 @@
 ```
 
 ### 2. **Master Pipeline Orchestrator** ✓
-- Path: `projects/bradesco/scripts/00_MASTER_PIPELINE.py`
+- Path: `projects/clientebanco/scripts/00_MASTER_PIPELINE.py`
 - Status: **Tested, validated, autonomous**
 - Performance: **28.1 seconds end-to-end** (6 phases)
 
@@ -35,14 +35,14 @@
 - Phase C: Midstream Design (4.9s) → 146 entities modeled
 - Phase D: Downstream Deployment (5.1s) → 12.45M rows validated (98.7%)
 - Phase E: Consolidation (3.8s) → ROI $167,049 calculated
-- Phase F: Normalization (1.3s) → Avanade branding applied
+- Phase F: Normalization (1.3s) → Consultoria branding applied
 - Archive (1s) → outputs/ cleaned
 
 ### 3. **Operational Cases** ✓
-- **Bradesco** (Cloudera → Databricks): Ready, tested, proven
-- **Einstein-HIAE** (SQL Server → Fabric): Structure complete, ready for execution
+- **ClienteBanco** (Cloudera → Databricks): Ready, tested, proven
+- **ClienteSaude** (SQL Server → Fabric): Structure complete, ready for execution
 
-### 4. **Complete Avanade Branding** ✓
+### 4. **Complete Consultoria Branding** ✓
 - Template: `DASHBOARD-TEMPLATE-MASTER.html`
 - Colors: #5c2d91 (purple) + #ff6b35 (orange)
 - Placeholders: 6 active ({{TITLE}}, {{MAIN_CONTENT}}, {{KPI_METRICS}}, etc.)
@@ -84,8 +84,8 @@
 
 ```
 [1] ESTRUTURA DE CASES              ✓ 2/2 PASSED
-    ✓ Case: bradesco
-    ✓ Case: einstein-hiae
+    ✓ Case: clientebanco
+    ✓ Case: ClienteSaude
 
 [2] MASTER PIPELINE & SCRIPTS       ✓ 7/7 PASSED
     ✓ All critical scripts present & validated
@@ -116,7 +116,7 @@ TOTAL: 22/22 PASSED — 100% OPERATIONAL
 |-------|----------|--------|
 | markdown not installed | `pip install markdown` | ✓ FIXED |
 | wave-config.yaml missing migration_scope | Added field to YAML | ✓ FIXED |
-| einstein-hiae missing scripts/, context/ | Created folders + README | ✓ FIXED |
+| ClienteSaude missing scripts/, context/ | Created folders + README | ✓ FIXED |
 | Template missing {{KPI_METRICS}} placeholder | Added to template | ✓ FIXED |
 
 ---
@@ -125,13 +125,13 @@ TOTAL: 22/22 PASSED — 100% OPERATIONAL
 
 ### 1. Execute Master Pipeline
 ```powershell
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+cd ~/projects/imfai-ava-fabric-data-agents
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Expected Output**:
 - Runtime: ~28 seconds
-- HTML dashboards: 3 (Avanade-branded)
+- HTML dashboards: 3 (Consultoria-branded)
 - Metrics: 545 files, 146 entities, 12.45M rows, 98.7% validated
 - ROI: $167,049 Year 1
 
@@ -195,7 +195,7 @@ Time: ~1 hour setup + 30 sec execution
 | fabricae-TODO.md | `/memories/repo/` | Roadmap & prioritization |
 | WORKFLOW-INTEGRATION-STATUS.md | workspace root | Integration status |
 | INTEGRATION-COMPLETE.md | workspace root | Detailed report |
-| projects/bradesco/README.md | projects/ | Case quick start |
+| projects/clientebanco/README.md | projects/ | Case quick start |
 
 ---
 
@@ -207,8 +207,8 @@ Time: ~1 hour setup + 30 sec execution
 ║                                                                       ║
 ║  ✓ System Memory:         Operational (6 files, 62 KB)                ║
 ║  ✓ Master Pipeline:       Validated (28.1s end-to-end)               ║
-║  ✓ Cases:                 2 operational (Bradesco + HIAE)             ║
-║  ✓ Branding:              Complete (Avanade colors + templates)       ║
+║  ✓ Cases:                 2 operational (ClienteBanco + ClienteSaude)             ║
+║  ✓ Branding:              Complete (Consultoria colors + templates)       ║
 ║  ✓ Dependencies:          All installed & verified                    ║
 ║  ✓ Validation:            22/22 PASSED (100%)                        ║
 ║                                                                       ║
@@ -223,7 +223,7 @@ Time: ~1 hour setup + 30 sec execution
 
 ### P0 — Immediate (Next 48 hours)
 - [ ] Execute master pipeline (verify dashboards)
-- [ ] Test new case onboarding (einstein-hiae)
+- [ ] Test new case onboarding (ClienteSaude)
 - [ ] Document execution results
 
 ### P1 — Short-term (Next week)
@@ -244,7 +244,7 @@ Time: ~1 hour setup + 30 sec execution
 **Exit Code**: 0  
 
 **Fabricae v3 — Autonomous Data Migration Factory**  
-**Avanade Data Platform Solutions**
+**Consultoria Data Platform Solutions**
 
 ---
 

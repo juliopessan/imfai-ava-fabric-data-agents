@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Padroniza todos os arquivos HTML com a estrutura Avanade do Bradesco.
+Padroniza todos os arquivos HTML com a estrutura Consultoria do ClienteBanco.
 Aplica o template mestre a todos os dashboards.
 """
 
@@ -10,7 +10,7 @@ from pathlib import Path
 from datetime import datetime
 
 def get_template_css():
-    """Retorna o CSS padrão Avanade"""
+    """Retorna o CSS padrão Consultoria"""
     return """        * {
             margin: 0;
             padding: 0;
@@ -323,7 +323,7 @@ def get_template_css():
 """
 
 def standardize_html(file_path, title, subtitle, project_name):
-    """Padroniza um arquivo HTML com a estrutura Avanade"""
+    """Padroniza um arquivo HTML com a estrutura Consultoria"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -357,7 +357,7 @@ def standardize_html(file_path, title, subtitle, project_name):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title_match} | Avanade</title>
+    <title>{title_match} | Consultoria</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <style>
 {get_template_css()}
@@ -385,7 +385,7 @@ def standardize_html(file_path, title, subtitle, project_name):
         <div class="footer">
             <p>
                 <strong>{project_name}</strong> | Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}<br>
-                Powered by Avanade's Data Migration Factory v3 | 
+                Powered by Consultoria's Data Migration Factory v3 | 
                 <span style="color: #ff6b35; font-weight: bold;">100% Autonomous Execution</span>
             </p>
         </div>
@@ -407,44 +407,44 @@ def standardize_html(file_path, title, subtitle, project_name):
 def main():
     """Padroniza todos os arquivos HTML"""
     
-    reports_dir = Path(r"c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents\reports")
+    reports_dir = Path(r"~/projects/imfai-ava-fabric-data-agents\reports")
     
     html_files = [
         {
             'path': reports_dir / '_templates' / 'executive-dashboard.html',
             'title': '📊 Executive Dashboard Template',
             'subtitle': 'Multi-Project Overview',
-            'project': 'Avanade Data Migration Factory'
+            'project': 'Consultoria Data Migration Factory'
         },
         {
             'path': reports_dir / '_templates' / 'example-dashboard.html',
             'title': '📈 Example Dashboard',
             'subtitle': 'Template Example',
-            'project': 'Avanade Data Migration Factory'
+            'project': 'Consultoria Data Migration Factory'
         },
         {
             'path': reports_dir / '_templates' / 'dashboard-with-metrics.html',
             'title': '📊 Dashboard with Metrics',
             'subtitle': 'Metrics Visualization',
-            'project': 'Avanade Data Migration Factory'
+            'project': 'Consultoria Data Migration Factory'
         },
         {
-            'path': reports_dir / 'bradesco' / 'ROI_ANALYSIS_VISUAL.html',
-            'title': '💰 ROI Analysis - Bradesco',
+            'path': reports_dir / 'clientebanco' / 'ROI_ANALYSIS_VISUAL.html',
+            'title': '💰 ROI Analysis - ClienteBanco',
             'subtitle': 'Cost-Benefit Analysis & Savings',
-            'project': 'Bradesco Data Migration'
+            'project': 'ClienteBanco Data Migration'
         },
         {
-            'path': reports_dir / 'bradesco' / 'bradesco-autonomous-test-report.html',
-            'title': '✅ Autonomous Test Report - Bradesco',
+            'path': reports_dir / 'clientebanco' / 'clientebanco-autonomous-test-report.html',
+            'title': '✅ Autonomous Test Report - ClienteBanco',
             'subtitle': 'Full Migration Testing & Validation',
-            'project': 'Bradesco Data Migration'
+            'project': 'ClienteBanco Data Migration'
         },
         {
-            'path': reports_dir / 'bradesco' / 'bradesco-3tier-dashboard.html',
-            'title': '🏗️ 3-Tier Migration Dashboard - Bradesco',
+            'path': reports_dir / 'clientebanco' / 'clientebanco-3tier-dashboard.html',
+            'title': '🏗️ 3-Tier Migration Dashboard - ClienteBanco',
             'subtitle': 'Upstream · Midstream · Downstream',
-            'project': 'Bradesco Data Migration'
+            'project': 'ClienteBanco Data Migration'
         },
     ]
     

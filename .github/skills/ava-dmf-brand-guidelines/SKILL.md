@@ -1,22 +1,22 @@
 ---
-name: avanade-brand-guidelines
-description: Aplica as diretrizes oficiais de marca da Avanade (cores, tipografia e estilo visual) a artefatos digitais e documentos, garantindo consistência visual, aderência a padrões corporativos e alinhamento com a identidade global da Avanade.
+name: consultoria-brand-guidelines
+description: Aplica as diretrizes oficiais de marca da Consultoria (cores, tipografia e estilo visual) a artefatos digitais e documentos, garantindo consistência visual, aderência a padrões corporativos e alinhamento com a identidade global da Consultoria.
 ---
 
 Use esta skill sempre que **brand, identidade visual, layout ou padrões de design corporativo** forem relevantes.
 
 ## License
-Uso interno Avanade. Consulte as políticas internas de Brand & Marketing para termos completos.
+Uso interno Consultoria. Consulte as políticas internas de Brand & Marketing para termos completos.
 
-## Avanade Brand Styling Overview
-Esta skill automatiza a aplicação da identidade visual Avanade em artefatos como:
+## Consultoria Brand Styling Overview
+Esta skill automatiza a aplicação da identidade visual Consultoria em artefatos como:
 - Apresentações (PPT/PPTX)
 - Documentos (Markdown, Word, PDF)
 - Diagramas e relatórios técnicos
 - Outputs gerados por agentes (decks, specs, proposals)
 
 ## Keywords
-branding, corporate identity, visual identity, avanade brand, design system, typography, brand colors, visual formatting, post-processing
+branding, corporate identity, visual identity, consultoria brand, design system, typography, brand colors, visual formatting, post-processing
 
 ---
 
@@ -25,7 +25,7 @@ branding, corporate identity, visual identity, avanade brand, design system, typ
 ### Colors
 
 #### Primary Colors
-- **Avanade Orange**: `#FF5800` — Cor principal de destaque e identidade
+- **Consultoria Orange**: `#FF5800` — Cor principal de destaque e identidade
 - **Dark Gray**: `#1F1F1F` — Texto principal e fundos escuros
 - **White**: `#FFFFFF` — Fundos claros e contraste
 
@@ -69,7 +69,7 @@ branding, corporate identity, visual identity, avanade brand, design system, typ
 - Contraste automático baseado no fundo
 
 ### Shapes & Accents
-- Elementos não textuais usam **Avanade Orange** com moderação
+- Elementos não textuais usam **Consultoria Orange** com moderação
 - Tons de cinza para suporte visual
 - Evita poluição visual e mantém padrão executivo
 
@@ -103,4 +103,4 @@ branding, corporate identity, visual identity, avanade brand, design system, typ
 
 ## Notes
 - Esta skill **não altera conteúdo**, apenas **forma e estilo**
-- Sempre prioriza clareza, sobriedade e padrão executivo Avanade
+- Sempre prioriza clareza, sobriedade e padrão executivo Consultoria

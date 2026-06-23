@@ -29,14 +29,14 @@ $moves = @(
     @{ source = 'PROJECT-COMPLETION-SUMMARY.md'; destination = 'docs/project-plans' }
     @{ source = 'REPOSITORY-STRUCTURE.md'; destination = 'docs/project-plans' }
     @{ source = 'INTEGRATION-CHECKLIST.md'; destination = 'docs/project-plans' }
-    @{ source = 'BRADESCO-TIER1-EXECUTION-PLAN.md'; destination = 'docs/project-plans' }
-    @{ source = 'BRADESCO-TIER1-VALIDATION-REPORT.md'; destination = 'docs/project-plans' }
+    @{ source = 'CLIENTEBANCO-TIER1-EXECUTION-PLAN.md'; destination = 'docs/project-plans' }
+    @{ source = 'CLIENTEBANCO-TIER1-VALIDATION-REPORT.md'; destination = 'docs/project-plans' }
     @{ source = 'GAP-ANALYSIS-REPORT.md'; destination = 'docs/project-plans' }
     
     # Scripts de Validação → /tools/validation/
     @{ source = 'WORKFLOW-INTEGRATION-CHECK.py'; destination = 'tools/validation' }
     @{ source = 'WORKFLOW-INTEGRATION-CHECK-v2.py'; destination = 'tools/validation' }
-    @{ source = 'run_bradesco_tier1_validation.py'; destination = 'tools/validation' }
+    @{ source = 'run_clientebanco_tier1_validation.py'; destination = 'tools/validation' }
     
     # Scripts de Utilidade → /tools/utilities/
     @{ source = 'test_telemetry_system.py'; destination = 'tools/utilities' }

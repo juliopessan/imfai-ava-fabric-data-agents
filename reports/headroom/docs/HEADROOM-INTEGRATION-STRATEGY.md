@@ -147,7 +147,7 @@ headroom mcp install
 
 # Step 3: Integração em mock
 python src/shared/scripts/headroom_poc.py \
-  --input projects/bradesco/outputs/midstream/architecture.json \
+  --input projects/clientebanco/outputs/midstream/architecture.json \
   --agent data-architect \
   --output reports/headroom-poc-results.json
 ```
@@ -224,7 +224,7 @@ def validate_compression(artifact: dict, min_ratio: float = 0.70):
 
 ## 5. Impacto Financeiro Estimado
 
-### Cenário: Bradesco Tier 1 + Tier 2 (18K tokens mensais em produção)
+### Cenário: ClienteBanco Tier 1 + Tier 2 (18K tokens mensais em produção)
 
 **Sem Headroom:**
 - 18,000 tokens/mês × $0.0015 = **$27 USD/mês**
@@ -233,7 +233,7 @@ def validate_compression(artifact: dict, min_ratio: float = 0.70):
 - 18,000 × 0.25 = 4,500 tokens/mês × $0.0015 = **$6.75 USD/mês**
 - **Economia: $20.25/mês ou $243/ano**
 
-**Com Scale (10 projects como Bradesco):**
+**Com Scale (10 projects como ClienteBanco):**
 - **Economia: $2,430/ano**
 
 **Mais importante:** ⏱️ Latência reduzida → ciclos de gate mais rápidos
@@ -263,7 +263,7 @@ def validate_compression(artifact: dict, min_ratio: float = 0.70):
 2. **[IMMEDIATE]** Rodar exemplo Headroom com arquivo de teste:
    ```bash
    python -m headroom compress \
-     --input projects/bradesco/outputs/midstream/architecture.json \
+     --input projects/clientebanco/outputs/midstream/architecture.json \
      --model "gpt-4o"
    ```
 3. **[2 DAYS]** Criar PoC script (`src/shared/scripts/headroom_poc.py`)
@@ -290,7 +290,7 @@ def validate_compression(artifact: dict, min_ratio: float = 0.70):
 ## 📊 Sumário Executivo
 
 **Por que Headroom agora?**
-1. Tokens são custo real (18K/mês × $0.0015 = $27 USD em Bradesco)
+1. Tokens são custo real (18K/mês × $0.0015 = $27 USD em ClienteBanco)
 2. Já temos token tracking (`token_metrics_collector.py`) — Headroom é próximo passo natural
 3. 75–90% compressão validada em mil+ deployments (Headroom community stats)
 4. Handoffs de agentes são pontos ótimos para compressão

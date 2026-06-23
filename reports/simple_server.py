@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple Static File Server for Einstein-HIAE Dashboards
+Simple Static File Server for ClienteSaude Dashboards
 Serves HTML files from reports/ directory without dependencies
 """
 
@@ -26,20 +26,20 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         # Decode URL
         path = unquote(self.path)
         
-        # Handle root request - serve INDEX.html from einstein-hiae
+        # Handle root request - serve INDEX.html from ClienteSaude
         if path == "/" or path == "":
-            self.path = "/reports/einstein-hiae/INDEX.html"
+            self.path = "/reports/ClienteSaude/INDEX.html"
         
-        # Handle einstein-hiae dashboard requests
-        elif path.startswith("/einstein-hiae/"):
+        # Handle ClienteSaude dashboard requests
+        elif path.startswith("/ClienteSaude/"):
             self.path = f"/reports{path}"
         
         # Handle direct dashboards access
-        elif path.startswith("/einstein-"):
-            self.path = f"/reports/einstein-hiae{path}"
+        elif path.startswith("/clientesaude-"):
+            self.path = f"/reports/ClienteSaude{path}"
         
         # Add index.html for directories
-        elif path.endswith("/") and not path.endswith("einstein-hiae/"):
+        elif path.endswith("/") and not path.endswith("ClienteSaude/"):
             if not path.endswith("index.html"):
                 self.path = path + "index.html"
         
@@ -66,11 +66,11 @@ def main():
     
     print(f"""
 ╔════════════════════════════════════════════════════════════════════╗
-║                   EINSTEIN-HIAE DASHBOARD SERVER                  ║
+║                   ClienteSaude DASHBOARD SERVER                  ║
 ║                                                                    ║
 ║  📊 http://localhost:{PORT}                                        ║
-║  📊 http://localhost:{PORT}/einstein-hiae/                        ║
-║  📊 http://localhost:{PORT}/einstein-executive-dashboard.html     ║
+║  📊 http://localhost:{PORT}/ClienteSaude/                        ║
+║  📊 http://localhost:{PORT}/clientesaude-executive-dashboard.html     ║
 ║                                                                    ║
 ║  Press Ctrl+C to stop                                             ║
 ╚════════════════════════════════════════════════════════════════════╝

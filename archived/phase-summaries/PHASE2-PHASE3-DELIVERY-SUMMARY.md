@@ -42,7 +42,7 @@
 │    3. Test workflow chain (3 min)                           │
 │    4. Measure token reduction (2 min)                       │
 │    5. Hallucination prevention (2 min)                      │
-│    6. Bradesco workflow readiness (3 min)                   │
+│    6. ClienteBanco workflow readiness (3 min)                   │
 │    7. Complete test suite (5 min)                           │
 │                                                              │
 │    Output:                                                   │
@@ -51,7 +51,7 @@
 │    • Workflow chain valid ✅                                │
 │    • Token reduction ≥70% ✅                                │
 │    • Hallucination prevention verified ✅                   │
-│    • Bradesco wave ready ✅                                 │
+│    • ClienteBanco wave ready ✅                                 │
 │    • Time: 31 minutes total (complete automation)           │
 │    • Final: PHASE 3 TESTING: ALL TESTS PASSED ✅            │
 └─────────────────────────────────────────────────────────────┘
@@ -140,7 +140,7 @@ PHASE 3: Comprehensive Testing (2026-06-20)
    ✅ TEST 3: Workflow Chain: Valid
    ✅ TEST 4: Token Reduction: 70.0%
    ✅ TEST 5: Hallucination Prevention: Valid
-   ✅ TEST 6: Bradesco Workflow: Workflow ready
+   ✅ TEST 6: ClienteBanco Workflow: Workflow ready
    
    ============================================================
    🎉 PHASE 3 TESTING: ALL TESTS PASSED ✅
@@ -173,7 +173,7 @@ Phase 3 Success
 [ ] Workflow chain validates end-to-end
 [ ] Token reduction ≥ 70%
 [ ] Hallucination prevention keywords found
-[ ] Bradesco wave config validated
+[ ] ClienteBanco wave config validated
 [ ] Legacy folder with sample data present
 [ ] Test report generated
 [ ] All tests marked: PASSED ✅

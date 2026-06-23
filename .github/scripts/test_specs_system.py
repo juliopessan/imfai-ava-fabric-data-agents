@@ -7,7 +7,7 @@ Phase 3: Comprehensive Testing of Specs System
 - Tests agent-spec compliance
 - Measures token reduction
 - Confirms zero hallucination
-- Tests workflow with sample Bradesco data
+- Tests workflow with sample ClienteBanco data
 
 Usage:
   python test_specs_system.py --all
@@ -250,16 +250,16 @@ class SpecsSystemTester:
         
         return prevention_found
     
-    def test_workflow_with_bradesco(self) -> Tuple[bool, str]:
-        """Test 6: Test workflow with Bradesco sample data."""
-        print("\n🧪 TEST 6: Test Workflow with Bradesco Wave")
+    def test_workflow_with_clientebanco(self) -> Tuple[bool, str]:
+        """Test 6: Test workflow with ClienteBanco sample data."""
+        print("\n🧪 TEST 6: Test Workflow with ClienteBanco Wave")
         print("-" * 60)
         
-        # Check if Bradesco wave config exists
-        wave_config = self.project_root / "projects" / "bradesco" / "wave-config.yaml"
+        # Check if ClienteBanco wave config exists
+        wave_config = self.project_root / "projects" / "clientebanco" / "wave-config.yaml"
         
         if not wave_config.exists():
-            print(f"⚠️  Bradesco wave-config.yaml not found")
+            print(f"⚠️  ClienteBanco wave-config.yaml not found")
             return False, "Wave config missing"
         
         print(f"✅ Wave config found: {wave_config}")
@@ -280,7 +280,7 @@ class SpecsSystemTester:
             print(f"✅ Wave config valid: {config.get('project_name')}")
             
             # Check legacy folder
-            legacy_folder = self.project_root / "projects" / "bradesco" / "legacy"
+            legacy_folder = self.project_root / "projects" / "clientebanco" / "legacy"
             if legacy_folder.exists():
                 legacy_files = list(legacy_folder.glob("*"))
                 print(f"✅ Legacy folder found: {len(legacy_files)} files")
@@ -303,7 +303,7 @@ class SpecsSystemTester:
         workflow_ok = self.test_spec_workflow_chain()
         token_metrics = self.measure_token_reduction()
         hallucination_ok = self.test_hallucination_prevention()
-        workflow_ok_bradesco, workflow_msg = self.test_workflow_with_bradesco()
+        workflow_ok_clientebanco, workflow_msg = self.test_workflow_with_clientebanco()
         
         # Summary
         print("\n" + "=" * 60)
@@ -316,7 +316,7 @@ class SpecsSystemTester:
             workflow_ok and
             token_metrics["target_met"] and
             hallucination_ok and
-            workflow_ok_bradesco
+            workflow_ok_clientebanco
         )
         
         print(f"✅ Specs Valid: {valid}/16")
@@ -324,7 +324,7 @@ class SpecsSystemTester:
         print(f"{'✅' if workflow_ok else '❌'} Workflow Chain: Valid")
         print(f"{'✅' if token_metrics['target_met'] else '❌'} Token Reduction: {token_metrics['reduction_percent']:.1f}% (target: 70%)")
         print(f"{'✅' if hallucination_ok else '❌'} Hallucination Prevention: Valid")
-        print(f"{'✅' if workflow_ok_bradesco else '❌'} Bradesco Workflow: {workflow_msg}")
+        print(f"{'✅' if workflow_ok_clientebanco else '❌'} ClienteBanco Workflow: {workflow_msg}")
         
         print("\n" + "=" * 60)
         if all_passed:

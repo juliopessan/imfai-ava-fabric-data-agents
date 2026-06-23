@@ -12,8 +12,8 @@ Workflow **Fabricae v3** (Autonomous Data Migration Factory) agora está **total
 
 1. ✅ **Sistema de Memória Persistente** (`/memories/repo/`)
 2. ✅ **Master Pipeline Orchestrator** (28 segundos end-to-end)
-3. ✅ **Dois Cases Operacionais** (Bradesco + Einstein-HIAE)
-4. ✅ **Avanade Branding Completo** (#5c2d91 + #ff6b35)
+3. ✅ **Dois Cases Operacionais** (ClienteBanco + ClienteSaude)
+4. ✅ **Consultoria Branding Completo** (#5c2d91 + #ff6b35)
 5. ✅ **Dependências Python Instaladas** (markdown + yaml)
 6. ✅ **Scripts Críticos Validados** (7/7 presentes)
 
@@ -38,15 +38,15 @@ TOTAL                               ✓ 22/22 OK
 
 ## 🚀 Sistema Pronto Para
 
-### 1. Executar Master Pipeline (Bradesco)
+### 1. Executar Master Pipeline (ClienteBanco)
 ```powershell
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+cd ~/projects/imfai-ava-fabric-data-agents
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Resultado esperado**: 
 - Execução: ~28 segundos (6 fases)
-- Output: 3 dashboards HTML (Avanade-branded)
+- Output: 3 dashboards HTML (Consultoria-branded)
 - ROI: $167,049 calculado
 - Validação: Gate scores gerados
 
@@ -72,7 +72,7 @@ Veja: `/memories/repo/fabricae-best-practices.md` → Seção "Adding a New Case
 
 **Passos** (1 hora total):
 1. Criar pasta: `mkdir projects/case-name/{scripts,legacy,context,outputs}`
-2. Copiar scripts: `cp projects/bradesco/scripts/* projects/case-name/scripts/`
+2. Copiar scripts: `cp projects/clientebanco/scripts/* projects/case-name/scripts/`
 3. Atualizar: `wave-config.yaml` com dados específicos do case
 4. Executar: `python projects/case-name/scripts/00_MASTER_PIPELINE.py`
 
@@ -92,9 +92,9 @@ python -m pip install markdown
 migration_scope: "Full modernization: SQL Server → Microsoft Fabric Medallion"
 ```
 
-### ✅ Correção 3: Estrutura Einstein-HIAE Completa
+### ✅ Correção 3: Estrutura ClienteSaude Completa
 ```
-projects/einstein-hiae/
+projects/ClienteSaude/
 ├── scripts/          [✓ Criado]
 ├── context/          [✓ Criado]
 ├── legacy/           [✓ Existia]
@@ -118,12 +118,12 @@ projects/einstein-hiae/
 |---------|-------|--------|
 | **Casos Operacionais** | 2 | ✓ |
 | **Scripts Críticos** | 7 | ✓ |
-| **Templates** | 1 (Avanade-branded) | ✓ |
+| **Templates** | 1 (Consultoria-branded) | ✓ |
 | **Dependências** | 4/4 | ✓ |
 | **Memória do Sistema** | 6 arquivos, ~62 KB | ✓ |
 | **Tempo Master Pipeline** | 28 segundos | ✓ |
 | **ROI Calculado** | $167,049 | ✓ |
-| **Validação Gates** | 27/27 Pass (Bradesco) | ✓ |
+| **Validação Gates** | 27/27 Pass (ClienteBanco) | ✓ |
 | **Token Savings (futuro)** | ~40% por sessão | ✓ |
 
 ---
@@ -155,8 +155,8 @@ projects/einstein-hiae/
 | MEMORY-INDEX.md | Navegação da memória | `/memories/repo/` |
 | fabricae-best-practices.md | How-to guide | `/memories/repo/` |
 | fabricae-architecture-decisions.md | Rationale técnica (10 ADRs) | `/memories/repo/` |
-| README.md | Quick start | `projects/bradesco/` |
-| WORKFLOW_AND_ARCHITECTURE.md | Detalhes workflow | `projects/bradesco/` |
+| README.md | Quick start | `projects/clientebanco/` |
+| WORKFLOW_AND_ARCHITECTURE.md | Detalhes workflow | `projects/clientebanco/` |
 | REPOSITORY-STRUCTURE.md | Organização folders | `workspace root` |
 
 ---
@@ -166,7 +166,7 @@ projects/einstein-hiae/
 ### ✅ Operacional
 - ✓ Execução autônoma (sem intervenção manual)
 - ✓ End-to-end em 28 segundos
-- ✓ Dashboards Avanade-branded prontos para stakeholders
+- ✓ Dashboards Consultoria-branded prontos para stakeholders
 - ✓ ROI quantificado automaticamente
 
 ### ✅ De Conhecimento
@@ -203,15 +203,15 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 │                                                          │
 │  ✅ Sistema de Memória Operacional                       │
 │  ✅ Master Pipeline Validado                             │
-│  ✅ Cases Operacionais (Bradesco + HIAE)                 │
-│  ✅ Avanade Branding Completo                            │
+│  ✅ Cases Operacionais (ClienteBanco + ClienteSaude)                 │
+│  ✅ Consultoria Branding Completo                            │
 │  ✅ Dependências Instaladas                              │
 │  ✅ Documentação Centralizada                            │
 │                                                          │
 │  🚀 PRONTO PARA PRODUÇÃO                                 │
 │                                                          │
 │  Próximo passo: Executar master pipeline                 │
-│  python projects/bradesco/scripts/00_MASTER_PIPELINE.py  │
+│  python projects/clientebanco/scripts/00_MASTER_PIPELINE.py  │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -225,4 +225,4 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 ---
 
 *Workflow Fabricae v3 — Autonomous Data Migration Factory*  
-*Avanade Data Platform Solutions*
+*Consultoria Data Platform Solutions*

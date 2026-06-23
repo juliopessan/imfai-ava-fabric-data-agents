@@ -116,7 +116,7 @@ ROOT:
     ├── test_spec_workflow_chain() — handoff valid?
     ├── measure_token_reduction() — ≥70% savings?
     ├── test_hallucination_prevention() — keywords?
-    ├── test_workflow_with_bradesco() — wave ready?
+    ├── test_workflow_with_clientebanco() — wave ready?
     └── run_all_tests() — complete suite
 
 ROOT:
@@ -134,7 +134,7 @@ ROOT:
 | 3. Workflow Chain | Handoff chain valid | 3 min | 01→02→...→10 ✅ |
 | 4. Token Reduction | Token savings | 2 min | ≥70% ✅ |
 | 5. Hallucination Prevention | NO GUESSING keywords | 2 min | Found ✅ |
-| 6. Bradesco Wave | Wave config valid | 3 min | Ready ✅ |
+| 6. ClienteBanco Wave | Wave config valid | 3 min | Ready ✅ |
 | 7. Complete Suite | All tests pass | 5 min | PASS ✅ |
 
 **Tempo Phase 3:**
@@ -148,7 +148,7 @@ ROOT:
 - [ ] Workflow chain valid
 - [ ] Token reduction ≥70%
 - [ ] Hallucination prevention verified
-- [ ] Bradesco wave ready
+- [ ] ClienteBanco wave ready
 - [ ] ALL TESTS PASSED ✅
 
 ---

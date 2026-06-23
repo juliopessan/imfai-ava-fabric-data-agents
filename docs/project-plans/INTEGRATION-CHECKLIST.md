@@ -17,10 +17,10 @@
 
 | Component | Status | Evidence |
 |-----------|--------|----------|
-| Master Orchestrator | ✓ OK | projects/bradesco/scripts/00_MASTER_PIPELINE.py exists |
-| Outputs Ready | ✓ OK | projects/bradesco/outputs folder exists |
-| HIAE Scripts | ✓ OK | projects/einstein-hiae/scripts folder created |
-| HIAE Context | ✓ OK | projects/einstein-hiae/context folder created |
+| Master Orchestrator | ✓ OK | projects/clientebanco/scripts/00_MASTER_PIPELINE.py exists |
+| Outputs Ready | ✓ OK | projects/clientebanco/outputs folder exists |
+| ClienteSaude Scripts | ✓ OK | projects/ClienteSaude/scripts folder created |
+| ClienteSaude Context | ✓ OK | projects/ClienteSaude/context folder created |
 | Template | ✓ OK | reports/_templates/DASHBOARD-TEMPLATE-MASTER.html |
 | Validation Script | ✓ OK | WORKFLOW-INTEGRATION-CHECK-v2.py ready |
 
@@ -53,14 +53,14 @@
 1. ✓ Integrated persistent memory system (6 files)
 2. ✓ Validated master pipeline (28.1s autonomous)
 3. ✓ Fixed dependencies (markdown, yaml installed)
-4. ✓ Completed case structures (Einstein-HIAE)
+4. ✓ Completed case structures (ClienteSaude)
 5. ✓ Enhanced templates (added {{KPI_METRICS}} placeholder)
 6. ✓ Created validation framework
 
 ### Quality Metrics
 - Validation Checks: 22/22 PASSED
 - Critical Files: 6/6 verified
-- Cases Operational: 2 (Bradesco + HIAE)
+- Cases Operational: 2 (ClienteBanco + ClienteSaude)
 - Scripts Ready: 7/7
 - Master Pipeline Time: 28.1 seconds
 - Exit Code: 0
@@ -77,8 +77,8 @@
 
 ### Execute Pipeline (Immediate)
 ```powershell
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+cd ~/projects/imfai-ava-fabric-data-agents
+python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 ```
 
 Expected: 28 seconds, 3 dashboards, $167K ROI calculated
@@ -108,8 +108,8 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 
 ### Verify All Files
 ```powershell
-Test-Path "projects/bradesco/scripts/00_MASTER_PIPELINE.py"
-Test-Path "projects/einstein-hiae/scripts"
+Test-Path "projects/clientebanco/scripts/00_MASTER_PIPELINE.py"
+Test-Path "projects/ClienteSaude/scripts"
 Test-Path "reports/_templates/DASHBOARD-TEMPLATE-MASTER.html"
 ```
 
@@ -154,7 +154,7 @@ Documentation Complete : YES
 1. ✓ DONE: Integrate workflow with memory system
 2. ✓ DONE: Validate all components
 3. NEXT: Execute master pipeline
-4. NEXT: Test case onboarding (Einstein-HIAE)
+4. NEXT: Test case onboarding (ClienteSaude)
 5. NEXT: Setup CI/CD (if needed)
 6. NEXT: Document lessons learned
 
@@ -190,9 +190,9 @@ This workflow is now fully integrated, validated, and ready for:
 - Future sessions (with token efficiency)
 
 **Next Action**: Execute master pipeline
-**Command**: python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+**Command**: python projects/clientebanco/scripts/00_MASTER_PIPELINE.py
 **Expected Time**: ~28 seconds
-**Expected Output**: 3 Avanade-branded dashboards
+**Expected Output**: 3 Consultoria-branded dashboards
 
 ---
 

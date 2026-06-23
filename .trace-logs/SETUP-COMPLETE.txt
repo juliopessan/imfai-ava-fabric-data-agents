@@ -23,7 +23,7 @@
 │   └── Validates: All trace event structures
 │
 ├── agents/                                    ✅ Agent execution traces
-│   └── agent_execution_bradesco-wave2_2026-06-18_example.jsonl
+│   └── agent_execution_clientebanco-wave2_2026-06-18_example.jsonl
 │       (5 sample traces for testing)
 │
 ├── workflows/                                 (Ready for workflow traces)
@@ -83,7 +83,7 @@ Step 3: Write Your First Trace
     context={
       "category": "agents",
       "agent_id": "my-agent",
-      "wave": "bradesco-wave2",
+      "wave": "clientebanco-wave2",
       "gate": 1
     },
     operation={
@@ -128,7 +128,7 @@ Each line in a JSONL file is a complete trace event:
   "context": {
     "category": "agents",                               agents|workflows|etl|gates|migrations|analytics
     "agent_id": "migration-coordinator",
-    "wave": "bradesco-wave2",
+    "wave": "clientebanco-wave2",
     "gate": 1,
     "tags": ["critical", "gate-1-validation"]
   },
@@ -321,7 +321,7 @@ START HERE (choose one):
 ✅ .trace-logs/trace-schema.json                           (150+ lines)
    → JSON Schema v1.0.0 for validation
 
-✅ .trace-logs/agents/agent_execution_bradesco-wave2_2026-06-18_example.jsonl
+✅ .trace-logs/agents/agent_execution_clientebanco-wave2_2026-06-18_example.jsonl
    → 5 sample traces (ready to test with)
 
 ✅ docs/observability/trace-logs/README.md                 (600+ lines)

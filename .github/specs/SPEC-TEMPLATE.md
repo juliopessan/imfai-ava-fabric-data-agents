@@ -140,7 +140,7 @@ Do NOT Produce:
 ### Input Provided
 ```yaml
 platform: "Cloudera"
-wave_config: projects/bradesco/wave-config.yaml
+wave_config: projects/clientebanco/wave-config.yaml
 discovery_owner: "discovery-scout"
 ```
 

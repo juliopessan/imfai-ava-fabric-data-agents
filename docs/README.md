@@ -32,8 +32,8 @@ Documentação estratégica, checklists e análises de projeto.
 | `PROJECT-COMPLETION-SUMMARY.md` | Sumário de conclusão geral do projeto |
 | `REPOSITORY-STRUCTURE.md` | Mapa de estrutura do repositório |
 | `INTEGRATION-CHECKLIST.md` | Checklist de integração |
-| `BRADESCO-TIER1-EXECUTION-PLAN.md` | Plano de execução Bradesco TIER 1 |
-| `BRADESCO-TIER1-VALIDATION-REPORT.md` | Validação Bradesco TIER 1 |
+| `CLIENTEBANCO-TIER1-EXECUTION-PLAN.md` | Plano de execução ClienteBanco TIER 1 |
+| `CLIENTEBANCO-TIER1-VALIDATION-REPORT.md` | Validação ClienteBanco TIER 1 |
 | `GAP-ANALYSIS-REPORT.md` | Análise de gaps de implementação |
 
 ### `_templates/` — Templates & Referência

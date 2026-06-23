@@ -40,22 +40,22 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 
 ---
 
-### 3. run_bradesco_tier1_validation.py
+### 3. run_clientebanco_tier1_validation.py
 
-**Propósito:** Validação específica para o projeto Bradesco (TIER 1)
+**Propósito:** Validação específica para o projeto ClienteBanco (TIER 1)
 
 **Uso:**
 ```bash
-python run_bradesco_tier1_validation.py
+python run_clientebanco_tier1_validation.py
 ```
 
 **Valida:**
-- Estrutura do projeto Bradesco
+- Estrutura do projeto ClienteBanco
 - Conformidade com padrões TIER 1
 - Artefatos de descoberta
 - Integridade de dados
 
-**Output:** Relatório específico de Bradesco
+**Output:** Relatório específico de ClienteBanco
 
 ---
 
@@ -114,7 +114,7 @@ pip install -r config/requirements-dev.txt
 ### Script não encontrado
 ```bash
 # Certificar que está no diretório correto
-cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+cd ~/projects/imfai-ava-fabric-data-agents
 ls tools/validation/
 ```
 

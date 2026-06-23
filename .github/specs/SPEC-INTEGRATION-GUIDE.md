@@ -171,7 +171,7 @@ python .github/scripts/validate_agent_contracts.py --all-specs
 
 ### Validate Workflow
 ```bash
-python .github/scripts/validate_agent_contracts.py --validate-wave bradesco
+python .github/scripts/validate_agent_contracts.py --validate-wave clientebanco
 ```
 
 ---

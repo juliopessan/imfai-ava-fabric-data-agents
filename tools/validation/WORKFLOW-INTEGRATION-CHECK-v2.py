@@ -46,7 +46,7 @@ def validate():
     print(f"{C.B}[1] ESTRUTURA DE CASES{C.E}")
     print("=" * 76)
     
-    for case_name in ["bradesco", "einstein-hiae"]:
+    for case_name in ["clientebanco", "ClienteSaude"]:
         case_path = ws_root / "projects" / case_name
         exists = case_path.exists()
         
@@ -67,13 +67,13 @@ def validate():
     print("=" * 76)
     
     critical_scripts = {
-        "projects/bradesco/scripts/00_MASTER_PIPELINE.py": "Master orchestrator",
-        "projects/bradesco/scripts/run_all_phases.py": "Phase B: Upstream",
-        "projects/bradesco/scripts/run_midstream_phases.py": "Phase C: Midstream",
-        "projects/bradesco/scripts/run_downstream_phases.py": "Phase D: Downstream",
-        "projects/bradesco/scripts/generate_consolidated_report.py": "Report generation",
-        "projects/bradesco/scripts/generate_tabbed_report.py": "Dashboard generation",
-        "projects/bradesco/scripts/normalize_outputs_to_template.py": "Template normalization"
+        "projects/clientebanco/scripts/00_MASTER_PIPELINE.py": "Master orchestrator",
+        "projects/clientebanco/scripts/run_all_phases.py": "Phase B: Upstream",
+        "projects/clientebanco/scripts/run_midstream_phases.py": "Phase C: Midstream",
+        "projects/clientebanco/scripts/run_downstream_phases.py": "Phase D: Downstream",
+        "projects/clientebanco/scripts/generate_consolidated_report.py": "Report generation",
+        "projects/clientebanco/scripts/generate_tabbed_report.py": "Dashboard generation",
+        "projects/clientebanco/scripts/normalize_outputs_to_template.py": "Template normalization"
     }
     
     for script_rel, description in critical_scripts.items():
@@ -92,7 +92,7 @@ def validate():
     
     template_path = ws_root / "reports" / "_templates" / "DASHBOARD-TEMPLATE-MASTER.html"
     if template_path.exists():
-        ok("Template: DASHBOARD-TEMPLATE-MASTER.html", "Avanade branding")
+        ok("Template: DASHBOARD-TEMPLATE-MASTER.html", "Consultoria branding")
         
         # Check placeholders
         with open(template_path, 'r', encoding='utf-8') as f:
@@ -122,7 +122,7 @@ def validate():
     print(f"\n{C.B}[4] CONFIGURAÇÃO{C.E}")
     print("=" * 76)
     
-    wave_config = ws_root / "projects" / "einstein-hiae" / "wave-config.yaml"
+    wave_config = ws_root / "projects" / "ClienteSaude" / "wave-config.yaml"
     if wave_config.exists():
         ok("wave-config.yaml", "Configuration file present")
         
@@ -173,11 +173,11 @@ def validate():
     print(f"\n{C.B}[6] OUTPUTS & FUNCIONALIDADE{C.E}")
     print("=" * 76)
     
-    outputs_path = ws_root / "projects" / "bradesco" / "outputs"
+    outputs_path = ws_root / "projects" / "clientebanco" / "outputs"
     if outputs_path.exists():
-        ok("Outputs folder: bradesco", "Ready for generated reports")
+        ok("Outputs folder: clientebanco", "Ready for generated reports")
     else:
-        fail("Outputs folder: bradesco", "NOT FOUND")
+        fail("Outputs folder: clientebanco", "NOT FOUND")
         all_ok = False
     
     # ========================================================================
@@ -191,10 +191,10 @@ def validate():
         print(f"{C.G}{C.B}✓ TUDO 100% FUNCIONAL!{C.E}\n")
         print(f"{C.C}Sistema pronto para:{C.E}")
         print(f"  1. Executar master pipeline:")
-        print(f"     python projects/bradesco/scripts/00_MASTER_PIPELINE.py")
+        print(f"     python projects/clientebanco/scripts/00_MASTER_PIPELINE.py")
         print(f"\n  2. Referenciar documentação:")
         print(f"     - Memória: /memories/repo/MEMORY-INDEX.md")
-        print(f"     - Código: projects/bradesco/README.md")
+        print(f"     - Código: projects/clientebanco/README.md")
         print(f"\n  3. Adicionar novo case:")
         print(f"     - Veja: /memories/repo/fabricae-best-practices.md")
         return 0

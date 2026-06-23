@@ -1,6 +1,6 @@
 # Executive Dashboard — Data Migration Factory v3
 
-> **Avanade-branded executive dashboard** for enterprise data platform migration oversight. Designed for C-suite, PMO, and stakeholder communication. **Now with real-time token usage tracking and cost analytics.**
+> **Consultoria-branded executive dashboard** for enterprise data platform migration oversight. Designed for C-suite, PMO, and stakeholder communication. **Now with real-time token usage tracking and cost analytics.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 | File | Purpose |
 |------|---------|
-| `executive-dashboard.html` | 🎨 Main dashboard — Avanade Style Guide 100% compliant |
+| `executive-dashboard.html` | 🎨 Main dashboard — Consultoria Style Guide 100% compliant |
 | `generate-dashboard.py` | 🔧 Python script to generate live dashboard from wave data |
 | `EXECUTIVE-DASHBOARD-GUIDE.md` | 📖 User guide + customization instructions |
 | `validate-compliance.py` | ✅ Style guide compliance checker |
@@ -116,11 +116,11 @@ The dashboard now includes:
 
 ## 🎨 Design System
 
-**Avanade Brand Compliance:** ✅ 100%
+**Consultoria Brand Compliance:** ✅ 100%
 
 - **Colors:** Orange #FF5800 (primary), Greys (80–10), master gradient (135° Orange→Aurora)
 - **Typography:** Segoe UI (Light for H1/H2, Semibold for H3/H5), 42pt–20pt hierarchy
-- **Cards:** Border-top 4px orange, hover effects, Avanade shadow system
+- **Cards:** Border-top 4px orange, hover effects, Consultoria shadow system
 - **Spacing:** 8px base unit (all margins/padding in multiples)
 - **Tagline:** "Do what matters" (Orange hero section, white footer)
 - **Responsive:** Mobile-first, tested on all breakpoints + print
@@ -255,7 +255,7 @@ Before sharing with executives:
 - **WCAG 2.1 AA:** Color contrast verified, semantic HTML, responsive
 - **Print-friendly:** Header/footer hidden, cards forced white bg
 - **Microsoft Stack:** 100% — no external CDNs or non-Microsoft tooling
-- **Brand:** Avanade Style Guide 100% applied
+- **Brand:** Consultoria Style Guide 100% applied
 
 ---
 
@@ -289,7 +289,7 @@ GET http://127.0.0.1:8000/health
 ### Compliance Check
 ```bash
 python validate-compliance.py
-# ✅ PASSED: 100% Avanade Style Guide Compliant
+# ✅ PASSED: 100% Consultoria Style Guide Compliant
 ```
 
 ### Token Metrics Validation
@@ -347,5 +347,5 @@ See: `docs/OPERATING-MODEL-CANVAS-v2.md` or `docs/COPILOT-AGENTS-GUIDE.md`
 **Last Updated:** 2026-06-05  
 **Version:** 2.0 (with Token Metrics)  
 **Status:** ✅ Production Ready  
-**Compliance:** Avanade Style Guide 100% | WCAG 2.1 AA ✅  
+**Compliance:** Consultoria Style Guide 100% | WCAG 2.1 AA ✅  
 **Token Metrics:** ✅ Complete & Tested

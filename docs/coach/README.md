@@ -98,7 +98,7 @@ WEEK 2 (Jul 1–5)    ✓ GateScore + Dashboard
 ```
 
 **Deliverable:** Telemetry flowing + GateScore adjusting + metrics dashboard  
-**Success Criteria:** All 3 components working on bradesco Wave 2 history
+**Success Criteria:** All 3 components working on clientebanco Wave 2 history
 
 ---
 

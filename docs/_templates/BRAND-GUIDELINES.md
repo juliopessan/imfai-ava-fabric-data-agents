@@ -1,16 +1,16 @@
-# 🎨 Avanade Brand Guidelines — Component Implementation (v2.0 + Orange DNA)
+# 🎨 Consultoria Brand Guidelines — Component Implementation (v2.0 + Orange DNA)
 
-> **Updated:** 2026-06-08 · Integrated Orange DNA design system while preserving Avanade brand identity.  
+> **Updated:** 2026-06-08 · Integrated Orange DNA design system while preserving Consultoria brand identity.  
 > **Reference:** See `ORANGE-DNA-DESIGN-SYSTEM.md` for comprehensive token documentation.  
 > **CSS Tokens:** Import `DESIGN-TOKENS.css` in all projects (single source of truth).
 
 ---
 
-## Avanade Color Palette (PRESERVED)
+## Consultoria Color Palette (PRESERVED)
 
 ### Primary Colors — REGISTERED BRAND (DO NOT REPLACE)
 ```
-Avanade Orange (Primary CTA)
+Consultoria Orange (Primary CTA)
 HEX:  #ff6b35
 RGB:  (255, 107, 53)
 CMYK: (0, 65, 80, 0)
@@ -19,7 +19,7 @@ NOTE: Not #ff5800 (Orange DNA). Keep #ff6b35 for brand compliance.
 ```
 
 ```
-Avanade Blue (Secondary)
+Consultoria Blue (Secondary)
 HEX:  #1f3a93
 RGB:  (31, 58, 147)
 CMYK: (95, 85, 0, 42)
@@ -93,7 +93,7 @@ Usage: Borders, dividers, subtle lines
 ### Font Family
 **Primary:** Segoe UI, Arial, sans-serif  
 **Fallback:** -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif (system fonts for resilience)  
-**Rationale:** Segoe UI is Microsoft standard (Avanade brand); system fonts provide fallback reliability.
+**Rationale:** Segoe UI is Microsoft standard (Consultoria brand); system fonts provide fallback reliability.
 
 ### Font Weights & Sizes
 
@@ -193,7 +193,7 @@ Usage: Borders, dividers, subtle lines
 ### Header Section
 ```
 ┌─────────────────────────────────────┐
-│ AVANADE                             │
+│ CONSULTORIA                             │
 │ ───── (orange underline)            │
 │                                     │
 │ Data Migration Upload Manager       │
@@ -202,7 +202,7 @@ Usage: Borders, dividers, subtle lines
 ```
 
 **Implementation:**
-- "AVANADE" text: Bold, #1f3a93
+- "CONSULTORIA" text: Bold, #1f3a93
 - Underline bar: 4px height, #ff6b35
 - Main title: Bold, #1f3a93, 32px
 - Subtitle: Regular, #0f1d4d, 16px
@@ -417,7 +417,7 @@ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
 | File | Purpose |
 |------|---------|
-| `google-drive-uploader-toast-avanade.tsx` | Main component with branding |
+| `google-drive-uploader-toast-consultoria.tsx` | Main component with branding |
 | `demo-uploader.tsx` | Demo with full brand presentation |
 | This file | Brand guidelines reference |
 | `UPLOADER-COMPONENT-GUIDE.md` | Technical integration guide |
@@ -429,7 +429,7 @@ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
 ```
 // Copy-paste into your component
-const AVANADE_COLORS = {
+const CONSULTORIA_COLORS = {
   // Primary (PRESERVED)
   primary: "#ff6b35",              // Orange - main CTA
   secondary: "#1f3a93",            // Blue - headers
@@ -508,7 +508,7 @@ For all new projects and components, **import and use CSS custom properties** in
 - ✅ Add top bar (56px) to dashboards (NEW)
 - ✅ Import DESIGN-TOKENS.css for all colors (NEW)
 - ✅ Combine orange + blue for professional look
-- ✅ Include Avanade logo/text in prominent location
+- ✅ Include Consultoria logo/text in prominent location
 - ✅ Use 20px border radius for toast
 - ✅ Implement dark mode support
 - ✅ Use lucide-react for consistency
@@ -523,7 +523,7 @@ For all new projects and components, **import and use CSS custom properties** in
 - ❌ Do NOT hard-code colors (use DESIGN-TOKENS.css variables)
 - ❌ Change primary orange to different shade
 - ❌ Use red (#e74c3c) for primary actions
-- ❌ Remove Avanade branding
+- ❌ Remove Consultoria branding
 - ❌ Use gradients (unless on accent elements)
 - ❌ Mix multiple brand colors randomly
 - ❌ Ignore dark mode requirements
@@ -548,7 +548,7 @@ style={{
 ```tsx
 // ✓ Good
 <div style={{ color: "#1f3a93", fontSize: "32px", fontWeight: "bold" }}>
-  AVANADE
+  CONSULTORIA
   <div style={{ height: "4px", width: "60px", backgroundColor: "#ff6b35", marginTop: "8px" }} />
 </div>
 ```
@@ -578,7 +578,7 @@ style={{
 Refer to:
 1. **Design System:** See `ORANGE-DNA-DESIGN-SYSTEM.md` (comprehensive token reference)
 2. **CSS Tokens:** See `DESIGN-TOKENS.css` (import in all projects)
-3. **Color palette:** See "Avanade Color Palette" section above
+3. **Color palette:** See "Consultoria Color Palette" section above
 4. **Typography:** Check "Typography" section (font weights/sizes table)
 5. **Layout & Navigation:** Check "Layout & Navigation (Orange DNA)" section
 6. **Implementation:** Check `UPLOADER-COMPONENT-GUIDE.md`
@@ -587,7 +587,7 @@ Refer to:
 ---
 
 **Last Updated:** 2026-06-08  
-**Brand Version:** Avanade 2026 + Orange DNA Integration  
+**Brand Version:** Consultoria 2026 + Orange DNA Integration  
 **Status:** ✅ Complete (v2.0)  
 **Related Files:**
 - `ORANGE-DNA-DESIGN-SYSTEM.md` — Comprehensive design token documentation

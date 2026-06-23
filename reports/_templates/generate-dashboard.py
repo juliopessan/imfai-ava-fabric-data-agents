@@ -13,7 +13,7 @@ from typing import Any, Dict, Optional
 
 
 class DashboardGenerator:
-    """Generate Avanade-branded executive dashboard from migration data."""
+    """Generate Consultoria-branded executive dashboard from migration data."""
 
     TEMPLATE_PATH = Path(__file__).parent / "executive-dashboard.html"
     OUTPUT_DIR = Path(__file__).parent

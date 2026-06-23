@@ -1,5 +1,5 @@
 /**
- * Orange DNA + Avanade Hybrid Components
+ * Orange DNA + Consultoria Hybrid Components
  * Reference implementation for React components using DESIGN-TOKENS.css
  * 
  * Components:

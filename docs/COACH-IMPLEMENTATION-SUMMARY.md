@@ -65,7 +65,7 @@
 
 1. **Verify structure:**
    ```bash
-   cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+   cd ~/projects/imfai-ava-fabric-data-agents
    ls .coach/                    # Should see: telemetry/, rules/, reports/, README.md
    ls src/shared/coaches/        # Should see: __init__.py, telemetry_collector.py, anti_pattern_detector.py
    ```
@@ -142,15 +142,15 @@
    ```
    (Similar YAMLs for other 5 rules)
 
-3. **Test with bradesco Wave 2 history:**
+3. **Test with clientebanco Wave 2 history:**
    ```bash
    # Simulate past executions
-   python scripts/replay_bradesco_wave2_telemetry.py  # [to be created]
+   python scripts/replay_clientebanco_wave2_telemetry.py  # [to be created]
    
    # Analyze
    python -c "
    from src.shared.coaches import telemetry_collector
-   summary = telemetry_collector.collector.summarize_wave('bradesco_wave_2')
+   summary = telemetry_collector.collector.summarize_wave('clientebanco_wave_2')
    print(f'Wave {summary[\"wave\"]}: {summary[\"event_count\"]} events, \${summary[\"total_cost_usd\"]}')
    "
    ```
@@ -167,8 +167,8 @@
 
 - Create `.coach/cli.py` (CLI wrapper):
   ```bash
-  python -m src.shared.coaches.cli --wave bradesco_wave_2 --action analyze
-  # Output: .coach/reports/bradesco-wave-2-analysis.html
+  python -m src.shared.coaches.cli --wave clientebanco_wave_2 --action analyze
+  # Output: .coach/reports/clientebanco-wave-2-analysis.html
   ```
 
 ---
@@ -183,7 +183,7 @@ migration-coordinator.spawn_agent(...)
     ↓
 telemetry_collector.log_execution(...)     ← NEW
     ↓
-.coach/telemetry/bradesco_wave_2_2026-06-18.jsonl  [APPEND]
+.coach/telemetry/clientebanco_wave_2_2026-06-18.jsonl  [APPEND]
 ```
 
 ### **Flow 2: Gate Sign-Off (Anti-Pattern Detection)**
@@ -204,7 +204,7 @@ wave_status_tracker.mark_wave_complete(...)
 coach_report = telemetry_collector.summarize_wave(...)  ← NEW
 coach_report += anti_pattern_detector.generate_report(...)  ← NEW
     ↓
-.coach/reports/bradesco-wave-2-analysis.html  [CREATE]
+.coach/reports/clientebanco-wave-2-analysis.html  [CREATE]
 ```
 
 ---
@@ -259,7 +259,7 @@ imfai-ava-fabric-data-agents/
 - [ ] Decide on hook point with migration-coordinator (Migration Wave Orchestrator)
 - [ ] Create `.coach/rules/` YAMLs for all 6 anti-patterns
 - [ ] Add telemetry hook to migration-coordinator
-- [ ] Run on historical data (bradesco Wave 2)
+- [ ] Run on historical data (clientebanco Wave 2)
 
 ### **Priority 3: Build Dashboard** (Next week)
 - [ ] Create HTML template with Chart.js

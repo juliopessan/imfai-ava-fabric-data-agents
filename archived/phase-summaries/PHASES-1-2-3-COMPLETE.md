@@ -44,7 +44,7 @@
   3. ✅ Test spec workflow chain (01→02→...→10)
   4. ✅ Measure token reduction (target ≥70%)
   5. ✅ Test hallucination prevention (keywords search)
-  6. ✅ Test workflow with Bradesco (wave-config validation)
+  6. ✅ Test workflow with ClienteBanco (wave-config validation)
   7. ✅ Run all tests + generate summary
 - **Automation:** 31 minutes (all tests + report generation)
 - **Quality:** 100% test coverage with validation rules
@@ -104,7 +104,7 @@ Functions:
   ✅ test_spec_workflow_chain() — Test 3 (workflow valid)
   ✅ measure_token_reduction() — Test 4 (token savings)
   ✅ test_hallucination_prevention() — Test 5 (prevention verified)
-  ✅ test_workflow_with_bradesco() — Test 6 (wave ready)
+  ✅ test_workflow_with_clientebanco() — Test 6 (wave ready)
   ✅ run_all_tests() — Test 7 (complete suite)
 
 Usage:
@@ -137,7 +137,7 @@ Expected Output:
 - [ ] Test 3: Workflow chain valid ✅
 - [ ] Test 4: Token reduction ≥70% ✅
 - [ ] Test 5: Hallucination prevention verified ✅
-- [ ] Test 6: Bradesco wave ready ✅
+- [ ] Test 6: ClienteBanco wave ready ✅
 - [ ] Test 7: PHASE 3 TESTING: ALL TESTS PASSED ✅
 - [ ] JSON report generated and committed
 
@@ -194,7 +194,7 @@ Expected Output:
 ### When 2026-06-17 Arrives (Phase 2)
 ```powershell
 # Open VS Code
-code c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
+code ~/projects/imfai-ava-fabric-data-agents
 
 # Read execution guide
 # Open: PHASE2-PHASE3-EXECUTION-ROADMAP.md (Phase 2 section)

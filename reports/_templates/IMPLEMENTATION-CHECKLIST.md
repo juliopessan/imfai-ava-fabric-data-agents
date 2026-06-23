@@ -1,7 +1,7 @@
 # Executive Dashboard — Implementation Checklist
 
 **Status:** ✅ Production Ready  
-**Compliance:** Avanade Style Guide 100%  
+**Compliance:** Consultoria Style Guide 100%  
 **Date:** 2026-06-05
 
 ---
@@ -9,7 +9,7 @@
 ## Phase 1: Review & Validation ✅
 
 - [x] Dashboard HTML created (executive-dashboard.html)
-- [x] All Avanade colors applied (#FF5800, Greys, status colors)
+- [x] All Consultoria colors applied (#FF5800, Greys, status colors)
 - [x] Segoe UI typography + proper weight hierarchy
 - [x] Cards with border-top orange + hover effects
 - [x] 8px base spacing throughout
@@ -202,7 +202,7 @@ python reports/generate-dashboard.py --sample --output temp.html
 
 ### **Can't see Segoe UI font**
 - ✅ Not required — fallback works
-- ✅ Dashboard is still 100% Avanade compliant
+- ✅ Dashboard is still 100% Consultoria compliant
 - ✅ Install Segoe UI from Windows font manager if desired
 
 ### **Gate status not updating**
@@ -232,7 +232,7 @@ python reports/generate-dashboard.py --sample --output temp.html
 ## Success Criteria
 
 ✅ **All Met:**
-- [x] Dashboard created in 100% Avanade Style
+- [x] Dashboard created in 100% Consultoria Style
 - [x] Compliance validator passes
 - [x] Responsive on all devices
 - [x] Accessible (WCAG 2.1 AA)

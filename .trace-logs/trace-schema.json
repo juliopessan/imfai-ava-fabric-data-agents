@@ -51,7 +51,7 @@
         },
         "wave": {
           "type": "string",
-          "description": "Migration wave name (e.g., 'bradesco-wave2')"
+          "description": "Migration wave name (e.g., 'clientebanco-wave2')"
         },
         "gate": {
           "type": "integer",
@@ -204,7 +204,7 @@
       "context": {
         "category": "agents",
         "agent_id": "migration-coordinator",
-        "wave": "bradesco-wave2",
+        "wave": "clientebanco-wave2",
         "gate": 1,
         "user": "data-engineer@company.com",
         "tags": ["critical", "gate-1-validation"]
@@ -233,7 +233,7 @@
       "context": {
         "category": "gates",
         "gate": 1,
-        "wave": "bradesco-wave2",
+        "wave": "clientebanco-wave2",
         "user": "qa-lead@company.com",
         "tags": ["validation", "auto-adjustment"]
       },

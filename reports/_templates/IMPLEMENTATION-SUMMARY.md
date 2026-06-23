@@ -1,4 +1,4 @@
-# 🎨 Padrão Ouro Avanade — Implementação Concluída
+# 🎨 Padrão Ouro Consultoria — Implementação Concluída
 
 **Data:** 9 de Junho de 2026  
 **Status:** ✅ **100% Concluído**  
@@ -12,7 +12,7 @@
 
 1. **`GOLDEN-STANDARD-TEMPLATE.html`**
    - Template mestre com design padrão completo
-   - CSS variables com cores Avanade
+   - CSS variables com cores Consultoria
    - Componentes reutilizáveis (KPI cards, phase blocks, tables)
    - Suporte a Mermaid e Chart.js
 
@@ -34,9 +34,9 @@
 
 | Dashboard | Arquivo | Status |
 |-----------|---------|--------|
-| 1 | bradesco-autonomous-test-report.html | ✅ |
-| 2 | bradesco-3tier-dashboard.html | ✅ |
-| 3 | bradesco-executive-dashboard.html | ✅ |
+| 1 | clientebanco-autonomous-test-report.html | ✅ |
+| 2 | clientebanco-3tier-dashboard.html | ✅ |
+| 3 | clientebanco-executive-dashboard.html | ✅ |
 | 4 | ROI_ANALYSIS_VISUAL.html | ✅ |
 | 5 | DASHBOARD-TEMPLATE-ORANGE-DNA.html | ✅ |
 | 6 | DASHBOARD-ENTERPRISE-STANDARD.html | ✅ |
@@ -62,11 +62,11 @@ Dark:     #2D2D2D  (Text)
 ```
 
 ### Componentes Implementados
-- 🎯 **Header** — Gradient Avanade com efeito de glow
+- 🎯 **Header** — Gradient Consultoria com efeito de glow
 - 📊 **KPI Cards** — 9 variantes de cor com hover effects
 - 📈 **Phase Blocks** — Seções colapsáveis com gradientes customizáveis
 - 📋 **Tables** — Header com gradiente purple, hover interativo
-- 🔷 **Mermaid Diagrams** — Integração automática com tema Avanade
+- 🔷 **Mermaid Diagrams** — Integração automática com tema Consultoria
 - 📱 **Responsive Grid** — Mobile-first, 4+ colunas desktop → 1 coluna mobile
 - 🌙 **Dark Mode** — Suporte via `prefers-color-scheme`
 
@@ -87,10 +87,10 @@ reports/
 │   ├── dashboard-with-metrics.html        ← ATUALIZADO ✅
 │   └── example-dashboard.html             ← ATUALIZADO ✅
 │
-└── bradesco/
-    ├── bradesco-autonomous-test-report.html  ← ATUALIZADO ✅
-    ├── bradesco-3tier-dashboard.html         ← ATUALIZADO ✅
-    ├── bradesco-executive-dashboard.html     ← ATUALIZADO ✅
+└── clientebanco/
+    ├── clientebanco-autonomous-test-report.html  ← ATUALIZADO ✅
+    ├── clientebanco-3tier-dashboard.html         ← ATUALIZADO ✅
+    ├── clientebanco-executive-dashboard.html     ← ATUALIZADO ✅
     └── ROI_ANALYSIS_VISUAL.html              ← ATUALIZADO ✅
 ```
 
@@ -126,7 +126,7 @@ reports/
 
 ## ✨ Funcionalidades
 
-### Header com Gradiente Avanade
+### Header com Gradiente Consultoria
 ```css
 background: linear-gradient(135deg, #1a0a00 0%, #3d1700 30%, #FF5800 100%);
 ```
@@ -171,7 +171,7 @@ mermaid.initialize({
     }
 });
 ```
-✅ Temas automáticos Avanade  
+✅ Temas automáticos Consultoria  
 ✅ Diagramas flow, graph, sequence suportados
 
 ---
@@ -188,7 +188,7 @@ mermaid.initialize({
 
 ## 🔍 Verificação de Qualidade
 
-- ✅ **Cores:** Todas Avanade Orange DNA
+- ✅ **Cores:** Todas Consultoria Orange DNA
 - ✅ **Tipografia:** Segoe UI + Black para títulos
 - ✅ **Spacing:** Consistente em todo repo (44px main, 18px gap)
 - ✅ **Shadows:** 0 2px 14px rgba(0,0,0,0.05) padrão
@@ -225,8 +225,8 @@ mermaid.initialize({
 
 Antes de usar em produção, verificar:
 
-- [x] Header com gradiente Avanade correto
-- [x] Cores Avanade em toda interface
+- [x] Header com gradiente Consultoria correto
+- [x] Cores Consultoria em toda interface
 - [x] KPI cards com 9 variantes de cor
 - [x] Tables com header gradient
 - [x] Mermaid diagrams renderizando
@@ -251,6 +251,6 @@ Antes de usar em produção, verificar:
 ---
 
 **Implementação concluída com sucesso! 🎉**  
-**Todos os 11 dashboards estão 100% em conformidade com o Padrão Ouro Avanade.**
+**Todos os 11 dashboards estão 100% em conformidade com o Padrão Ouro Consultoria.**
 
 Última atualização: 9 de Junho de 2026

@@ -4,10 +4,10 @@
 
 Um **dashboard executivo em HTML** que apresenta a visão gerencial completa do **Data Migration Factory v3**:
 
-- ✅ Paleta Avanade oficial (Orange #FF5800, Greys, master gradient)
+- ✅ Paleta Consultoria oficial (Orange #FF5800, Greys, master gradient)
 - ✅ Tipografia Segoe UI com hierarquia 100% conforme Style Guide
 - ✅ Responsive design (mobile, tablet, desktop, print)
-- ✅ Cards com border-top orange, hover effects, sombras Avanade
+- ✅ Cards com border-top orange, hover effects, sombras Consultoria
 - ✅ Visualização do fluxo de 3 gates com status indicators
 - ✅ Portfolio completo de 21 agentes organizados por fase
 - ✅ Tabelas de skills, governance, métricas
@@ -54,7 +54,7 @@ wkhtmltopdf reports/executive-dashboard.html reports/executive-dashboard.pdf
 
 ---
 
-## 🎨 Componentes Avanade Inclusos
+## 🎨 Componentes Consultoria Inclusos
 
 ### **Cores (Variáveis CSS)**
 ```css
@@ -69,7 +69,7 @@ wkhtmltopdf reports/executive-dashboard.html reports/executive-dashboard.pdf
 ```
 
 ### **Cards**
-- Border-top: 4px laranja (assinatura Avanade)
+- Border-top: 4px laranja (assinatura Consultoria)
 - Hover: lift effect (translateY -4px) + shadow upgrade
 - Shadow: ava-shadow-md padrão, ava-shadow-lg ao hover
 
@@ -181,7 +181,7 @@ Adicione ao `<style>` para customização local:
 
 ---
 
-## 📋 Checklist de Conformidade Avanade
+## 📋 Checklist de Conformidade Consultoria
 
 Quando finalizar customizações:
 
@@ -192,7 +192,7 @@ Quando finalizar customizações:
 - [x] Sombras: ava-shadow-sm/md/lg, nunca drop-shadow genérico
 - [x] Status: 🟢 (success), 🟡 (warning), 🔴 (error)
 - [x] Tagline: "Do what matters" apenas em 4 cores autorizadas (Grey, Orange, Gradient, White)
-- [x] Logo: Avanade no header, nunca em lockup com tagline
+- [x] Logo: Consultoria no header, nunca em lockup com tagline
 - [x] Contraste: texto laranja pequeno (#FF5800) usa #DC4600 fallback para WCAG AA
 - [x] Responsive: mobile, tablet, desktop, print
 - [x] Idioma: EN-US client-facing, PT-BR interno apenas (marcado [Internal])
@@ -201,7 +201,7 @@ Quando finalizar customizações:
 
 ## 🔗 Referências
 
-- **Avanade Style Guide:** [attachment]
+- **Consultoria Style Guide:** [attachment]
 - **Data Migration Factory Docs:** `docs/OPERATING-MODEL-CANVAS-v2.md`
 - **Agent Guide:** `docs/COPILOT-AGENTS-GUIDE.md`
 - **Playbook:** `docs/PLAYBOOK-MIGRATION-OPERATIONS.md`
@@ -240,12 +240,12 @@ Adicione ao CSS:
 
 ## 📞 Contato & Suporte
 
-- **Brand Approval:** brand@avanade.com
+- **Brand Approval:** brand@consultoria.example
 - **Technical Issues:** Refer to `docs/COPILOT-AGENTS-GUIDE.md` → **Troubleshooting**
 - **This Report:** User memory `/memories/session/executive-dashboard.md`
 
 ---
 
 **Last Updated:** 2026-06-05  
-**Compliance:** Avanade Style Guide v1.0 ✅  
+**Compliance:** Consultoria Style Guide v1.0 ✅  
 **Status:** Production Ready 🚀
