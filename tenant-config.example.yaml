@@ -1,0 +1,26 @@
+# Exemplo de configuracao multi-tenant para a Data Migration Factory.
+# Copie para tenant-config.yaml (ou config/tenants/<tenant_id>.yaml) e ajuste os valores.
+# Nao commitar credenciais reais; use variaveis de ambiente (.env) para segredos.
+
+tenant_id: default
+tenant_name: "Cliente Exemplo"
+environment: development
+
+source_platform: cloudera
+target_platform: databricks
+migration_pattern: lift-and-shift
+
+owners:
+  discovery_owner_primary: owner.primary@example.com
+  discovery_owner_secondary: owner.secondary@example.com
+
+paths:
+  legacy_path: legacy/extracted
+  outputs_path: outputs
+
+limits:
+  db_retry_count: 3
+  timeout_sec: 60
+
+notes:
+  - "Ajuste scope e mapping de acordo com o wave-config do projeto."
