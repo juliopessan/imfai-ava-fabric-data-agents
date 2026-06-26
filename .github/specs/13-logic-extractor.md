@@ -28,7 +28,15 @@ Required:
 
 ---
 
-## Output
+## Success Criteria
+
+- ✅ 100% of legacy code files parsed (no skipped files)
+- ✅ Every extracted rule cites its source file + line number
+- ✅ Ambiguous/complex logic flagged with ⚠️ (not guessed)
+
+---
+
+## Output Contract
 
 ```
 Produces:

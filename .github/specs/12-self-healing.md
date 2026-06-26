@@ -29,7 +29,15 @@ Required:
 
 ---
 
-## Output
+## Success Criteria
+
+- ✅ Every discrepancy has a categorized root cause (data quality, logic, or performance)
+- ✅ Remediation proposed for every categorized issue
+- ✅ Revalidation confirms the fix introduces no new discrepancies
+
+---
+
+## Output Contract
 
 ```
 Produces:

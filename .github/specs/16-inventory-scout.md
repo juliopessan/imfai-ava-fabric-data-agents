@@ -27,7 +27,15 @@ Optional:
 
 ---
 
-## Output
+## Success Criteria
+
+- ✅ 100% of legacy folder scanned (no skipped files)
+- ✅ Output format matches discovery-scout exactly (drop-in replacement)
+- ✅ Merge with existing partial inventory loses no previously-discovered objects
+
+---
+
+## Output Contract
 
 ```
 Produces:
@@ -39,9 +47,11 @@ Passes To: business-analyst (same as discovery-scout)
 
 ---
 
-## Note
+## Constraints
 
-⚠️ Use only if discovery-scout unavailable. Produces same output.
+🔴 NO GUESSING object definitions — same hard rule as discovery-scout
+🔴 Must produce output in the exact same schema as discovery-scout (consumers can't tell which agent ran)
+🟡 Use only if discovery-scout is unavailable
 
 ---
 

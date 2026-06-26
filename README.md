@@ -240,21 +240,21 @@ imfai-ava-fabric-data-agents/
 - **Automation Rate:** 100%
 
 ### Specs System (Phase 1, 2, 3)
-- **Phase 1 Specs Created:** 16 agents with 10-section structure ✅
+- **Phase 1 Specs Created:** 16 agents with a 6-section contract (Input/Task/Success/Output/Constraints) — not yet the full 10-section `SPEC-TEMPLATE.md` structure ✅
 - **Phase 1 Documentation:** 3 comprehensive guides + HOW-TO (3000+ words) ✅
 - **Phase 2 Automation:** Integration script (280 lines) + roadmap ✅
-- **Phase 3 Automation:** Testing script (320 lines) + 7 comprehensive tests ✅
+- **Phase 3 Automation:** Testing script (`.github/scripts/test_specs_system.py`) — **executed and fixed 2026-06-26** ✅
 - **Documentation Delivered:** 5 guides + navigation index (2000+ lines) ✅
-- **Expected Token Reduction:** 70%+ via specs + workflow optimization
+- **Measured Token Reduction:** **-526.3%, and unreliable** — not "70%+". Specs measure at 6,182 real tokens vs. 987 for the agent `.chatmode.md` files, but all 16 of those agent files are thin `@file` stubs pointing at a prompt file (`src/modules/dmf-fabric-agents/...`) that **does not exist anywhere in this repo**. There is no real "before" content to compare against yet, so no reduction percentage can be trusted until those 16 agent prompts are actually written.
 - **Target Accuracy:** 100% (no guessing, no hallucination)
-- **Status:** ✅ READY FOR EXECUTION (Phase 2: 2026-06-17, Phase 3: 2026-06-20)
+- **Status:** ✅ 5/6 sub-tests genuinely passing (specs validity 16/16, agent-spec links 16/16, workflow chain, hallucination prevention, Financeiro wave-config) — the 6th (token reduction) fails honestly, for the structural reason above, not a test bug
 
 ### Test Coverage (All Phases)
 - **Phase 1 (Discovery):** 93 tests ✓
 - **Phase 2 (Design):** 64 tests ✓
 - **Phase 3 (Execution):** 158 tests ✓
-- **Phase 2 & 3 (Specs):** 7 automated tests (pending execution)
-- **Total:** 189 tests (100% passing) + 7 pending
+- **Phase 2 & 3 (Specs):** 7 automated tests — had never run on Windows (console-encoding + file-encoding crashes); now executable. 5/6 sub-tests pass for real; the 6th is correctly red pending the missing agent prompt files
+- **Total:** 189 tests (100% passing) + 7 specs tests (5 passing, 1 honestly failing — see above)
 
 ---
 
@@ -427,14 +427,13 @@ docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
 - ✓ **Phase 2 & 3 Automation** (integration + testing scripts ready)
 
 ### 🟡 In Progress
-- 🟠 **Phase 2 Execution:** Agent integration (scheduled 2026-06-17 to 06-19)
-  - Script: `.github/scripts/integrate_agents_with_specs.py`
-  - Target: 16/16 agents linked to specs
-  - Automation: 20 minutes
-- 🟠 **Phase 3 Execution:** Comprehensive testing (scheduled 2026-06-20)
-  - Script: `.github/scripts/test_specs_system.py`
+- ✅ **Phase 2 Execution:** Agent integration — **done 2026-06-26**: 16/16 agents linked to their spec via a `spec:` frontmatter field
+  - Script: `.github/scripts/integrate_agents_with_specs.py` (not run — linking done directly; the script also wants a "🔗 Spec Reference" section after a `# Title` line the `.chatmode.md` stubs don't have, so its own `--validate` will still report incomplete even though the `spec:` field test_specs_system.py checks for is present)
+  - Target: 16/16 agents linked to specs ✅
+- ✅ **Phase 3 Execution:** Comprehensive testing — **ran and fixed 2026-06-26**, 5/6 sub-tests genuinely passing
+  - Script: `.github/scripts/test_specs_system.py` (had never run on Windows before — fixed console-encoding and file-encoding crashes, a hardcoded-constant token measurement, an over-eager template-file validation, and a master-agent router false-negative)
   - Tests: 7 validations (specs, links, workflow, tokens, hallucination, wave, all)
-  - Automation: 31 minutes
+  - Real results: specs validity 16/16 ✅, agent links 16/16 ✅, workflow chain ✅, hallucination prevention ✅, Financeiro wave-config ✅, token reduction ❌ (-526.3%, unreliable — see Specs System metrics above)
 - 🟠 Multi-platform wave (blockers: Airflow version, SSS ID, PowerCenter .par files)
 - 🟠 Phase 1 discovery execution (per-platform exports)
 
@@ -443,7 +442,7 @@ docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
 - Microsoft Foundry integration
 - Machine learning for risk prediction
 - Real-time telemetry dashboards
-- Azure Monitor integration
+- Azure Monitor integration *(real OTel spans + cost telemetry already exist locally as of 2026-06-26 — see `docs/OBSERVABILITY-AND-TRACES.md`; this item is now "add an Azure Monitor exporter," not "build tracing from scratch")*
 - HITL (Human-In-The-Loop) decision points
 
 ---

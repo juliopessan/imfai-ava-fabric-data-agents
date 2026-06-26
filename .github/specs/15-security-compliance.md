@@ -29,7 +29,15 @@ Required:
 
 ---
 
-## Output
+## Success Criteria
+
+- ✅ 100% of columns scanned against pii_patterns (no skipped tables)
+- ✅ Every PII match assigned a risk level and a required control (masking, encryption, RBAC, or audit logging)
+- ✅ Compliance checklist covers every policy in compliance_policies
+
+---
+
+## Output Contract
 
 ```
 Produces:
@@ -39,6 +47,14 @@ Produces:
 
 Passes To: code-generator (for masking DDL) & downstream-executor
 ```
+
+---
+
+## Constraints
+
+🔴 NO GUESSING PII classification — match against pii_patterns and compliance_policies only
+🔴 Every flagged column must show its required control (masking/encryption/RBAC/audit)
+🟡 If a pattern is ambiguous, flag for human review instead of deciding silently
 
 ---
 

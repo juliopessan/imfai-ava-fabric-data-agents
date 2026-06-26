@@ -43,7 +43,7 @@ Reject If:
 
 ---
 
-## Output
+## Output Contract
 
 ```
 Produces:

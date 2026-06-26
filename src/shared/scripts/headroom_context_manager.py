@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 """
 Headroom Context Manager
-Integrates token compression into agent handoffs using Headroom.
-Part of DMF Phase 1 implementation (starting 2026-06-22).
+Integrates token compression into agent handoffs.
+
+Tries the real Headroom engine (github.com/juliopessan/headroom, published as
+`headroom-ai`) first. That engine's compression is implemented in a Rust
+extension (`headroom._core`) which only ships prebuilt wheels for macOS and
+Linux (manylinux) — there is no Windows build. On platforms without the
+native core, this falls back to `real_compressor`: genuine, measured,
+reversible compression (tiktoken counts + columnar JSON dedup), never a
+fabricated ratio.
 """
 from __future__ import annotations
 
@@ -11,8 +18,10 @@ import logging
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, Optional
-import sys
+from typing import Any, Dict
+
+import model_pricing
+import real_compressor
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -29,10 +38,10 @@ class CompressionStats:
     compression_ratio: float
     tokens_saved: int
     latency_ms: float
-    method: str  # "headroom" or "mock"
+    method: str  # "headroom-native" | "python-real-columnar" | "python-real-whitespace" | ...
     timestamp: str
     reversible: bool = True
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return asdict(self)
@@ -41,33 +50,52 @@ class CompressionStats:
 class HeadroomContextManager:
     """
     Manage token compression for agent handoffs.
-    
-    Falls back gracefully to mock compression if real Headroom unavailable.
-    Implements: Try real → Mock fallback
+
+    Tries the real Headroom native engine first; falls back to real_compressor
+    (genuine measured compression, no native dependency) when unavailable.
     """
-    
+
     def __init__(self, project_root: str | None = None, use_mock: bool = False):
-        """Initialize context manager."""
+        """Initialize context manager.
+
+        `use_mock` forces the real_compressor fallback even when the native
+        Headroom engine is importable — useful for tests/CI determinism.
+        """
         self.project_root = Path(project_root) if project_root else Path.cwd()
         self.use_mock = use_mock
         self.headroom_available = self._check_headroom()
         self.compression_stats: list[CompressionStats] = []
-        
+
         if not self.headroom_available:
-            logger.warning("⚠️  Headroom not available. Using mock fallback.")
+            logger.info(
+                "ℹ️  Headroom native engine unavailable on this platform "
+                "(no headroom._core build) — using real_compressor (%s).",
+                real_compressor.tokenizer_method(),
+            )
             self.use_mock = True
 
     def _check_headroom(self) -> bool:
-        """Check if real Headroom is available."""
+        """Check if the real Headroom *native* engine is actually usable.
+
+        Importing the `headroom` package alone is not sufficient: PyPI only
+        publishes the compiled `_core` extension for macOS/Linux, so on
+        Windows `import headroom` succeeds but compression silently no-ops.
+        We require `headroom._core` to confirm the real engine will do
+        anything.
+        """
         if self.use_mock:
             return False
-        
+
         try:
-            import headroom
-            logger.info("✅ Headroom library available")
+            import headroom  # noqa: F401
+            import headroom._core  # noqa: F401
+            logger.info("✅ Headroom native engine available (headroom._core)")
             return True
         except ImportError:
-            logger.debug("ℹ️  Headroom not installed. Mock fallback enabled.")
+            logger.debug(
+                "ℹ️  headroom._core not available (no Windows wheel published). "
+                "real_compressor fallback enabled."
+            )
             return False
 
     def compress_handoff(
@@ -75,40 +103,36 @@ class HeadroomContextManager:
         data: str | dict,
         source_agent: str,
         target_agent: str,
-        model: str = "gpt-4o",
+        model: str = "claude-haiku-4-5",
     ) -> tuple[str, CompressionStats]:
         """
         Compress data for handoff between agents.
-        
+
         Args:
             data: Artifact data (JSON string or dict)
             source_agent: Name of agent producing data
             target_agent: Name of agent consuming data
-            model: LLM model for compression hints
-            
-        Returns:
-            (compressed_data, stats)
-        """
-        # Convert dict to JSON string if needed
-        if isinstance(data, dict):
-            data_str = json.dumps(data, indent=2)
-        else:
-            data_str = data
+            model: Model name, used for native Headroom's cache-alignment hints
 
-        input_tokens = self._estimate_tokens(data_str)
-        
+        Returns:
+            (compressed_data, stats) — all token counts in `stats` are measured,
+            never derived from a guessed ratio.
+        """
         start_time = datetime.now()
-        
+
         if self.headroom_available and not self.use_mock:
-            compressed, ratio = self._compress_real(data_str, model)
+            compressed, input_tokens, output_tokens, method = self._compress_real(data, model)
         else:
-            compressed, ratio = self._compress_mock(data_str, model)
-        
+            outcome = real_compressor.compress_artifact(data)
+            compressed = outcome.compressed_text
+            input_tokens = outcome.input_tokens
+            output_tokens = outcome.output_tokens
+            method = outcome.method
+
         elapsed_ms = (datetime.now() - start_time).total_seconds() * 1000
-        
-        output_tokens = int(input_tokens * (1 - ratio))
         tokens_saved = input_tokens - output_tokens
-        
+        ratio = (tokens_saved / input_tokens) if input_tokens > 0 else 0.0
+
         stats = CompressionStats(
             source_agent=source_agent,
             target_agent=target_agent,
@@ -117,83 +141,46 @@ class HeadroomContextManager:
             compression_ratio=ratio,
             tokens_saved=tokens_saved,
             latency_ms=elapsed_ms,
-            method="headroom" if self.headroom_available else "mock",
+            method=method,
             timestamp=datetime.now().isoformat(),
         )
-        
+
         self.compression_stats.append(stats)
-        
+
         logger.info(
             f"📦 Handoff {source_agent} → {target_agent}: "
-            f"{input_tokens:,} → {output_tokens:,} tokens ({ratio*100:.1f}% compression)"
+            f"{input_tokens:,} → {output_tokens:,} tokens ({ratio*100:.1f}% measured, method={method})"
         )
-        
+
         return compressed, stats
 
-    def _compress_real(self, data: str, model: str) -> tuple[str, float]:
-        """Compress using real Headroom library."""
+    def _compress_real(self, data: str | dict, model: str) -> tuple[str, int, int, str]:
+        """Compress using the real Headroom native engine (headroom._core)."""
         try:
-            from headroom import compress, Configuration
-            
-            config = Configuration(model=model)
-            compressed = compress(data, config=config)
-            
-            input_len = len(data)
-            output_len = len(compressed)
-            ratio = (input_len - output_len) / input_len if input_len > 0 else 0.0
-            
-            return compressed, ratio
-        except Exception as e:
-            logger.warning(f"Real Headroom failed: {e}. Falling back to mock.")
-            return self._compress_mock(data, model)
+            from headroom import compress, CompressConfig
 
-    def _compress_mock(self, data: str, model: str) -> tuple[str, float]:
-        """
-        Mock compression using heuristic ratios.
-        
-        Heuristics (realistic for DMF artifacts):
-        - JSON/YAML: 65% compression (structured data compresses well)
-        - SQL/DDL: 45% compression (code less repetitive)
-        - Markdown: 30% compression (prose harder to compress)
-        - Logs: 15% compression (already sparse)
-        """
-        data_lower = data.lower()
-        
-        # Detect type
-        if "{" in data or ":" in data and "-" in data:
-            ratio = 0.65  # JSON/YAML
-        elif "select" in data_lower or "create" in data_lower:
-            ratio = 0.45  # SQL
-        elif "#" in data and "\n" in data:
-            ratio = 0.30  # Markdown
-        elif "error" in data_lower or "warn" in data_lower:
-            ratio = 0.15  # Logs
-        else:
-            ratio = 0.50  # Default
-        
-        # Apply "compression" - just mark it for retrieval
-        metadata = {
-            "compressed": True,
-            "compression_ratio": ratio,
-            "method": "mock-estimator",
-            "original_size": len(data),
-            "timestamp": datetime.now().isoformat(),
-        }
-        
-        compressed_marker = f"\n<!-- COMPRESSED (mock): {ratio*100:.0f}% -->\n"
-        return data + compressed_marker, ratio
+            content = json.dumps(data, indent=2, default=str) if isinstance(data, dict) else str(data)
+            messages = [{"role": "user", "content": content}]
+            config = CompressConfig(kompress_model="disabled", protect_recent=0, compress_user_messages=True)
+            result = compress(messages, model=model, config=config)
 
-    def retrieve_if_needed(self, data: str, retrieval_id: str) -> str:
+            compressed_content = result.messages[0]["content"] if result.messages else content
+            return compressed_content, result.tokens_before, result.tokens_after, "headroom-native"
+        except Exception as exc:
+            logger.warning("Real Headroom engine failed (%s). Falling back to real_compressor.", exc)
+            outcome = real_compressor.compress_artifact(data)
+            return outcome.compressed_text, outcome.input_tokens, outcome.output_tokens, outcome.method
+
+    def retrieve_if_needed(self, data: str) -> str:
         """
-        Retrieve original data if compression used reversible CCR.
-        
-        For now, returns data as-is (mock doesn't actually compress).
-        Real Headroom would call CCR retriever here.
+        Reverse a real_compressor columnar transform back to its original shape.
+        No-op for whitespace-only or native-engine output (already plain text/JSON).
         """
-        if "COMPRESSED (mock)" in data:
-            # Remove compression marker
-            return data.replace("\n<!-- COMPRESSED (mock):", "<!-- (was compressed) ").split("-->\n")[0]
-        return data
+        try:
+            parsed = json.loads(data)
+        except (json.JSONDecodeError, TypeError):
+            return data
+        return json.dumps(real_compressor.expand_columnar(parsed), indent=2)
 
     def get_stats(self) -> Dict[str, Any]:
         """Get aggregated compression statistics."""
@@ -207,18 +194,9 @@ class HeadroomContextManager:
             self.compression_stats
         )
         
-        # Calculate cost savings (rough estimate)
-        # ~$0.075 per 1M input tokens, ~$0.30 per 1M output tokens
-        input_cost = (total_input / 1_000_000) * 0.075
-        output_cost = (total_output / 1_000_000) * 0.30
-        total_cost = input_cost + output_cost
-        
-        # With compression
-        output_cost_compressed = (total_output / 1_000_000) * 0.30
-        total_cost_compressed = input_cost + output_cost_compressed
-        
-        cost_saved = total_cost - total_cost_compressed
-        
+        # Real per-model pricing (model_pricing.py), applied to real measured tokens.
+        cost_saved = model_pricing.estimate_cost_usd(total_saved, 0)
+
         return {
             "total_handoffs": len(self.compression_stats),
             "total_input_tokens": total_input,
@@ -226,7 +204,7 @@ class HeadroomContextManager:
             "total_tokens_saved": total_saved,
             "avg_compression_ratio": avg_ratio,
             "cost_saved_usd": round(cost_saved, 6),
-            "method": "headroom" if self.headroom_available else "mock",
+            "method": "headroom-native" if self.headroom_available else real_compressor.tokenizer_method(),
             "by_agent": self._stats_by_agent(),
             "timeline": [s.to_dict() for s in self.compression_stats[-10:]],  # Last 10
         }
@@ -250,10 +228,6 @@ class HeadroomContextManager:
         
         return by_pair
 
-    def _estimate_tokens(self, text: str) -> int:
-        """Rough token estimation: 1 token ≈ 4 characters."""
-        return max(1, len(text) // 4)
-
     def save_stats(self, output_file: str | Path):
         """Save compression stats to JSON file."""
         output_path = Path(output_file)
@@ -266,6 +240,11 @@ class HeadroomContextManager:
 
 # Module initialization
 if __name__ == "__main__":
+    import sys as _sys
+
+    if hasattr(_sys.stdout, "reconfigure"):
+        _sys.stdout.reconfigure(encoding="utf-8")
+
     # Example usage
     manager = HeadroomContextManager(use_mock=True)
     

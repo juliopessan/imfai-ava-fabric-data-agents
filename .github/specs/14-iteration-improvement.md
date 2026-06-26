@@ -29,7 +29,15 @@ Required:
 
 ---
 
-## Output
+## Success Criteria
+
+- ✅ Every optimization opportunity is scored (effort vs. impact)
+- ✅ Opportunities ranked, not just listed
+- ✅ Next-iteration plan ties back to specific, named opportunities
+
+---
+
+## Output Contract
 
 ```
 Produces:
@@ -38,6 +46,14 @@ Produces:
 
 Passes To: migration-coordinator (for Phase 6+ planning)
 ```
+
+---
+
+## Constraints
+
+🔴 NO GUESSING cost/performance numbers — derive from monitoring-metrics.json and cost-analysis.json only
+🔴 Every opportunity must show effort vs. impact scoring, not just a recommendation
+🟡 If baseline data is missing or incomplete, flag it instead of estimating
 
 ---
 

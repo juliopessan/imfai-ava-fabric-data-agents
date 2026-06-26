@@ -20,10 +20,25 @@ Usage:
 import os
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
 from datetime import datetime
 import statistics
+
+_SCRIPTS_DIR = Path(__file__).resolve().parents[2] / "src" / "shared" / "scripts"
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from real_compressor import count_tokens, tokenizer_method  # noqa: E402
+
+
+def _read_text_safe(path: Path) -> str:
+    """Read a repo doc that may be UTF-8 or legacy cp1252 (some PT-BR files are)."""
+    try:
+        return path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return path.read_text(encoding="cp1252")
 
 
 class SpecsSystemTester:
@@ -52,10 +67,10 @@ class SpecsSystemTester:
         ]
         
         for spec_file in sorted(self.specs_dir.glob("*.md")):
-            if spec_file.name in ["README.md", "HOW-TO-USE-SPECS.md", "SPEC-INTEGRATION-GUIDE.md"]:
+            if spec_file.name in ["README.md", "HOW-TO-USE-SPECS.md", "SPEC-INTEGRATION-GUIDE.md", "SPEC-TEMPLATE.md"]:
                 continue
             
-            content = spec_file.read_text()
+            content = _read_text_safe(spec_file)
             
             # Check all required sections
             missing_sections = []
@@ -80,31 +95,52 @@ class SpecsSystemTester:
         return valid_count, invalid_count
     
     def validate_agent_spec_links(self) -> Tuple[int, int]:
-        """Test 2: Validate all agents reference their specs."""
+        """
+        Test 2: Validate that agents covered by the Specs System reference
+        their spec. Only the 16 agents with a numbered spec (01-16) are in
+        scope — the Specs System never claimed to cover the other 5
+        (agent-designer, bi-semantic, data-strategist, documentation,
+        orchestrator — the last is explicitly DEPRECATED). Those are
+        reported separately, not counted as failures of this system.
+        """
         print("\n🧪 TEST 2: Validate Agent-Spec Links")
         print("-" * 60)
-        
+
+        specced_agent_names = {
+            spec_file.stem.split("-", 1)[1]
+            for spec_file in self.specs_dir.glob("*.md")
+            if spec_file.name.startswith(tuple(f"{i:02d}-" for i in range(1, 17)))
+        }
+
         linked_count = 0
         unlinked_count = 0
-        
+        out_of_scope = []
+
         for agent_file in sorted(self.agents_dir.glob("*.chatmode.md")):
             agent_name = agent_file.stem.replace(".chatmode", "")
-            content = agent_file.read_text()
-            
-            # Check if spec: field exists
+
+            if agent_name not in specced_agent_names:
+                out_of_scope.append(agent_name)
+                continue
+
+            content = _read_text_safe(agent_file)
             has_spec_field = re.search(r'spec:\s*\.github/specs/\d{2}-.*?\.md', content)
-            
+
             if has_spec_field:
                 print(f"✅ {agent_file.name} → spec field found")
                 linked_count += 1
             else:
                 print(f"❌ {agent_file.name} → spec field NOT found")
                 unlinked_count += 1
-        
+
+        if out_of_scope:
+            print(f"ℹ️  Out of Specs System scope (no numbered spec exists): {', '.join(out_of_scope)}")
+
         self.test_results["agent_links"] = {
             "linked": linked_count,
             "unlinked": unlinked_count,
             "total": linked_count + unlinked_count,
+            "out_of_scope": out_of_scope,
             "passed": unlinked_count == 0,
         }
         
@@ -116,7 +152,7 @@ class SpecsSystemTester:
         print("-" * 60)
         
         spec_files = [
-            ("01-master-agent.md", "discovery-scout"),
+            ("01-master-agent.md", None),  # Dynamic router (see "Routes To"), not a fixed handoff
             ("02-discovery-scout.md", "business-analyst"),
             ("03-data-architect.md", None),  # Receives from multiple
             ("04-business-analyst.md", "data-modeler"),
@@ -137,17 +173,23 @@ class SpecsSystemTester:
                 all_valid = False
                 continue
             
-            content = spec_path.read_text()
-            
-            # Check if "Passes To" is documented
+            content = _read_text_safe(spec_path)
+
+            # Check if "Passes To" or a dynamic "Routes To" is documented
             passes_to_match = re.search(r"Passes To:\s*(.+)", content)
-            
+            routes_to_match = re.search(r"Routes To:\s*(.+)", content)
+
             if passes_to_match and expected_next:
                 next_agent = passes_to_match.group(1).strip()
                 status = "✅" if expected_next.lower() in next_agent.lower() else "⚠️ "
                 print(f"{status} {spec_file} → Passes to: {next_agent}")
-            elif expected_next is None:
+            elif expected_next is None and routes_to_match:
+                print(f"✅ {spec_file} — Dynamic router: {routes_to_match.group(1).strip()}")
+            elif expected_next is None and passes_to_match:
                 print(f"ℹ️  {spec_file} — Endpoint or fork (OK)")
+            elif expected_next is None:
+                print(f"⚠️  {spec_file} — Endpoint/fork has no 'Passes To' or 'Routes To' documented")
+                all_valid = False
             else:
                 print(f"⚠️  {spec_file} — Missing 'Passes To' section")
                 all_valid = False
@@ -158,49 +200,94 @@ class SpecsSystemTester:
         
         return all_valid
     
+    def _resolve_agent_file_content(self, agent_file: Path) -> Tuple[str, bool]:
+        """
+        Resolve a chatmode.md's `@file <path>` include to the real prompt it
+        points at. Returns (content, resolved). If the referenced file
+        doesn't exist in this repo, returns the stub's own 6-line content
+        and resolved=False — the stub is NOT a stand-in for "the real agent
+        prompt"; callers must treat unresolved agents separately, not fold
+        their stub size into a token comparison as if it were real.
+        """
+        stub_content = _read_text_safe(agent_file)
+        match = re.search(r"^@file\s+(.+)$", stub_content, re.MULTILINE)
+        if not match:
+            return stub_content, True  # no include — stub IS the whole prompt
+
+        included_path = self.project_root / match.group(1).strip()
+        if included_path.exists():
+            return _read_text_safe(included_path), True
+        return stub_content, False
+
     def measure_token_reduction(self) -> Dict:
-        """Test 4: Measure token reduction (before specs vs after specs)."""
+        """
+        Test 4: Measure token reduction (before specs vs after specs).
+
+        Real measurement, not a guess: "before" is the actual token count of
+        the real agent prompt (resolving each chatmode.md's `@file` include)
+        an agent would have to read without specs; "after" is the actual
+        token count of the matching spec file it reads instead. Both sides
+        use the same real tokenizer (real_compressor.count_tokens — tiktoken
+        when available). No hardcoded per-task constants.
+
+        Only the 16 agents that have a numbered spec (01-16) are compared —
+        see validate_agent_spec_links() for the 5 agents out of scope.
+        """
         print("\n🧪 TEST 4: Measure Token Reduction")
         print("-" * 60)
-        
-        # Estimate tokens from spec files
-        spec_tokens = 0
+
+        spec_tokens_by_file: Dict[str, int] = {}
         for spec_file in self.specs_dir.glob("*.md"):
-            if spec_file.name.startswith(("01-", "02-", "03-", "04-", "05-", "06-", "07-", "08-", "09-", "10-")):
-                content = spec_file.read_text()
-                # Rough estimate: 1 token per 4 characters
-                spec_tokens += len(content) // 4
-        
-        # Estimate tokens from agent files (before specs)
-        agent_tokens = 0
-        for agent_file in self.agents_dir.glob("*.chatmode.md"):
-            content = agent_file.read_text()
-            agent_tokens += len(content) // 4
-        
-        # Estimate workflow tokens per execution
-        workflow_tokens_before = 2000  # Estimate: 2000 tokens per task
-        workflow_tokens_after = 500     # Estimate: 500 tokens per task
-        tasks_per_wave = 10             # 10 agent tasks
-        
-        total_before = workflow_tokens_before * tasks_per_wave
-        total_after = workflow_tokens_after * tasks_per_wave + spec_tokens
-        
-        reduction = ((total_before - total_after) / total_before) * 100
-        
-        print(f"📊 Token Analysis:")
-        print(f"   Specs total: ~{spec_tokens:,} tokens (one-time)")
-        print(f"   Per-wave before: ~{total_before:,} tokens")
-        print(f"   Per-wave after: ~{total_after:,} tokens")
-        print(f"   Reduction: {reduction:.1f}%")
-        
-        self.metrics["token_reduction"] = {
-            "spec_tokens": spec_tokens,
-            "workflow_before": total_before,
-            "workflow_after": total_after,
-            "reduction_percent": reduction,
-            "target_met": reduction >= 70,
+            if spec_file.name.startswith(tuple(f"{i:02d}-" for i in range(1, 17))):
+                spec_tokens_by_file[spec_file.stem] = count_tokens(_read_text_safe(spec_file))
+
+        agent_name_by_spec_num = {
+            spec_file.stem.split("-", 1)[1]: spec_file.stem
+            for spec_file in self.specs_dir.glob("*.md")
+            if spec_file.name.startswith(tuple(f"{i:02d}-" for i in range(1, 17)))
         }
-        
+
+        agent_tokens_by_file: Dict[str, int] = {}
+        unresolved_agents: List[str] = []
+        for agent_name in agent_name_by_spec_num:
+            agent_file = self.agents_dir / f"{agent_name}.chatmode.md"
+            if not agent_file.exists():
+                continue
+            content, resolved = self._resolve_agent_file_content(agent_file)
+            agent_tokens_by_file[agent_name] = count_tokens(content)
+            if not resolved:
+                unresolved_agents.append(agent_name)
+
+        total_before = sum(agent_tokens_by_file.values())
+        total_after = sum(spec_tokens_by_file.values())
+
+        reduction = ((total_before - total_after) / total_before * 100) if total_before > 0 else 0.0
+
+        print(f"📊 Token Analysis ({tokenizer_method()}):")
+        if unresolved_agents:
+            print(
+                f"⚠️  {len(unresolved_agents)}/{len(agent_tokens_by_file)} agent prompts are unresolved "
+                f"`@file` stubs (the real prompt file doesn't exist in this repo): "
+                f"{', '.join(sorted(unresolved_agents))}"
+            )
+            print("   Their 6-line stub size is being counted as 'before' — this UNDER-counts the real")
+            print("   baseline, so the reduction number below is not reliable until those prompts exist.")
+        print(f"   Agent files (before specs):   {total_before:,} tokens across {len(agent_tokens_by_file)} files")
+        print(f"   Spec files (after specs):     {total_after:,} tokens across {len(spec_tokens_by_file)} files")
+        print(f"   Measured reduction:           {reduction:.1f}%")
+
+        self.metrics["token_reduction"] = {
+            "method": tokenizer_method(),
+            "agent_tokens_total": total_before,
+            "spec_tokens_total": total_after,
+            "reduction_percent": reduction,
+            "target_met": reduction >= 70 and not unresolved_agents,
+            "unresolved_agents": unresolved_agents,
+            "reliable": not unresolved_agents,
+            "by_agent": agent_tokens_by_file,
+            "by_spec": spec_tokens_by_file,
+        }
+
         return self.metrics["token_reduction"]
     
     def test_hallucination_prevention(self) -> bool:
@@ -222,7 +309,7 @@ class SpecsSystemTester:
         
         # Check discovery-scout spec (most hallucination-prone)
         spec_path = self.specs_dir / "02-discovery-scout.md"
-        content = spec_path.read_text()
+        content = _read_text_safe(spec_path)
         
         found_keywords = []
         for keyword in hallucination_keywords:
@@ -267,7 +354,7 @@ class SpecsSystemTester:
         # Validate wave config structure
         import yaml
         try:
-            with open(wave_config) as f:
+            with open(wave_config, encoding="utf-8") as f:
                 config = yaml.safe_load(f)
             
             required_fields = ["project_name", "phases", "discovery_owner"]
@@ -319,10 +406,11 @@ class SpecsSystemTester:
             workflow_ok_Financeiro
         )
         
-        print(f"✅ Specs Valid: {valid}/16")
-        print(f"✅ Agents Linked: {linked}/16")
+        print(f"{'✅' if invalid == 0 else '❌'} Specs Valid: {valid}/16")
+        print(f"{'✅' if unlinked == 0 else '❌'} Agents Linked: {linked}/16")
         print(f"{'✅' if workflow_ok else '❌'} Workflow Chain: Valid")
-        print(f"{'✅' if token_metrics['target_met'] else '❌'} Token Reduction: {token_metrics['reduction_percent']:.1f}% (target: 70%)")
+        reliability_note = "" if token_metrics["reliable"] else f" — UNRELIABLE: {len(token_metrics['unresolved_agents'])} agent prompt(s) don't exist in this repo"
+        print(f"{'✅' if token_metrics['target_met'] else '❌'} Token Reduction: {token_metrics['reduction_percent']:.1f}% (target: 70%){reliability_note}")
         print(f"{'✅' if hallucination_ok else '❌'} Hallucination Prevention: Valid")
         print(f"{'✅' if workflow_ok_Financeiro else '❌'} Financeiro Workflow: {workflow_msg}")
         
@@ -355,7 +443,10 @@ import re
 
 def main():
     import argparse
-    
+
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
     parser = argparse.ArgumentParser(description="Phase 3: Test Specs System")
     parser.add_argument("--all", action="store_true", help="Run all tests")
     parser.add_argument("--validate-specs", action="store_true", help="Validate spec files")

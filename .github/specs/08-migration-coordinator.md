@@ -39,7 +39,7 @@ Optional:
 
 ---
 
-## Output
+## Output Contract
 
 ```
 Produces:

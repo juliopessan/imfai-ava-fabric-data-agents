@@ -12,10 +12,17 @@ Tracks both raw tokens and compression metrics from Headroom.
 from __future__ import annotations
 
 import json
+import sys as _sys
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in _sys.path:
+    _sys.path.insert(0, str(_SCRIPTS_DIR))
+
+import model_pricing
 
 
 class EnhancedTokenMetrics:
@@ -36,7 +43,7 @@ class EnhancedTokenMetrics:
                 "by_phase": {},  # Compression ratio per phase
                 "total_saved": 0,
                 "avg_ratio": 0.0,
-                "method": "mock",  # or "headroom"
+                "method": "unspecified",  # set by add_compression_event(); see real_compressor.py
             },
             "cost_delta": {  # Cost before/after compression
                 "raw_cost_usd": 0.0,
@@ -82,7 +89,7 @@ class EnhancedTokenMetrics:
         output_tokens: int,
         compression_ratio: float,
         phase: str,
-        method: str = "mock",
+        method: str = "unspecified",
     ):
         """Record compression event from Headroom."""
         agent_pair = f"{source_agent} → {target_agent}"
@@ -144,29 +151,20 @@ class EnhancedTokenMetrics:
 
     def calculate_cost_delta(
         self,
-        raw_cost_per_mtokens: float = 0.0015,
-        compressed_cost_factor: float = 0.8,  # 20% cost increase for compression overhead
+        model: str = model_pricing.DEFAULT_MODEL,
     ) -> Dict[str, float]:
         """
-        Calculate cost difference before/after compression.
-        
-        Args:
-            raw_cost_per_mtokens: Cost per M tokens without compression
-            compressed_cost_factor: Additional cost factor for compression (0.8 = 80% of raw)
+        Calculate cost difference before/after compression using real per-model
+        pricing (model_pricing.py). Compressed handoffs become input tokens for
+        the next agent's call, so both sides are priced at the model's input rate.
         """
         raw_tokens = self.metrics["raw_tokens"]["total"]
         tokens_saved = self.metrics["compression"]["total_saved"]
         compressed_tokens = raw_tokens - tokens_saved
 
-        # Raw cost (no compression)
-        raw_cost = (raw_tokens / 1_000_000) * raw_cost_per_mtokens
-
-        # Compressed cost (input tokens have higher rate + output tokens)
-        # Simplified: use compressed tokens with same rate but account for compression overhead
-        compressed_cost = (
-            (compressed_tokens / 1_000_000) * raw_cost_per_mtokens
-            + (tokens_saved / 1_000_000) * raw_cost_per_mtokens * (1 - compressed_cost_factor)
-        )
+        price = model_pricing.get_price(model)
+        raw_cost = (raw_tokens / 1_000_000) * price.input_per_mtok
+        compressed_cost = (compressed_tokens / 1_000_000) * price.input_per_mtok
 
         savings = raw_cost - compressed_cost
 
@@ -248,7 +246,7 @@ class EnhancedTokenMetrics:
             output_tokens=65_404,
             compression_ratio=0.50,
             phase="upstream",
-            method="mock",
+            method="example-data",
         )
 
         # MIDSTREAM phase
@@ -266,7 +264,7 @@ class EnhancedTokenMetrics:
             output_tokens=32_702,
             compression_ratio=0.50,
             phase="midstream",
-            method="mock",
+            method="example-data",
         )
 
         # DOWNSTREAM phase
@@ -284,7 +282,7 @@ class EnhancedTokenMetrics:
             output_tokens=16_351,
             compression_ratio=0.50,
             phase="downstream",
-            method="mock",
+            method="example-data",
         )
 
         # Calculate cost impact
@@ -294,6 +292,9 @@ class EnhancedTokenMetrics:
 
 
 if __name__ == "__main__":
+    if hasattr(_sys.stdout, "reconfigure"):
+        _sys.stdout.reconfigure(encoding="utf-8")
+
     # Example with realistic data
     metrics = EnhancedTokenMetrics.example_with_headroom_integration()
 

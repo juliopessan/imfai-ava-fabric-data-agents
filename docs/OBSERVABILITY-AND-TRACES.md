@@ -1,8 +1,32 @@
 # Observability & Distributed Traces — DMF v3
 
-**Version:** 1.0  
-**Date:** 2026-06-16  
-**Owner:** SRE / Observability Lead  
+**Version:** 1.1
+**Date:** 2026-06-26
+**Owner:** SRE / Observability Lead
+
+---
+
+## Implementation Status (2026-06-26)
+
+The `TraceContext`/`SpanCollector` classes sketched below were a design
+sketch only — no file in this repo ever implemented them, and the
+Application Insights pipeline was never built. What actually exists today:
+
+| Capability | Status | Where |
+|---|---|---|
+| Real OTel spans per gate transition | ✅ Implemented | `src/shared/scripts/observability_setup.py`, wired into `migration_coordinator.py` |
+| Trace export | ✅ JSONL file (`projects/<name>/outputs/traces.jsonl`) | `observability_setup.JSONLSpanExporter` |
+| Application Insights / Azure Monitor sink | 📋 Not built | Spans are standard OTel — add an `AzureMonitorTraceExporter` span processor when ready; no code changes needed elsewhere |
+| Cost attribution (per-handoff, real tokens) | ✅ Implemented | `model_pricing.py` + `enhanced_token_metrics.py`, real tiktoken counts via `real_compressor.py` |
+| Compression ratio (real, measured) | ✅ Implemented | `real_compressor.py` (Python, no native dependency) + real Headroom engine when `headroom._core` is importable (macOS/Linux only — see caveat below) |
+| Drift detection / baselines | 📋 Not built | Would consume the JSONL trace history once a few real waves have run |
+
+**Headroom native-engine caveat:** the real Headroom project
+(github.com/juliopessan/headroom, published as `headroom-ai`) only ships its
+Rust-accelerated compression core for macOS and Linux (manylinux) — there is
+no Windows wheel. On Windows, `headroom_context_manager.py` automatically
+falls back to `real_compressor.py`, which still reports genuinely measured
+(not guessed) token counts and compression ratios.
 
 ---
 
@@ -324,12 +348,18 @@ traces
 ```
 Total_Cost_Per_Trace = Σ (LLM_tokens_cost + Tool_execution_cost + Sub_agent_cost)
 
-LLM_tokens_cost = (tokens_input / 1M × $3) + (tokens_output / 1M × $15)  # Claude Opus 4
+LLM_tokens_cost = (tokens_input / 1M × price.input) + (tokens_output / 1M × price.output)
 
 Tool_execution_cost = Duration_sec × $0.0001  # Sandbox/compute
 
 Sub_agent_cost = Sub_agent_trace_cost  # Recursive
 ```
+
+Real implementation: `price` comes from `src/shared/scripts/model_pricing.py`
+(per-model, e.g. Haiku $0.80/$2.40 per M input/output) — not the fixed
+Opus-only $3/$15 shown above. `tokens_input`/`tokens_output` are real
+tiktoken counts from `real_compressor.py`, never estimated from character
+count or a guessed compression ratio.
 
 ### Trace Cost Reporting
 
@@ -460,14 +490,14 @@ def mask_sensitive_data(span_data: Dict) -> Dict:
 
 ## Implementation Roadmap
 
-- [ ] **Week 1:** Implement `TraceContext` class + propagation in orchestrator
-- [ ] **Week 2:** Add span collection to agent loop + tool execution
-- [ ] **Week 3:** Set up Application Insights pipeline + KQL queries
+- [x] **Week 1:** Real OTel spans per gate transition (`observability_setup.py`, standard SDK — not the bespoke `TraceContext` sketched above)
+- [x] **Week 2:** Span collection wired into the agent/handoff loop (`migration_coordinator.py`); real wall-clock + per-call telemetry via `execution_telemetry.py`
+- [ ] **Week 3:** Application Insights pipeline + KQL queries — spans are already standard OTel, so this is "add an exporter," not a rewrite
 - [ ] **Week 4:** Build "Agent Observatory" dashboard (PowerBI)
-- [ ] **Week 5:** Establish baseline metrics for all agents
+- [ ] **Week 5:** Establish baseline metrics for all agents (needs real wave history — `traces.jsonl` accumulates this once waves run)
 - [ ] **Week 6:** Configure drift detection alerts
-- [ ] **Week 7:** Cost attribution report (monthly)
-- [ ] **Week 8:** Privacy review + data masking rules
+- [x] **Week 7:** Cost attribution — real measured tokens × real per-model pricing (`model_pricing.py`, `enhanced_token_metrics.py`), not the rough $/M constant this doc originally specified
+- [ ] **Week 8:** Privacy review + data masking rules (the `mask_sensitive_data` sketch above is not yet wired into `JSONLSpanExporter`)
 
 ---
 

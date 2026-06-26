@@ -29,6 +29,9 @@ if str(_SCRIPTS_DIR) not in sys.path:
 from headroom_context_manager import HeadroomContextManager  # noqa: E402
 from headroom_workflow_integration import HeadroomWorkflowIntegration  # noqa: E402
 from enhanced_token_metrics import EnhancedTokenMetrics  # noqa: E402
+from execution_telemetry import ExecutionTelemetry  # noqa: E402
+import observability_setup  # noqa: E402
+from opentelemetry.trace import Status, StatusCode  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
 logger = logging.getLogger(__name__)
@@ -64,6 +67,18 @@ class MigrationCoordinator:
         )
         self.headroom_workflow = HeadroomWorkflowIntegration(str(self.project_root))
         self.token_metrics = EnhancedTokenMetrics(str(self.project_root))
+        self.telemetry = ExecutionTelemetry(
+            workflow_name=f"Migration-{project_name}",
+            agent_name="migration-coordinator",
+        )
+
+        # Real OTel tracing (docs/OBSERVABILITY-AND-TRACES.md), JSONL sink by
+        # default — see observability_setup.py for the Azure Monitor upgrade path.
+        self.tracer = observability_setup.get_tracer(
+            self._outputs_root() / "traces.jsonl",
+            service_name="migration-coordinator",
+            use_simple_processor=True,
+        )
 
         logger.info("✅ MigrationCoordinator initialised (project=%s)", project_name)
 
@@ -80,50 +95,66 @@ class MigrationCoordinator:
         logger.info("🔄 Starting MIDSTREAM for %s …", wave_id)
         upstream_dir = self._outputs_dir("upstream")
 
-        try:
-            artifacts = self._load_json_artifacts(upstream_dir)
+        with self.tracer.start_as_current_span(
+            "gate.upstream_to_midstream", attributes={"wave_id": wave_id, "phase": "upstream"}
+        ) as span, self.telemetry.track_phase("Upstream -> Midstream", "Gate1-2"):
+            try:
+                artifacts = self._load_json_artifacts(upstream_dir)
 
-            if not artifacts:
-                logger.warning("⚠️  No upstream artifacts found — skipping compression.")
+                if not artifacts:
+                    logger.warning("⚠️  No upstream artifacts found — skipping compression.")
+                    span.set_attribute("skipped", True)
+                    return True
+
+                compressed, stats = self.headroom_workflow.compress_upstream_handoff(
+                    artifact_data=artifacts,
+                    source_agent="discovery-scout",
+                )
+
+                self.token_metrics.add_raw_tokens(
+                    agent="discovery-scout",
+                    phase="upstream",
+                    wave_id=wave_id,
+                    tokens=stats["input_tokens"],
+                )
+                self.token_metrics.add_compression_event(
+                    source_agent="discovery-scout",
+                    target_agent="data-architect",
+                    input_tokens=stats["input_tokens"],
+                    output_tokens=stats["output_tokens"],
+                    compression_ratio=stats["compression_ratio"],
+                    phase="upstream",
+                    method=stats["method"],
+                )
+                self.telemetry.add_tool_call(
+                    "headroom.compress_handoff",
+                    tokens_used=stats["output_tokens"],
+                )
+                span.set_attribute("input_tokens", stats["input_tokens"])
+                span.set_attribute("output_tokens", stats["output_tokens"])
+                span.set_attribute("compression_ratio", stats["compression_ratio"])
+                span.set_attribute("compression_method", stats["method"])
+
+                validation = self.headroom_workflow.validate_compression_ratios("upstream")
+                logger.info("Compression: %s — %s", validation["status"], validation["recommendation"])
+                span.set_attribute("threshold_passed", validation["passed"])
+
+                compressed_file = upstream_dir / f"compressed_{wave_id}_discovery.json"
+                compressed_file.parent.mkdir(parents=True, exist_ok=True)
+                if isinstance(compressed, dict):
+                    compressed_file.write_text(json.dumps(compressed, indent=2), encoding="utf-8")
+                else:
+                    compressed_file.write_text(str(compressed), encoding="utf-8")
+                logger.info("💾 Compressed artifact saved: %s", compressed_file)
+
+                span.set_status(Status(StatusCode.OK))
                 return True
 
-            compressed, stats = self.headroom_workflow.compress_upstream_handoff(
-                artifact_data=artifacts,
-                source_agent="discovery-scout",
-            )
-
-            self.token_metrics.add_raw_tokens(
-                agent="discovery-scout",
-                phase="upstream",
-                wave_id=wave_id,
-                tokens=stats["input_tokens"],
-            )
-            self.token_metrics.add_compression_event(
-                source_agent="discovery-scout",
-                target_agent="data-architect",
-                input_tokens=stats["input_tokens"],
-                output_tokens=stats["output_tokens"],
-                compression_ratio=stats["compression_ratio"],
-                phase="upstream",
-                method=stats["method"],
-            )
-
-            validation = self.headroom_workflow.validate_compression_ratios("upstream")
-            logger.info("Compression: %s — %s", validation["status"], validation["recommendation"])
-
-            compressed_file = upstream_dir / f"compressed_{wave_id}_discovery.json"
-            compressed_file.parent.mkdir(parents=True, exist_ok=True)
-            if isinstance(compressed, dict):
-                compressed_file.write_text(json.dumps(compressed, indent=2), encoding="utf-8")
-            else:
-                compressed_file.write_text(str(compressed), encoding="utf-8")
-            logger.info("💾 Compressed artifact saved: %s", compressed_file)
-
-            return True
-
-        except Exception as exc:
-            logger.error("❌ start_midstream failed: %s", exc)
-            return False
+            except Exception as exc:
+                logger.error("❌ start_midstream failed: %s", exc)
+                span.record_exception(exc)
+                span.set_status(Status(StatusCode.ERROR, str(exc)))
+                return False
 
     # ------------------------------------------------------------------
     # Gate 2 → Gate 3 transition: Midstream → Downstream
@@ -138,50 +169,66 @@ class MigrationCoordinator:
         logger.info("🔄 Starting DOWNSTREAM for %s …", wave_id)
         midstream_dir = self._outputs_dir("midstream")
 
-        try:
-            artifacts = self._load_json_artifacts(midstream_dir)
+        with self.tracer.start_as_current_span(
+            "gate.midstream_to_downstream", attributes={"wave_id": wave_id, "phase": "midstream"}
+        ) as span, self.telemetry.track_phase("Midstream -> Downstream", "Gate2-3"):
+            try:
+                artifacts = self._load_json_artifacts(midstream_dir)
 
-            if not artifacts:
-                logger.warning("⚠️  No midstream artifacts found — skipping compression.")
+                if not artifacts:
+                    logger.warning("⚠️  No midstream artifacts found — skipping compression.")
+                    span.set_attribute("skipped", True)
+                    return True
+
+                compressed, stats = self.headroom_workflow.compress_midstream_handoff(
+                    artifact_data=artifacts,
+                    source_agent="code-generator",
+                )
+
+                self.token_metrics.add_raw_tokens(
+                    agent="code-generator",
+                    phase="midstream",
+                    wave_id=wave_id,
+                    tokens=stats["input_tokens"],
+                )
+                self.token_metrics.add_compression_event(
+                    source_agent="code-generator",
+                    target_agent="downstream-executor",
+                    input_tokens=stats["input_tokens"],
+                    output_tokens=stats["output_tokens"],
+                    compression_ratio=stats["compression_ratio"],
+                    phase="midstream",
+                    method=stats["method"],
+                )
+                self.telemetry.add_tool_call(
+                    "headroom.compress_handoff",
+                    tokens_used=stats["output_tokens"],
+                )
+                span.set_attribute("input_tokens", stats["input_tokens"])
+                span.set_attribute("output_tokens", stats["output_tokens"])
+                span.set_attribute("compression_ratio", stats["compression_ratio"])
+                span.set_attribute("compression_method", stats["method"])
+
+                validation = self.headroom_workflow.validate_compression_ratios("midstream")
+                logger.info("Compression: %s — %s", validation["status"], validation["recommendation"])
+                span.set_attribute("threshold_passed", validation["passed"])
+
+                compressed_file = midstream_dir / f"compressed_{wave_id}_codegen.json"
+                compressed_file.parent.mkdir(parents=True, exist_ok=True)
+                if isinstance(compressed, dict):
+                    compressed_file.write_text(json.dumps(compressed, indent=2), encoding="utf-8")
+                else:
+                    compressed_file.write_text(str(compressed), encoding="utf-8")
+                logger.info("💾 Compressed artifact saved: %s", compressed_file)
+
+                span.set_status(Status(StatusCode.OK))
                 return True
 
-            compressed, stats = self.headroom_workflow.compress_midstream_handoff(
-                artifact_data=artifacts,
-                source_agent="code-generator",
-            )
-
-            self.token_metrics.add_raw_tokens(
-                agent="code-generator",
-                phase="midstream",
-                wave_id=wave_id,
-                tokens=stats["input_tokens"],
-            )
-            self.token_metrics.add_compression_event(
-                source_agent="code-generator",
-                target_agent="downstream-executor",
-                input_tokens=stats["input_tokens"],
-                output_tokens=stats["output_tokens"],
-                compression_ratio=stats["compression_ratio"],
-                phase="midstream",
-                method=stats["method"],
-            )
-
-            validation = self.headroom_workflow.validate_compression_ratios("midstream")
-            logger.info("Compression: %s — %s", validation["status"], validation["recommendation"])
-
-            compressed_file = midstream_dir / f"compressed_{wave_id}_codegen.json"
-            compressed_file.parent.mkdir(parents=True, exist_ok=True)
-            if isinstance(compressed, dict):
-                compressed_file.write_text(json.dumps(compressed, indent=2), encoding="utf-8")
-            else:
-                compressed_file.write_text(str(compressed), encoding="utf-8")
-            logger.info("💾 Compressed artifact saved: %s", compressed_file)
-
-            return True
-
-        except Exception as exc:
-            logger.error("❌ start_downstream failed: %s", exc)
-            return False
+            except Exception as exc:
+                logger.error("❌ start_downstream failed: %s", exc)
+                span.record_exception(exc)
+                span.set_status(Status(StatusCode.ERROR, str(exc)))
+                return False
 
     # ------------------------------------------------------------------
     # Gate 3 → Documentation: Downstream → Documentation
@@ -196,55 +243,83 @@ class MigrationCoordinator:
         """
         logger.info("📝 Starting DOCUMENTATION for %s …", wave_id)
         downstream_dir = self._outputs_dir("downstream")
+        success = False
 
-        try:
-            artifacts = self._load_json_artifacts(downstream_dir)
+        with self.tracer.start_as_current_span(
+            "gate.downstream_to_documentation", attributes={"wave_id": wave_id, "phase": "downstream"}
+        ) as span, self.telemetry.track_phase("Downstream -> Documentation", "Gate3-Doc"):
+            try:
+                artifacts = self._load_json_artifacts(downstream_dir)
 
-            if artifacts:
-                compressed, stats = self.headroom_workflow.compress_downstream_handoff(
-                    artifact_data=artifacts,
-                    source_agent="reconciliation",
-                )
-                self.token_metrics.add_compression_event(
-                    source_agent="reconciliation",
-                    target_agent="documentation",
-                    input_tokens=stats["input_tokens"],
-                    output_tokens=stats["output_tokens"],
-                    compression_ratio=stats["compression_ratio"],
-                    phase="downstream",
-                    method=stats["method"],
-                )
+                if artifacts:
+                    compressed, stats = self.headroom_workflow.compress_downstream_handoff(
+                        artifact_data=artifacts,
+                        source_agent="reconciliation",
+                    )
+                    self.token_metrics.add_compression_event(
+                        source_agent="reconciliation",
+                        target_agent="documentation",
+                        input_tokens=stats["input_tokens"],
+                        output_tokens=stats["output_tokens"],
+                        compression_ratio=stats["compression_ratio"],
+                        phase="downstream",
+                        method=stats["method"],
+                    )
+                    self.telemetry.add_tool_call(
+                        "headroom.compress_handoff",
+                        tokens_used=stats["output_tokens"],
+                    )
+                    span.set_attribute("input_tokens", stats["input_tokens"])
+                    span.set_attribute("output_tokens", stats["output_tokens"])
+                    span.set_attribute("compression_ratio", stats["compression_ratio"])
+                    span.set_attribute("compression_method", stats["method"])
 
-                validation = self.headroom_workflow.validate_compression_ratios("downstream")
+                    validation = self.headroom_workflow.validate_compression_ratios("downstream")
+                    logger.info(
+                        "Compression: %s — %s", validation["status"], validation["recommendation"]
+                    )
+                    span.set_attribute("threshold_passed", validation["passed"])
+                else:
+                    span.set_attribute("skipped", True)
+
+                # Final cost impact — real measured tokens, real per-model pricing
+                cost = self.token_metrics.calculate_cost_delta()
                 logger.info(
-                    "Compression: %s — %s", validation["status"], validation["recommendation"]
+                    "💰 Cost Analysis → raw: $%.6f | compressed: $%.6f | saved: $%.6f",
+                    cost["raw_cost_usd"],
+                    cost["compressed_cost_usd"],
+                    cost["savings_usd"],
                 )
+                span.set_attribute("cost_savings_usd", cost["savings_usd"])
 
-            # Final cost impact
-            cost = self.token_metrics.calculate_cost_delta()
-            logger.info(
-                "💰 Cost Analysis → raw: $%.6f | compressed: $%.6f | saved: $%.6f",
-                cost["raw_cost_usd"],
-                cost["compressed_cost_usd"],
-                cost["savings_usd"],
-            )
+                # Persist metrics
+                metrics_file = downstream_dir / f"{wave_id}_headroom_metrics.json"
+                metrics_file.parent.mkdir(parents=True, exist_ok=True)
+                self.token_metrics.save_to_file(metrics_file)
+                logger.info("📊 Headroom metrics saved: %s", metrics_file)
 
-            # Persist metrics
-            metrics_file = downstream_dir / f"{wave_id}_headroom_metrics.json"
-            metrics_file.parent.mkdir(parents=True, exist_ok=True)
-            self.token_metrics.save_to_file(metrics_file)
-            logger.info("📊 Headroom metrics saved: %s", metrics_file)
+                workflow_status = self.headroom_workflow.get_workflow_status()
+                status_file = downstream_dir / f"{wave_id}_headroom_workflow.json"
+                status_file.write_text(json.dumps(workflow_status, indent=2), encoding="utf-8")
+                logger.info("🔄 Workflow status saved: %s", status_file)
 
-            workflow_status = self.headroom_workflow.get_workflow_status()
-            status_file = downstream_dir / f"{wave_id}_headroom_workflow.json"
-            status_file.write_text(json.dumps(workflow_status, indent=2), encoding="utf-8")
-            logger.info("🔄 Workflow status saved: %s", status_file)
+                span.set_status(Status(StatusCode.OK))
+                success = True
 
-            return True
+            except Exception as exc:
+                logger.error("❌ start_documentation failed: %s", exc)
+                span.record_exception(exc)
+                span.set_status(Status(StatusCode.ERROR, str(exc)))
+                success = False
 
-        except Exception as exc:
-            logger.error("❌ start_documentation failed: %s", exc)
-            return False
+        # Saved after the `with` block closes so this phase is already
+        # recorded in self.telemetry.phases — otherwise the report would
+        # always under-count the in-flight documentation phase by one.
+        telemetry_file = downstream_dir / f"{wave_id}_execution_telemetry.json"
+        self.telemetry.to_json(telemetry_file)
+        logger.info("⏱️  Execution telemetry saved: %s", telemetry_file)
+
+        return success
 
     # ------------------------------------------------------------------
     # Introspection helpers
@@ -277,6 +352,9 @@ class MigrationCoordinator:
 
     def _outputs_dir(self, phase: str) -> Path:
         return self.project_root / "projects" / self.project_name / "outputs" / phase
+
+    def _outputs_root(self) -> Path:
+        return self.project_root / "projects" / self.project_name / "outputs"
 
     def _load_json_artifacts(self, directory: Path) -> dict | None:
         """Load all *.json files from *directory* into a single dict keyed by stem."""

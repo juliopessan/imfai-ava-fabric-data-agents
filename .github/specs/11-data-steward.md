@@ -1,1 +1,61 @@
-# SDD: data-steward (Govern Data Quality)\n\n**Role:** Define data quality rules, ownership, and SLAs. Not execution.\n\n---\n\n## Input Contract\n\n```\nRequired:\n  ├─ data-contracts.json: File — from data-modeler\n  ├─ business-rules.md: File — from business-analyst\n  └─ governance_policy: Dict — quality thresholds, owners\n\nOptional:\n  └─ stakeholder_feedback: String — quality concerns\n```\n\n---\n\n## Task Definition\n\n1. **Define** data quality rules (null %, uniqueness, range, format)\n2. **Assign** data owners per table\n3. **Set** SLOs (Service Level Objectives) for freshness, accuracy, completeness\n4. **Document** quality standards\n5. **Create** monitoring plan\n\n---\n\n## Output\n\n```\nProduces:\n  ├─ data-governance-policy.md: Rules + owners + SLOs\n  ├─ quality-metrics-spec.json: Measurable thresholds\n  └─ monitoring-dashboard-spec.json: KPI definitions\n\nLocation: projects/[project]/outputs/governance/\nPasses To: code-generator (for test script generation)\n```\n\n---\n\n## Constraints\n\n🔴 All quality rules must be measurable  \n🔴 Must define owner per table  \n🔴 No vague SLOs (\"reasonable\" is forbidden)  \n\n---\n\n**Status:** ✅ ACTIVE | **Updated:** 2026-06-16\n
+# SDD: data-steward (Govern Data Quality)
+
+**Role:** Define data quality rules, ownership, and SLAs. Not execution.
+
+---
+
+## Input Contract
+
+```
+Required:
+  ├─ data-contracts.json: File — from data-modeler
+  ├─ business-rules.md: File — from business-analyst
+  └─ governance_policy: Dict — quality thresholds, owners
+
+Optional:
+  └─ stakeholder_feedback: String — quality concerns
+```
+
+---
+
+## Task Definition
+
+1. **Define** data quality rules (null %, uniqueness, range, format)
+2. **Assign** data owners per table
+3. **Set** SLOs (Service Level Objectives) for freshness, accuracy, completeness
+4. **Document** quality standards
+5. **Create** monitoring plan
+
+---
+
+## Success Criteria
+
+- ✅ Every table has an assigned owner
+- ✅ Every quality rule is measurable (no vague language)
+- ✅ SLOs defined for freshness, accuracy, completeness
+
+---
+
+## Output Contract
+
+```
+Produces:
+  ├─ data-governance-policy.md: Rules + owners + SLOs
+  ├─ quality-metrics-spec.json: Measurable thresholds
+  └─ monitoring-dashboard-spec.json: KPI definitions
+
+Location: projects/[project]/outputs/governance/
+Passes To: code-generator (for test script generation)
+```
+
+---
+
+## Constraints
+
+🔴 All quality rules must be measurable
+🔴 Must define owner per table
+🔴 No vague SLOs ("reasonable" is forbidden)
+
+---
+
+**Status:** ✅ ACTIVE | **Updated:** 2026-06-16

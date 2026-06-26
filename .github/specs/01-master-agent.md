@@ -46,7 +46,7 @@ Optional:
 
 ---
 
-## Output
+## Output Contract
 
 ```
 Routes To: [AGENT_NAME]

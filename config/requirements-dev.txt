@@ -1,3 +1,16 @@
 pytest>=7.0
 pytest-cov
 pyyaml
+
+# Real token counting + tracing for src/shared/scripts (real_compressor.py,
+# headroom_context_manager.py, observability_setup.py). No long-path issues.
+tiktoken>=0.5.0
+opentelemetry-sdk>=1.24.0
+
+# Optional: the real Headroom engine (github.com/juliopessan/headroom,
+# published as `headroom-ai`). Its compression core is a Rust extension
+# shipped only for macOS/Linux (manylinux) — there is no Windows wheel, so on
+# Windows this installs but compression silently no-ops; real_compressor.py
+# is used instead automatically. Needs a short install path on Windows (a
+# transitive dependency, litellm, ships files whose path exceeds 260 chars).
+# pip install --only-binary=:all: "headroom-ai[otel]"

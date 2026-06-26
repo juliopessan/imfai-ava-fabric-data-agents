@@ -27,23 +27,36 @@ Usage:
 """
 
 import json
+import sys as _sys
 import time
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in _sys.path:
+    _sys.path.insert(0, str(_SCRIPTS_DIR))
+
+import model_pricing
+
 
 class ExecutionTelemetry:
     """Track agent execution metrics and business outcomes."""
 
-    def __init__(self, workflow_name: str, agent_name: str, output_dir: Optional[Path] = None):
+    def __init__(
+        self,
+        workflow_name: str,
+        agent_name: str,
+        output_dir: Optional[Path] = None,
+        model: str = model_pricing.DEFAULT_MODEL,
+    ):
         self.workflow_name = workflow_name
         self.agent_name = agent_name
         self.output_dir = Path(output_dir) if output_dir else Path(".")
-        
+
         self.start_time = time.time()
         self.start_datetime = datetime.now()
-        
+
         # Metrics
         self.input_tokens = 0
         self.output_tokens = 0
@@ -53,11 +66,13 @@ class ExecutionTelemetry:
         self.memory_lookups: List[Dict[str, Any]] = []
         self.phases: List[Dict[str, Any]] = []
         self.business_outcomes: List[Dict[str, Any]] = []
-        
-        # Pricing (Claude Haiku)
-        self.price_per_input_mtok = 0.80  # $0.80 per million tokens
-        self.price_per_output_mtok = 2.40  # $2.40 per million tokens
-        
+
+        # Pricing — shared table (model_pricing.py), not a hand-picked constant
+        self.model = model
+        price = model_pricing.get_price(model)
+        self.price_per_input_mtok = price.input_per_mtok
+        self.price_per_output_mtok = price.output_per_mtok
+
         self.current_phase = None
         self.current_phase_start = None
         self.cache_hit_rate = 0.0

@@ -1,6 +1,7 @@
 wave_id: Financeiro-reference-2026-06
 project_name: Financeiro — reference Migration Wave
 description: Migration wave for legacy Cloudera assets to Databricks (proof-of-concept + phased roll-out)
+discovery_owner: julio.cesar.d.pessan@company.example
 discovery_owner_primary: julio.cesar.d.pessan@company.example
 discovery_owner_secondary: data-architect@avanade.example
 source_platform: cloudera
@@ -13,6 +14,25 @@ scope:
   - emr-packages
 legacy_path: legacy/extracted
 outputs_path: outputs
+
+# Phasing — mirrors the upstream/midstream/downstream output dirs this wave
+# already produces (see outputs/upstream, outputs/midstream, outputs/downstream).
+phases:
+  - phase: 1
+    name: "Upstream Discovery"
+    gates: [gate-1]
+    agents: [discovery-scout, data-architect]
+
+  - phase: 2
+    name: "Midstream Design & Code Generation"
+    gates: [gate-2]
+    agents: [business-analyst, data-modeler, code-generator]
+
+  - phase: 3
+    name: "Downstream Execution & Reconciliation"
+    gates: [gate-3]
+    agents: [downstream-executor, reconciliation, quality-gate]
+
 notes:
   - "Use Cloudera→Databricks mapping. Target delta tables and Databricks jobs."
   - "Run full upstream → midstream → downstream pipelines."
