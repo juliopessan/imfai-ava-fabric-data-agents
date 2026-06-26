@@ -1,13 +1,13 @@
 # 🚀 FINANCEIRO REFERENCE MIGRATION WAVE 4 — ORCHESTRATION COMPLETE
 
 **Data de Execução:** 2026-06-16 | **Status:** 🟢 **PRODUCTION READY**  
-**Wave ID:** `bradesco-einstein-2026-06` | **Coordenador:** migration-coordinator  
+**Wave ID:** `Financeiro-reference-2026-06` | **Coordenador:** migration-coordinator  
 
 ---
 
 ## 📋 EXECUTIVE SUMMARY
 
-Orquestração completamente autônoma de 3 gates sequenciais na migração Bradesco Einstein 2026-06 foi **finalizada com sucesso** em **2.44 minutos**, superando todos os KPIs de Wave 3:
+Orquestração completamente autônoma de 3 gates sequenciais na migração Financeiro reference 2026-06 foi **finalizada com sucesso** em **2.44 minutos**, superando todos os KPIs de Wave 3:
 
 | KPI | Target W4 | Realizado | Δ | Status |
 |-----|----------|----------|---|--------|
@@ -253,7 +253,7 @@ RETURNS:
 ## 📁 DELIVERABLES LOCATION
 
 ```
-projects/bradesco/
+projects/Financeiro/
 ├── state/
 │   ├── gate1-decision.md ✓
 │   ├── gate2-decision.md ✓
@@ -278,9 +278,9 @@ projects/bradesco/
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║          BRADESCO EINSTEIN WAVE 4 — 100% AUTONOMOUS           ║
+║          Financeiro reference WAVE 4 — 100% AUTONOMOUS           ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ Wave ID:              bradesco-einstein-2026-06               ║
+║ Wave ID:              Financeiro-reference-2026-06               ║
 ║ Status:               🟢 PRODUCTION READY                     ║
 ║ Execution:            100% Autonomous (3 gates, 0 manual)     ║
 ║ Total Time:           2.44 minutes                            ║

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-BRADESCO WAVES 1-4 PARALLEL ORCHESTRATOR v2.0
+Financeiro WAVES 1-4 PARALLEL ORCHESTRATOR v2.0
 ============================================
 Performance Optimization: 75% faster via parallel waves + schema caching
 - Parallel wave execution (ThreadPoolExecutor)
@@ -162,7 +162,7 @@ class ParallelExecutionMetrics:
 # ORCHESTRATOR
 # ============================================================================
 
-class BradescoBrallelOrchestrator:
+class FinanceiroBrallelOrchestrator:
     """Parallel DMF orchestrator with schema caching."""
     
     def __init__(self, legacy_count: int = 545):
@@ -311,7 +311,7 @@ class BradescoBrallelOrchestrator:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bradesco Parallel Orchestration - Performance Report</title>
+    <title>Financeiro Parallel Orchestration - Performance Report</title>
     <meta charset="utf-8">
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
@@ -333,7 +333,7 @@ class BradescoBrallelOrchestrator:
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Bradesco Parallel Orchestration — Performance Report</h1>
+        <h1>🚀 Financeiro Parallel Orchestration — Performance Report</h1>
         
         <div class="metrics-grid">
             <div class="metric-card speedup">
@@ -422,7 +422,7 @@ class BradescoBrallelOrchestrator:
         </div>
         
         <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; color: #999; font-size: 12px;">
-            Generated: {datetime.utcnow().isoformat()} | Bradesco DMF v2.0
+            Generated: {datetime.utcnow().isoformat()} | Financeiro DMF v2.0
         </footer>
     </div>
 </body>
@@ -442,18 +442,18 @@ def main():
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     
     print("\n" + "="*80)
-    print("🚀 BRADESCO PARALLEL ORCHESTRATOR v2.0")
+    print("🚀 Financeiro PARALLEL ORCHESTRATOR v2.0")
     print("="*80)
     print(f"Start Time: {datetime.utcnow().isoformat()}\n")
     
-    orchestrator = BradescoBrallelOrchestrator()
+    orchestrator = FinanceiroBrallelOrchestrator()
     
     # ========================================
     # SERIAL BASELINE
     # ========================================
     print("📊 Running SERIAL baseline (4 waves sequentially)...")
     serial_start = time.time()
-    orchestrator_serial = BradescoBrallelOrchestrator()
+    orchestrator_serial = FinanceiroBrallelOrchestrator()
     _, serial_time = orchestrator_serial.execute_serial()
     print(f"   ✅ Serial completed in {serial_time:.2f}s\n")
     
@@ -500,14 +500,14 @@ def main():
     # ========================================
     # GENERATE REPORTS
     # ========================================
-    output_dir = Path("projects/bradesco/outputs/teste_26062026_parallel_optimized")
+    output_dir = Path("projects/Financeiro/outputs/teste_26062026_parallel_optimized")
     output_dir.mkdir(parents=True, exist_ok=True)
     
     print(f"\n📁 Generating reports in {output_dir}...")
     
     # HTML Dashboard
     html_report = orchestrator.generate_comparison_report(serial_time, parallel_time)
-    html_path = output_dir / "BRADESCO_PARALLEL_DASHBOARD.html"
+    html_path = output_dir / "Financeiro_PARALLEL_DASHBOARD.html"
     html_path.write_text(html_report, encoding='utf-8')
     print(f"   ✅ {html_path.name} ({html_path.stat().st_size / 1024:.1f} KB)")
     
@@ -542,12 +542,12 @@ def main():
         "timestamp": datetime.utcnow().isoformat(),
     }
     
-    json_path = output_dir / "BRADESCO_PARALLEL_METRICS.json"
+    json_path = output_dir / "Financeiro_PARALLEL_METRICS.json"
     json_path.write_text(json.dumps(metrics_dict, indent=2), encoding='utf-8')
     print(f"   ✅ {json_path.name} ({json_path.stat().st_size / 1024:.1f} KB)")
     
     # Markdown Report
-    md_report = f"""# 🚀 Bradesco Parallel Orchestration — Performance Report
+    md_report = f"""# 🚀 Financeiro Parallel Orchestration — Performance Report
 
 **Generated:** {datetime.utcnow().isoformat()}
 
@@ -612,7 +612,7 @@ Parallel execution achieved **{speedup:.1f}x speedup** with schema caching reduc
 4. Scale to 50+ concurrent migrations
 """
     
-    md_path = output_dir / "BRADESCO_PARALLEL_TECHNICAL_REPORT.md"
+    md_path = output_dir / "Financeiro_PARALLEL_TECHNICAL_REPORT.md"
     md_path.write_text(md_report, encoding='utf-8')
     print(f"   ✅ {md_path.name} ({md_path.stat().st_size / 1024:.1f} KB)")
     

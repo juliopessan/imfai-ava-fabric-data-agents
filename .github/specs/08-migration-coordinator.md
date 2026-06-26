@@ -9,7 +9,7 @@
 ```
 Required:
   ├─ wave_config.yaml: File — projects/[project]/wave-config.yaml
-  ├─ project_name: String — bradesco|einstein-hiae|multi-platform
+  ├─ project_name: String — Financeiro|Reference-Sa�de|multi-platform
   ├─ phase: String — discovery|architecture|deployment|consolidation
   └─ start_phase: String — where to begin
 

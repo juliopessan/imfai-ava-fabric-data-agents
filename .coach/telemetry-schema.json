@@ -21,7 +21,7 @@
     "wave": {
       "type": "string",
       "pattern": "^[a-z_0-9]+_wave_\\d+$",
-      "description": "Wave identifier (e.g., 'bradesco_wave_2')"
+      "description": "Wave identifier (e.g., 'Financeiro_wave_2')"
     },
     "gate": {
       "type": "integer",

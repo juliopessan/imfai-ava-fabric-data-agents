@@ -229,7 +229,7 @@ Seamless adaptation to user's system preference.
 
 ## 🎯 Use Cases
 
-### 1. **Data Migration Dashboard** (Bradesco)
+### 1. **Data Migration Dashboard** (Financeiro)
 Upload data files for migration to Databricks
 ```tsx
 // Perfect for the migration factory

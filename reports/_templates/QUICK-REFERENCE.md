@@ -246,9 +246,9 @@ document.body.style.colorScheme = 'dark';
 ## 🎓 Exemplos em Repositório
 
 ```
-reports/bradesco/
-├── bradesco-executive-dashboard.html       ← Full example
-├── bradesco-3tier-dashboard.html           ← With charts
+reports/Financeiro/
+├── Financeiro-executive-dashboard.html       ← Full example
+├── Financeiro-3tier-dashboard.html           ← With charts
 └── ROI_ANALYSIS_VISUAL.html                ← With metrics
 
 reports/_templates/

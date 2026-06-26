@@ -34,9 +34,9 @@
 
 | Dashboard | Arquivo | Status |
 |-----------|---------|--------|
-| 1 | bradesco-autonomous-test-report.html | ✅ |
-| 2 | bradesco-3tier-dashboard.html | ✅ |
-| 3 | bradesco-executive-dashboard.html | ✅ |
+| 1 | Financeiro-autonomous-test-report.html | ✅ |
+| 2 | Financeiro-3tier-dashboard.html | ✅ |
+| 3 | Financeiro-executive-dashboard.html | ✅ |
 | 4 | ROI_ANALYSIS_VISUAL.html | ✅ |
 | 5 | DASHBOARD-TEMPLATE-ORANGE-DNA.html | ✅ |
 | 6 | DASHBOARD-ENTERPRISE-STANDARD.html | ✅ |
@@ -87,10 +87,10 @@ reports/
 │   ├── dashboard-with-metrics.html        ← ATUALIZADO ✅
 │   └── example-dashboard.html             ← ATUALIZADO ✅
 │
-└── bradesco/
-    ├── bradesco-autonomous-test-report.html  ← ATUALIZADO ✅
-    ├── bradesco-3tier-dashboard.html         ← ATUALIZADO ✅
-    ├── bradesco-executive-dashboard.html     ← ATUALIZADO ✅
+└── Financeiro/
+    ├── Financeiro-autonomous-test-report.html  ← ATUALIZADO ✅
+    ├── Financeiro-3tier-dashboard.html         ← ATUALIZADO ✅
+    ├── Financeiro-executive-dashboard.html     ← ATUALIZADO ✅
     └── ROI_ANALYSIS_VISUAL.html              ← ATUALIZADO ✅
 ```
 

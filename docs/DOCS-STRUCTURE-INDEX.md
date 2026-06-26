@@ -50,8 +50,8 @@ docs/
 │   └── README.md
 │
 ├── project-plans/                   📅 Project Planning
-│   ├── BRADESCO-TIER1-EXECUTION-PLAN.md
-│   ├── BRADESCO-TIER1-VALIDATION-REPORT.md
+│   ├── Financeiro-TIER1-EXECUTION-PLAN.md
+│   ├── Financeiro-TIER1-VALIDATION-REPORT.md
 │   ├── GAP-ANALYSIS-REPORT.md
 │   ├── PROJECT-COMPLETION-SUMMARY.md
 │   └── README.md
@@ -131,7 +131,7 @@ docs/
 - **Best for:** Designers, documentation, standardization
 
 ### **project-plans/** 📅 Project Planning
-- Wave execution plans (Bradesco, Einstein, etc.)
+- Wave execution plans (Financeiro, reference, etc.)
 - Validation reports
 - Gap analysis
 - Completion summaries

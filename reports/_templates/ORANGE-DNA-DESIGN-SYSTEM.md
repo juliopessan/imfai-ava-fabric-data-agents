@@ -451,7 +451,7 @@ Reference file: `DESIGN-TOKENS.css`
 1. **Review & Approval** — Stakeholder sign-off on color/spacing updates
 2. **BRAND-GUIDELINES.md Update** — Incorporate this document's findings
 3. **DESIGN-TOKENS.css Creation** — CSS custom properties file (single source of truth)
-4. **Dashboard Refactoring** — Apply to executive-dashboard.html, Bradesco outputs, etc.
+4. **Dashboard Refactoring** — Apply to executive-dashboard.html, Financeiro outputs, etc.
 5. **Component Updates** — Update React components to use new tokens
 6. **Testing & Validation** — Visual regression, WCAG AA verification, responsive testing
 

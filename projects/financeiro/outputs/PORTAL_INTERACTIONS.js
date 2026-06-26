@@ -98,7 +98,7 @@ function applyDynamicTranslations() {
   const headerBrand = document.querySelector('.header-brand');
   if (headerBrand) {
     const brandText = portalContent.content.header[currentLanguage].brand;
-    if (headerBrand.textContent.includes('Bradesco')) {
+    if (headerBrand.textContent.includes('Financeiro')) {
       headerBrand.textContent = brandText;
     }
   }

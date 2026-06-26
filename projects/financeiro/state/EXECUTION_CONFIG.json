@@ -1,5 +1,5 @@
 {
-  "project": "Bradesco Legacy Migration",
+  "project": "Financeiro Legacy Migration",
   "source_platform": "Cloudera",
   "target_platform": "Databricks",
   "legacy_projects": [

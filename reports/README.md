@@ -11,9 +11,9 @@ reports/
 ├── README.md                         (este arquivo)
 ├── INDEX.md                          (índice de todos os relatórios)
 │
-├── bradesco/                         ← CLIENTE: Bradesco
-│   ├── bradesco-3tier-dashboard.html          (Dashboard 3-tier migration)
-│   ├── bradesco-autonomous-test-report.html   (Relatório de teste autônomo)
+├── Financeiro/                         ← CLIENTE: Financeiro
+│   ├── Financeiro-3tier-dashboard.html          (Dashboard 3-tier migration)
+│   ├── Financeiro-autonomous-test-report.html   (Relatório de teste autônomo)
 │   └── ROI_ANALYSIS_VISUAL.html               (Dashboard ROI com benchmarks)
 │
 ├── reference-saude/                    ← CLIENTE: Reference Saude (planejado)
@@ -49,8 +49,8 @@ reports/
 reports/[CLIENT_NAME]/
 ```
 
-Exemplo: `reports/bradesco/`
-- Todos os dashboards e relatórios do Bradesco
+Exemplo: `reports/Financeiro/`
+- Todos os dashboards e relatórios do Financeiro
 - Fácil localização e manutenção
 
 ### 2. **Usar Templates & Ferramentas**
@@ -78,9 +78,9 @@ mkdir reports/[novo-cliente]/
 [cliente]-[tipo]-[titulo?].html
 
 Exemplos:
-- bradesco-3tier-dashboard.html       (Dashboard de migração 3-tier)
-- bradesco-autonomous-test-report.html (Relatório de teste)
-- einstein-roi-analysis.html          (Análise de ROI)
+- Financeiro-3tier-dashboard.html       (Dashboard de migração 3-tier)
+- Financeiro-autonomous-test-report.html (Relatório de teste)
+- reference-roi-analysis.html          (Análise de ROI)
 ```
 
 ### Para Ferramentas Compartilhadas:
@@ -96,15 +96,15 @@ Exemplos:
 
 ## 📊 Dashboards Disponíveis
 
-### **Bradesco** (`reports/bradesco/`)
+### **Financeiro** (`reports/Financeiro/`)
 
 1. **3-Tier Migration Dashboard**
-   - Arquivo: `bradesco-3tier-dashboard.html`
+   - Arquivo: `Financeiro-3tier-dashboard.html`
    - Status: Upstream + Midstream + Downstream
    - Métricas: 13 fases, 22 artefatos, Gate scores
 
 2. **Autonomous Test Report**
-   - Arquivo: `bradesco-autonomous-test-report.html`
+   - Arquivo: `Financeiro-autonomous-test-report.html`
    - Status: Teste autônomo completo
    - Métricas: Execution time, validations, artifacts
 
@@ -152,7 +152,7 @@ python _templates/generate-dashboard.py \
 ## 🚀 Próximas Etapas
 
 1. [X] Criar estrutura por cliente
-2. [ ] Adicionar novo cliente (Einstein HIAE)
+2. [ ] Adicionar novo cliente (reference saude)
 3. [ ] Automatizar geração de dashboards no pipeline CI/CD
 4. [ ] Versionar relatórios com timestamps
 5. [ ] Integrar com Data Viewer para visualização interativa
@@ -161,7 +161,7 @@ python _templates/generate-dashboard.py \
 
 ## 📞 Referências
 
-- **Bradesco Reports:** `reports/bradesco/`
+- **Financeiro Reports:** `reports/Financeiro/`
 - **Templates & Tools:** `reports/_templates/`
 - **Índice Completo:** Ver `INDEX.md`
 

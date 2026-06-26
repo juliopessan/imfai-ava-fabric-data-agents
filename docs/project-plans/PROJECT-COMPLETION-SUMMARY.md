@@ -43,17 +43,17 @@
 - Peach highlight on active/hover
 - Smooth transitions (0.2s cubic-bezier)
 
-### **Phase 4: Bradesco Project Integration** ✅
+### **Phase 4: Financeiro Project Integration** ✅
 **7 Dashboards Regenerated:**
 1. ✅ `00_CONSOLIDATED_MIGRATION_REPORT.html`
 2. ✅ `00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html`
 3. ✅ `00_CONSOLIDATED_MIGRATION_REPORT_templated.html`
-4. ✅ `BRADESCO_MIGRATION_DASHBOARD.html`
+4. ✅ `Financeiro_MIGRATION_DASHBOARD.html`
 5. ✅ `DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html`
 6. ✅ `EXECUTIVE_DATA_FACTORY_DASHBOARD.html`
 7. ✅ `TELEMETRY_DEMO_DASHBOARD.html`
 
-**Automation Script:** `regenerate_bradesco_dashboards.py` (reusable for future dashboards)
+**Automation Script:** `regenerate_Financeiro_dashboards.py` (reusable for future dashboards)
 
 ### **Phase 5: Validation & Testing** ✅
 **Validation Framework:** `phase5_validation_suite.py`
@@ -73,7 +73,7 @@
 
 | Metric | Target | Achieved | Status |
 |--------|--------|----------|--------|
-| Dashboard Coverage | 100% | 10/10 (3 template + 7 Bradesco) | ✅ |
+| Dashboard Coverage | 100% | 10/10 (3 template + 7 Financeiro) | ✅ |
 | Layout Compliance | 100% | 100% | ✅ |
 | Design Token Usage | 100% | 100% (20+ tokens) | ✅ |
 | Responsive Breakpoints | ≥3 | 3 (320px/768px/1024px) | ✅ |
@@ -148,15 +148,15 @@ reports/_templates/
 ├── DASHBOARD-ENTERPRISE-STANDARD.html             [✅ refactored]
 ├── dashboard-with-metrics.html                    [✅ refactored]
 ├── OrangeDNA-Components.tsx                       [4 React components]
-├── regenerate_bradesco_dashboards.py              [automation script]
+├── regenerate_Financeiro_dashboards.py              [automation script]
 ├── phase5_validation_suite.py                     [validation framework]
 └── phase5_visual_regression.py                    [screenshot framework]
 
-projects/bradesco/outputs/
+projects/Financeiro/outputs/
 ├── 00_CONSOLIDATED_MIGRATION_REPORT.html          [✅ regenerated]
 ├── 00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html   [✅ regenerated]
 ├── 00_CONSOLIDATED_MIGRATION_REPORT_templated.html [✅ regenerated]
-├── BRADESCO_MIGRATION_DASHBOARD.html              [✅ regenerated]
+├── Financeiro_MIGRATION_DASHBOARD.html              [✅ regenerated]
 ├── DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html      [✅ regenerated]
 ├── EXECUTIVE_DATA_FACTORY_DASHBOARD.html          [✅ regenerated]
 ├── TELEMETRY_DEMO_DASHBOARD.html                  [✅ regenerated]
@@ -172,7 +172,7 @@ Root:
 ## 🚀 Quick Start
 
 ### For Dashboard Review
-1. Open any Bradesco dashboard in browser
+1. Open any Financeiro dashboard in browser
 2. Verify topbar appears at top (56px)
 3. Verify sidebar appears on left (248px)
 4. Hover over navigation items (peach highlight)
@@ -192,7 +192,7 @@ import { Sidebar, TopBar, KPICard, StatusBadge } from './OrangeDNA-Components.ts
 ```bash
 pip install playwright
 playwright install chromium
-python projects/bradesco/outputs/screenshots/take_screenshots.py
+python projects/Financeiro/outputs/screenshots/take_screenshots.py
 ```
 
 ---
@@ -320,7 +320,7 @@ python projects/bradesco/outputs/screenshots/take_screenshots.py
 1. **Color updates** → Edit DESIGN-TOKENS.css (single file)
 2. **Spacing changes** → Update --ava-space-* variables
 3. **New component** → Add to OrangeDNA-Components.tsx
-4. **New dashboard** → Run regenerate_bradesco_dashboards.py
+4. **New dashboard** → Run regenerate_Financeiro_dashboards.py
 
 ### Maintenance Checklist
 - [ ] Quarterly: Review color contrast ratios
@@ -336,7 +336,7 @@ python projects/bradesco/outputs/screenshots/take_screenshots.py
 | Criterion | Target | Achieved |
 |-----------|--------|----------|
 | Design system completeness | 100% | ✅ 100% |
-| Dashboard coverage | ≥3 | ✅ 10 (3 template + 7 Bradesco) |
+| Dashboard coverage | ≥3 | ✅ 10 (3 template + 7 Financeiro) |
 | React component library | 3+ components | ✅ 4 components |
 | Responsive design | Mobile + Desktop | ✅ 3 breakpoints |
 | Accessibility compliance | WCAG AA | ✅ Met (with noted exceptions) |

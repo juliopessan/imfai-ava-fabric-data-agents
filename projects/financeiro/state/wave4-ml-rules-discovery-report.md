@@ -2,7 +2,7 @@
 =====================================================
 
 **Report Date:** 2026-06-16  
-**Wave ID:** bradesco-wave4-2026-06  
+**Wave ID:** Financeiro-wave4-2026-06  
 **Discovery Method:** Pattern analysis from error logs (Gate 1 & Gate 2)  
 **New Rules Discovered:** 6 patterns (consolidates to 3 unique rules: R36-R38)
 
@@ -155,7 +155,7 @@ def map_regulatory_codes(legacy_code, legacy_version='2020-q1'):
     Legacy Formats Detected:
     1. Pre-2020 codes (e.g., 'RISK_2019_001') → map to current
     2. Internal shorthand (e.g., 'R01', 'C12') → expand to full code
-    3. Vendor codes (e.g., 'BCMF_X001') → standardize to Bradesco format
+    3. Vendor codes (e.g., 'BCMF_X001') → standardize to Financeiro format
     4. NULL/Missing → categorize based on context (schema, parent table)
     
     Returns: string matching LGPD/2020 regulatory code (e.g., 'LGPD_DATA_PROTECTION_001')

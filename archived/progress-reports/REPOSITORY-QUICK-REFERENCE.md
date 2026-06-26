@@ -7,20 +7,20 @@
 
 ## ğŸ“ Script Locations
 
-### Einstein-HIAE Scripts
+### Reference-Saúde Scripts
 
 | Script | Location | Purpose |
 |--------|----------|---------|
-| `orchestrator.py` | `projects/einstein-hiae/scripts/` | Master orchestration |
-| `deep_legacy_analyzer.py` | `projects/einstein-hiae/scripts/` | Legacy DDL extraction |
-| `generate_kpi_portal.py` | `projects/einstein-hiae/scripts/` | Portal generation |
-| `generate_final_report.py` | `projects/einstein-hiae/scripts/` | Report generation |
-| `create_executive_dashboard.py` | `projects/einstein-hiae/scripts/` | Dashboard creation |
-| `render_screenshots.py` | `projects/einstein-hiae/scripts/` | Screenshot automation |
-| `update_portal_with_legacy.py` | `projects/einstein-hiae/scripts/` | Portal content merge |
+| `orchestrator.py` | `projects/Reference-Saúde/scripts/` | Master orchestration |
+| `deep_legacy_analyzer.py` | `projects/Reference-Saúde/scripts/` | Legacy DDL extraction |
+| `generate_kpi_portal.py` | `projects/Reference-Saúde/scripts/` | Portal generation |
+| `generate_final_report.py` | `projects/Reference-Saúde/scripts/` | Report generation |
+| `create_executive_dashboard.py` | `projects/Reference-Saúde/scripts/` | Dashboard creation |
+| `render_screenshots.py` | `projects/Reference-Saúde/scripts/` | Screenshot automation |
+| `update_portal_with_legacy.py` | `projects/Reference-Saúde/scripts/` | Portal content merge |
 
-### Bradesco Scripts
-- Located in: `projects/bradesco/scripts/`
+### Financeiro Scripts
+- Located in: `projects/Financeiro/scripts/`
 
 ### Utility Scripts
 - Located in: `tools/validation/`, `tools/utilities/`
@@ -29,26 +29,26 @@
 
 ## ğŸ“Š Output Locations
 
-### Einstein-HIAE Outputs
+### Reference-Saúde Outputs
 
 | File | Location | Type |
 |------|----------|------|
-| `KPI_PORTAL_MASTER.html` | `projects/einstein-hiae/outputs/` | Portal (LIVE) |
-| `AVANADE_DESIGN_TOKENS.css` | `projects/einstein-hiae/outputs/` | Design system |
-| `AVANADE_COMPONENTS.css` | `projects/einstein-hiae/outputs/` | UI components |
-| `PORTAL_INTERACTIONS.js` | `projects/einstein-hiae/outputs/` | Interactivity |
-| `EINSTEIN_KPI_PORTAL_CONTENT.json` | `projects/einstein-hiae/outputs/` | Portal content |
-| `DEEP_LEGACY_ANALYSIS_SUMMARY.txt` | `projects/einstein-hiae/outputs/` | Summary |
-| `EXECUTION_SUMMARY.txt` | `projects/einstein-hiae/outputs/` | Execution log |
-| `DELIVERABLES_INDEX.md` | `projects/einstein-hiae/outputs/` | File index |
+| `KPI_PORTAL_MASTER.html` | `projects/Reference-Saúde/outputs/` | Portal (LIVE) |
+| `AVANADE_DESIGN_TOKENS.css` | `projects/Reference-Saúde/outputs/` | Design system |
+| `AVANADE_COMPONENTS.css` | `projects/Reference-Saúde/outputs/` | UI components |
+| `PORTAL_INTERACTIONS.js` | `projects/Reference-Saúde/outputs/` | Interactivity |
+| `reference_KPI_PORTAL_CONTENT.json` | `projects/Reference-Saúde/outputs/` | Portal content |
+| `DEEP_LEGACY_ANALYSIS_SUMMARY.txt` | `projects/Reference-Saúde/outputs/` | Summary |
+| `EXECUTION_SUMMARY.txt` | `projects/Reference-Saúde/outputs/` | Execution log |
+| `DELIVERABLES_INDEX.md` | `projects/Reference-Saúde/outputs/` | File index |
 
 ### Phase Outputs
-- **Phase 1 (Discovery):** `projects/einstein-hiae/outputs/phase-1/`
-- **Phase 2 (Architecture):** `projects/einstein-hiae/outputs/phase-2/`
-- **Phase 3 (Deployment):** `projects/einstein-hiae/outputs/phase-3/`
+- **Phase 1 (Discovery):** `projects/Reference-Saúde/outputs/phase-1/`
+- **Phase 2 (Architecture):** `projects/Reference-Saúde/outputs/phase-2/`
+- **Phase 3 (Deployment):** `projects/Reference-Saúde/outputs/phase-3/`
 
-### Bradesco Outputs
-- Located in: `projects/bradesco/outputs/`
+### Financeiro Outputs
+- Located in: `projects/Financeiro/outputs/`
 - Includes: Test reports, execution guides, documentation
 
 ---
@@ -101,7 +101,7 @@ projects/{project}/
 
 | Path | Purpose |
 |------|---------|
-| `projects/` | Case study projects (bradesco, einstein-hiae) |
+| `projects/` | Case study projects (Financeiro, Reference-Saúde) |
 | `projects/*/scripts/` | Executable Python scripts |
 | `projects/*/outputs/` | Generated artifacts & reports |
 | `projects/*/state/` | Execution state & config |
@@ -119,46 +119,46 @@ projects/{project}/
 
 ## ğŸ¯ Common Tasks
 
-### Run Einstein-HIAE Portal Generation
+### Run Reference-Saúde Portal Generation
 ```bash
-cd projects/einstein-hiae/scripts
+cd projects/Reference-Saúde/scripts
 python generate_kpi_portal.py
 ```
 
-### Run Einstein-HIAE Deep Legacy Analysis
+### Run Reference-Saúde Deep Legacy Analysis
 ```bash
-cd projects/einstein-hiae/scripts
+cd projects/Reference-Saúde/scripts
 python deep_legacy_analyzer.py
 ```
 
-### Access Einstein Portal
+### Access reference Portal
 ```
 Browser: http://localhost:8000/KPI_PORTAL_MASTER.html
-File: projects/einstein-hiae/outputs/KPI_PORTAL_MASTER.html
+File: projects/Reference-Saúde/outputs/KPI_PORTAL_MASTER.html
 ```
 
-### Run Bradesco Tests
+### Run Financeiro Tests
 ```bash
-cd projects/bradesco/scripts
+cd projects/Financeiro/scripts
 # [Test commands]
 ```
 
 ### View Project Status
-- **Einstein:** `projects/einstein-hiae/README.md`
-- **Bradesco:** `projects/bradesco/README.md`
+- **reference:** `projects/Reference-Saúde/README.md`
+- **Financeiro:** `projects/Financeiro/README.md`
 
 ---
 
 ## ğŸ“ˆ File Organization Statistics
 
-### Einstein-HIAE
+### Reference-Saúde
 - **Total files:** ~80
 - **Scripts:** 7 (in `scripts/`)
 - **Outputs:** 40+ (in `outputs/`)
 - **Phases:** 3 (in `outputs/phase-{1,2,3}/`)
 - **Portal files:** 5 (HTML, CSSÃ—2, JS, JSON)
 
-### Bradesco
+### Financeiro
 - **Total files:** ~60
 - **Scripts:** Multiple (in `scripts/`)
 - **Outputs:** 10+ (in `outputs/`)
@@ -168,10 +168,10 @@ cd projects/bradesco/scripts
 
 ## âœ… Verification Checklist
 
-- [x] Einstein scripts in `scripts/` folder
-- [x] Einstein outputs in `outputs/` folder
-- [x] Bradesco docs in `outputs/` folder
-- [x] Bradesco state in `state/` folder
+- [x] reference scripts in `scripts/` folder
+- [x] reference outputs in `outputs/` folder
+- [x] Financeiro docs in `outputs/` folder
+- [x] Financeiro state in `state/` folder
 - [x] No orphaned .py files in project roots
 - [x] No orphaned .md files in project roots (except README)
 - [x] Portal files accessible

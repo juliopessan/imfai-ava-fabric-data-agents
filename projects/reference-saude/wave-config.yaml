@@ -1,14 +1,14 @@
 ---
 project_name: "Reference-SaÃºde"
-project_id: "einstein-healthcare-001"
+project_id: "reference-healthcare-001"
 description: "Healthcare Analytics Platform Modernization - Data Migration to Microsoft Fabric"
-organization: "HIAE"
+organization: "saude"
 target_platform: "fabric"  # fabric | databricks
 migration_scope: "Full modernization: SQL Server â†’ Microsoft Fabric Medallion (Bronze/Silver/Gold)"
 
 # Wave Configuration
 wave_number: 1
-wave_name: "Einstein-HIAE Discovery & Design"
+wave_name: "Reference-Saúde Discovery & Design"
 wave_start_date: "2026-06-05"
 wave_target_completion: "2026-08-30"
 
@@ -25,7 +25,7 @@ source:
   platform: "sql-server"
   description: "Legacy SQL Server (27 databases, 2,641 tables)"
   databases:
-    - dwhiae
+    - dwsaude
     - dwstage
     - bi_ods
     - bi_stage
@@ -35,7 +35,7 @@ source:
 
 target:
   platform: "fabric"
-  workspace: "einstein-hiae-dev"
+  workspace: "Reference-Saúde-dev"
   capacity_tier: "premium"
 
 # Phasing
@@ -89,14 +89,14 @@ gates:
 
 # Discovery Scope
 discovery:
-  dw_scripts_path: "projects/einstein-hiae/legacy/dw-scripts-extracted"
-  emr_scripts_path: "projects/einstein-hiae/legacy/emr-scripts-extracted"
+  dw_scripts_path: "projects/Reference-Saúde/legacy/dw-scripts-extracted"
+  emr_scripts_path: "projects/Reference-Saúde/legacy/emr-scripts-extracted"
   scan_depth: "full"
   entity_estimation: "2641"
   
 # Output Paths
 outputs:
-  base_path: "projects/einstein-hiae/outputs"
+  base_path: "projects/Reference-Saúde/outputs"
   phase_1: "phase-1"
   phase_2: "phase-2"
   phase_3: "phase-3"
@@ -123,8 +123,8 @@ governance:
     - layer: "gold"
       sensitivity: "restricted"
   
-  dq_rules_catalog: "projects/einstein-hiae/outputs/phase-2/DQ-RULES.yaml"
-  data_contracts_catalog: "projects/einstein-hiae/outputs/phase-2/DATA-CONTRACTS.yaml"
+  dq_rules_catalog: "projects/Reference-Saúde/outputs/phase-2/DQ-RULES.yaml"
+  data_contracts_catalog: "projects/Reference-Saúde/outputs/phase-2/DATA-CONTRACTS.yaml"
 
 # KPIs & Metrics
 kpis:

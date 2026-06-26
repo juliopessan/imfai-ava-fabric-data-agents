@@ -13,9 +13,9 @@
 | Fase | Ação | Impacto |
 |------|------|--------|
 | **1** | Movidos 7 scripts Python (Reference) → `scripts/` | Raiz limpa ✅ |
-| **2** | Movidos 7 docs (Bradesco) → `outputs/` | Docs organizadas ✅ |
+| **2** | Movidos 7 docs (Financeiro) → `outputs/` | Docs organizadas ✅ |
 | **3** | Criado `state/` para config/logs | Admin centralizado ✅ |
-| **4** | Movidos 2 summaries (Einstein) → `outputs/` | Outputs consolidados ✅ |
+| **4** | Movidos 2 summaries (reference) → `outputs/` | Outputs consolidados ✅ |
 | **5** | Criada estrutura multi-platform-migration | Pronto para uso ✅ |
 
 ---
@@ -24,7 +24,7 @@
 
 ```
 projects/
-├── bradesco/
+├── Financeiro/
 │   ├── scripts/          ✅ Organizado
 │   ├── outputs/          ✅ Docs consolidadas
 │   ├── state/            ✅ Config & logs
@@ -33,7 +33,7 @@ projects/
 │   ├── README.md
 │   └── wave-config.yaml
 │
-├── einstein-hiae/
+├── Reference-Sa�de/
 │   ├── scripts/          ✅ 7 scripts
 │   ├── outputs/          ✅ 40+ arquivos
 │   ├── legacy/
@@ -56,8 +56,8 @@ projects/
 
 ```
 PASSED: 15/15 ✅
-├─ Einstein: All checks passed ✅
-├─ Bradesco: All checks passed ✅
+├─ reference: All checks passed ✅
+├─ Financeiro: All checks passed ✅
 └─ Multi-platform: All checks passed ✅
 ```
 

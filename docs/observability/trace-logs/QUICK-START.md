@@ -78,7 +78,7 @@ write_trace(
     context={
         "category": "agents",
         "agent_id": "my-agent",
-        "wave": "bradesco-wave2",
+        "wave": "Financeiro-wave2",
         "gate": 1,
         "tags": ["test", "quick-start"]
     },
@@ -98,7 +98,7 @@ write_trace(
 print("✅ Trace written!")
 ```
 
-✅ This creates: `.trace-logs/agents/agent_execution_bradesco-wave2_2026-06-18_001.jsonl`
+✅ This creates: `.trace-logs/agents/agent_execution_Financeiro-wave2_2026-06-18_001.jsonl`
 
 ---
 
@@ -167,7 +167,7 @@ write_trace(
     context={
         "category": "agents",
         "agent_id": "migration-coordinator",
-        "wave": "bradesco-wave2",
+        "wave": "Financeiro-wave2",
         "gate": 1
     },
     operation={
@@ -185,8 +185,8 @@ write_trace(
     trace_type="workflow_execution",
     context={
         "category": "workflows",
-        "pipeline": "bradesco-tier1",
-        "wave": "bradesco-wave2"
+        "pipeline": "Financeiro-tier1",
+        "wave": "Financeiro-wave2"
     },
     operation={
         "name": "execute_stage",
@@ -204,7 +204,7 @@ write_trace(
     context={
         "category": "etl",
         "pipeline": "staging-to-delta",
-        "wave": "bradesco-wave2"
+        "wave": "Financeiro-wave2"
     },
     operation={
         "name": "load_entities",
@@ -226,7 +226,7 @@ write_trace(
     context={
         "category": "gates",
         "gate": 1,
-        "wave": "bradesco-wave2"
+        "wave": "Financeiro-wave2"
     },
     operation={
         "name": "calculate_gatescore",
@@ -250,7 +250,7 @@ After running your traces:
 ```
 .trace-logs/
 ├── agents/
-│   └── agent_execution_bradesco-wave2_2026-06-18_001.jsonl
+│   └── agent_execution_Financeiro-wave2_2026-06-18_001.jsonl
 ├── workflows/
 ├── etl/
 ├── gates/

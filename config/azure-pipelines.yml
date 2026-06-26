@@ -55,6 +55,6 @@ stages:
             displayName: 'Run master pipeline with telemetry'
           - task: PublishBuildArtifacts@1
             inputs:
-              pathToPublish: 'projects/bradesco/outputs'
+              pathToPublish: 'projects/Financeiro/outputs'
               artifactName: 'telemetry-reports-$(Build.BuildNumber)'
             displayName: 'Publish telemetry artifacts'

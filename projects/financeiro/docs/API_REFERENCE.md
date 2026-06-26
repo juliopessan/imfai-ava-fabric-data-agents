@@ -80,8 +80,8 @@ Content-Type: application/json
 
 Request:
 {
-  "name": "bradesco-connector-001",
-  "tenant_id": "bradesco-001",
+  "name": "Financeiro-connector-001",
+  "tenant_id": "Financeiro-001",
   "description": "Clouderea → Databricks migration",
   "data_sources": [
     {
@@ -106,8 +106,8 @@ Request:
 
 Response (201 Created):
 {
-  "id": "c-bradesco-001",
-  "name": "bradesco-connector-001",
+  "id": "c-Financeiro-001",
+  "name": "Financeiro-connector-001",
   "status": "registered",
   "license_key": "lic-XXXXX-XXXXX",
   "license_expiry": "2027-06-12T00:00:00Z",
@@ -119,14 +119,14 @@ Response (201 Created):
 #### List Connectors
 
 ```
-GET /v1/connectors?tenant_id=bradesco-001&status=active
+GET /v1/connectors?tenant_id=Financeiro-001&status=active
 
 Response (200 OK):
 {
   "connectors": [
     {
-      "id": "c-bradesco-001",
-      "name": "bradesco-connector-001",
+      "id": "c-Financeiro-001",
+      "name": "Financeiro-connector-001",
       "status": "registered",
       "pattern": "push",
       "created_at": "2026-06-12T10:30:00Z",
@@ -142,13 +142,13 @@ Response (200 OK):
 #### Get Connector Details
 
 ```
-GET /v1/connectors/c-bradesco-001
+GET /v1/connectors/c-Financeiro-001
 
 Response (200 OK):
 {
-  "id": "c-bradesco-001",
-  "name": "bradesco-connector-001",
-  "tenant_id": "bradesco-001",
+  "id": "c-Financeiro-001",
+  "name": "Financeiro-connector-001",
+  "tenant_id": "Financeiro-001",
   "status": "registered",
   "pattern": "push",
   "data_sources": [
@@ -189,8 +189,8 @@ Request:
 
 Response (200 OK):
 {
-  "sas_url": "https://avanadeadls.blob.core.windows.net/landing/bradesco-001/run-20260612-001?sv=2021-06-08&ss=b&srt=sco&sp=rwdlacx&se=2026-06-13T12:00:00Z&st=2026-06-12T12:00:00Z&spr=https&sig=...",
-  "upload_path": "landing/bradesco-001/run-20260612-001/",
+  "sas_url": "https://avanadeadls.blob.core.windows.net/landing/Financeiro-001/run-20260612-001?sv=2021-06-08&ss=b&srt=sco&sp=rwdlacx&se=2026-06-13T12:00:00Z&st=2026-06-12T12:00:00Z&spr=https&sig=...",
+  "upload_path": "landing/Financeiro-001/run-20260612-001/",
   "expiration": "2026-06-13T12:00:00Z",
   "max_size_mb": 500000,
   "max_uploads": 100
@@ -217,7 +217,7 @@ Content-Type: application/json
 
 Request:
 {
-  "connector_id": "c-bradesco-001",
+  "connector_id": "c-Financeiro-001",
   "data_sources": ["ds-hive-01", "ds-sql-01"],
   "job_type": "full_migration",  # full_migration | incremental | discovery
   "config": {
@@ -234,7 +234,7 @@ Request:
 Response (201 Created):
 {
   "id": "job-20260612-001",
-  "connector_id": "c-bradesco-001",
+  "connector_id": "c-Financeiro-001",
   "status": "queued",
   "job_type": "full_migration",
   "created_at": "2026-06-12T12:00:00Z",
@@ -250,7 +250,7 @@ GET /v1/jobs/job-20260612-001?include=metrics,events
 Response (200 OK):
 {
   "id": "job-20260612-001",
-  "connector_id": "c-bradesco-001",
+  "connector_id": "c-Financeiro-001",
   "status": "running",  # queued | running | completed | failed
   "stages": [
     {
@@ -302,14 +302,14 @@ Response (200 OK):
 #### List Jobs
 
 ```
-GET /v1/jobs?connector_id=c-bradesco-001&status=running,failed&limit=50&offset=0
+GET /v1/jobs?connector_id=c-Financeiro-001&status=running,failed&limit=50&offset=0
 
 Response (200 OK):
 {
   "jobs": [
     {
       "id": "job-20260612-001",
-      "connector_id": "c-bradesco-001",
+      "connector_id": "c-Financeiro-001",
       "status": "running",
       "created_at": "2026-06-12T12:00:00Z",
       "progress": 45
@@ -380,7 +380,7 @@ Response (201 Created):
   "webhook_id": "webhook-123",
   "data": {
     "job_id": "job-20260612-001",
-    "connector_id": "c-bradesco-001",
+    "connector_id": "c-Financeiro-001",
     "status": "completed",
     "metrics": {
       "rows_processed": 52487234,
@@ -396,7 +396,7 @@ Response (201 Created):
 #### Get Metrics
 
 ```
-GET /v1/metrics/jobs?connector_id=c-bradesco-001&granularity=hourly&hours=24
+GET /v1/metrics/jobs?connector_id=c-Financeiro-001&granularity=hourly&hours=24
 
 Response (200 OK):
 {
@@ -529,8 +529,8 @@ client = Client(
 
 # Register connector
 connector = client.connectors.register(
-    name="bradesco-connector",
-    tenant_id="bradesco-001",
+    name="Financeiro-connector",
+    tenant_id="Financeiro-001",
     pattern="push",
     data_sources=[
         {"type": "hive", "host": "cloudera.internal", "database": "raw_data"},
@@ -567,7 +567,7 @@ print(f"Final metrics: {status.metrics}")
 
 #### Request SAS Token
 ```bash
-curl -X POST https://api.avanade.com/v1/connectors/c-bradesco-001/sas-token \
+curl -X POST https://api.avanade.com/v1/connectors/c-Financeiro-001/sas-token \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

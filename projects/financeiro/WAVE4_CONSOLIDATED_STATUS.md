@@ -196,7 +196,7 @@ RETORNO:                $64,020
 ## 📁 ESTRUTURA DE ENTREGA
 
 ```
-projects/bradesco/
+projects/Financeiro/
 ├── state/                                    ✅ COMPLETE
 │   ├── gate1-decision.md                    (0.9390 approved)
 │   ├── gate2-decision.md                    (0.9595 approved)
@@ -260,7 +260,7 @@ projects/bradesco/
 4. ⏳ **Plan Wave 5** — target Q3 2026
 
 ### Operacional
-1. **Archive Wave 4 artifacts** → projects/bradesco/legacy/wave4-2026-06
+1. **Archive Wave 4 artifacts** → projects/Financeiro/legacy/wave4-2026-06
 2. **Update baseline metrics** → cost model, quality asymptote tracking
 3. **Train Wave 5 rules** → R39-R44 confidence > 85%
 4. **Prepare monitoring** → Foundry eval integration
@@ -269,7 +269,7 @@ projects/bradesco/
 
 ## 🏆 CONCLUSÃO
 
-**Bradesco Einstein Migration Wave 4** demonstra que:
+**Financeiro reference Migration Wave 4** demonstra que:
 
 > **100% autonomous multi-stage orchestration é viável e escala linearly, com GateScore-driven decisions eliminating rework and enabling 96.8% faster execution vs manual processes.**
 

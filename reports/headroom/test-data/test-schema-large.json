@@ -1,7 +1,7 @@
 {
   "architecture": {
     "version": "1.0",
-    "project": "Bradesco Tier 1",
+    "project": "Financeiro Tier 1",
     "tables": [
       {
         "table_id": "tbl_000",

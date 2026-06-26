@@ -6,7 +6,7 @@
 
 ## 🎯 Project Overview
 
-This project represents the **complete modernization of Einstein-HIAE's data infrastructure**:
+This project represents the **complete modernization of Reference-Sa�de's data infrastructure**:
 
 | Phase | Status | Output |
 |-------|--------|--------|
@@ -21,7 +21,7 @@ This project represents the **complete modernization of Einstein-HIAE's data inf
 ## 📁 Project Structure
 
 ```
-projects/einstein-hiae/
+projects/Reference-Sa�de/
 ├── 📂 scripts/                         # Analysis & portal generation
 │   ├── orchestrator.py                 # Master orchestration
 │   ├── deep_legacy_analyzer.py         # DDL extraction (309 objects)
@@ -37,7 +37,7 @@ projects/einstein-hiae/
 │   ├── AVANADE_DESIGN_TOKENS.css       # Design system (50+ tokens)
 │   ├── AVANADE_COMPONENTS.css          # UI components (20+)
 │   ├── PORTAL_INTERACTIONS.js          # Interactivity (23.1 KB)
-│   ├── EINSTEIN_KPI_PORTAL_CONTENT.json # Content repository
+│   ├── reference_KPI_PORTAL_CONTENT.json # Content repository
 │   ├── DEEP_LEGACY_ANALYSIS_SUMMARY.txt # Executive summary
 │   ├── EXECUTION_SUMMARY.txt           # Execution log
 │   ├── DELIVERABLES_INDEX.md           # File inventory
@@ -70,7 +70,7 @@ projects/einstein-hiae/
 
 ### 1️⃣ Run Portal Generation (5 seconds)
 ```bash
-cd projects/einstein-hiae/scripts
+cd projects/Reference-Sa�de/scripts
 python generate_kpi_portal.py
 ```
 
@@ -217,7 +217,7 @@ python update_portal_with_legacy.py
 
 ### generate_kpi_portal.py
 **Generates all 5 portal files** (HTML + CSS + JS + JSON + docs) in ~5 seconds
-- Input: `EINSTEIN_KPI_PORTAL_CONTENT.json` (content)
+- Input: `reference_KPI_PORTAL_CONTENT.json` (content)
 - Output: `KPI_PORTAL_MASTER.html` + supporting files
 - No external dependencies
 - Production-ready
@@ -233,7 +233,7 @@ python update_portal_with_legacy.py
 **Merges legacy extraction** into portal content
 - Input: `LEGACY_INVENTORY.json`
 - Updates: Portal content with real metrics
-- Output: Updated `EINSTEIN_KPI_PORTAL_CONTENT.json`
+- Output: Updated `reference_KPI_PORTAL_CONTENT.json`
 - Preserves bilingual content
 
 ---

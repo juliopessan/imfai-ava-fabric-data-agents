@@ -269,7 +269,7 @@ for attempt in range(max_retries):
   "level": "INFO",
   "service": "pull-agent",
   "job_id": "job-20260612-001",
-  "connector_id": "c-bradesco-001",
+  "connector_id": "c-Financeiro-001",
   "event": "extraction_started",
   "metadata": {
     "source": "cloudera_main",

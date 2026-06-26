@@ -30,10 +30,10 @@
 **Examples:**
 ```
 agents_migration-coordinator_2026-06-18_001.jsonl
-workflows_bradesco-wave2_2026-06-18_001.jsonl
+workflows_Financeiro-wave2_2026-06-18_001.jsonl
 etl_staging-to-delta_2026-06-18_001.jsonl
 gates_gate1_2026-06-18_001.jsonl
-migrations_bradesco-wave2-entities_2026-06-18_001.jsonl
+migrations_Financeiro-wave2-entities_2026-06-18_001.jsonl
 ```
 
 ---
@@ -49,7 +49,7 @@ Each line in a JSONL file is a complete trace event:
   "trace_type": "agent_execution",
   "context": {
     "agent_id": "migration-coordinator",
-    "wave": "bradesco-wave2",
+    "wave": "Financeiro-wave2",
     "gate": 1,
     "user": "data-engineer@company.com"
   },
@@ -134,7 +134,7 @@ write_trace(
     trace_type="agent_execution",
     context={
         "agent_id": "migration-coordinator",
-        "wave": "bradesco-wave2",
+        "wave": "Financeiro-wave2",
         "gate": 1,
         "category": "agents",
         "subcontext": "migration-coordinator",

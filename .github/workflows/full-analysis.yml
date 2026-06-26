@@ -54,7 +54,7 @@ jobs:
       - name: Run analysis with telemetry
         run: |
           set -euo pipefail
-          python projects/bradesco/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
+          python projects/Financeiro/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
         env:
           CI: true
       - name: Upload telemetry reports
@@ -63,8 +63,8 @@ jobs:
         with:
           name: telemetry-analysis-${{ github.run_number }}
           path: |
-            projects/bradesco/outputs/telemetry.json
-            projects/bradesco/outputs/01_EXECUTION_TELEMETRY.html
-            projects/bradesco/outputs/00_CONSOLIDATED_MIGRATION_REPORT.html
-            projects/bradesco/outputs/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
+            projects/Financeiro/outputs/telemetry.json
+            projects/Financeiro/outputs/01_EXECUTION_TELEMETRY.html
+            projects/Financeiro/outputs/00_CONSOLIDATED_MIGRATION_REPORT.html
+            projects/Financeiro/outputs/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
           retention-days: 30

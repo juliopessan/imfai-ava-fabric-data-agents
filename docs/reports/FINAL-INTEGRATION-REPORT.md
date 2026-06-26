@@ -26,7 +26,7 @@
 ```
 
 ### 2. **Master Pipeline Orchestrator** ✓
-- Path: `projects/bradesco/scripts/00_MASTER_PIPELINE.py`
+- Path: `projects/Financeiro/scripts/00_MASTER_PIPELINE.py`
 - Status: **Tested, validated, autonomous**
 - Performance: **28.1 seconds end-to-end** (6 phases)
 
@@ -39,8 +39,8 @@
 - Archive (1s) → outputs/ cleaned
 
 ### 3. **Operational Cases** ✓
-- **Bradesco** (Cloudera → Databricks): Ready, tested, proven
-- **Einstein-HIAE** (SQL Server → Fabric): Structure complete, ready for execution
+- **Financeiro** (Cloudera → Databricks): Ready, tested, proven
+- **Reference-Sa�de** (SQL Server → Fabric): Structure complete, ready for execution
 
 ### 4. **Complete Avanade Branding** ✓
 - Template: `DASHBOARD-TEMPLATE-MASTER.html`
@@ -84,8 +84,8 @@
 
 ```
 [1] ESTRUTURA DE CASES              ✓ 2/2 PASSED
-    ✓ Case: bradesco
-    ✓ Case: einstein-hiae
+    ✓ Case: Financeiro
+    ✓ Case: Reference-Sa�de
 
 [2] MASTER PIPELINE & SCRIPTS       ✓ 7/7 PASSED
     ✓ All critical scripts present & validated
@@ -116,7 +116,7 @@ TOTAL: 22/22 PASSED — 100% OPERATIONAL
 |-------|----------|--------|
 | markdown not installed | `pip install markdown` | ✓ FIXED |
 | wave-config.yaml missing migration_scope | Added field to YAML | ✓ FIXED |
-| einstein-hiae missing scripts/, context/ | Created folders + README | ✓ FIXED |
+| Reference-Sa�de missing scripts/, context/ | Created folders + README | ✓ FIXED |
 | Template missing {{KPI_METRICS}} placeholder | Added to template | ✓ FIXED |
 
 ---
@@ -126,7 +126,7 @@ TOTAL: 22/22 PASSED — 100% OPERATIONAL
 ### 1. Execute Master Pipeline
 ```powershell
 cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Expected Output**:
@@ -195,7 +195,7 @@ Time: ~1 hour setup + 30 sec execution
 | fabricae-TODO.md | `/memories/repo/` | Roadmap & prioritization |
 | WORKFLOW-INTEGRATION-STATUS.md | workspace root | Integration status |
 | INTEGRATION-COMPLETE.md | workspace root | Detailed report |
-| projects/bradesco/README.md | projects/ | Case quick start |
+| projects/Financeiro/README.md | projects/ | Case quick start |
 
 ---
 
@@ -207,7 +207,7 @@ Time: ~1 hour setup + 30 sec execution
 ║                                                                       ║
 ║  ✓ System Memory:         Operational (6 files, 62 KB)                ║
 ║  ✓ Master Pipeline:       Validated (28.1s end-to-end)               ║
-║  ✓ Cases:                 2 operational (Bradesco + HIAE)             ║
+║  ✓ Cases:                 2 operational (Financeiro + saude)             ║
 ║  ✓ Branding:              Complete (Avanade colors + templates)       ║
 ║  ✓ Dependencies:          All installed & verified                    ║
 ║  ✓ Validation:            22/22 PASSED (100%)                        ║
@@ -223,7 +223,7 @@ Time: ~1 hour setup + 30 sec execution
 
 ### P0 — Immediate (Next 48 hours)
 - [ ] Execute master pipeline (verify dashboards)
-- [ ] Test new case onboarding (einstein-hiae)
+- [ ] Test new case onboarding (Reference-Sa�de)
 - [ ] Document execution results
 
 ### P1 — Short-term (Next week)

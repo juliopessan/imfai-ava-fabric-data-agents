@@ -25,7 +25,7 @@ headroom/
 |------|-------|
 | **What** | Token compression layer (Headroom) for DMF agent handoffs |
 | **Compression** | 50% single / 87.5% multi-handoff cascade |
-| **Cost Saved** | $243/year (Bradesco) → $2.4K+ (10 projects) |
+| **Cost Saved** | $243/year (Financeiro) → $2.4K+ (10 projects) |
 | **Status** | ✅ GO (approved 2026-06-15) |
 | **Start** | Phase 1 on 2026-06-22 |
 
@@ -104,7 +104,7 @@ python scripts/headroom_poc.py \
 
 ## 📈 Financial Impact
 
-### Single Project (Bradesco)
+### Single Project (Financeiro)
 - **Monthly:** $0.027 → $0.003 USD (-89%)
 - **Annual:** $0.324 → $0.041 USD (-87%)
 

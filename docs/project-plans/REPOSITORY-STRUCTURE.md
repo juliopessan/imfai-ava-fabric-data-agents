@@ -7,7 +7,7 @@ imfai-ava-fabric-data-agents/
 │
 ├── 🚀 ENTRADA PRINCIPAL
 │   └── projects/
-│       ├── bradesco/                      ← CASE 1: Cloudera → Databricks (ATIVO)
+│       ├── Financeiro/                      ← CASE 1: Cloudera → Databricks (ATIVO)
 │       │   ├── wave-config.yaml           # Configuração do projeto
 │       │   ├── context/                   # Contexto & requisitos
 │       │   ├── legacy/                    # Dados de origem (ZIPs)
@@ -33,18 +33,18 @@ imfai-ava-fabric-data-agents/
 │       │   ├── WORKFLOW_AND_ARCHITECTURE.md
 │       │   └── README-REPORT-GENERATION.md
 │       │
-│       └── einstein-hiae/                 ← CASE 2: Referência (SUS/HIAE)
+│       └── Reference-Sa�de/                 ← CASE 2: Referência (SUS/saude)
 │           ├── wave-config.yaml
 │           ├── orchestrator.py
 │           ├── outputs/
-│           └── [similar structure to bradesco]
+│           └── [similar structure to Financeiro]
 │
 ├── 📊 TEMPLATES & DASHBOARD
 │   └── reports/
 │       ├── _templates/
 │       │   ├── DASHBOARD-TEMPLATE-MASTER.html  # Avanade branding
 │       │   └── [other templates]
-│       ├── bradesco/                     # Outputs públicos (Bradesco)
+│       ├── Financeiro/                     # Outputs públicos (Financeiro)
 │       │   ├── 00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
 │       │   └── [other HTML dashboards]
 │       ├── simple_server.py              # HTTP server local
@@ -74,10 +74,10 @@ imfai-ava-fabric-data-agents/
 
 | Item | Motivo |
 |------|--------|
-| `projects/bradesco/` | Case principal ativo — workflow completo em `scripts/` |
-| `projects/einstein-hiae/` | Case referência (SUS/HIAE) — serve como modelo |
+| `projects/Financeiro/` | Case principal ativo — workflow completo em `scripts/` |
+| `projects/Reference-Sa�de/` | Case referência (SUS/saude) — serve como modelo |
 | `reports/_templates/` | Template Avanade obrigatório para branding |
-| `reports/bradesco/` | Outputs públicos do case Bradesco |
+| `reports/Financeiro/` | Outputs públicos do case Financeiro |
 | `scripts/install-*.ps1/cmd` | Replicabilidade para novos cases |
 | `.venv/` | Environment Python necessário |
 | `requirements-dev.txt` | Dependências Python |
@@ -98,7 +98,7 @@ imfai-ava-fabric-data-agents/
 | `reports/generate-executive-dashboard.py` | Script antigo |
 | `reports/simple-server.py` (duplicado) | Versão duplicada (mantive `simple_server.py`) |
 | `BACKLOG-48H.md`, `TIMELINE-48H.md` | Histórico antigo |
-| `PROJECT-SUMMARY.md` | Histórico de Einstein |
+| `PROJECT-SUMMARY.md` | Histórico de reference |
 | `PLAYWRIGHT-*.md` | Integração não usada |
 | `Makefile`, `module.yaml`, `list_screenshots.py` | Não usados |
 
@@ -115,7 +115,7 @@ Quando um novo case chegar (ex: Case 3):
    ├── legacy/
    ├── context/
    ├── outputs/
-   └── scripts/  ← Copiar de projects/bradesco/scripts
+   └── scripts/  ← Copiar de projects/Financeiro/scripts
    ```
 
 2. **Usar o master pipeline**
@@ -138,7 +138,7 @@ Quando um novo case chegar (ex: Case 3):
 ## 🔄 Workflow Autônomo (Testado ✅)
 
 ```
-.venv\Scripts\python.exe projects/bradesco/scripts/00_MASTER_PIPELINE.py
+.venv\Scripts\python.exe projects/Financeiro/scripts/00_MASTER_PIPELINE.py
     ↓
 Phase B: Upstream Discovery (12.9s)     → 545 files, 27/27 PASS
 Phase C: Midstream Design (4.9s)         → 146 entities, Medallion arch
@@ -192,9 +192,9 @@ Total: 28.1 segundos
 
 | Arquivo | Propósito |
 |---------|-----------|
-| `projects/bradesco/README.md` | Quick start Bradesco |
-| `projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md` | Explicação completa do workflow |
-| `projects/bradesco/README-REPORT-GENERATION.md` | Instruções de execução |
+| `projects/Financeiro/README.md` | Quick start Financeiro |
+| `projects/Financeiro/WORKFLOW_AND_ARCHITECTURE.md` | Explicação completa do workflow |
+| `projects/Financeiro/README-REPORT-GENERATION.md` | Instruções de execução |
 | `reports/README.md` | Como servir dashboards |
 | `REPOSITORY-STRUCTURE.md` | Este arquivo |
 

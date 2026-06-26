@@ -1,6 +1,6 @@
 # Wave 3 — Financial Models Domain Learnings
 
-**Date:** 2026-06-16 | **Status:** ✅ COMPLETE | **Dataset:** Bradesco Financial Models (15.8M rows, 67 schemas)
+**Date:** 2026-06-16 | **Status:** ✅ COMPLETE | **Dataset:** Financeiro Financial Models (15.8M rows, 67 schemas)
 
 ---
 

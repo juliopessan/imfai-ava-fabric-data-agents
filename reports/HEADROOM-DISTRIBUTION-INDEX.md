@@ -140,7 +140,7 @@
 ```
 reports/headroom/scripts/             (PoC)
 src/shared/scripts/                   (Implementation - TBD)
-projects/bradesco/scripts/            (Integration examples - TBD)
+projects/Financeiro/scripts/            (Integration examples - TBD)
 ```
 
 ---
@@ -280,7 +280,7 @@ Subject: Token Optimization Initiative — GO Approved ✅
 [Project Name] has approved a token compression initiative:
 
 **What:** Reduce handoff tokens by 50–87.5% using Headroom
-**ROI:** $243/year per project (Bradesco) → $2.4K+ (10 projects)
+**ROI:** $243/year per project (Financeiro) → $2.4K+ (10 projects)
 **Risk:** Low — PoC completed successfully
 **Start:** 2026-06-22 (Phase 1, 4 weeks)
 **Timeline:** Complete by 2026-08-10

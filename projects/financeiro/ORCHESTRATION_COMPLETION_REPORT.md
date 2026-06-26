@@ -1,5 +1,5 @@
 
-# 🚀 BRADESCO DATA MIGRATION FACTORY — ORCHESTRATION COMPLETE
+# 🚀 Financeiro DATA MIGRATION FACTORY — ORCHESTRATION COMPLETE
 
 ## ✅ FINAL STATUS: 🟢 ALL GATES APPROVED
 
@@ -7,8 +7,8 @@
 
 ## 📊 Executive Summary
 
-**Wave:** bradesco-einstein-2026-06  
-**Project:** Bradesco — Einstein Migration (Cloudera → Databricks)  
+**Wave:** Financeiro-reference-2026-06  
+**Project:** Financeiro — reference Migration (Cloudera → Databricks)  
 **Orchestrator:** migration-coordinator (Orion)  
 **Execution Date:** 2026-06-16  
 **Overall Status:** ✅ **ALL PHASES APPROVED**  
@@ -155,7 +155,7 @@ Average GateScore: 0.91 / 1.00 ✅✅
 ## 📍 File Locations
 
 ```
-📁 Bradesco Project Root
+📁 Financeiro Project Root
 ├── 📂 state/                              (← Gate decisions & reports)
 │   ├── gate1-decision.md                  ✅ UPSTREAM approval
 │   ├── gate2-decision.md                  ✅ MIDSTREAM approval
@@ -224,7 +224,7 @@ cat state/lessons-learned-retrospective.md
 - **0.70–0.84**: 🟡 **APPROVED WITH ITEMS** — Monitor and remediate
 - **< 0.70**: 🔴 **BLOCKED** — Remediation required
 
-### Bradesco Results
+### Financeiro Results
 - Gate 1: 0.88 ✅ → (0.35 × 0.92) + (0.25 × 0.88) + (0.20 × 0.85) + (0.20 × 0.90) = 0.88
 - Gate 2: 0.87 ✅ → (0.35 × 0.90) + (0.25 × 0.86) + (0.20 × 0.88) + (0.20 × 0.87) = 0.87
 - Gate 3: 0.99 ✅✅ → (0.35 × 0.99) + (0.25 × 0.98) + (0.20 × 0.98) + (0.20 × 0.98) = 0.99
@@ -233,7 +233,7 @@ cat state/lessons-learned-retrospective.md
 
 ## ✨ Conclusion
 
-**The Bradesco Data Migration Factory orchestration is complete and successful.**
+**The Financeiro Data Migration Factory orchestration is complete and successful.**
 
 All three phases (UPSTREAM, MIDSTREAM, DOWNSTREAM) have been executed with high quality metrics and zero critical blockers. The project is **ready for production** with a **0.91 average GateScore**.
 

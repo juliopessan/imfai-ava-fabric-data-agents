@@ -15,7 +15,7 @@ Two-part model:
 ## 1. DATA CONTRACT SCHEMA (Declarative)
 
 ```yaml
-# projects/bradesco/specs/data-contracts.yaml
+# projects/Financeiro/specs/data-contracts.yaml
 
 data_contracts:
   version: "1.0.0"

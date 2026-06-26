@@ -277,7 +277,7 @@ original = HeadroomContextManager.retrieve(
 
 | Q | A |
 |---|---|
-| **How much saves?** | 75–90% tokens ($243/year Bradesco) |
+| **How much saves?** | 75–90% tokens ($243/year Financeiro) |
 | **How long to implement?** | 4 weeks, 32 hours dev |
 | **Risky?** | Low — PoC passed all tests |
 | **When start?** | 2026-06-22 (Phase 1) |

@@ -554,7 +554,7 @@ if __name__ == "__main__":
     # Example telemetry data
     sample_telemetry = {
         "metadata": {
-            "workflow": "Data Migration - Bradesco",
+            "workflow": "Data Migration - Financeiro",
             "agent": "discovery-scout",
             "start_time": datetime.now().isoformat(),
             "elapsed_time": "6m 59s",

@@ -100,7 +100,7 @@ Cada wave segue um fluxo determinístico, guiado por specs:
 ```
 ┌──────────────────────────────────────────────────────┐
 │                    USER REQUEST                      │
-│         "Migrate Bradesco legacy to Fabric"         │
+│         "Migrate Financeiro legacy to Fabric"         │
 └────────────────────┬─────────────────────────────────┘
                      │
                      ▼
@@ -209,9 +209,9 @@ Cada spec tem a mesma estrutura (machine-readable):
 ### Input Contract (Must Accept)
 ```yaml
 Required:
-  ├─ legacy_folder: Path — projects/bradesco/legacy/
+  ├─ legacy_folder: Path — projects/Financeiro/legacy/
   ├─ platform_type: String — Cloudera|SAP|PowerCenter
-  ├─ wave_config: File — projects/bradesco/wave-config.yaml
+  ├─ wave_config: File — projects/Financeiro/wave-config.yaml
   └─ discovery_owner: String — from wave_config
 
 Reject If:
@@ -249,7 +249,7 @@ Produces:
   ├─ discovery_summary.md (human-readable report)
   └─ discovery_metrics.json (KPIs)
 
-Location: projects/bradesco/outputs/
+Location: projects/Financeiro/outputs/
 Passes To: business-analyst (for STTM mapping)
 ```
 
@@ -298,7 +298,7 @@ Output:
 ```
 2026-06-17 to 06-19: Update all 16 agent files to reference specs
 2026-06-20: Validate agent-spec links (16/16)
-2026-06-20: Test Bradesco wave execution
+2026-06-20: Test Financeiro wave execution
 2026-06-21: Deploy specs system (production ready)
 ```
 

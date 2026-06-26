@@ -24,7 +24,7 @@
 ```
 
 ### 2. **Workflow Master Pipeline** ✓
-- Location: `projects/bradesco/scripts/00_MASTER_PIPELINE.py`
+- Location: `projects/Financeiro/scripts/00_MASTER_PIPELINE.py`
 - Status: **Validated, executable, autonomous**
 - Execution: 28.1 seconds (6 phases, end-to-end)
 
@@ -38,8 +38,8 @@ Archive Non-HTML                [1s]    ✓ outputs/ cleaned
 ```
 
 ### 3. **Casos Operacionais** ✓
-- **Bradesco** (Cloudera → Databricks): Fully operational, proven
-- **Einstein-HIAE** (SQL Server → Fabric): Setup complete, ready for execution
+- **Financeiro** (Cloudera → Databricks): Fully operational, proven
+- **Reference-Sa�de** (SQL Server → Fabric): Setup complete, ready for execution
 
 ### 4. **Avanade Branding Completo** ✓
 - Template: `DASHBOARD-TEMPLATE-MASTER.html`
@@ -73,8 +73,8 @@ WORKFLOW INTEGRATION CHECK v2.0
 Data: 2026-06-08 09:30:45
 
 [1] ESTRUTURA DE CASES              ✓ 2/2 PASSED
-    ✓ Case: bradesco
-    ✓ Case: einstein-hiae
+    ✓ Case: Financeiro
+    ✓ Case: Reference-Sa�de
 
 [2] MASTER PIPELINE & SCRIPTS       ✓ 7/7 PASSED
     ✓ 00_MASTER_PIPELINE.py
@@ -120,7 +120,7 @@ TOTAL: 22/22 PASSED
 ### Executar Master Pipeline (Imediato)
 ```powershell
 cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Resultado esperado**:
@@ -146,7 +146,7 @@ Time: ~1 hour setup + 30 sec execution
 |-------|----------|--------|
 | markdown not installed | `pip install markdown` | ✓ Fixed |
 | wave-config.yaml missing migration_scope | Added field | ✓ Fixed |
-| einstein-hiae missing scripts/ & context/ | Created folders + README | ✓ Fixed |
+| Reference-Sa�de missing scripts/ & context/ | Created folders + README | ✓ Fixed |
 | Template missing {{KPI_METRICS}} | Added placeholder + section | ✓ Fixed |
 
 ---
@@ -171,7 +171,7 @@ How to add case:         /memories/repo/fabricae-best-practices.md
 Architecture rationale:  /memories/repo/fabricae-architecture-decisions.md
 What's next:            /memories/repo/fabricae-TODO.md
 Lessons learned:        /memories/repo/fabricae-lessons-learned.md
-Execute pipeline:       python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+Execute pipeline:       python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 ---
@@ -180,7 +180,7 @@ Execute pipeline:       python projects/bradesco/scripts/00_MASTER_PIPELINE.py
 
 1. ✅ **Test master pipeline** (verify outputs in browser)
 2. ⏳ **Document test results** (add to WORKFLOW-INTEGRATION-STATUS.md)
-3. ⏳ **Test new case onboarding** (einstein-hiae as second case)
+3. ⏳ **Test new case onboarding** (Reference-Sa�de as second case)
 4. ⏳ **Setup Azure CI/CD** (if deployment automation needed)
 
 ---

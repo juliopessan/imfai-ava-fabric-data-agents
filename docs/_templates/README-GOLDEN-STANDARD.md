@@ -177,10 +177,10 @@ reports/
 │   ├── standardize_dashboards.py          ← Automation script
 │   └── README-GOLDEN-STANDARD.md          ← This file
 │
-└── bradesco/
-    ├── bradesco-autonomous-test-report.html      ← Standardized ✅
-    ├── bradesco-3tier-dashboard.html             ← Standardized ✅
-    ├── bradesco-executive-dashboard.html         ← Standardized ✅
+└── Financeiro/
+    ├── Financeiro-autonomous-test-report.html      ← Standardized ✅
+    ├── Financeiro-3tier-dashboard.html             ← Standardized ✅
+    ├── Financeiro-executive-dashboard.html         ← Standardized ✅
     └── ROI_ANALYSIS_VISUAL.html                  ← Standardized ✅
 ```
 

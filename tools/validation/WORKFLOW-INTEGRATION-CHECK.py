@@ -6,7 +6,7 @@ WORKFLOW INTEGRATION CHECK - Verificação 100% Funcional
 
 Valida:
 1. Sistema de memória (`/memories/repo/`)
-2. Estrutura de workflow (Bradesco + HIAE)
+2. Estrutura de workflow (Financeiro + saude)
 3. Dependências Python
 4. Arquivo de configuração
 5. Integridade de templates
@@ -85,8 +85,8 @@ def check_workflow_structure():
     
     # Verificar cases
     cases = {
-        "bradesco": "Case 1 (Cloudera → Databricks)",
-        "einstein-hiae": "Case 2 (Legacy → Modern)"
+        "Financeiro": "Case 1 (Cloudera → Databricks)",
+        "Reference-Sa�de": "Case 2 (Legacy → Modern)"
     }
     
     for case_name, description in cases.items():
@@ -111,7 +111,7 @@ def check_workflow_structure():
         all_ok = all_ok and (exists and subfolder_status)
     
     # Verificar master pipeline
-    master_pipeline = workspace_root / "projects" / "bradesco" / "scripts" / "00_MASTER_PIPELINE.py"
+    master_pipeline = workspace_root / "projects" / "Financeiro" / "scripts" / "00_MASTER_PIPELINE.py"
     master_exists = master_pipeline.exists()
     status(
         "Master Pipeline: 00_MASTER_PIPELINE.py",
@@ -174,7 +174,7 @@ def check_configuration():
     print("=" * 76)
     
     workspace_root = Path(__file__).parent
-    wave_config = workspace_root / "projects" / "einstein-hiae" / "wave-config.yaml"
+    wave_config = workspace_root / "projects" / "Reference-Sa�de" / "wave-config.yaml"
     
     config_exists = wave_config.exists()
     status(
@@ -283,7 +283,7 @@ def check_executability():
     print("=" * 76)
     
     workspace_root = Path(__file__).parent
-    scripts_dir = workspace_root / "projects" / "bradesco" / "scripts"
+    scripts_dir = workspace_root / "projects" / "Financeiro" / "scripts"
     
     required_scripts = [
         "00_MASTER_PIPELINE.py",
@@ -338,7 +338,7 @@ def final_summary(results):
     if all_ok:
         print(f"{Colors.GREEN}{Colors.BOLD}✓ TUDO 100% FUNCIONAL!{Colors.ENDC}")
         print(f"\n{Colors.CYAN}Sistema integrado e pronto para:${Colors.ENDC}")
-        print(f"  1. Executar master pipeline: python projects/bradesco/scripts/00_MASTER_PIPELINE.py")
+        print(f"  1. Executar master pipeline: python projects/Financeiro/scripts/00_MASTER_PIPELINE.py")
         print(f"  2. Referenciar memória: /memories/repo/MEMORY-INDEX.md")
         print(f"  3. Adicionar novo case: Veja fabricae-best-practices.md")
         print(f"  4. Entender arquitetura: fabricae-architecture-decisions.md (10 ADRs)")

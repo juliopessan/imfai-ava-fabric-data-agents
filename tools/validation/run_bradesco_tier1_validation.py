@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Bradesco TIER 1 Validation Runner
+Financeiro TIER 1 Validation Runner
 
-Executes all TIER 1 validators against Bradesco project and generates comprehensive report.
-Usage: python run_bradesco_tier1_validation.py [--output-dir reports/bradesco/]
+Executes all TIER 1 validators against Financeiro project and generates comprehensive report.
+Usage: python run_Financeiro_tier1_validation.py [--output-dir reports/Financeiro/]
 """
 
 import json
@@ -23,12 +23,12 @@ from src.shared.scripts.gate_score_report import GateScoreCalculator
 
 
 def run_validation() -> Dict[str, Any]:
-    """Execute all TIER 1 validations against Bradesco project."""
+    """Execute all TIER 1 validations against Financeiro project."""
     
-    project_path = Path("projects/bradesco")
+    project_path = Path("projects/Financeiro")
     results = {
         "timestamp": datetime.now().isoformat(),
-        "project": "bradesco",
+        "project": "Financeiro",
         "status": "pending",
         "validations": {}
     }
@@ -260,7 +260,7 @@ def run_validation() -> Dict[str, Any]:
 
 def main():
     """Main entry point."""
-    print("\n" + "[BRADESCO TIER 1 VALIDATION RUNNER]" + "\n")
+    print("\n" + "[Financeiro TIER 1 VALIDATION RUNNER]" + "\n")
     
     # Run validation
     results = run_validation()
@@ -274,7 +274,7 @@ def main():
     print(f"Project: {results['project']}")
     
     # Save results to JSON
-    output_path = Path("reports/bradesco/tier1-validation-results.json")
+    output_path = Path("reports/Financeiro/tier1-validation-results.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(output_path, 'w') as f:

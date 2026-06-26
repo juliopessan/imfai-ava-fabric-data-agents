@@ -116,7 +116,7 @@ def verify_gate_readiness(commit_msg, files_changed):
 ```
 ┌─ Trace ID (unique per agent invocation)
 │  ├─ Agent: data-modeler
-│  ├─ Wave: bradesco-g1
+│  ├─ Wave: Financeiro-g1
 │  ├─ Gate: 2
 │  ├─ Session: 2026-06-16T14:30:42Z
 │  │

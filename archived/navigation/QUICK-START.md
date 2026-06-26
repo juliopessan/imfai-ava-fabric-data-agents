@@ -21,16 +21,16 @@ pip install -r config/requirements-dev.txt
 
 ## 2Ô∏è‚É£ Run a Case Study (choose one)
 
-### Option A: Bradesco Migration
+### Option A: Financeiro Migration
 ```powershell
 # Execute the complete migration pipeline
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 ### Option B: Reference-Sa√∫de KPI Portal
 ```powershell
 # Generate the KPI portal with real legacy metrics
-python projects/einstein-hiae/scripts/generate_kpi_portal.py
+python projects/Reference-Sa˙de/scripts/generate_kpi_portal.py
 ```
 
 **When done, you'll see:**
@@ -43,15 +43,15 @@ python projects/einstein-hiae/scripts/generate_kpi_portal.py
 
 ## 3Ô∏è‚É£ View Dashboards (choose project)
 
-### Bradesco Dashboard
+### Financeiro Dashboard
 ```powershell
-python -m http.server 8000 --directory projects/bradesco/outputs
+python -m http.server 8000 --directory projects/Financeiro/outputs
 # Open: http://localhost:8000/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
 ```
 
-### Einstein-HIAE KPI Portal
+### Reference-Sa˙de KPI Portal
 ```powershell
-python -m http.server 8000 --directory projects/einstein-hiae/outputs
+python -m http.server 8000 --directory projects/Reference-Sa˙de/outputs
 # Open: http://localhost:8000/KPI_PORTAL_MASTER.html
 ```
 
@@ -79,7 +79,7 @@ python -m pytest src/shared/tests/ -q
 ## 5Ô∏è‚É£ Explore Docs (Optional)
 
 - **Master Index:** [`INDEX.md`](INDEX.md)
-- **Bradesco Case:** [`projects/bradesco/README.md`](projects/bradesco/README.md)
+- **Financeiro Case:** [`projects/Financeiro/README.md`](projects/Financeiro/README.md)
 - **Multi-Platform Wave:** [`projects/multi-platform-migration/README.md`](projects/multi-platform-migration/README.md)
 - **Memory System:** [`/memories/repo/MEMORY-INDEX.md`](/memories/repo/MEMORY-INDEX.md)
 
@@ -89,8 +89,8 @@ python -m pytest src/shared/tests/ -q
 
 | Goal | Location |
 |------|----------|
-| **Understand Bradesco workflow** | [`projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md`](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md) |
-| **Learn Einstein-HIAE portal** | [`projects/einstein-hiae/README.md`](projects/einstein-hiae/README.md) |
+| **Understand Financeiro workflow** | [`projects/Financeiro/WORKFLOW_AND_ARCHITECTURE.md`](projects/Financeiro/WORKFLOW_AND_ARCHITECTURE.md) |
+| **Learn Reference-Sa˙de portal** | [`projects/Reference-Sa˙de/README.md`](projects/Reference-Sa˙de/README.md) |
 | **View file locations** | [`REPOSITORY-QUICK-REFERENCE.md`](REPOSITORY-QUICK-REFERENCE.md) |
 | **Learn about 6-platform wave** | [`projects/multi-platform-migration/README.md`](projects/multi-platform-migration/README.md) |
 | **Add a new migration case** | Copy any project folder ‚Üí `projects/[new-name]/` with same structure |

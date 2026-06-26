@@ -103,12 +103,12 @@ def setup_vscode_tasks():
         "version": "2.0.0",
         "tasks": [
             {
-                "label": "🎬 Playwright: Capturar Screenshots (Bradesco - Upstream)",
+                "label": "🎬 Playwright: Capturar Screenshots (Financeiro - Upstream)",
                 "type": "shell",
                 "command": "python",
                 "args": [
                     "reports/_templates/playwright_screenshot_generator.py",
-                    "--project", "bradesco",
+                    "--project", "Financeiro",
                     "--stage", "upstream"
                 ],
                 "group": {
@@ -121,12 +121,12 @@ def setup_vscode_tasks():
                 }
             },
             {
-                "label": "🎬 Playwright: Capturar Screenshots (Bradesco - Midstream)",
+                "label": "🎬 Playwright: Capturar Screenshots (Financeiro - Midstream)",
                 "type": "shell",
                 "command": "python",
                 "args": [
                     "reports/_templates/playwright_screenshot_generator.py",
-                    "--project", "bradesco",
+                    "--project", "Financeiro",
                     "--stage", "midstream"
                 ],
                 "group": {
@@ -139,12 +139,12 @@ def setup_vscode_tasks():
                 }
             },
             {
-                "label": "🎬 Playwright: Capturar Screenshots (Bradesco - Downstream)",
+                "label": "🎬 Playwright: Capturar Screenshots (Financeiro - Downstream)",
                 "type": "shell",
                 "command": "python",
                 "args": [
                     "reports/_templates/playwright_screenshot_generator.py",
-                    "--project", "bradesco",
+                    "--project", "Financeiro",
                     "--stage", "downstream"
                 ],
                 "group": {
@@ -191,9 +191,9 @@ def print_summary(all_checks: dict):
     if all(all_checks.values()):
         print("  1️⃣  Abra o VS Code (Ctrl+Shift+B) e selecione uma task Playwright")
         print("  2️⃣  Ou execute direto no terminal:")
-        print("      python reports/_templates/playwright_screenshot_generator.py --project bradesco --stage upstream")
-        print("  3️⃣  Verifique os screenshots em: reports/screenshots/bradesco/")
-        print("  4️⃣  Abra o HTML gerado: reports/screenshots/bradesco/before_after_comparison.html")
+        print("      python reports/_templates/playwright_screenshot_generator.py --project Financeiro --stage upstream")
+        print("  3️⃣  Verifique os screenshots em: reports/screenshots/Financeiro/")
+        print("  4️⃣  Abra o HTML gerado: reports/screenshots/Financeiro/before_after_comparison.html")
     else:
         print("  1️⃣  Execute a instalação automática:")
         print("      python reports/_templates/playwright_vscode_integration_test.py --install")

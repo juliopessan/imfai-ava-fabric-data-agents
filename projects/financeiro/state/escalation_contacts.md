@@ -98,13 +98,13 @@
 | **VP Engineering** | vp-engineering@avanade.example | vp-engineering@avanade.example | +55 11 98765-4400 | Business hours + on-call (critical) |
 | **CTO** | cto@avanade.example | cto@avanade.example | +55 11 98765-4401 | On-call for critical decisions |
 
-### Client Stakeholders (Bradesco)
+### Client Stakeholders (Financeiro)
 
 | Role | Name | Email | Phone | Availability |
 |------|------|-------|-------|---|
-| **Data Governance Board** | governance-board@bradesco.com.br | governance-board@bradesco.com.br | +55 11 3555-5555 | Business hours |
-| **Business Sponsor** | business-sponsor@bradesco.com.br | business-sponsor@bradesco.com.br | +55 11 3555-5556 | Business hours + on-call (Sev 1) |
-| **IT Director** | it-director@bradesco.com.br | it-director@bradesco.com.br | +55 11 3555-5557 | Business hours + on-call (Sev 1) |
+| **Data Governance Board** | governance-board@Financeiro.com.br | governance-board@Financeiro.com.br | +55 11 3555-5555 | Business hours |
+| **Business Sponsor** | business-sponsor@Financeiro.com.br | business-sponsor@Financeiro.com.br | +55 11 3555-5556 | Business hours + on-call (Sev 1) |
+| **IT Director** | it-director@Financeiro.com.br | it-director@Financeiro.com.br | +55 11 3555-5557 | Business hours + on-call (Sev 1) |
 
 ---
 
@@ -258,7 +258,7 @@ If you are not satisfied with progress:
 ### Incident Notification (Sev 1)
 
 ```
-Subject: 🔴 SEV 1 INCIDENT — Bradesco Migration (Ticket #BRD-12345)
+Subject: 🔴 SEV 1 INCIDENT — Financeiro Migration (Ticket #BRD-12345)
 
 IMPACT: Databricks cluster is down. 12.4M row migration HALTED.
 SEVERITY: Critical (data access lost, 500+ users affected)
@@ -287,7 +287,7 @@ NEXT UPDATE: 23:00 BRT
 ### All-Clear Notification (Resolved)
 
 ```
-✅ INCIDENT RESOLVED — Bradesco Migration BRD-12345
+✅ INCIDENT RESOLVED — Financeiro Migration BRD-12345
 
 TIME RESOLVED: 2026-06-16 23:10 BRT
 DURATION: 55 minutes
@@ -303,10 +303,10 @@ FOLLOW-UP: Root cause analysis scheduled for 2026-06-17 10:00 BRT.
 
 ### Quick Links for On-Call Team
 
-- **Runbook:** projects/bradesco/RUNBOOK_ON_CALL.md
+- **Runbook:** projects/Financeiro/RUNBOOK_ON_CALL.md
 - **Troubleshooting Guide:** docs/TROUBLESHOOTING.md
-- **Rollback Procedure:** projects/bradesco/state/go_live_checklist.md (Rollback section)
-- **Known Issues:** projects/bradesco/state/lessons-learned-retrospective.md
+- **Rollback Procedure:** projects/Financeiro/state/go_live_checklist.md (Rollback section)
+- **Known Issues:** projects/Financeiro/state/lessons-learned-retrospective.md
 - **Metrics Dashboard:** Datadog/Azure Monitor (linked in on-call wiki)
 
 ### Handoff Template (For Shift Change)
@@ -341,7 +341,7 @@ FOLLOW-UP: Root cause analysis scheduled for 2026-06-17 10:00 BRT.
 - ✅ All contact information is **CONFIDENTIAL** and for authorized personnel only
 - ✅ Phone numbers & emails subject to change — **CHECK THIS DOCUMENT BEFORE EACH USE**
 - ✅ For external questions, route through: external-support@avanade.com
-- ✅ Do NOT share this document outside Avanade + Bradesco governance teams
+- ✅ Do NOT share this document outside Avanade + Financeiro governance teams
 
 ---
 
@@ -359,4 +359,4 @@ FOLLOW-UP: Root cause analysis scheduled for 2026-06-17 10:00 BRT.
 **Document Status:** ✅ ACTIVE & REVIEWED  
 **Last Updated:** 2026-06-16 11:18:17 UTC  
 **Next Review:** 2026-09-16  
-**Distribution:** Avanade + Bradesco Authorized Personnel Only
+**Distribution:** Avanade + Financeiro Authorized Personnel Only

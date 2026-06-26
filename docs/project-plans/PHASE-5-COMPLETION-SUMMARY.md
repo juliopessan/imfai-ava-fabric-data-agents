@@ -93,16 +93,16 @@ Successfully integrated Orange DNA modern design patterns (sidebar 248px + topba
 
 ---
 
-### Phase 4: Bradesco Project Integration ✅
+### Phase 4: Financeiro Project Integration ✅
 **Deliverables:**
-- Regenerated 7 Bradesco dashboards with Orange DNA layout
-- Python regeneration script: `regenerate_bradesco_dashboards.py`
+- Regenerated 7 Financeiro dashboards with Orange DNA layout
+- Python regeneration script: `regenerate_Financeiro_dashboards.py`
 
 **Dashboards Updated:**
 1. ✅ `00_CONSOLIDATED_MIGRATION_REPORT.html`
 2. ✅ `00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html`
 3. ✅ `00_CONSOLIDATED_MIGRATION_REPORT_templated.html`
-4. ✅ `BRADESCO_MIGRATION_DASHBOARD.html`
+4. ✅ `Financeiro_MIGRATION_DASHBOARD.html`
 5. ✅ `DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html`
 6. ✅ `EXECUTIVE_DATA_FACTORY_DASHBOARD.html`
 7. ✅ `TELEMETRY_DEMO_DASHBOARD.html`
@@ -137,7 +137,7 @@ Successfully integrated Orange DNA modern design patterns (sidebar 248px + topba
 **Validation Results:**
 
 #### Layout Compliance ✅
-- ✅ All 7 Bradesco dashboards have Orange DNA layout
+- ✅ All 7 Financeiro dashboards have Orange DNA layout
 - ✅ Topbar markers present (class="topbar")
 - ✅ Sidebar markers present (class="sidebar")
 - ✅ App container structure verified
@@ -307,14 +307,14 @@ body {
 ### React Components (Phase 3)
 - ✅ `/reports/_templates/OrangeDNA-Components.tsx` (production-ready)
 
-### Bradesco Integration (Phase 4)
-- ✅ `/reports/_templates/regenerate_bradesco_dashboards.py` (automation script)
-- ✅ `/projects/bradesco/outputs/*` (7 dashboards updated)
+### Financeiro Integration (Phase 4)
+- ✅ `/reports/_templates/regenerate_Financeiro_dashboards.py` (automation script)
+- ✅ `/projects/Financeiro/outputs/*` (7 dashboards updated)
 
 ### Validation & Testing (Phase 5)
 - ✅ `/reports/_templates/phase5_validation_suite.py` (validation framework)
 - ✅ `/reports/_templates/phase5_visual_regression.py` (screenshot framework)
-- ✅ `/projects/bradesco/outputs/screenshots/take_screenshots.py` (ready to execute)
+- ✅ `/projects/Financeiro/outputs/screenshots/take_screenshots.py` (ready to execute)
 
 ---
 
@@ -322,7 +322,7 @@ body {
 
 ### Immediate Actions
 1. **Manual Visual Review**
-   - Open each Bradesco dashboard in browser
+   - Open each Financeiro dashboard in browser
    - Verify topbar and sidebar render correctly
    - Test mobile view (resize to <768px)
    - Confirm peach highlight on active nav items
@@ -331,7 +331,7 @@ body {
    ```bash
    pip install playwright
    playwright install chromium
-   python projects/bradesco/outputs/screenshots/take_screenshots.py
+   python projects/Financeiro/outputs/screenshots/take_screenshots.py
    ```
 
 3. **Browser Compatibility Testing**

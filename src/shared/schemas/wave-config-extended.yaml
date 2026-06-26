@@ -9,8 +9,8 @@
 
 wave_metadata:
   # REQUIRED
-  wave_id: "bradesco-g1"  # Format: {project}-{wave_sequence}
-  project: "bradesco"     # Maps to projects/{project}/
+  wave_id: "Financeiro-g1"  # Format: {project}-{wave_sequence}
+  project: "Financeiro"     # Maps to projects/{project}/
   platform: "fabric"      # Target: fabric | synapse | snowflake | databricks
   phase: 1                # 1 (initial) | 2 (incremental) | 3 (optimization)
   
@@ -24,7 +24,7 @@ wave_metadata:
   
   # OPTIONAL: Wave Metadata
   description: |
-    Migration of Bradesco financial data warehouse.
+    Migration of Financeiro financial data warehouse.
     Phase 1: Core data mart (customers, transactions, products).
   start_date: "2026-06-01"
   target_completion: "2026-08-30"
@@ -51,7 +51,7 @@ harness:
     - file: ".github/copilot-instructions.md"
       role: "global rules"
       required: true
-    - file: "projects/bradesco/wave-config.yaml"
+    - file: "projects/Financeiro/wave-config.yaml"
       role: "wave-specific policies"
       required: true
   
@@ -146,7 +146,7 @@ skills:
       enabled: true
       agents: ["code-generator"]
       config:
-        template_library: "projects/bradesco/bicep-templates/"
+        template_library: "projects/Financeiro/bicep-templates/"
         
     - name: "ava-dmf-etl-patterns"
       version: "2.1.1"

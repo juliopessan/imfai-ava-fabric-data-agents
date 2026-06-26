@@ -1,7 +1,7 @@
 {
   "timestamp": "2026-06-16T11:18:17.382849",
-  "wave_id": "bradesco-einstein-2026-06",
-  "project": "Bradesco",
+  "wave_id": "Financeiro-reference-2026-06",
+  "project": "Financeiro",
   "overall_status": "🟢 TODOS OS GATES APROVADOS",
   "average_gate_score": 0.91,
   "gates": {

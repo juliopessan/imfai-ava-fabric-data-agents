@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Phase 4: Bradesco Project Integration
-Regenerates Bradesco dashboards with Orange DNA design patterns (sidebar + topbar)
+Phase 4: Financeiro Project Integration
+Regenerates Financeiro dashboards with Orange DNA design patterns (sidebar + topbar)
 
 Usage:
-    python regenerate_bradesco_dashboards.py
+    python regenerate_Financeiro_dashboards.py
     
 Output:
-    - Updates all HTML dashboards in projects/bradesco/outputs/
+    - Updates all HTML dashboards in projects/Financeiro/outputs/
     - Applies new design system: 248px sidebar + 56px topbar
     - Preserves content, enhances layout
 """
@@ -23,7 +23,7 @@ from datetime import datetime
 # ============================================================================
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-BRADESCO_OUTPUTS = PROJECT_ROOT / "projects" / "bradesco" / "outputs"
+Financeiro_OUTPUTS = PROJECT_ROOT / "projects" / "Financeiro" / "outputs"
 TEMPLATES_DIR = PROJECT_ROOT / "reports" / "_templates"
 
 DESIGN_TOKENS_LINK = '<link rel="stylesheet" href="../../reports/_templates/DESIGN-TOKENS.css">'
@@ -278,19 +278,19 @@ def regenerate_dashboard(input_path: Path, output_path: Path = None) -> bool:
 def main():
     """Main regeneration workflow."""
     print("\n" + "="*70)
-    print("PHASE 4: Bradesco Project Integration")
+    print("PHASE 4: Financeiro Project Integration")
     print("Regenerating dashboards with Orange DNA patterns")
     print("="*70 + "\n")
 
-    if not BRADESCO_OUTPUTS.exists():
-        print(f"❌ Bradesco outputs directory not found: {BRADESCO_OUTPUTS}")
+    if not Financeiro_OUTPUTS.exists():
+        print(f"❌ Financeiro outputs directory not found: {Financeiro_OUTPUTS}")
         return
 
     # Find all HTML files in outputs
-    html_files = sorted(BRADESCO_OUTPUTS.glob("*.html"))
+    html_files = sorted(Financeiro_OUTPUTS.glob("*.html"))
     
     if not html_files:
-        print("❌ No HTML files found in Bradesco outputs")
+        print("❌ No HTML files found in Financeiro outputs")
         return
 
     print(f"📁 Found {len(html_files)} dashboard(s) to regenerate:\n")

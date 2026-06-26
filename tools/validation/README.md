@@ -40,22 +40,22 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 
 ---
 
-### 3. run_bradesco_tier1_validation.py
+### 3. run_Financeiro_tier1_validation.py
 
-**Propósito:** Validação específica para o projeto Bradesco (TIER 1)
+**Propósito:** Validação específica para o projeto Financeiro (TIER 1)
 
 **Uso:**
 ```bash
-python run_bradesco_tier1_validation.py
+python run_Financeiro_tier1_validation.py
 ```
 
 **Valida:**
-- Estrutura do projeto Bradesco
+- Estrutura do projeto Financeiro
 - Conformidade com padrões TIER 1
 - Artefatos de descoberta
 - Integridade de dados
 
-**Output:** Relatório específico de Bradesco
+**Output:** Relatório específico de Financeiro
 
 ---
 

@@ -1,4 +1,4 @@
-# Bradesco — Lições Aprendidas & Melhoria Contínua
+# Financeiro — Lições Aprendidas & Melhoria Contínua
 
 ## 📋 Índice de Documentação
 
@@ -64,7 +64,7 @@
 
 **Tamanho:** ~2,000 linhas (JSON estruturado) | **Audiência:** Automação + Wave 2 orchestrator
 
-**Use este arquivo quando:** Você precisa calibrar um novo projeto contra Bradesco baseline ou estimar timeline/custo para Wave 2.
+**Use este arquivo quando:** Você precisa calibrar um novo projeto contra Financeiro baseline ou estimar timeline/custo para Wave 2.
 
 ---
 
@@ -72,7 +72,7 @@
 
 | Pergunta | Documento |
 |----------|-----------|
-| "O que deu certo em Bradesco?" | lessons-learned-comprehensive.md (Seção 1) |
+| "O que deu certo em Financeiro?" | lessons-learned-comprehensive.md (Seção 1) |
 | "Quais foram os gaps?" | lessons-learned-comprehensive.md (Seção 2) |
 | "O que fazer diferente em Wave 2?" | improvement-roadmap.md (Wave 2 section) |
 | "Quanto tempo vai levar Wave 2?" | baseline-metrics.json (timing_baseline) + improvement-roadmap.md (timeline) |
@@ -126,7 +126,7 @@
 - [ ] Compartilhar docs com team (30 min sync)
 - [ ] Validar que assumptions.md template é OK
 - [ ] Confirmar owners para W2.1-W2.5
-- [ ] Schedule retrospective com Bradesco stakeholders
+- [ ] Schedule retrospective com Financeiro stakeholders
 
 ### Curto Prazo (Próximas 2 semanas)
 - [ ] Criar backlog tasks (5 items W2)
@@ -145,7 +145,7 @@
 
 Todos os artefatos salvos em:
 ```
-projects/bradesco/state/
+projects/Financeiro/state/
 ├── lessons-learned-comprehensive.md
 ├── improvement-roadmap.md
 └── baseline-metrics.json
@@ -153,7 +153,7 @@ projects/bradesco/state/
 
 Copiar para reuso em futuros projetos:
 ```
-cp projects/bradesco/state/baseline-metrics.json \
+cp projects/Financeiro/state/baseline-metrics.json \
    src/shared/patterns/baseline-metrics-template.json
 ```
 
@@ -166,7 +166,7 @@ cp projects/bradesco/state/baseline-metrics.json \
 | **Gerado por** | Kai (Iteration Improvement Agent) |
 | **Data** | 2026-06-16 14:32 UTC |
 | **Versão** | 1.0 Final |
-| **Projeto Fonte** | Bradesco — Einstein Migration Wave |
+| **Projeto Fonte** | Financeiro — reference Migration Wave |
 | **Status Entrada** | 3/3 Gates Aprovados (GateScore 0.91) |
 | **Escopo** | Lições aprendidas + roadmap futuro + baseline reutilizável |
 | **Classificação** | Internal | Strategic Documentation |

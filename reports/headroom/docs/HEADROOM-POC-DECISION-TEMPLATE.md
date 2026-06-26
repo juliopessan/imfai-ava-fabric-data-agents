@@ -113,7 +113,7 @@ Simular fluxo: discovery-scout → data-architect → code-generator
 
 ## 3. Financial Impact
 
-### 3.1 Bradesco Case
+### 3.1 Financeiro Case
 
 **Monthly Baseline:** 18,000 tokens  
 **Compression Ratio (do seu PoC):** —%
@@ -135,8 +135,8 @@ Annual = monthly × 12
 
 | Scale | Annual Savings |
 |-------|-----------------|
-| Bradesco (1 project) | $— |
-| 10 projects (Bradesco × 10) | $— |
+| Financeiro (1 project) | $— |
+| 10 projects (Financeiro × 10) | $— |
 | 20 projects | $— |
 
 ---

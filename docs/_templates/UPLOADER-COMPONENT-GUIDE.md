@@ -387,7 +387,7 @@ describe('UploadManager', () => {
 
 ---
 
-## 📝 Example Integration in Bradesco Project
+## 📝 Example Integration in Financeiro Project
 
 ### Use Case: Data Migration Dashboard
 ```tsx
@@ -400,7 +400,7 @@ export default function MigrationUploadPage() {
       <header className="bg-white dark:bg-gray-800 shadow">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold" style={{ color: '#1f3a93' }}>
-            Bradesco Data Migration Upload
+            Financeiro Data Migration Upload
           </h1>
         </div>
       </header>

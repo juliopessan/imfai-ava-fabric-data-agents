@@ -1,6 +1,6 @@
-wave_id: bradesco-einstein-wave2-2026-07
-project_name: "Bradesco Wave 2 â€” Einstein HIAE Migration (Optimized)"
-description: "Wave 2 applying optimizations from Wave 1 (GateScore 0.91). Dataset: Einstein HIAE (backup/contingency)"
+wave_id: Financeiro-reference-wave2-2026-07
+project_name: "Financeiro Wave 2 â€” reference saude Migration (Optimized)"
+description: "Wave 2 applying optimizations from Wave 1 (GateScore 0.91). Dataset: reference saude (backup/contingency)"
 discovery_owner_primary: julio.cesar.d.pessan@company.example
 discovery_owner_secondary: data-architect@avanade.example
 
@@ -9,7 +9,7 @@ source_platform: cloudera
 target_platform: databricks
 migration_pattern: lift-and-shift-optimized
 dataset:
-  name: "Einstein HIAE"
+  name: "reference saude"
   type: "contingency/backup"
   data_volume_gb: 380
   data_volume_rows: 8200000  # vs 12.4M Wave 1 = -33.8%
@@ -19,11 +19,11 @@ dataset:
   expected_improvement_cost: "-10%"
 
 scope:
-  - einstein-hiae-core-tables
-  - einstein-hiae-staging
-  - einstein-hiae-aggregates
+  - Reference-Saúde-core-tables
+  - Reference-Saúde-staging
+  - Reference-Saúde-aggregates
 
-legacy_path: legacy/einstein-hiae
+legacy_path: legacy/Reference-Saúde
 outputs_path: outputs/wave2
 
 # Wave 2 Optimizations (from improvement-roadmap.md)

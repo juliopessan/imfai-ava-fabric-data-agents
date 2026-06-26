@@ -8,7 +8,7 @@ Instalação:
   playwright install chromium
   
 Uso:
-  python screenshots_generator.py --project bradesco --stage upstream
+  python screenshots_generator.py --project Financeiro --stage upstream
 """
 
 import asyncio
@@ -25,7 +25,7 @@ import argparse
 class PlaywrightScreenshotGenerator:
     """Gerador de screenshots e documentação visual"""
     
-    def __init__(self, project_name: str = "bradesco", output_dir: str = "reports/screenshots"):
+    def __init__(self, project_name: str = "Financeiro", output_dir: str = "reports/screenshots"):
         self.project_name = project_name
         self.output_dir = Path(output_dir) / project_name
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -385,34 +385,34 @@ class PlaywrightScreenshotGenerator:
         return str(html_path)
 
 
-def run_screenshot_capture(project: str = "bradesco", stage: str = "upstream"):
+def run_screenshot_capture(project: str = "Financeiro", stage: str = "upstream"):
     """Executa captura de screenshots"""
     
     # URLs de dashboards para capturar
     dashboards_to_capture = {
-        "bradesco": {
+        "Financeiro": {
             "upstream": [
                 {
-                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/bradesco/bradesco-executive-dashboard.html",
+                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/Financeiro/Financeiro-executive-dashboard.html",
                     "stage": "upstream",
                     "label": "Executive Dashboard - Estado Inicial"
                 },
                 {
-                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/bradesco/ROI_ANALYSIS_VISUAL.html",
+                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/Financeiro/ROI_ANALYSIS_VISUAL.html",
                     "stage": "upstream",
                     "label": "ROI Analysis - Antes da Migração"
                 }
             ],
             "midstream": [
                 {
-                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/bradesco/bradesco-autonomous-test-report.html",
+                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/Financeiro/Financeiro-autonomous-test-report.html",
                     "stage": "midstream",
                     "label": "Test Report - Validações em Progresso"
                 }
             ],
             "downstream": [
                 {
-                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/bradesco/bradesco-3tier-dashboard.html",
+                    "url": "file:///C:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/Financeiro/Financeiro-3tier-dashboard.html",
                     "stage": "downstream",
                     "label": "3-Tier Dashboard - Estado Final"
                 }
@@ -454,7 +454,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Capturar screenshots de dashboards para documentação visual"
     )
-    parser.add_argument("--project", default="bradesco", help="Nome do projeto")
+    parser.add_argument("--project", default="Financeiro", help="Nome do projeto")
     parser.add_argument("--stage", default="upstream", help="Etapa: upstream, midstream, downstream")
     
     args = parser.parse_args()

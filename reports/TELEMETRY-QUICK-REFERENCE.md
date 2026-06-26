@@ -271,7 +271,7 @@ Step 9: Monitor & refine metrics
 
 **For DevOps:**
 - `docs/observability/OBSERVABILITY-AND-TRACES.md` (full guide)
-- `projects/bradesco/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py` (integration)
+- `projects/Financeiro/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py` (integration)
 - `.trace-logs/trace-schema.json` (schema)
 
 ---

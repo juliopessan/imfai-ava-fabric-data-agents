@@ -1,7 +1,7 @@
-# Bradesco — Shared Context
+# Financeiro — Shared Context
 
 ## Projeto
-Migração de serviços legados de processamento de dados do Bradesco para plataforma moderna (Databricks).
+Migração de serviços legados de processamento de dados do Financeiro para plataforma moderna (Databricks).
 
 ## Escopo Inicial (Wave 1)
 Dois repositórios de microserviços:
@@ -21,6 +21,6 @@ Dois repositórios de microserviços:
 - Unity Catalog
 
 ## Convenções
-- Output path: `projects/bradesco/outputs/upstream/`
-- Legacy path: `projects/bradesco/legacy/`
-- Scripts: `projects/bradesco/scripts/`
+- Output path: `projects/Financeiro/outputs/upstream/`
+- Legacy path: `projects/Financeiro/legacy/`
+- Scripts: `projects/Financeiro/scripts/`

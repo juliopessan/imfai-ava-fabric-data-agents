@@ -105,14 +105,14 @@ imfai-ava-fabric-data-agents/
 │   ├── project-plans/             # Planning documents
 │   └── README.md
 ├── projects/                      # Case studies
-│   ├── bradesco/
+│   ├── Financeiro/
 │   │   ├── legacy/               # Original data/scripts
 │   │   ├── scripts/              # Analysis scripts
 │   │   ├── context/              # Analysis context
 │   │   ├── outputs/              # Generated artifacts
 │   │   ├── docs/                 # Project docs
 │   │   └── wave-config.yaml
-│   ├── einstein-hiae/
+│   ├── Reference-Sa�de/
 │   │   └── [same structure]
 │   └── multi-platform-migration/
 ├── src/                           # Framework code

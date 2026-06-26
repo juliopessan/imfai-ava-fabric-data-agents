@@ -26,8 +26,8 @@ def temp_project_dir():
 def sample_wave_config():
     """Sample wave-config.yaml structure."""
     return {
-        "wave_id": "bradesco-wave-001",
-        "project_name": "Bradesco Migration",
+        "wave_id": "Financeiro-wave-001",
+        "project_name": "Financeiro Migration",
         "discovery_owner": "alice@company.com",
         "target_platform": "databricks",
         "entities": [

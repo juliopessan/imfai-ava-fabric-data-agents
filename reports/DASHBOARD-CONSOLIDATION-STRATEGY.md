@@ -45,13 +45,13 @@ Estratégia de unificação de dashboards em 2 camadas:
 
 ## 🏢 Dashboards de Projeto (Mantidos Separados)
 
-### Bradesco (4 dashboards específicos)
+### Financeiro (4 dashboards específicos)
 
 ```
-reports/bradesco/
-├── bradesco-executive-dashboard.html        ← Exec específico de Bradesco
-├── bradesco-3tier-dashboard.html            ← Phases: Upstream, Mid, Down
-├── bradesco-autonomous-test-report.html     ← Testing & Validation
+reports/Financeiro/
+├── Financeiro-executive-dashboard.html        ← Exec específico de Financeiro
+├── Financeiro-3tier-dashboard.html            ← Phases: Upstream, Mid, Down
+├── Financeiro-autonomous-test-report.html     ← Testing & Validation
 └── ROI_ANALYSIS_VISUAL.html                 ← Financial metrics
 ```
 
@@ -63,10 +63,10 @@ reports/bradesco/
 ### Reference-Saude (a criar)
 
 ```
-reports/einstein/
-├── einstein-executive-dashboard.html        ← Exec específico (criar)
-├── einstein-3tier-dashboard.html            ← Phases: Discovery, Design, Exec
-└── einstein-health-metrics.html             ← Healthcare-specific KPIs
+reports/reference/
+├── reference-executive-dashboard.html        ← Exec específico (criar)
+├── reference-3tier-dashboard.html            ← Phases: Discovery, Design, Exec
+└── reference-health-metrics.html             ← Healthcare-specific KPIs
 ```
 
 **Propósito**: Análise profunda da migração SQL Server → Fabric
@@ -102,9 +102,9 @@ reports/einstein/
 ## 🔄 Fluxo de Consolidação
 
 ```
-[Bradesco Dashboard] ──┐
+[Financeiro Dashboard] ──┐
                        ├──> [Executive Unified]
-[Einstein Dashboard] ──┤
+[reference Dashboard] ──┤
                        └──> [C-Level Decision]
 ```
 
@@ -121,8 +121,8 @@ Cada projeto atualiza seu dashboard com:
 Script Python (`consolidate_dashboards.py`) extrai:
 ```python
 kpis = {
-    "bradesco": extract_kpis("reports/bradesco/bradesco-executive-dashboard.html"),
-    "einstein": extract_kpis("reports/einstein/einstein-executive-dashboard.html")
+    "Financeiro": extract_kpis("reports/Financeiro/Financeiro-executive-dashboard.html"),
+    "reference": extract_kpis("reports/reference/reference-executive-dashboard.html")
 }
 ```
 
@@ -140,11 +140,11 @@ Injeta KPIs no `DASHBOARD-EXECUTIVE-UNIFIED.html`:
 
 ---
 
-## 📊 Consolidação de KPIs: Bradesco (Exemplo)
+## 📊 Consolidação de KPIs: Financeiro (Exemplo)
 
-### Bradesco: Do Detalhe para o Executivo
+### Financeiro: Do Detalhe para o Executivo
 
-**Dashboard Específico (bradesco-3tier-dashboard.html):**
+**Dashboard Específico (Financeiro-3tier-dashboard.html):**
 ```
 Downstream Phase:
 ├─ Total Artifacts: 545
@@ -166,7 +166,7 @@ EXTRAI:
 **Renderização no Executivo:**
 ```html
 <div class="project-card">
-    <div class="project-name">🏦 Bradesco</div>
+    <div class="project-name">🏦 Financeiro</div>
     <div class="project-kpi">
         <span>Completude</span>
         <span>98.7%</span>
@@ -180,11 +180,11 @@ EXTRAI:
 
 ---
 
-## 🎯 Consolidação de KPIs: Einstein-HIAE (Exemplo)
+## 🎯 Consolidação de KPIs: Reference-Sa�de (Exemplo)
 
-### Einstein: Do Detalhe para o Executivo
+### reference: Do Detalhe para o Executivo
 
-**Dashboard Específico (einstein-discovery-dashboard.html - TBD):**
+**Dashboard Específico (reference-discovery-dashboard.html - TBD):**
 ```
 Discovery Phase:
 ├─ Databases Catalogued: 7/7 ✓
@@ -206,7 +206,7 @@ EXTRAI:
 **Renderização no Executivo:**
 ```html
 <div class="project-card">
-    <div class="project-name">🏥 Einstein-HIAE</div>
+    <div class="project-name">🏥 Reference-Sa�de</div>
     <div class="project-kpi">
         <span>Completude</span>
         <span>68%</span>
@@ -278,8 +278,8 @@ def update_executive_dashboard(project_kpis):
 
 if __name__ == '__main__':
     projects = {
-        'bradesco': 'reports/bradesco/bradesco-executive-dashboard.html',
-        'einstein': 'reports/einstein/einstein-executive-dashboard.html'
+        'Financeiro': 'reports/Financeiro/Financeiro-executive-dashboard.html',
+        'reference': 'reports/reference/reference-executive-dashboard.html'
     }
     
     kpis = {name: extract_project_kpis(path) for name, path in projects.items()}
@@ -299,7 +299,7 @@ if __name__ == '__main__':
 |------|--------|-------------|
 | ✅ Dashboard Executivo Unificado | ✓ Criado | Auto |
 | ⏳ Script de Consolidação | TBD | DevOps/Architect |
-| ⏳ Dashboard Einstein (projeto) | TBD | Data Team |
+| ⏳ Dashboard reference (projeto) | TBD | Data Team |
 | ⏳ Integração CI/CD | TBD | DevOps |
 | ✅ Documentação | ✓ Completo | Auto |
 
@@ -309,7 +309,7 @@ if __name__ == '__main__':
 
 ### Imediato (This Week)
 - [ ] Validar Dashboard Executivo com stakeholders
-- [ ] Estruturar dashboards de projeto (Einstein)
+- [ ] Estruturar dashboards de projeto (reference)
 - [ ] Documentar formato de KPIs por projeto
 
 ### Curto Prazo (Next 2 Weeks)
@@ -332,16 +332,16 @@ if __name__ == '__main__':
 Dashboard Executivo:
 └─ DASHBOARD-EXECUTIVE-UNIFIED.html
 
-Dashboard de Projeto (Bradesco):
-├─ bradesco-executive-dashboard.html      [Exec específico]
-├─ bradesco-3tier-dashboard.html          [Technical detail]
-├─ bradesco-autonomous-test-report.html   [Testing metrics]
+Dashboard de Projeto (Financeiro):
+├─ Financeiro-executive-dashboard.html      [Exec específico]
+├─ Financeiro-3tier-dashboard.html          [Technical detail]
+├─ Financeiro-autonomous-test-report.html   [Testing metrics]
 └─ ROI_ANALYSIS_VISUAL.html               [Financial]
 
-Dashboard de Projeto (Einstein):
-├─ einstein-executive-dashboard.html      [Exec específico]
-├─ einstein-3tier-dashboard.html          [Technical detail]
-└─ einstein-health-metrics.html           [Domain-specific]
+Dashboard de Projeto (reference):
+├─ reference-executive-dashboard.html      [Exec específico]
+├─ reference-3tier-dashboard.html          [Technical detail]
+└─ reference-health-metrics.html           [Domain-specific]
 ```
 
 ### Estrutura de KPIs

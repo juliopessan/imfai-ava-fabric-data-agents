@@ -141,8 +141,8 @@ Base GateScore:      0.82
 - [ ] Localize `migration-coordinator.py` (ou arquivo real de spawn)
 - [ ] Leia método `spawn_agent()` ou equivalente
 - [ ] Insira chamada `telemetry_hook.log_agent_execution()`
-- [ ] Teste com agent real (data-architect em bradesco Wave 2)
-- [ ] Valide: `.coach/telemetry/bradesco_wave_2_*.jsonl` criado
+- [ ] Teste com agent real (data-architect em Financeiro Wave 2)
+- [ ] Valide: `.coach/telemetry/Financeiro_wave_2_*.jsonl` criado
 
 **Recursos:**
 - Exemplos: `src/shared/coaches/INTEGRATION-EXAMPLES.py` (EXAMPLE_1)
@@ -150,8 +150,8 @@ Base GateScore:      0.82
 
 **Saída esperada:**
 ```
-✅ Telemetry logged for data-architect in bradesco_wave_2 Gate 1
-   File: .coach/telemetry/bradesco_wave_2_2026-06-18.jsonl
+✅ Telemetry logged for data-architect in Financeiro_wave_2 Gate 1
+   File: .coach/telemetry/Financeiro_wave_2_2026-06-18.jsonl
    Event: timestamp, agent_id, tokens, cost, artifact_size, etc.
 ```
 
@@ -187,14 +187,14 @@ Recommendations:      (auto-generated)
 
 **Tarefas:**
 - [ ] Crie `.coach/templates/wave-analysis.html` (Chart.js)
-- [ ] Leia telemetry JSONL de bradesco Wave 2
+- [ ] Leia telemetry JSONL de Financeiro Wave 2
 - [ ] Visualize: timeline agent × tempo, custo breakdown, anti-patterns
 - [ ] Crie `.coach/cli.py` (gera HTML de wave summaries)
 
 **Saída esperada:**
 ```bash
-python -m src.shared.coaches.cli --wave bradesco_wave_2 --action analyze
-# → .coach/reports/bradesco-wave-2-analysis.html (abrir no browser)
+python -m src.shared.coaches.cli --wave Financeiro_wave_2 --action analyze
+# → .coach/reports/Financeiro-wave-2-analysis.html (abrir no browser)
 ```
 
 ---
@@ -269,7 +269,7 @@ print(f'Anti-patterns: {len(patterns)}')
 ### 🟡 A Fazer (Sprint 1)
 - [ ] Hook em migration-coordinator.py (real file)
 - [ ] Hook em quality-gate.py (real file)
-- [ ] Teste em bradesco Wave 2 (dados históricos)
+- [ ] Teste em Financeiro Wave 2 (dados históricos)
 - [ ] Dashboard HTML básico
 - [ ] CLI wrapper
 

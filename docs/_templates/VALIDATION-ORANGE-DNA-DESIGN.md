@@ -289,7 +289,7 @@ Screenshot é **light mode** (#ffffff backgrounds). Sidebar mostra branco puro, 
 1. **Phase 2 (Template Refactoring)** — Utilizar este screenshot como **design reference** para:
    - `executive-dashboard.html` — Adicionar sidebar + top bar
    - `DASHBOARD-TEMPLATE-ORANGE-DNA.html` — Criar novo template with all patterns
-   - Bradesco outputs — Regenerate with new template
+   - Financeiro outputs — Regenerate with new template
 
 2. **Phase 3 (Component Updates)** — Criar React components para:
    - Sidebar navigation (248px, active state #FFE6D3)
@@ -297,13 +297,13 @@ Screenshot é **light mode** (#ffffff backgrounds). Sidebar mostra branco puro, 
    - KPI card (with status indicators)
    - Status badge (4-color palette)
 
-3. **Phase 4 (Bradesco Integration)** — Aplicar novo design a:
+3. **Phase 4 (Financeiro Integration)** — Aplicar novo design a:
    - `consolidated-migration-report.html`
    - `executive-dashboard.html`
    - All project outputs
 
 4. **Phase 5 (Validation)** — Screenshot comparison:
-   - Before: Atual Bradesco dashboards
+   - Before: Atual Financeiro dashboards
    - After: New Orange DNA template
    - Visual regression testing (responsive: 320px, 640px, 1024px)
 

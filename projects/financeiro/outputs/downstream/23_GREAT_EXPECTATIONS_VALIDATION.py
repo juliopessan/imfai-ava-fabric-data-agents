@@ -2,7 +2,7 @@
 ================================================================================
 GREAT EXPECTATIONS VALIDATION (GATE 3 PHASE 1)
 ================================================================================
-Wave: bradesco-einstein-2026-06 | Owner: downstream-executor (Diego)
+Wave: Financeiro-reference-2026-06 | Owner: downstream-executor (Diego)
 Date: 2026-06-08 | Framework: Great Expectations v0.18+
 
 📋 VALIDATION LAYERS:
@@ -74,7 +74,7 @@ thresholds = QualityThresholds()
 class BronzeValidator:
     """Validates Bronze raw data quality"""
     
-    def __init__(self, spark, catalog: str = "bradesco_bronze", schema: str = "raw_aaar"):
+    def __init__(self, spark, catalog: str = "Financeiro_bronze", schema: str = "raw_aaar"):
         self.spark = spark
         self.catalog = catalog
         self.schema = schema
@@ -300,7 +300,7 @@ class SilverValidator:
                 WHEN ROUND(100.0 * SUM(CASE WHEN portfolio_daily_id IS NULL THEN 1 ELSE 0 END) / COUNT(*), 4) <= 0.1 THEN 'PASS'
                 ELSE 'FAIL'
             END AS status
-        FROM bradesco_silver.conformed_aaar.portfolio_daily
+        FROM Financeiro_silver.conformed_aaar.portfolio_daily
         WHERE dt_partition >= CURRENT_DATE() - INTERVAL '1 day'
         """
         
@@ -343,7 +343,7 @@ class SilverValidator:
                 WHEN MIN(portfolio_balance) >= 0 AND MAX(portfolio_balance) <= 999999999.999999999999 THEN 'PASS'
                 ELSE 'FAIL'
             END AS status
-        FROM bradesco_silver.conformed_aaar.portfolio_daily
+        FROM Financeiro_silver.conformed_aaar.portfolio_daily
         WHERE dt_partition >= CURRENT_DATE() - INTERVAL '1 day'
         """
         
@@ -385,8 +385,8 @@ class SilverValidator:
             "FK_Orphans": """
             SELECT 
                 COUNT(*) AS orphan_count
-            FROM bradesco_silver.conformed_aaar.portfolio_daily p
-            LEFT JOIN bradesco_gold.dim_client d 
+            FROM Financeiro_silver.conformed_aaar.portfolio_daily p
+            LEFT JOIN Financeiro_gold.dim_client d 
                 ON p.client_id_masked = d.client_id_masked 
                 AND d.is_current = TRUE
             WHERE d.client_sk IS NULL
@@ -394,14 +394,14 @@ class SilverValidator:
             "PK_Uniqueness": """
             SELECT 
                 COUNT(*) - COUNT(DISTINCT CONCAT(portfolio_daily_id, dt_partition)) AS duplicate_count
-            FROM bradesco_silver.conformed_aaar.portfolio_daily
+            FROM Financeiro_silver.conformed_aaar.portfolio_daily
             """,
             "Row_Variance": """
             SELECT 
                 ROUND(100.0 * ABS(
-                    (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw) -
-                    (SELECT COUNT(*) FROM bradesco_silver.conformed_aaar.portfolio_daily)
-                ) / (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw), 4) AS variance_pct
+                    (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw) -
+                    (SELECT COUNT(*) FROM Financeiro_silver.conformed_aaar.portfolio_daily)
+                ) / (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw), 4) AS variance_pct
             """
         }
         

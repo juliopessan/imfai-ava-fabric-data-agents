@@ -1,6 +1,6 @@
-# 📚 Bradesco Data Migration Agents — Wiki
+# 📚 Financeiro Data Migration Agents — Wiki
 
-> Central de conhecimento técnico e operacional para o suite de agentes de migração de dados Bradesco.
+> Central de conhecimento técnico e operacional para o suite de agentes de migração de dados Financeiro.
 
 ---
 
@@ -24,7 +24,7 @@
 ### 📊 Dashboards
 - [Portal Principal](../INDEX.html) — Hub central de navegação
 - [Dashboard Consolidado](../00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html) — Relatório completo (Upstream/Midstream/Downstream)
-- [Dashboard Bradesco](../BRADESCO_MIGRATION_DASHBOARD.html) — Visão executiva
+- [Dashboard Financeiro](../Financeiro_MIGRATION_DASHBOARD.html) — Visão executiva
 - [Dashboard Premium](../DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html) — Operações de dados e IA
 - [Dashboard Factory](../EXECUTIVE_DATA_FACTORY_DASHBOARD.html) — Fábrica de dados
 - [Dashboard Telemetria](../TELEMETRY_DEMO_DASHBOARD.html) — Métricas de observabilidade

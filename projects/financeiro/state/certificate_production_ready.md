@@ -1,6 +1,6 @@
 # 🏆 CERTIFICATE OF PRODUCTION READINESS
 
-**Bradesco — Data Migration Factory (Cloudera → Databricks)**
+**Financeiro — Data Migration Factory (Cloudera → Databricks)**
 
 ---
 
@@ -8,8 +8,8 @@
 
 | Field | Value |
 |-------|-------|
-| **Certificate ID** | BRADESCO-PROD-2026-06-16-001 |
-| **Project Name** | Bradesco — Einstein Migration Wave |
+| **Certificate ID** | Financeiro-PROD-2026-06-16-001 |
+| **Project Name** | Financeiro — reference Migration Wave |
 | **Migration Path** | Cloudera → Databricks |
 | **Issue Date** | 2026-06-16 11:18:17 UTC |
 | **Certification Status** | ✅ **PRODUCTION READY** |
@@ -161,7 +161,7 @@
 
 ## DEPLOYMENT AUTHORIZATION
 
-**By virtue of this certificate, the Bradesco — Einstein Migration Wave is hereby AUTHORIZED FOR PRODUCTION DEPLOYMENT.**
+**By virtue of this certificate, the Financeiro — reference Migration Wave is hereby AUTHORIZED FOR PRODUCTION DEPLOYMENT.**
 
 ### Effective Immediately Upon:
 1. Final stakeholder review meeting (scheduled)
@@ -206,7 +206,7 @@ See: [escalation_contacts.md](escalation_contacts.md)
 
 ## LEGAL & COMPLIANCE STATEMENT
 
-This certificate confirms that the Bradesco — Einstein Data Migration Wave has successfully passed all three mandatory quality gates (UPSTREAM, MIDSTREAM, DOWNSTREAM) and meets the production readiness criteria established by Avanade Data Migration Factory standards.
+This certificate confirms that the Financeiro — reference Data Migration Wave has successfully passed all three mandatory quality gates (UPSTREAM, MIDSTREAM, DOWNSTREAM) and meets the production readiness criteria established by Avanade Data Migration Factory standards.
 
 **Issued under:** Data Migration Governance Policy v2.1  
 **Valid jurisdiction:** All cloud regions (Azure, Databricks)  
@@ -229,5 +229,5 @@ This certificate confirms that the Bradesco — Einstein Data Migration Wave has
 
 ✅ Production deployment authorized as of 2026-06-16 11:18:17 UTC
 
-**Certification ID:** BRADESCO-PROD-2026-06-16-001  
+**Certification ID:** Financeiro-PROD-2026-06-16-001  
 **Next Review:** 2027-06-16

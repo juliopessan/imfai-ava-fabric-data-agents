@@ -133,20 +133,20 @@ TOTAL:  93 minutes (vs 120 = -22.5% time reduction)
 
 ### 📊 Reports
 
-1. **[wave2-gatescore-reports.md](projects/bradesco/state/wave2-gatescore-reports.md)**
+1. **[wave2-gatescore-reports.md](projects/Financeiro/state/wave2-gatescore-reports.md)**
    - Detailed GateScore breakdown (all 3 gates)
    - Data quality metrics
    - Issues self-healed
    - Recommendation: ✅ APPROVED FOR PRODUCTION
 
-2. **[wave2-optimization-summary.md](projects/bradesco/state/wave2-optimization-summary.md)**
+2. **[wave2-optimization-summary.md](projects/Financeiro/state/wave2-optimization-summary.md)**
    - Quantified time savings (27 min/wave)
    - Quality improvements (+0.2% validation)
    - Cost analysis (-10% per wave)
    - Automation gains (19 issues zero-touch)
    - Wave 3+ recommendations
 
-3. **[wave2-timeline-comparison.html](projects/bradesco/state/wave2-timeline-comparison.html)**
+3. **[wave2-timeline-comparison.html](projects/Financeiro/state/wave2-timeline-comparison.html)**
    - Wave 1 vs Wave 2 side-by-side
    - Phase breakdown
    - Lessons applied
@@ -155,16 +155,16 @@ TOTAL:  93 minutes (vs 120 = -22.5% time reduction)
 
 ### 📋 Data Files
 
-4. **[wave2-assumptions.json](projects/bradesco/state/wave2-assumptions.json)**
+4. **[wave2-assumptions.json](projects/Financeiro/state/wave2-assumptions.json)**
    - 4 documented assumptions
    - Risk levels (Medium, High, High, Low)
    - Gate 1 timestamp
 
-5. **[wave2-reconciliation-results.json](projects/bradesco/state/wave2-reconciliation-results.json)**
+5. **[wave2-reconciliation-results.json](projects/Financeiro/state/wave2-reconciliation-results.json)**
    - Gate 2 early sample (10K rows: EXACT_MATCH)
    - Gate 3 full reconciliation (8.2M rows: 100% match)
 
-6. **[wave2-telemetry.json](projects/bradesco/state/wave2-telemetry.json)**
+6. **[wave2-telemetry.json](projects/Financeiro/state/wave2-telemetry.json)**
    - Phase timing (min, ms resolution)
    - CPU & memory utilization
    - I/O throughput
@@ -172,9 +172,9 @@ TOTAL:  93 minutes (vs 120 = -22.5% time reduction)
 
 ### 📝 Configuration
 
-7. **[wave2-config.yaml](projects/bradesco/wave2-config.yaml)**
+7. **[wave2-config.yaml](projects/Financeiro/wave2-config.yaml)**
    - Wave 2 setup parameters
-   - Einstein HIAE dataset profile
+   - reference saude dataset profile
    - 5 optimizations configuration
    - Timeline targets vs results
 

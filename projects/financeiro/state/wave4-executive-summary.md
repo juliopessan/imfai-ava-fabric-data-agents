@@ -1,4 +1,4 @@
-# WAVE 4 EXECUTIVE SUMMARY — Bradesco Risk Assessment
+# WAVE 4 EXECUTIVE SUMMARY — Financeiro Risk Assessment
 ================================================
 
 **Date:** 2026-06-16  
@@ -8,7 +8,7 @@
 
 ## One-Sentence Context
 
-Wave 4 deployed advanced tri-gate parallelization + ML-driven rule discovery on Bradesco Risk Assessment (18.2M rows, 89 schemas), achieving **96.8% time reduction, 5 new optimization patterns, and $240 cost savings** over Wave 3.
+Wave 4 deployed advanced tri-gate parallelization + ML-driven rule discovery on Financeiro Risk Assessment (18.2M rows, 89 schemas), achieving **96.8% time reduction, 5 new optimization patterns, and $240 cost savings** over Wave 3.
 
 ---
 

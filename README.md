@@ -124,7 +124,7 @@ imfai-ava-fabric-data-agents/
 │
 ├── 🚀 projects/                            Active migration cases
 │   ├── financeiro/                         ⭐ Main case (COMPLETE)
-│   ├── einstein-saude/                     Reference case
+│   ├── reference-saude/                     Reference case
 │   └── multi-platform-migration/           6-platform wave (IN PROGRESS)
 │
 ├── 📊 reports/                             Dashboards & findings
@@ -308,7 +308,7 @@ imfai-ava-fabric-data-agents/
 
 ### Autonomous Execution
 - 🔄 Runs end-to-end without manual intervention
-- ⏱️ 28 seconds for complete Bradesco case
+- ⏱️ 28 seconds for complete Financeiro case
 - 📊 Generates executive dashboards automatically
 
 ### 3-Tier Governance
@@ -322,8 +322,8 @@ imfai-ava-fabric-data-agents/
 - **Gate 3 (Execution):** Data integrity ≥99.9%, Validation score ≥98%
 
 ### Multi-Client Support
-- Bradesco (completed) → Cloudera to Databricks
-- Einstein HIAE (reference) → SUS healthcare data
+- Financeiro (completed) → Cloudera to Databricks
+- reference saude (reference) → SUS healthcare data
 - Multi-Platform Wave (6 systems in one orchestration)
 
 ### 🎯 Specs System (Phase 1, 2 & 3)
@@ -344,7 +344,7 @@ imfai-ava-fabric-data-agents/
 ## 🚀 Getting Started
 
 ### For New Projects
-1. **Copy structure:** `cp -r projects/bradesco projects/[new-name]`
+1. **Copy structure:** `cp -r projects/Financeiro projects/[new-name]`
 2. **Fill configuration:** Edit `projects/[new-name]/wave-config.yaml`
 3. **Place data:** Add legacy exports to `projects/[new-name]/legacy/`
 4. **Execute:** `python projects/[new-name]/scripts/00_MASTER_PIPELINE.py`
@@ -418,7 +418,7 @@ docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
 ## 📈 Roadmap 2026-06-16 to 06-21
 
 ### ✅ Completed (v3 + Phase 1 Specs)
-- ✓ Bradesco case (autonomous execution)
+- ✓ Financeiro case (autonomous execution)
 - ✓ 3-tier governance framework
 - ✓ 189 test cases (100% passing)
 - ✓ Memory system (persistent knowledge)

@@ -1,6 +1,6 @@
-# Bradesco Migration — Lessons Learned & Retrospective
+# Financeiro Migration — Lessons Learned & Retrospective
 
-**Wave:** bradesco-einstein-2026-06  
+**Wave:** Financeiro-reference-2026-06  
 **Data:** 2026-06-16  
 **Gerado por:** migration-coordinator (Orion)
 

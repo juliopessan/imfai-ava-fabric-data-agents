@@ -16,7 +16,7 @@
 
   ✓ Sistema de Memória Persistente   → /memories/repo/ (6 files)
   ✓ Master Pipeline Orchestrator     → 28.1s end-to-end
-  ✓ Cases Operacionais               → Bradesco + Einstein-HIAE
+  ✓ Cases Operacionais               → Financeiro + Reference-Sa�de
   ✓ Avanade Branding                 → #5c2d91 + #ff6b35 (completo)
   ✓ Dependências Python              → markdown, yaml (instaladas)
   ✓ Scripts Críticos                 → 7/7 (todos validados)
@@ -34,14 +34,14 @@
   ROI Calculated              → $167,049 (Year 1)
   Gate Validation Score       → 27/27 Pass (100%)
   Token Savings (future)      → ~40% por sessão
-  Cases Ready                 → 2 (Bradesco + HIAE)
+  Cases Ready                 → 2 (Financeiro + saude)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🚀 PRÓXIMAS AÇÕES
 
   1. Executar Master Pipeline (verificar outputs)
-     python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+     python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 
   2. Referenciar Memória (próxima sessão)
      /memories/repo/MEMORY-INDEX.md

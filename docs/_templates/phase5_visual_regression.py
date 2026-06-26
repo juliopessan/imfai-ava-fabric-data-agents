@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
 Phase 5: Visual Regression Testing via Playwright
-Captures screenshots of all Bradesco dashboards at multiple breakpoints
+Captures screenshots of all Financeiro dashboards at multiple breakpoints
 
 Screenshots:
   • Mobile: 390x844 (iPhone 12)
   • Tablet: 768x1024 (iPad)
   • Desktop: 1920x1080 (Full HD)
 
-Stores in: projects/bradesco/outputs/screenshots/
+Stores in: projects/Financeiro/outputs/screenshots/
 """
 
 import subprocess
@@ -20,13 +20,13 @@ from pathlib import Path
 # ============================================================================
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-BRADESCO_OUTPUTS = PROJECT_ROOT / "projects" / "bradesco" / "outputs"
-SCREENSHOTS_DIR = BRADESCO_OUTPUTS / "screenshots"
+Financeiro_OUTPUTS = PROJECT_ROOT / "projects" / "Financeiro" / "outputs"
+SCREENSHOTS_DIR = Financeiro_OUTPUTS / "screenshots"
 
 # Dashboard files to screenshot
 DASHBOARDS = [
     "00_CONSOLIDATED_MIGRATION_REPORT.html",
-    "BRADESCO_MIGRATION_DASHBOARD.html",
+    "Financeiro_MIGRATION_DASHBOARD.html",
     "EXECUTIVE_DATA_FACTORY_DASHBOARD.html",
 ]
 
@@ -59,7 +59,7 @@ async def take_screenshots():
         browser = await p.chromium.launch()
         
         for dashboard_name in dashboards:
-            dashboard_path = Path(r'%BRADESCO_OUTPUTS%') / dashboard_name
+            dashboard_path = Path(r'%Financeiro_OUTPUTS%') / dashboard_name
             if not dashboard_path.exists():
                 print(f"⏭️  {{dashboard_name}} not found")
                 continue
@@ -115,13 +115,13 @@ def main():
     # Check if dashboards exist
     missing = []
     for dashboard in DASHBOARDS:
-        if not (BRADESCO_OUTPUTS / dashboard).exists():
+        if not (Financeiro_OUTPUTS / dashboard).exists():
             missing.append(dashboard)
     
     if missing:
         print(f"⚠️  Missing dashboards: {', '.join(missing)}")
         print("\nAvailable dashboards:")
-        for f in sorted(BRADESCO_OUTPUTS.glob("*.html")):
+        for f in sorted(Financeiro_OUTPUTS.glob("*.html")):
             print(f"  • {f.name}")
     
     print(f"\n📁 Output directory: {SCREENSHOTS_DIR}")
@@ -134,7 +134,7 @@ def main():
     script_content = script_content.replace('%DASHBOARDS%', repr(DASHBOARDS))
     script_content = script_content.replace('%VIEWPORTS%', repr(VIEWPORTS))
     script_content = script_content.replace('%OUTPUT_DIR%', str(SCREENSHOTS_DIR))
-    script_content = script_content.replace('%BRADESCO_OUTPUTS%', str(BRADESCO_OUTPUTS))
+    script_content = script_content.replace('%Financeiro_OUTPUTS%', str(Financeiro_OUTPUTS))
     
     script_path = SCREENSHOTS_DIR / "take_screenshots.py"
     with open(script_path, 'w', encoding='utf-8') as f:

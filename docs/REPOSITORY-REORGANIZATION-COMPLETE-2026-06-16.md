@@ -20,7 +20,7 @@
   - `render_screenshots.py`
   - `update_portal_with_legacy.py`
 
-#### Phase 2: Bradesco Project Reorganization
+#### Phase 2: Financeiro Project Reorganization
 - ✅ Moved 4 documentation files from root → `outputs/` folder
   - `AUTONOMOUS-TEST-REPORT-2026-06-05.md`
   - `AUTONOMOUS_FLOW_EXECUTION_GUIDE.md`
@@ -31,7 +31,7 @@
   - `LAST_EXECUTION.log`
 
 #### Phase 3: Clean Up Root Files
-- ✅ Moved Einstein summary files from root → `outputs/`
+- ✅ Moved reference summary files from root → `outputs/`
   - `DEEP_LEGACY_ANALYSIS_SUMMARY.txt`
   - `EXECUTION_SUMMARY.txt`
 
@@ -47,7 +47,7 @@
 
 ```
 projects/
-├── bradesco/
+├── Financeiro/
 │   ├── scripts/                # ✅ All scripts organized
 │   ├── outputs/                # ✅ All docs moved here
 │   │   ├── AUTONOMOUS-*.md
@@ -64,7 +64,7 @@ projects/
 │   ├── README.md              # ✅ Project overview
 │   └── wave-config.yaml
 │
-├── einstein-hiae/
+├── Reference-Sa�de/
 │   ├── scripts/                # ✅ All 7 scripts organized
 │   │   ├── orchestrator.py
 │   │   ├── deep_legacy_analyzer.py
@@ -126,12 +126,12 @@ projects/{project}/state/
 
 ## 📊 File Statistics
 
-### Einstein-HIAE
+### Reference-Sa�de
 - **Scripts:** 7 files → `scripts/` ✅
 - **Outputs:** 40+ files → `outputs/` ✅
 - **Root level:** Cleaned ✅
 
-### Bradesco
+### Financeiro
 - **Scripts:** Pre-organized ✅
 - **Outputs:** 10+ files → `outputs/` ✅
 - **State:** 2 files → `state/` ✅
@@ -162,8 +162,8 @@ projects/{project}/state/
 
 | Item | Before | After |
 |------|--------|-------|
-| **Einstein root files** | 7 scripts + 2 docs | Clean ✅ |
-| **Bradesco root files** | 10+ mixed files | Organized ✅ |
+| **reference root files** | 7 scripts + 2 docs | Clean ✅ |
+| **Financeiro root files** | 10+ mixed files | Organized ✅ |
 | **Script findability** | Root scattered | Centralized ✅ |
 | **Output clarity** | Mixed in root | Structured ✅ |
 | **Admin files** | Lost in docs | In `state/` ✅ |
@@ -173,7 +173,7 @@ projects/{project}/state/
 ## 🎯 Status
 
 **Repository Reorganization:** ✅ PHASE 1-4 COMPLETE  
-**Projects Cleaned:** bradesco, einstein-hiae ✅  
+**Projects Cleaned:** Financeiro, Reference-Sa�de ✅  
 **Ready for:** Stakeholder review + Portal deployment ✅
 
 ---

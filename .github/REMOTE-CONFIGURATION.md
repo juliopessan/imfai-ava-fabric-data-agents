@@ -70,7 +70,7 @@ git branch --set-upstream-to=origin/Dev Dev
 - ✅ Branch Dev sincronizada (com tracking)
 - ✅ Branch main sincronizada
 - ✅ Branches de features sincronizadas
-- ✅ Commit final do Wave 4 Bradesco incluído
+- ✅ Commit final do Wave 4 Financeiro incluído
 
 ---
 

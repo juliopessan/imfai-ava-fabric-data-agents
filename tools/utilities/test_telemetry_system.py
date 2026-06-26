@@ -38,7 +38,7 @@ def simulate_workflow_execution():
     
     # Initialize telemetry
     telemetry = ExecutionTelemetry(
-        workflow_name="Data Migration - Bradesco (Cloudera → Databricks)",
+        workflow_name="Data Migration - Financeiro (Cloudera → Databricks)",
         agent_name="discovery-scout"
     )
     
@@ -257,7 +257,7 @@ def simulate_workflow_execution():
     print("SAVING REPORTS".center(80))
     print("="*80 + "\n")
     
-    outputs_dir = Path("projects/bradesco/outputs")
+    outputs_dir = Path("projects/Financeiro/outputs")
     outputs_dir.mkdir(parents=True, exist_ok=True)
     
     # Save JSON

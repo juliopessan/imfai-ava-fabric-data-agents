@@ -1,8 +1,8 @@
 {
   "orchestration": {
     "timestamp": "2026-06-16T11:18:17Z",
-    "wave_id": "bradesco-einstein-2026-06",
-    "project_name": "Bradesco — Einstein Migration Wave",
+    "wave_id": "Financeiro-reference-2026-06",
+    "project_name": "Financeiro — reference Migration Wave",
     "orchestrator": "migration-coordinator (Orion)",
     "overall_status": "🟢 TODOS OS GATES APROVADOS",
     "execution_mode": "autonomous",

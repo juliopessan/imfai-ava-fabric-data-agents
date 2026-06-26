@@ -1,7 +1,7 @@
 {
   "metadata": {
     "document_type": "baseline-metrics-profile",
-    "source_project": "Bradesco — Einstein Migration Wave",
+    "source_project": "Financeiro — reference Migration Wave",
     "source_date": "2026-06-16",
     "generated_by": "Kai (Iteration Improvement Agent)",
     "version": "1.0",
@@ -9,7 +9,7 @@
     "license": "Internal Use Only"
   },
   "project_profile": {
-    "name": "Bradesco — Cloudera to Databricks",
+    "name": "Financeiro — Cloudera to Databricks",
     "legacy_platform": "Cloudera",
     "target_platform": "Databricks",
     "wave_type": "full-legacy-migration",
@@ -22,7 +22,7 @@
   "timing_baseline": {
     "description": "Expected execution time per phase, scaled by data volume and artifact count",
     "unit": "minutes",
-    "methodology": "Linear regression from Bradesco data; can be adjusted per project complexity",
+    "methodology": "Linear regression from Financeiro data; can be adjusted per project complexity",
     "phases": [
       {
         "phase": "GATE_1_UPSTREAM_DISCOVERY",
@@ -73,7 +73,7 @@
         "target_ideal": 97.0,
         "threshold_critical": 90.0,
         "calculation": "avg(schema_correctness, row_accuracy, data_type_match, null_handling)",
-        "notes": "Bradesco exceeded target by 3.7 percentage points"
+        "notes": "Financeiro exceeded target by 3.7 percentage points"
       },
       {
         "metric": "row_count_accuracy",
@@ -137,7 +137,7 @@
         "interpretation": "Gate BLOCKED — remediate critical gaps before proceeding"
       }
     },
-    "bradesco_results": [
+    "Financeiro_results": [
       {
         "gate": 1,
         "phase": "UPSTREAM",
@@ -267,7 +267,7 @@
       "estimated_cost_usd": 100
     },
     "total_estimated_cost_usd": 580,
-    "notes": "Cost for Bradesco. Scale by data volume for future projects. Include 20% contingency."
+    "notes": "Cost for Financeiro. Scale by data volume for future projects. Include 20% contingency."
   },
   "operational_patterns": {
     "description": "Proven orchestration patterns that worked well and are reusable",
@@ -318,7 +318,7 @@
         "probability": "low",
         "impact": "critical",
         "mitigation": "Reconciliation validation at each gate + row count verification",
-        "bradesco_result": "100% accuracy — zero data loss",
+        "Financeiro_result": "100% accuracy — zero data loss",
         "recommendation": "Maintain this validation rigor for all future waves"
       },
       {
@@ -327,7 +327,7 @@
         "probability": "medium",
         "impact": "high",
         "mitigation": "Gate 2 DDL validation + self-healing type coercion rules",
-        "bradesco_result": "100% schema correctness",
+        "Financeiro_result": "100% schema correctness",
         "recommendation": "Expand self-healing for schema drift (add rule R24 in Wave 2)"
       },
       {
@@ -336,7 +336,7 @@
         "probability": "medium",
         "impact": "medium",
         "mitigation": "Establish query baseline in first week, continuous monitoring dashboard",
-        "bradesco_result": "Not measured in Bradesco (post-deployment monitoring missing)",
+        "Financeiro_result": "Not measured in Financeiro (post-deployment monitoring missing)",
         "recommendation": "Implement continuous monitoring dashboard in Wave 3"
       },
       {
@@ -345,7 +345,7 @@
         "probability": "low",
         "impact": "critical",
         "mitigation": "Automated rollback procedures, stakeholder checkpoint at Gate 2",
-        "bradesco_result": "Zero deployment failures",
+        "Financeiro_result": "Zero deployment failures",
         "recommendation": "Document rollback procedures for Wave 3"
       },
       {
@@ -354,13 +354,13 @@
         "probability": "low",
         "impact": "medium",
         "mitigation": "Stakeholder review checkpoint at Gate 2",
-        "bradesco_result": "Not implemented in Bradesco (autonomous execution)",
+        "Financeiro_result": "Not implemented in Financeiro (autonomous execution)",
         "recommendation": "Add stakeholder checkpoint for Wave 2"
       }
     ]
   },
   "assumptions_validated": {
-    "description": "Key assumptions made during Bradesco migration (validated or not)",
+    "description": "Key assumptions made during Financeiro migration (validated or not)",
     "assumptions": [
       {
         "id": "A001",
@@ -421,7 +421,7 @@
     },
     "lesson_4": {
       "title": "Reconciliation sampling early catches issues quickly",
-      "metric": "Hypothetical: if delta found in Gate 2, remediation ~40h instead of 0 (perfect in Bradesco)",
+      "metric": "Hypothetical: if delta found in Gate 2, remediation ~40h instead of 0 (perfect in Financeiro)",
       "financial_impact": "$5,000 potential savings per wave",
       "recommendation": "Implement reconciliation sampling in Gate 2 for Wave 2"
     }
@@ -445,7 +445,7 @@
     ]
   },
   "export_notes": {
-    "file_location": "projects/bradesco/state/baseline-metrics.json",
+    "file_location": "projects/Financeiro/state/baseline-metrics.json",
     "last_updated": "2026-06-16",
     "how_to_use": "Load this JSON as baseline for Wave 2/3/4 wave-config.yaml. Adjust scaling factors based on project specifics (data volume, artifact count, platform differences)."
   }

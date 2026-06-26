@@ -1,6 +1,6 @@
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                               ║
-║                 ✅ EINSTEIN-HIAE DEEP LEGACY ANALYSIS COMPLETE ✅             ║
+║                 ✅ Reference-Sa�de DEEP LEGACY ANALYSIS COMPLETE ✅             ║
 ║                                                                               ║
 ║              Fábrica de Migração de Dados — 100% Autônomo                     ║
 ║                                                                               ║
@@ -37,7 +37,7 @@
 
 | Arquivo | Tamanho | Tipo | Status |
 |---|---|---|---|
-| dwhiae.sql | 10.4 MB | Data Warehouse Principal | ✅ |
+| dwsaude.sql | 10.4 MB | Data Warehouse Principal | ✅ |
 | ensino_bi.sql | 7.3 MB | Education Analytics | ✅ |
 | DWMKT03.sql | 5.0 MB | Marketing/CRM | ✅ |
 | SandBox.sql | 4.5 MB | Desenvolvimento | ✅ |
@@ -50,7 +50,7 @@
 ### 4️⃣ SCHEMAS IDENTIFICADOS (20 Total)
 ═══════════════════════════════════════════════════════════════════════════════
 
-- `DWHIAE` — Healthcare Data Warehouse
+- `DWsaude` — Healthcare Data Warehouse
 - `ENSINO_BI` — Education BI
 - `DWMKT` — Marketing Analytics
 - `SANDBOX` — Development & Testing
@@ -85,7 +85,7 @@
 ### 6️⃣ PORTAL ATUALIZADO COM DADOS REAIS
 ═══════════════════════════════════════════════════════════════════════════════
 
-✅ Arquivo: EINSTEIN_KPI_PORTAL_CONTENT.json
+✅ Arquivo: reference_KPI_PORTAL_CONTENT.json
 ✅ Versão: 2.0 (Deep Legacy Analysis)
 ✅ Dados Incorporados:
    • 96 Tabelas Extraídas (de 27 arquivos SQL)
@@ -115,7 +115,7 @@
 ✅ AVANADE_DESIGN_TOKENS.css — Design system
 ✅ AVANADE_COMPONENTS.css — UI components
 ✅ PORTAL_INTERACTIONS.js — Interactivity
-✅ EINSTEIN_KPI_PORTAL_CONTENT.json — Content & translations
+✅ reference_KPI_PORTAL_CONTENT.json — Content & translations
 
 **Documentation:**
 ✅ PORTAL_README.md — User guide
@@ -152,7 +152,7 @@
 ### 9️⃣ RESPOSTA À PERGUNTA
 ═══════════════════════════════════════════════════════════════════════════════
 
-**Q: "Tem certeza que rodou o Legacy do Einstein?"**
+**Q: "Tem certeza que rodou o Legacy do reference?"**
 
 ✅ SIM! CONFIRMADO:
 

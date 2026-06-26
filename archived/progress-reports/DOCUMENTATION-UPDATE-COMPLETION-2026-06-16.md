@@ -44,7 +44,7 @@
 
 ### Project-Level Documentation
 
-#### ✅ projects/bradesco/README.md
+#### ✅ projects/Financeiro/README.md
 - Added project structure diagram
 - Updated with new organization note (scripts/, outputs/)
 - Added reference to REPOSITORY-QUICK-REFERENCE.md
@@ -59,7 +59,7 @@
 - Quick start commands
 - Next steps timeline (through Phase 5 go-live)
 
-#### ✅ projects/einstein-hiae/scripts/README.md
+#### ✅ projects/Reference-Sa�de/scripts/README.md
 - **NEW FILE** — Complete scripts reference
 - 7 scripts with descriptions:
   - orchestrator.py
@@ -111,7 +111,7 @@
 - Breadcrumb navigation in project READMEs
 
 ### 3. **Completeness**
-- Einstein-HIAE project fully documented (including portal generation)
+- Reference-Sa�de project fully documented (including portal generation)
 - Scripts documented with time estimates and workflows
 - All 3 projects have README files
 - 15+ reference guides and documentation files
@@ -129,16 +129,16 @@
 ### Repository Structure Validation
 ```
 ✅ PASSED: 15/15 checks
-✓ [bradesco] No Python scripts in root
-✓ [bradesco] Docs organized (except README)
-✓ [bradesco] outputs/ exists
-✓ [bradesco] scripts/ exists  
-✓ [bradesco] wave-config.yaml present
-✓ [einstein-hiae] No Python scripts in root
-✓ [einstein-hiae] Docs organized (except README)
-✓ [einstein-hiae] outputs/ exists
-✓ [einstein-hiae] scripts/ exists
-✓ [einstein-hiae] wave-config.yaml present
+✓ [Financeiro] No Python scripts in root
+✓ [Financeiro] Docs organized (except README)
+✓ [Financeiro] outputs/ exists
+✓ [Financeiro] scripts/ exists  
+✓ [Financeiro] wave-config.yaml present
+✓ [Reference-Sa�de] No Python scripts in root
+✓ [Reference-Sa�de] Docs organized (except README)
+✓ [Reference-Sa�de] outputs/ exists
+✓ [Reference-Sa�de] scripts/ exists
+✓ [Reference-Sa�de] wave-config.yaml present
 ✓ [multi-platform-migration] No Python scripts in root
 ✓ [multi-platform-migration] Docs organized (except README)
 ✓ [multi-platform-migration] outputs/ exists
@@ -152,7 +152,7 @@
 |----------|-------|--------|
 | Root Level Docs | README.md, INDEX.md, QUICK-START.md, REPOSITORY-ORGANIZATION.md | ✅ All updated |
 | Project READMEs | 3 files | ✅ All present |
-| Scripts Documentation | einstein-hiae/scripts/README.md | ✅ Present |
+| Scripts Documentation | Reference-Sa�de/scripts/README.md | ✅ Present |
 | Reference Guides | 2 files | ✅ Complete |
 | Validation Scripts | validate_repo_structure.py | ✅ Working |
 
@@ -169,10 +169,10 @@ Root Level
 └── REPOSITORY-QUICK-REFERENCE.md. Fast lookup reference
 
 Project Documentation
-├── projects/bradesco/
-│   └── README.md ................. Bradesco project overview
-├── projects/einstein-hiae/
-│   ├── README.md ................. Einstein project overview (409 lines)
+├── projects/Financeiro/
+│   └── README.md ................. Financeiro project overview
+├── projects/Reference-Sa�de/
+│   ├── README.md ................. reference project overview (409 lines)
 │   ├── scripts/README.md ......... Scripts reference guide (450+ lines)
 │   └── wave-config.yaml
 └── projects/multi-platform-migration/
@@ -197,14 +197,14 @@ Infrastructure Documentation
 4. ✅ Key metrics and status
 5. ✅ Next steps and timeline
 
-### Einstein-HIAE Specific:
+### Reference-Sa�de Specific:
 1. ✅ 7 scripts fully documented
 2. ✅ Portal generation process explained
 3. ✅ Real metrics (309 legacy objects extracted)
 4. ✅ Performance characteristics (5 sec generation, 200ms load)
 5. ✅ Bilingual portal (EN/PT) documented
 
-### Bradesco Specific:
+### Financeiro Specific:
 1. ✅ 8 comprehensive technical guides
 2. ✅ 11 interactive dashboards documented
 3. ✅ Architecture diagrams referenced
@@ -227,11 +227,11 @@ Infrastructure Documentation
 2. Navigate: [`INDEX.md`](INDEX.md) (10 min)
 3. Quick Start: [`QUICK-START.md`](QUICK-START.md) (5 min)
 4. Choose project: Read specific [`projects/[name]/README.md`] (10 min)
-5. Deep dive: [`projects/einstein-hiae/scripts/README.md`] or project docs (20 min)
+5. Deep dive: [`projects/Reference-Sa�de/scripts/README.md`] or project docs (20 min)
 
 ### For Script Developers
 1. Project README
-2. [`projects/[name]/scripts/README.md`](projects/einstein-hiae/scripts/README.md)
+2. [`projects/[name]/scripts/README.md`](projects/Reference-Sa�de/scripts/README.md)
 3. Each script has docstrings
 4. Naming conventions documented in [`REPOSITORY-ORGANIZATION.md`](REPOSITORY-ORGANIZATION.md)
 
@@ -289,7 +289,7 @@ Infrastructure Documentation
 ### Medium-term (Next Sprint)
 8. Fabric workspace provisioning (2026-06-23)
 9. Begin Phase 5 execution
-10. Continue with Einstein-HIAE migration
+10. Continue with Reference-Sa�de migration
 
 ---
 
@@ -298,9 +298,9 @@ Infrastructure Documentation
 For questions about:
 - **Repository structure:** See [`REPOSITORY-ORGANIZATION.md`](REPOSITORY-ORGANIZATION.md)
 - **Quick reference:** See [`REPOSITORY-QUICK-REFERENCE.md`](REPOSITORY-QUICK-REFERENCE.md)
-- **Bradesco project:** See [`projects/bradesco/README.md`](projects/bradesco/README.md)
-- **Einstein-HIAE:** See [`projects/einstein-hiae/README.md`](projects/einstein-hiae/README.md)
-- **Scripts:** See [`projects/einstein-hiae/scripts/README.md`](projects/einstein-hiae/scripts/README.md)
+- **Financeiro project:** See [`projects/Financeiro/README.md`](projects/Financeiro/README.md)
+- **Reference-Sa�de:** See [`projects/Reference-Sa�de/README.md`](projects/Reference-Sa�de/README.md)
+- **Scripts:** See [`projects/Reference-Sa�de/scripts/README.md`](projects/Reference-Sa�de/scripts/README.md)
 - **Validation:** Run `python validate_repo_structure.py`
 
 ---
@@ -315,7 +315,7 @@ For questions about:
 | **Projects with README** | 3/3 (100%) |
 | **Scripts with documentation** | 7/7 (100%) |
 | **Repository structure checks passing** | 15/15 (100%) |
-| **Pages in Einstein-HIAE README** | 4 |
+| **Pages in Reference-Sa�de README** | 4 |
 | **Pages in Scripts README** | 5 |
 
 ---

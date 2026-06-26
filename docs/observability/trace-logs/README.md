@@ -70,7 +70,7 @@ Each line in a JSONL file is a complete event:
   "trace_type": "agent_execution",
   "context": {
     "agent_id": "migration-coordinator",
-    "wave": "bradesco-wave2",
+    "wave": "Financeiro-wave2",
     "gate": 1,
     "user": "data-engineer@company.com",
     "tags": ["critical", "gate-1-validation"]
@@ -144,7 +144,7 @@ write_trace(
     context={
         "category": "agents",
         "agent_id": "migration-coordinator",
-        "wave": "bradesco-wave2",
+        "wave": "Financeiro-wave2",
         "gate": 1,
         "tags": ["critical"]
     },
@@ -176,7 +176,7 @@ def read_traces(trace_file: str):
     return traces
 
 # Usage
-traces = read_traces("agents/agent_execution_bradesco-wave2_2026-06-18_001.jsonl")
+traces = read_traces("agents/agent_execution_Financeiro-wave2_2026-06-18_001.jsonl")
 for trace in traces:
     print(f"{trace['timestamp']} | {trace['operation']['name']} | {trace['operation']['status']}")
 ```

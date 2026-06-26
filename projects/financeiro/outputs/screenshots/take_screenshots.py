@@ -7,16 +7,16 @@ async def take_screenshots():
     """Take screenshots of dashboards at multiple breakpoints."""
     
     # Configuration
-    dashboards = ['00_CONSOLIDATED_MIGRATION_REPORT.html', 'BRADESCO_MIGRATION_DASHBOARD.html', 'EXECUTIVE_DATA_FACTORY_DASHBOARD.html']
+    dashboards = ['00_CONSOLIDATED_MIGRATION_REPORT.html', 'Financeiro_MIGRATION_DASHBOARD.html', 'EXECUTIVE_DATA_FACTORY_DASHBOARD.html']
     viewports = [('mobile', 390, 844), ('tablet', 768, 1024), ('desktop', 1920, 1080)]
-    output_dir = Path(r'C:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents\projects\bradesco\outputs\screenshots')
+    output_dir = Path(r'C:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents\projects\Financeiro\outputs\screenshots')
     output_dir.mkdir(parents=True, exist_ok=True)
     
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         
         for dashboard_name in dashboards:
-            dashboard_path = Path(r'C:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents\projects\bradesco\outputs') / dashboard_name
+            dashboard_path = Path(r'C:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents\projects\Financeiro\outputs') / dashboard_name
             if not dashboard_path.exists():
                 print(f"⏭️  {{dashboard_name}} not found")
                 continue

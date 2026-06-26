@@ -10,7 +10,7 @@ Uso:
 
 Exemplo:
     python consolidate_dashboards.py
-    python consolidate_dashboards.py --projects bradesco --dry-run
+    python consolidate_dashboards.py --projects Financeiro --dry-run
 """
 
 import json
@@ -23,15 +23,15 @@ from typing import Dict, Tuple
 # ===== CONFIGURATION =====
 
 PROJECTS_CONFIG = {
-    "bradesco": {
-        "source": "reports/bradesco/bradesco-executive-dashboard.html",
-        "name": "🏦 Bradesco",
+    "Financeiro": {
+        "source": "reports/Financeiro/Financeiro-executive-dashboard.html",
+        "name": "🏦 Financeiro",
         "description": "Migração Cloudera → Databricks",
         "icon": "🏢",
     },
-    "einstein": {
-        "source": "reports/einstein/einstein-executive-dashboard.html",
-        "name": "🏥 Einstein-HIAE",
+    "reference": {
+        "source": "reports/reference/reference-executive-dashboard.html",
+        "name": "🏥 Reference-Sa�de",
         "description": "SQL Server → Microsoft Fabric",
         "icon": "🏥",
     },
@@ -150,7 +150,7 @@ def generate_project_card_html(project_key: str, project_config: Dict, kpis: Dic
     Gera HTML de card do projeto com KPIs consolidados.
     
     Args:
-        project_key: ID do projeto (bradesco, einstein)
+        project_key: ID do projeto (Financeiro, reference)
         project_config: Configuração do projeto
         kpis: KPIs extraídos
     

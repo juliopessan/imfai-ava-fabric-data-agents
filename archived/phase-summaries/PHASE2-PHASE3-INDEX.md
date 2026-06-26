@@ -109,8 +109,8 @@ git commit -m "test: Phase 3 - All tests passed (7/7)"
 # Check agent-spec links
 python .github/scripts/validate_agent_contracts.py --check-links
 
-# Validate Bradesco wave
-python .github/scripts/validate_agent_contracts.py --validate-wave bradesco
+# Validate Financeiro wave
+python .github/scripts/validate_agent_contracts.py --validate-wave Financeiro
 ```
 
 ---
@@ -132,7 +132,7 @@ python .github/scripts/validate_agent_contracts.py --validate-wave bradesco
 - [ ] Workflow chain valid ✅
 - [ ] Token reduction ≥70% ✅
 - [ ] Hallucination prevention verified ✅
-- [ ] Bradesco wave ready ✅
+- [ ] Financeiro wave ready ✅
 - [ ] ALL TESTS PASSED ✅
 
 **When Complete:** Ready for Phase 4 Deployment on 2026-06-21

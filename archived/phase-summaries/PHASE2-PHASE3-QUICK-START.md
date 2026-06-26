@@ -24,7 +24,7 @@
     ├── test_spec_workflow_chain() — validate handoff chain (01→02→...→10)
     ├── measure_token_reduction() — measure 70% savings
     ├── test_hallucination_prevention() — verify keywords
-    ├── test_workflow_with_bradesco() — check wave readiness
+    ├── test_workflow_with_Financeiro() — check wave readiness
     └── run_all_tests() — complete test suite
 ```
 
@@ -44,7 +44,7 @@ PHASE2-PHASE3-EXECUTION-ROADMAP.md     (500+ linhas)
 │   ├── Test 3: Workflow chain (3 min)
 │   ├── Test 4: Token reduction (2 min)
 │   ├── Test 5: Hallucination prevention (2 min)
-│   ├── Test 6: Bradesco workflow (3 min)
+│   ├── Test 6: Financeiro workflow (3 min)
 │   └── Test 7: Complete suite (5 min)
 │
 ├── Timeline & milestones
@@ -112,8 +112,8 @@ python .github/scripts/integrate_agents_with_specs.py --execute
    Check: NO GUESSING, NO INFERRING found
    Result: Keywords verified ✅
 
-🧪 TEST 6: Bradesco Wave (3 min)
-   Input: projects/bradesco/wave-config.yaml
+🧪 TEST 6: Financeiro Wave (3 min)
+   Input: projects/Financeiro/wave-config.yaml
    Check: Config valid + legacy folder exists
    Result: Wave ready ✅
 
@@ -154,7 +154,7 @@ python .github/scripts/test_specs_system.py --all
 | 3. Workflow chain | automation | Valid | ⏳ 2026-06-20 |
 | 4. Token reduction | automation | ≥70% | ⏳ 2026-06-20 |
 | 5. Hallucination prevention | automation | Valid | ⏳ 2026-06-20 |
-| 6. Bradesco workflow | automation | Ready | ⏳ 2026-06-20 |
+| 6. Financeiro workflow | automation | Ready | ⏳ 2026-06-20 |
 | 7. Complete suite | automation | PASS | ⏳ 2026-06-20 |
 | **PHASE 3 COMPLETE** | **migration-coordinator** | **ALL PASS** | **⏳** |
 
@@ -251,7 +251,7 @@ git commit -m "test: Phase 3 - All tests passed (16/16 agents, 70% token reducti
     └── ✅ README.md                           (EXISTING — Phase 1)
 
 projects/
-├── bradesco/
+├── Financeiro/
 │   ├── wave-config.yaml                       (Used in Phase 3 Test 6)
 │   └── legacy/                                (Used in Phase 3 Test 6)
 │       └── [309 sample files]

@@ -1,12 +1,12 @@
-wave_id: bradesco-wave4-2026-06
-project_name: Bradesco — Wave 4 ML-Driven Risk Assessment
+wave_id: Financeiro-wave4-2026-06
+project_name: Financeiro — Wave 4 ML-Driven Risk Assessment
 description: |
   Wave 4: Advanced tri-gate parallelization with ML-driven rule discovery
-  Dataset: Bradesco Risk Assessment (18.2M rows, 89 schemas)
+  Dataset: Financeiro Risk Assessment (18.2M rows, 89 schemas)
   Targets: GateScore ≥0.95 | Time ≤60 min | Quality ≥99.5% | Cost ≤$1,100 | Rules 40+
 
 dataset:
-  source_system: Bradesco Risk Management Platform
+  source_system: Financeiro Risk Management Platform
   domain: Risk Assessment, Regulatory Compliance, Financial Risk
   volume:
     rows: 18_200_000
@@ -172,7 +172,7 @@ stakeholders:
   ops_lead: ops@avanade.example
 
 reporting:
-  reports_directory: projects/bradesco/state
+  reports_directory: projects/Financeiro/state
   
   deliverables:
     - wave4-gatescore-reports.md

@@ -6,7 +6,7 @@
 
 ## MISSION ACCOMPLISHED
 
-**Wave 3 Advanced Orchestration** successfully executed on **Bradesco Financial Models dataset (15.8M rows, 67 schemas)** with **5 new advanced optimizations**, achieving:
+**Wave 3 Advanced Orchestration** successfully executed on **Financeiro Financial Models dataset (15.8M rows, 67 schemas)** with **5 new advanced optimizations**, achieving:
 
 ### ✅ All Targets EXCEEDED
 
@@ -67,7 +67,7 @@
 
 ## SCALABILITY VALIDATION ✅
 
-**Dataset:** Bradesco Financial Models — 15.8M rows, 67 schemas, 620 GB
+**Dataset:** Financeiro Financial Models — 15.8M rows, 67 schemas, 620 GB
 
 | Metric | Wave 1 | Wave 2 | Wave 3 | W1→W3 Trend |
 |--------|--------|--------|--------|------------|
@@ -221,7 +221,7 @@ Business Impact: Prevents NPV calculation collapse
 - **wave3-orchestration.log** — Full execution trace
 - **wave3-telemetry.json** — Phase-level metrics (timing, CPU, IO, healing)
 
-**Location:** `projects/bradesco/state/`
+**Location:** `projects/Financeiro/state/`
 
 ---
 
@@ -356,11 +356,11 @@ All patterns, rules, models, and learnings are documented and ready for reuse. W
 
 | Document | Purpose |
 |----------|---------|
-| [WAVE3_EXECUTIVE_SUMMARY.md](projects/bradesco/state/WAVE3_EXECUTIVE_SUMMARY.md) | High-level overview + governance |
-| [wave3-gatescore-reports.md](projects/bradesco/state/wave3-gatescore-reports.md) | Detailed gate metrics |
-| [wave3-vs-wave1-wave2-comparison.html](projects/bradesco/state/wave3-vs-wave1-wave2-comparison.html) | Interactive 3-way dashboard |
-| [wave3-advanced-optimizations-summary.md](projects/bradesco/state/wave3-advanced-optimizations-summary.md) | Per-optimization deep-dive |
-| [wave3-financial-models-learnings.md](projects/bradesco/state/wave3-financial-models-learnings.md) | Domain expertise + reusable templates |
-| [wave3-cost-prediction-model.json](projects/bradesco/state/wave3-cost-prediction-model.json) | ML cost model (ready for Wave 4+) |
+| [WAVE3_EXECUTIVE_SUMMARY.md](projects/Financeiro/state/WAVE3_EXECUTIVE_SUMMARY.md) | High-level overview + governance |
+| [wave3-gatescore-reports.md](projects/Financeiro/state/wave3-gatescore-reports.md) | Detailed gate metrics |
+| [wave3-vs-wave1-wave2-comparison.html](projects/Financeiro/state/wave3-vs-wave1-wave2-comparison.html) | Interactive 3-way dashboard |
+| [wave3-advanced-optimizations-summary.md](projects/Financeiro/state/wave3-advanced-optimizations-summary.md) | Per-optimization deep-dive |
+| [wave3-financial-models-learnings.md](projects/Financeiro/state/wave3-financial-models-learnings.md) | Domain expertise + reusable templates |
+| [wave3-cost-prediction-model.json](projects/Financeiro/state/wave3-cost-prediction-model.json) | ML cost model (ready for Wave 4+) |
 
-**All outputs:** `projects/bradesco/state/`
+**All outputs:** `projects/Financeiro/state/`

@@ -1,7 +1,7 @@
 # ✅ Repository Cleanup Report — 2026-06-08
 
 ## 🎯 Objetivo
-Limpar repositório mantendo apenas o essencial para o workflow Bradesco + casos futuros, removendo documentação antiga e projetos não-relacionados.
+Limpar repositório mantendo apenas o essencial para o workflow Financeiro + casos futuros, removendo documentação antiga e projetos não-relacionados.
 
 ---
 
@@ -13,7 +13,7 @@ Limpar repositório mantendo apenas o essencial para o workflow Bradesco + casos
 - ✅ `.venv/` — Python environment
 - ✅ `.github/` — GitHub configuration
 - ✅ `.vscode/` — VS Code settings
-- ✅ `projects/` — Casos (bradesco + einstein-hiae)
+- ✅ `projects/` — Casos (Financeiro + Reference-Sa�de)
 - ✅ `reports/` — Templates + outputs
 - ✅ `scripts/` — Instalação (replicabilidade)
 
@@ -23,7 +23,7 @@ Limpar repositório mantendo apenas o essencial para o workflow Bradesco + casos
 - ✅ `.gitignore` — Git config
 - ✅ `REPOSITORY-STRUCTURE.md` — Guia da estrutura
 
-**Dentro de `projects/bradesco/`:**
+**Dentro de `projects/Financeiro/`:**
 - ✅ `scripts/` — 23 arquivos Python (workflow completo)
   - `00_MASTER_PIPELINE.py` — Orquestrador
   - `upstream_phase*.py` (7 fases)
@@ -38,7 +38,7 @@ Limpar repositório mantendo apenas o essencial para o workflow Bradesco + casos
 
 **Dentro de `reports/`:**
 - ✅ `_templates/` — Template Avanade
-- ✅ `bradesco/` — Outputs HTML públicos
+- ✅ `Financeiro/` — Outputs HTML públicos
 - ✅ `simple_server.py` — HTTP server
 - ✅ `README.md`, `QUICK-START.md`
 
@@ -56,9 +56,9 @@ Limpar repositório mantendo apenas o essencial para o workflow Bradesco + casos
 | `reports/screenshots/` | ~15 MB | Screenshots antigas |
 | `reports/generate-executive-dashboard.py` | ~20 KB | Script antigo |
 | `reports/simple-server.py` (duplicado) | ~5 KB | Versão duplicada |
-| `reports/einstein-hiae/` | ~40 MB | Case referência (mantém em projects/) |
+| `reports/Reference-Sa�de/` | ~40 MB | Case referência (mantém em projects/) |
 | `BACKLOG-48H.md`, `TIMELINE-48H.md` | ~30 KB | Histórico antigo |
-| `PROJECT-SUMMARY.md` | ~50 KB | Histórico Einstein |
+| `PROJECT-SUMMARY.md` | ~50 KB | Histórico reference |
 | `PLAYWRIGHT-*.md` | ~20 KB | Integração não usada |
 | `Makefile`, `module.yaml`, `list_screenshots.py` | ~10 KB | Não utilizados |
 
@@ -71,38 +71,38 @@ Limpar repositório mantendo apenas o essencial para o workflow Bradesco + casos
 ### Scripts Críticos — Verificados ✅
 
 ```
-✓ projects/bradesco/scripts/00_MASTER_PIPELINE.py
-✓ projects/bradesco/scripts/upstream_phase1_extract.py
-✓ projects/bradesco/scripts/upstream_phase2_inventory.py
-✓ projects/bradesco/scripts/upstream_phase3_parse.py
-✓ projects/bradesco/scripts/upstream_phase4_lineage.py
-✓ projects/bradesco/scripts/upstream_phase5_architecture.py
-✓ projects/bradesco/scripts/upstream_phase6_summary.py
-✓ projects/bradesco/scripts/upstream_phase7_validate.py
-✓ projects/bradesco/scripts/run_all_phases.py
-✓ projects/bradesco/scripts/run_midstream_phases.py
-✓ projects/bradesco/scripts/run_downstream_phases.py
-✓ projects/bradesco/scripts/generate_roi_analysis.py
-✓ projects/bradesco/scripts/generate_consolidated_report.py
-✓ projects/bradesco/scripts/generate_tabbed_report.py
-✓ projects/bradesco/scripts/normalize_outputs_to_template.py
+✓ projects/Financeiro/scripts/00_MASTER_PIPELINE.py
+✓ projects/Financeiro/scripts/upstream_phase1_extract.py
+✓ projects/Financeiro/scripts/upstream_phase2_inventory.py
+✓ projects/Financeiro/scripts/upstream_phase3_parse.py
+✓ projects/Financeiro/scripts/upstream_phase4_lineage.py
+✓ projects/Financeiro/scripts/upstream_phase5_architecture.py
+✓ projects/Financeiro/scripts/upstream_phase6_summary.py
+✓ projects/Financeiro/scripts/upstream_phase7_validate.py
+✓ projects/Financeiro/scripts/run_all_phases.py
+✓ projects/Financeiro/scripts/run_midstream_phases.py
+✓ projects/Financeiro/scripts/run_downstream_phases.py
+✓ projects/Financeiro/scripts/generate_roi_analysis.py
+✓ projects/Financeiro/scripts/generate_consolidated_report.py
+✓ projects/Financeiro/scripts/generate_tabbed_report.py
+✓ projects/Financeiro/scripts/normalize_outputs_to_template.py
 ```
 
 ### Dependências — Verificadas ✅
 
 ```
 ✓ reports/_templates/DASHBOARD-TEMPLATE-MASTER.html
-✓ projects/bradesco/outputs/  (diretório)
-✓ projects/bradesco/wave-config.yaml
-✓ projects/bradesco/context/
-✓ projects/bradesco/legacy/
+✓ projects/Financeiro/outputs/  (diretório)
+✓ projects/Financeiro/wave-config.yaml
+✓ projects/Financeiro/context/
+✓ projects/Financeiro/legacy/
 ```
 
 ### Casos Mantidos — Verificados ✅
 
 ```
-✓ projects/bradesco/    (CASE 1 — Ativo)
-✓ projects/einstein-hiae/  (CASE 2 — Referência)
+✓ projects/Financeiro/    (CASE 1 — Ativo)
+✓ projects/Reference-Sa�de/  (CASE 2 — Referência)
 ```
 
 ---
@@ -135,11 +135,11 @@ Redução: 62.5%
 ```
 imfai-ava-fabric-data-agents/
 ├── projects/
-│   ├── bradesco/           ← CASE 1 (ATIVO)
-│   └── einstein-hiae/      ← CASE 2 (REFERÊNCIA)
+│   ├── Financeiro/           ← CASE 1 (ATIVO)
+│   └── Reference-Sa�de/      ← CASE 2 (REFERÊNCIA)
 ├── reports/
 │   ├── _templates/         ← Avanade templates
-│   └── bradesco/           ← Outputs públicos
+│   └── Financeiro/           ← Outputs públicos
 ├── scripts/                ← Instalação
 ├── .venv/                  ← Python env
 ├── .github/
@@ -158,7 +158,7 @@ Quando novos cases chegarem:
 1. **Criar estrutura em `projects/`:**
    ```
    projects/novo-case/
-   ├── scripts/          ← Copiar de projects/bradesco/scripts/
+   ├── scripts/          ← Copiar de projects/Financeiro/scripts/
    ├── outputs/          ← Será criado automaticamente
    ├── legacy/           ← Dados de origem
    ├── context/          ← Contexto projeto
@@ -187,9 +187,9 @@ Quando novos cases chegarem:
 | Arquivo | Propósito |
 |---------|-----------|
 | `REPOSITORY-STRUCTURE.md` | Guia completo da estrutura |
-| `projects/bradesco/README.md` | Quick start Bradesco |
-| `projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md` | Explicação workflow |
-| `projects/bradesco/README-REPORT-GENERATION.md` | Instruções execução |
+| `projects/Financeiro/README.md` | Quick start Financeiro |
+| `projects/Financeiro/WORKFLOW_AND_ARCHITECTURE.md` | Explicação workflow |
+| `projects/Financeiro/README-REPORT-GENERATION.md` | Instruções execução |
 | `reports/README.md` | Como servir dashboards |
 
 ---
@@ -197,7 +197,7 @@ Quando novos cases chegarem:
 ## ✅ Conclusão
 
 🎉 **Repositório com sucesso:**
-- ✅ Mantém ambos os cases (Bradesco + HIAE)
+- ✅ Mantém ambos os cases (Financeiro + saude)
 - ✅ Preserva 100% do workflow (23 scripts Python)
 - ✅ Remove 140 MB de arquivos não-essenciais
 - ✅ Preparado para novos cases

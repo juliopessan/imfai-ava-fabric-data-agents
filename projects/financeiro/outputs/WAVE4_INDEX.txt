@@ -1,4 +1,4 @@
-🚀 BRADESCO WAVE 4 — AUTONOMOUS EXECUTION INDEX
+🚀 Financeiro WAVE 4 — AUTONOMOUS EXECUTION INDEX
 ================================================
 
 Execution Date: 2026-06-25 15:05–15:06 UTC
@@ -104,7 +104,7 @@ Cost WITHOUT Headroom:  $0.00877 USD
 Cost WITH Headroom:     $0.00459 USD
 Cost Savings:           $0.00417 USD (47.6% reduction)
 
-Scaling to 4-Wave Bradesco cycle:
+Scaling to 4-Wave Financeiro cycle:
   Tokens (no compression):     2,552,000
   Cost (no compression):        $0.0351 USD
   Cost (90.6% compression):     $0.0179 USD
@@ -156,19 +156,19 @@ PHASE 4: CONSOLIDATION (5.00s)
 ────────────────────────────────────────────────────────────────────────
 
 Option 1: Interactive Dashboard (Recommended)
-  Open in browser: projects/bradesco/outputs/WAVE4_AUTONOMOUS_TELEMETRY_REPORT.html
+  Open in browser: projects/Financeiro/outputs/WAVE4_AUTONOMOUS_TELEMETRY_REPORT.html
   Features: Live metrics, expandable sections, responsive design
 
 Option 2: JSON API
-  cat projects/bradesco/outputs/WAVE4_FINAL_METRICS.json | python -m json.tool
+  cat projects/Financeiro/outputs/WAVE4_FINAL_METRICS.json | python -m json.tool
   Features: Structured data, API integration ready
 
 Option 3: Technical Report
-  View: projects/bradesco/outputs/WAVE4_HEADROOM_COMPRESSION_REPORT.md
+  View: projects/Financeiro/outputs/WAVE4_HEADROOM_COMPRESSION_REPORT.md
   Features: Algorithm details, production recommendations
 
 Option 4: Portuguese Summary
-  View: projects/bradesco/outputs/WAVE4_EXECUTION_SUMMARY_PT-BR.md
+  View: projects/Financeiro/outputs/WAVE4_EXECUTION_SUMMARY_PT-BR.md
   Features: Executive summary, financial projections, next steps
 
 ────────────────────────────────────────────────────────────────────────
@@ -189,11 +189,11 @@ Token Metrics:
   (Per-phase token tracking, cost estimation)
 
 Wave 4 Configuration:
-  projects/bradesco/wave4-config.yaml
+  projects/Financeiro/wave4-config.yaml
   (Dataset: 18.2M rows, 89 schemas, 89% avg complexity)
 
 Executor Script:
-  projects/bradesco/scripts/WAVE4_AUTONOMOUS_EXECUTOR_WITH_TELEMETRY_AND_HEADROOM.py
+  projects/Financeiro/scripts/WAVE4_AUTONOMOUS_EXECUTOR_WITH_TELEMETRY_AND_HEADROOM.py
   (544 lines of production-ready Python code)
 
 ────────────────────────────────────────────────────────────────────────
@@ -262,13 +262,13 @@ Targets:
 ────────────────────────────────────────────────────────────────────────
 
 Script Location:
-  projects/bradesco/scripts/WAVE4_AUTONOMOUS_EXECUTOR_WITH_TELEMETRY_AND_HEADROOM.py
+  projects/Financeiro/scripts/WAVE4_AUTONOMOUS_EXECUTOR_WITH_TELEMETRY_AND_HEADROOM.py
 
 Output Directory:
-  projects/bradesco/outputs/
+  projects/Financeiro/outputs/
 
 Memory (Repository):
-  /memories/repo/bradesco-wave4-autonomous-execution-2026-06-25.md
+  /memories/repo/Financeiro-wave4-autonomous-execution-2026-06-25.md
 
 Questions? Check:
   - Headroom docs: https://headroom-docs.vercel.app/

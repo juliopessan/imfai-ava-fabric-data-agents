@@ -24,7 +24,7 @@ from datetime import datetime
 # ============================================================================
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-BRADESCO_OUTPUTS = PROJECT_ROOT / "projects" / "bradesco" / "outputs"
+Financeiro_OUTPUTS = PROJECT_ROOT / "projects" / "Financeiro" / "outputs"
 TEMPLATES_DIR = PROJECT_ROOT / "reports" / "_templates"
 DESIGN_TOKENS_FILE = TEMPLATES_DIR / "DESIGN-TOKENS.css"
 
@@ -165,10 +165,10 @@ def validate_layout_structure() -> List[str]:
     """Validate Orange DNA layout is present in all dashboards."""
     issues = []
     
-    if not BRADESCO_OUTPUTS.exists():
-        return ["❌ Bradesco outputs directory not found"]
+    if not Financeiro_OUTPUTS.exists():
+        return ["❌ Financeiro outputs directory not found"]
     
-    html_files = list(BRADESCO_OUTPUTS.glob("*.html"))
+    html_files = list(Financeiro_OUTPUTS.glob("*.html"))
     
     if not html_files:
         return ["❌ No HTML dashboards found"]

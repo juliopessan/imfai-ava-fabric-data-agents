@@ -1,6 +1,6 @@
 # Improvement Roadmap — Próximas 3 Waves (2026-07 até 2026-10)
 
-**Wave Anterior:** Bradesco (2026-06) — GateScore Avg: 0.91 ✅  
+**Wave Anterior:** Financeiro (2026-06) — GateScore Avg: 0.91 ✅  
 **Roadmap Período:** 2026-07 até 2026-10  
 **Gerado por:** Kai (Iteration Improvement Agent)  
 **Versão:** 1.0 Final
@@ -9,13 +9,13 @@
 
 ## 📋 Executive Summary
 
-Roadmap para implementar **9 melhorias críticas** identificadas em Bradesco, distribuídas em **3 waves** (Wave 2, Wave 3, Wave 4). Cada melhoria tem:
+Roadmap para implementar **9 melhorias críticas** identificadas em Financeiro, distribuídas em **3 waves** (Wave 2, Wave 3, Wave 4). Cada melhoria tem:
 - ✅ Owner responsável
 - ✅ Timeline estimada
 - ✅ Success metrics
 - ✅ Dependencies
 
-**Target:** GateScore Avg > 0.93 em Wave 2 (vs. 0.91 em Bradesco).
+**Target:** GateScore Avg > 0.93 em Wave 2 (vs. 0.91 em Financeiro).
 
 ---
 
@@ -34,7 +34,7 @@ Roadmap para implementar **9 melhorias críticas** identificadas em Bradesco, di
 | **Esforço** | 8 horas (dev) + 2 horas (test) = 10 horas |
 | **Owner** | DataOps Lead |
 | **Timeline** | Semanas 1-2 |
-| **Dependency** | Nenhuma (usar padrão Bradesco) |
+| **Dependency** | Nenhuma (usar padrão Financeiro) |
 | **Success Metric** | ✅ Reconciliation check passou em Gate 2. ✅ Zero false positives. |
 
 **Deliverables:**
@@ -56,7 +56,7 @@ Roadmap para implementar **9 melhorias críticas** identificadas em Bradesco, di
 | **Esforço** | 16 horas (dev) + 8 horas (test) = 24 horas |
 | **Owner** | DataOps Eng (2 pessoas) |
 | **Timeline** | Semanas 2-3 |
-| **Dependency** | Bradesco self-healing catalog review completa |
+| **Dependency** | Financeiro self-healing catalog review completa |
 | **Success Metric** | ✅ 31 total rules em production. ✅ Coverage matriz 100%. ✅ False positive rate < 2%. |
 
 **Novas regras a implementar:**
@@ -465,7 +465,7 @@ Discovery (novo — paralelo):
 
 | Wave | Primary Metric | Target | Success Criteria |
 |------|---|---|---|
-| **Wave 2** | GateScore Avg | > 0.91 | ✅ 0.91 or higher, no regression from Bradesco |
+| **Wave 2** | GateScore Avg | > 0.91 | ✅ 0.91 or higher, no regression from Financeiro |
 | **Wave 2** | Operational Efficiency | Execution time reduction | ✅ Gate 1 & 2 time -15% |
 | **Wave 3** | Production Stability | MTTR | ✅ < 30 min average |
 | **Wave 3** | Monitoring Coverage | Dashboard uptime | ✅ 99.5% availability |
@@ -545,7 +545,7 @@ Discovery (novo — paralelo):
 
 ## 📝 Checklist — Before Wave 2 Kicks Off
 
-- [ ] Lições Bradesco comunicadas ao team (30 min meeting)
+- [ ] Lições Financeiro comunicadas ao team (30 min meeting)
 - [ ] W2.1-W2.5 tasks criadas no backlog + assigned
 - [ ] Wave 2 wave-config.yaml pronto + validated
 - [ ] Dev environments setupados (Databricks + Azure resources)

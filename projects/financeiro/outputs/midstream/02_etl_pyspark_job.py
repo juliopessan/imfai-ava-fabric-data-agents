@@ -1,5 +1,5 @@
 # ============================================
-# BRADESCO — PySpark ETL Job
+# Financeiro — PySpark ETL Job
 # Source: Legacy Cloudera
 # Target: Databricks Delta Lake
 # Generated: 2026-06-23T09:49:30.635393
@@ -11,7 +11,7 @@ from pyspark.sql.types import StructType, StructField, StringType, DoubleType, D
 
 # Initialize Spark
 spark = SparkSession.builder \
-    .appName("bradesco-etl-rentabilidade") \
+    .appName("Financeiro-etl-rentabilidade") \
     .config("spark.sql.adaptive.enabled", "true") \
     .config("spark.databricks.delta.properties.defaults.enableChangeDataFeed", "true") \
     .getOrCreate()
@@ -45,16 +45,16 @@ transformed_df.write \
     .format("delta") \
     .option("mergeSchema", "true") \
     .partitionBy("periodo_mes") \
-    .option("path", "/mnt/databricks/gold/bradesco/rentabilidade_facts") \
-    .saveAsTable("bradesco_curated.analytics.rentabilidade_facts")
+    .option("path", "/mnt/databricks/gold/Financeiro/rentabilidade_facts") \
+    .saveAsTable("Financeiro_curated.analytics.rentabilidade_facts")
 
 print("✓ Wrote to Delta Lake with ACID guarantees")
 
 # 4. VALIDATE: Data quality checks
-final_count = spark.table("bradesco_curated.analytics.rentabilidade_facts").count()
+final_count = spark.table("Financeiro_curated.analytics.rentabilidade_facts").count()
 null_check = spark.sql('''
 SELECT COUNT(*) as nulls 
-FROM bradesco_curated.analytics.rentabilidade_facts 
+FROM Financeiro_curated.analytics.rentabilidade_facts 
 WHERE produto_id IS NULL OR periodo_mes IS NULL
 ''').collect()[0][0]
 

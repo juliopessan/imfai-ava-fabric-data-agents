@@ -64,7 +64,7 @@ headroom/
 
 ## 💰 ROI
 
-**Bradesco (1 project):**
+**Financeiro (1 project):**
 - Before: $27/month
 - After: $3/month (-89%)
 - Annual savings: ~$288

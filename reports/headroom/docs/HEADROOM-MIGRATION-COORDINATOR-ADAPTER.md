@@ -78,7 +78,7 @@ def start_midstream(self, wave_id: str) -> bool:
     
     try:
         # Load upstream artifacts
-        upstream_dir = self.project_root / "projects" / "bradesco" / "outputs" / "upstream"
+        upstream_dir = self.project_root / "projects" / "Financeiro" / "outputs" / "upstream"
         discovery_outputs = self._load_json_artifacts(upstream_dir)
         
         if not discovery_outputs:
@@ -148,7 +148,7 @@ def start_downstream(self, wave_id: str) -> bool:
     
     try:
         # Load midstream artifacts
-        midstream_dir = self.project_root / "projects" / "bradesco" / "outputs" / "midstream"
+        midstream_dir = self.project_root / "projects" / "Financeiro" / "outputs" / "midstream"
         codegen_outputs = self._load_json_artifacts(midstream_dir)
         
         if not codegen_outputs:
@@ -209,7 +209,7 @@ def start_documentation(self, wave_id: str) -> bool:
     
     try:
         # Load downstream artifacts
-        downstream_dir = self.project_root / "projects" / "bradesco" / "outputs" / "downstream"
+        downstream_dir = self.project_root / "projects" / "Financeiro" / "outputs" / "downstream"
         recon_outputs = self._load_json_artifacts(downstream_dir)
         
         if recon_outputs:
@@ -337,7 +337,7 @@ from enhanced_token_metrics import EnhancedTokenMetrics
 @app.route("/api/headroom/<wave_id>")
 def get_headroom_metrics(wave_id: str):
     """Serve Headroom metrics for dashboard."""
-    metrics_file = Path(f"projects/bradesco/outputs/downstream/{wave_id}_headroom_metrics.json")
+    metrics_file = Path(f"projects/Financeiro/outputs/downstream/{wave_id}_headroom_metrics.json")
     
     if metrics_file.exists():
         data = json.loads(metrics_file.read_text())
@@ -385,10 +385,10 @@ def headroom_dashboard():
    pytest src/shared/tests/test_headroom_integration.py -v
    ```
 
-5. **Deploy to Bradesco WAVE-001**
+5. **Deploy to Financeiro WAVE-001**
    ```bash
    # After successful testing
-   python src/shared/scripts/validate_gate3_artifacts.py projects/bradesco/outputs/downstream
+   python src/shared/scripts/validate_gate3_artifacts.py projects/Financeiro/outputs/downstream
    ```
 
 ---

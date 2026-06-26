@@ -47,7 +47,7 @@
 - [x] Credenciais read-only para DB (suportado: SQL, Hive, PostgreSQL, Oracle)
 
 **Avanade:**
-- [x] Tenant Bradesco provisionado
+- [x] Tenant Financeiro provisionado
 - [x] ADLS Gen2 landing zone criada
 - [x] Service Bus queue configurado
 
@@ -72,7 +72,7 @@ connector-agent --version
 
 ```yaml
 agent:
-  id: c-bradesco-001
+  id: c-Financeiro-001
   license_key: "lic-XXXXX-XXXXX"
   connector_id: c-12345
   region: eastus
@@ -157,10 +157,10 @@ curl -X POST https://api.avanade.com/v1/connectors/c-12345/sas-token \
 
 # Response:
 {
-  "sas_url": "https://avanadeadls.blob.core.windows.net/landing/bradesco-001/run-20260612-001?sv=2021-06-08&...",
+  "sas_url": "https://avanadeadls.blob.core.windows.net/landing/Financeiro-001/run-20260612-001?sv=2021-06-08&...",
   "sas_token": "sv=2021-06-08&...",
   "expiration": "2026-06-13T12:00:00Z",
-  "upload_path": "landing/bradesco-001/run-20260612-001/",
+  "upload_path": "landing/Financeiro-001/run-20260612-001/",
   "max_size_mb": 500000
 }
 
@@ -172,7 +172,7 @@ curl -X POST https://api.avanade.com/v1/connectors/c-12345/sas-token \
 ```bash
 # Store SAS URL in agent (encrypted on disk)
 connector-agent configure-upload \
-  --sas-url "https://avanadeadls.blob.core.windows.net/landing/bradesco-001/run-20260612-001?sv=2021-06-08&..." \
+  --sas-url "https://avanadeadls.blob.core.windows.net/landing/Financeiro-001/run-20260612-001?sv=2021-06-08&..." \
   --batch-size 100000 \
   --compression gzip \
   --parallel-uploads 5
@@ -385,7 +385,7 @@ helm install credential-broker avanade/credential-broker \
   --values - <<EOF
 config:
   credentials:
-    bradesco-001:
+    Financeiro-001:
       type: service_principal
       tenant_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       client_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
@@ -412,8 +412,8 @@ curl -X POST https://credential-broker.internal:8443/token/request \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {AGENT_TOKEN}" \
   -d '{
-    "credential_name": "bradesco-001",
-    "agent_id": "a-bradesco-001",
+    "credential_name": "Financeiro-001",
+    "agent_id": "a-Financeiro-001",
     "purpose": "data_extraction"
   }'
 
@@ -433,19 +433,19 @@ curl -X POST https://credential-broker.internal:8443/token/request \
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pull-agent-bradesco
+  name: pull-agent-Financeiro
   namespace: migration
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: pull-agent
-      tenant: bradesco
+      tenant: Financeiro
   template:
     metadata:
       labels:
         app: pull-agent
-        tenant: bradesco
+        tenant: Financeiro
     spec:
       serviceAccountName: avanade-agent
       containers:
@@ -456,7 +456,7 @@ spec:
         - name: CREDENTIAL_BROKER_URL
           value: "https://credential-broker.internal:8443"
         - name: CREDENTIAL_NAME
-          value: "bradesco-001"
+          value: "Financeiro-001"
         - name: STAGING_CONNECTION_STRING
           valueFrom:
             secretKeyRef:
@@ -489,14 +489,14 @@ spec:
 
 ```bash
 # View pod logs
-kubectl logs -f deployment/pull-agent-bradesco -n migration
+kubectl logs -f deployment/pull-agent-Financeiro -n migration
 
 # Output:
 # [INFO] Pull agent started
 # [INFO] Credential broker: connected
 # [INFO] Polling for jobs...
 # [INFO] Job received: job-12345
-# [INFO] Getting credentials for: bradesco-001
+# [INFO] Getting credentials for: Financeiro-001
 # [INFO] Token valid: 900s TTL
 # [INFO] Connecting to database: server.database.windows.net
 # [INFO] Reading table: [dbo].[customers] (5.4M rows)

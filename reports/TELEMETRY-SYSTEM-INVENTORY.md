@@ -177,7 +177,7 @@ docs/observability/
 
 ---
 
-### 5️⃣ **Master Pipeline com Telemetria** — `projects/bradesco/scripts/`
+### 5️⃣ **Master Pipeline com Telemetria** — `projects/Financeiro/scripts/`
 
 **Arquivo:** `00_MASTER_PIPELINE_WITH_TELEMETRY.py` (294 linhas)
 
@@ -285,7 +285,7 @@ Phase 2: Architecture Design
 from src.shared.scripts.execution_telemetry import ExecutionTelemetry
 
 telemetry = ExecutionTelemetry(
-    workflow_name="Bradesco Wave 2",
+    workflow_name="Financeiro Wave 2",
     agent_name="discovery-scout"
 )
 ```
@@ -348,7 +348,7 @@ write_trace(
     context={
         "category": "agents",
         "agent_id": "migration-coordinator",
-        "wave": "bradesco-wave2",
+        "wave": "Financeiro-wave2",
         "gate": 1,
         "tags": ["critical"]
     },

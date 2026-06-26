@@ -157,9 +157,9 @@ metric: executor_output_fidelity
 ```yaml
 rule: gate-score-regression
 trigger:
-  - Bradesco Wave 1: GateScore 0.89 🟢
-  - Bradesco Wave 2: GateScore 0.81 🟡 (7-point drop)
-  - Bradesco Wave 3: GateScore 0.76 🔴 (5-point drop)
+  - Financeiro Wave 1: GateScore 0.89 🟢
+  - Financeiro Wave 2: GateScore 0.81 🟡 (7-point drop)
+  - Financeiro Wave 3: GateScore 0.76 🔴 (5-point drop)
   - Trend: -7%, -5% (accelerating)
 severity: HIGH
 action: "Trigger iteration-improvement agent. Likely causes: (a) discovery rush, (b) STTM instability, (c) context bloat"
@@ -275,7 +275,7 @@ def mark_wave_complete(wave: str, results: dict):
 ```json
 {
   "timestamp": "2026-06-18T14:35:22.123Z",
-  "wave": "bradesco_wave_2",
+  "wave": "Financeiro_wave_2",
   "gate": 1,
   "agent_id": "data-architect",
   "agent_role": "Defines target architecture",
@@ -340,7 +340,7 @@ def mark_wave_complete(wave: str, results: dict):
 
 **Phase 4 (1 week):**
 10. Gamification (badges, trends)
-11. End-to-end example (re-analyze bradesco-wave-2 with coach)
+11. End-to-end example (re-analyze Financeiro-wave-2 with coach)
 
 ---
 
@@ -354,11 +354,11 @@ pip install -r requirements-coach.txt
 
 # Run analysis on completed wave
 python -m src.shared.coaches.cli \
-  --wave bradesco_wave_2 \
+  --wave Financeiro_wave_2 \
   --gate all \
   --action analyze
 
-# Output: .coach/reports/bradesco-wave-2-analysis.html
+# Output: .coach/reports/Financeiro-wave-2-analysis.html
 # Opens in browser → timeline, costs, anti-patterns, recommendations
 ```
 
@@ -396,7 +396,7 @@ def mark_wave_complete(wave: str):
 - [ ] Implement `skill_finder.py`
 - [ ] Add Coach reports to Wave output
 - [ ] Document CLI usage in `docs/`
-- [ ] Test on bradesco Wave 2 historical data
+- [ ] Test on Financeiro Wave 2 historical data
 - [ ] Get feedback from Orion (migration-coordinator) + Winston (data-architect)
 
 ---
@@ -451,7 +451,7 @@ action: |
   4. Update Gate 2 decision log with rationale
 
 examples:
-  - wave: "bradesco_wave_1"
+  - wave: "Financeiro_wave_1"
     gate_1_entities: 127
     gate_2_sttm_mapped: 98
     gap: 29 (23%)
@@ -465,7 +465,7 @@ examples:
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│ Coach Report: Bradesco Wave 2                              │
+│ Coach Report: Financeiro Wave 2                              │
 ├────────────────────────────────────────────────────────────┤
 │                                                             │
 │  📊 WAVE HEALTH                                             │

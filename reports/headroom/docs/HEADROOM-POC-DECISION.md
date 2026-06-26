@@ -127,7 +127,7 @@ Simulando fluxo real: discovery-scout → data-architect → code-generator
 
 ## 3. Financial Impact
 
-### 3.1 Bradesco Case (Realistic Scenario)
+### 3.1 Financeiro Case (Realistic Scenario)
 
 **Monthly Baseline:** 18,000 tokens  
 **Compression Ratio (Multi-handoff cascade):** 87.5%
@@ -140,13 +140,13 @@ Simulando fluxo real: discovery-scout → data-architect → code-generator
 | **Economia (50%)** | — | **$0.0135 USD/mês** | **$0.162 USD/ano** |
 | **Economia (87.5%)** | — | **$0.024 USD/mês** | **$0.283 USD/ano** |
 
-**Nota:** Valores baixos em Bradesco porque 18K tokens/mês é base. Scale com 10+ projects = $3–5K/ano economizado
+**Nota:** Valores baixos em Financeiro porque 18K tokens/mês é base. Scale com 10+ projects = $3–5K/ano economizado
 
-### 3.2 Scale (10 Projects como Bradesco)
+### 3.2 Scale (10 Projects como Financeiro)
 
 | Scale | Cost/mês (baseline) | Cost/mês (50% comp) | Cost/mês (87.5% comp) | Annual Savings |
 |-------|---|---|---|---|
-| Bradesco (1 project) | $0.27 | $0.135 | $0.030 | $0.162–0.283/ano |
+| Financeiro (1 project) | $0.27 | $0.135 | $0.030 | $0.162–0.283/ano |
 | 10 projects | $2.70 | $1.35 | $0.30 | **$2.4–3.6/ano** |
 | 100 projects | $27 | $13.50 | $3.00 | **$24–36/ano** |
 

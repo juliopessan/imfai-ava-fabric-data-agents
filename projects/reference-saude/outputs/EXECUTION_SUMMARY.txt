@@ -35,11 +35,11 @@
   ├─ AVANADE_DESIGN_TOKENS.css ................. ✅ 4.4 KB
   ├─ AVANADE_COMPONENTS.css .................... ✅ 8.3 KB
   ├─ PORTAL_INTERACTIONS.js .................... ✅ 21.7 KB
-  └─ EINSTEIN_KPI_PORTAL_CONTENT.json .......... ✅ 42 KB
+  └─ reference_KPI_PORTAL_CONTENT.json .......... ✅ 42 KB
 
   DOCUMENTATION & TOOLS
   ├─ PORTAL_README.md .......................... ✅ Complete
-  ├─ EINSTEIN_PROJECT_COMPLETION_SUMMARY.md ... ✅ Complete
+  ├─ reference_PROJECT_COMPLETION_SUMMARY.md ... ✅ Complete
   ├─ DELIVERABLES_INDEX.md ..................... ✅ Complete
   ├─ generate_kpi_portal.py .................... ✅ Reusable
   └─ orchestrator.py ........................... ✅ Executed
@@ -123,10 +123,10 @@
 ═══════════════════════════════════════════════════════════════════════════════
 
   Location: c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents\
-            projects\einstein-hiae\outputs\
+            projects\Reference-Sa�de\outputs\
 
   Start Server:
-  $ cd projects/einstein-hiae/outputs
+  $ cd projects/Reference-Sa�de/outputs
   $ python -m http.server 8000
 
   Open Browser:
@@ -149,10 +149,10 @@
   ├── AVANADE_DESIGN_TOKENS.css ................. Design tokens (4.4 KB)
   ├── AVANADE_COMPONENTS.css .................... Components (8.3 KB)
   ├── PORTAL_INTERACTIONS.js .................... Interactivity (21.7 KB)
-  ├── EINSTEIN_KPI_PORTAL_CONTENT.json ......... Content EN/PT (42 KB)
+  ├── reference_KPI_PORTAL_CONTENT.json ......... Content EN/PT (42 KB)
   ├── PORTAL_README.md .......................... Documentation
   ├── DELIVERABLES_INDEX.md ..................... File inventory
-  ├── EINSTEIN_PROJECT_COMPLETION_SUMMARY.md ... Project report
+  ├── reference_PROJECT_COMPLETION_SUMMARY.md ... Project report
   ├── phase-1/DISCOVERY-REPORT.md
   ├── phase-2/ARCHITECTURE-DESIGN.md
   ├── phase-2/DATA-MODEL.md
@@ -174,7 +174,7 @@
   Step 7: Language toggle verified .............. ✅ EN ↔ PT working
   Step 8: Documentation completed ............... ✅ Complete
 
-  TOTAL AUTONOMOUS EXECUTION: ~11 minutes (vs Bradesco 4+ weeks)
+  TOTAL AUTONOMOUS EXECUTION: ~11 minutes (vs Financeiro 4+ weeks)
 
 
 ✅ QUALITY ASSURANCE CHECKLIST
@@ -192,10 +192,10 @@
   [✅] All gates passed (scores: 0.89/0.92/0.93)
 
 
-🎯 COMPARISON: BRADESCO vs EINSTEIN-HIAE
+🎯 COMPARISON: Financeiro vs Reference-Sa�de
 ═══════════════════════════════════════════════════════════════════════════════
 
-                    BRADESCO              EINSTEIN-HIAE
+                    Financeiro              Reference-Sa�de
   ─────────────────────────────────────────────────────────
   Execution Mode    Phased+Guidance       100% Autonomous
   Timeline          4+ weeks              11 minutes
@@ -242,7 +242,7 @@
      → 100% hands-free execution reduced timeline from weeks to minutes
 
   2. Healthcare Domain Specifics Matter
-     → Early HIAE taxonomy mapping saved 30% rework
+     → Early saude taxonomy mapping saved 30% rework
 
   3. Medallion Architecture Advantage
      → Bronze/Silver/Gold separation improved Fabric performance 60x
@@ -274,7 +274,7 @@
 
   Questions? Read [PORTAL_README.md](./outputs/PORTAL_README.md)
   Issues?   Check browser console (F12) for errors
-  Customize? Edit AVANADE_DESIGN_TOKENS.css or EINSTEIN_KPI_PORTAL_CONTENT.json
+  Customize? Edit AVANADE_DESIGN_TOKENS.css or reference_KPI_PORTAL_CONTENT.json
 
 
 ═══════════════════════════════════════════════════════════════════════════════

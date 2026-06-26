@@ -123,7 +123,7 @@ gate_result = {
   "trace_id": "a7f3-92c1-4e8b-11d7-5fk2m9p0",
   "span_id": "parent-perceive-001",
   "agent": "data-modeler",
-  "wave": "bradesco-g1",
+  "wave": "Financeiro-g1",
   "gate": 2,
   "timestamp": "2026-06-16T14:30:42Z",
   "events": [

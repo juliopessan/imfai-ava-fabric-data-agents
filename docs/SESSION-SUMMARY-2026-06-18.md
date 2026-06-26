@@ -117,12 +117,12 @@ if pattern:
 ## Integration Timeline (Recommended)
 
 ### Sprint 1 (2 weeks) — Telemetry + First Dashboard
-**Goal:** Prove concept with bradesco Wave 2 historical data
+**Goal:** Prove concept with Financeiro Wave 2 historical data
 
 - Week 1 (June 25–28):
   - [ ] Hook telemetry into `migration-coordinator.spawn_agent()`
   - [ ] Create `.coach/rules/*.yaml` for all 6 anti-patterns
-  - [ ] Run on bradesco Wave 2 historical executions
+  - [ ] Run on Financeiro Wave 2 historical executions
   - [ ] Validate signal quality (do alerts make sense?)
 
 - Week 2 (July 1–5):
@@ -211,7 +211,7 @@ cat .coach/telemetry-schema.json | jq .
 - Decide on hook point for telemetry (which file, which method?)
 - Estimate Sprint 1 scope (telemetry integration + basic dashboard)
 - Assign owner (Coach module maintenance)
-- Schedule first test run on bradesco Wave 2 history
+- Schedule first test run on Financeiro Wave 2 history
 
 ---
 

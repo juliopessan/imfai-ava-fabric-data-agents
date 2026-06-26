@@ -1,8 +1,8 @@
-# Bradesco Data Platform Migration — Complete Project
+# Financeiro Data Platform Migration — Complete Project
 
 > **Autonomous end-to-end migration orchestration from Cloudera to Databricks**
 > 
-> Single entry point: `python projects/bradesco/scripts/00_MASTER_PIPELINE.py`
+> Single entry point: `python projects/Financeiro/scripts/00_MASTER_PIPELINE.py`
 >
 > **📁 Organization:** All scripts in `scripts/`, all outputs in `outputs/`  
 > **🧠 Memory System**: Project knowledge captured in `/memories/repo/MEMORY-INDEX.md`  
@@ -10,7 +10,7 @@
 
 ## 🎯 Project Overview
 
-This project implements a **complete data migration pipeline** for the Bradesco financial institution:
+This project implements a **complete data migration pipeline** for the Financeiro financial institution:
 - **Source:** Cloudera (legacy on-premises data platform)
 - **Target:** Databricks (cloud-native data lakehouse on Azure)
 - **Scope:** Financial data, customer segments, transaction ledgers
@@ -47,7 +47,7 @@ cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
 python -m pip install markdown pyyaml
 
 # Run the master pipeline (autonomous A→F)
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Runtime:** ~10–20 minutes (depends on legacy data volume)
@@ -63,7 +63,7 @@ python projects/bradesco/scripts/00_MASTER_PIPELINE.py
 ### View Results
 ```powershell
 # Serve dashboards locally
-python -m http.server 8000 --directory projects/bradesco/outputs
+python -m http.server 8000 --directory projects/Financeiro/outputs
 
 # Open browser to:
 # http://localhost:8000/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
@@ -109,7 +109,7 @@ All results in `outputs/teste_26062026_*/`:
 **View Results:**
 ```powershell
 # Open parallel optimization dashboard
-Start-Process "projects/bradesco/outputs/teste_26062026_parallel_optimized/BRADESCO_PARALLEL_DASHBOARD.html"
+Start-Process "projects/Financeiro/outputs/teste_26062026_parallel_optimized/Financeiro_PARALLEL_DASHBOARD.html"
 ```
 
 ---
@@ -117,12 +117,12 @@ Start-Process "projects/bradesco/outputs/teste_26062026_parallel_optimized/BRADE
 ## 📁 Project Structure
 
 ```
-projects/bradesco/
+projects/Financeiro/
 ├── 📂 scripts/                      # ✅ All executable scripts
 │   ├── 00_MASTER_PIPELINE.py       # Master orchestrator
-│   ├── BRADESCO_WAVES_1-4_AUTONOMOUS_ORCHESTRATOR.py
-│   ├── BRADESCO_LEGACY_INTEGRATED_AUTONOMOUS_ORCHESTRATOR.py
-│   └── BRADESCO_WAVES_1-4_PARALLEL_OPTIMIZED.py
+│   ├── Financeiro_WAVES_1-4_AUTONOMOUS_ORCHESTRATOR.py
+│   ├── Financeiro_LEGACY_INTEGRATED_AUTONOMOUS_ORCHESTRATOR.py
+│   └── Financeiro_WAVES_1-4_PARALLEL_OPTIMIZED.py
 │
 ├── 📂 outputs/                      # ✅ All generated deliverables
 │   ├── 00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
@@ -175,7 +175,7 @@ projects/bradesco/
 ## 📂 Project Structure
 
 ```
-projects/bradesco/
+projects/Financeiro/
 ├── docs/                                         # ⭐ NEW: 8 technical guides
 │   ├── README.md                                 # Documentation index
 │   ├── WIKI_HOME.md                              # Central navigation hub
@@ -266,7 +266,7 @@ projects/bradesco/
 | Dashboard | Type | Purpose | File |
 |-----------|------|---------|------|
 | **Consolidated Report** | 📋 Tabbed | 3-tier (Upstream/Mid/Downstream) | [00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html](outputs/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html) |
-| **Bradesco Migration** | 📊 Operations | Migration status & metrics | [BRADESCO_MIGRATION_DASHBOARD.html](outputs/BRADESCO_MIGRATION_DASHBOARD.html) |
+| **Financeiro Migration** | 📊 Operations | Migration status & metrics | [Financeiro_MIGRATION_DASHBOARD.html](outputs/Financeiro_MIGRATION_DASHBOARD.html) |
 | **Data & AI Operations** | 🤖 Premium | Data pipeline + observability | [DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html](outputs/DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html) |
 | **Telemetry & Monitoring** | 📡 Observability | Real-time metrics | [TELEMETRY_DEMO_DASHBOARD.html](outputs/TELEMETRY_DEMO_DASHBOARD.html) |
 | **Blueprint Patterns** | 🔌 Technical | 3 connection patterns (A/B/C) | [BLUEPRINT_CONNECTION_PATTERNS.html](outputs/BLUEPRINT_CONNECTION_PATTERNS.html) |
@@ -313,17 +313,17 @@ For step-by-step control, see `README-REPORT-GENERATION.md`:
 
 ```powershell
 # Run individual phases
-python projects/bradesco/scripts/run_all_phases.py           # Upstream
-python projects/bradesco/scripts/run_midstream_phases.py     # Midstream
-python projects/bradesco/scripts/run_downstream_phases.py    # Downstream
+python projects/Financeiro/scripts/run_all_phases.py           # Upstream
+python projects/Financeiro/scripts/run_midstream_phases.py     # Midstream
+python projects/Financeiro/scripts/run_downstream_phases.py    # Downstream
 
 # Generate reports
-python projects/bradesco/scripts/generate_consolidated_report.py
-python projects/bradesco/scripts/generate_roi_analysis.py
-python projects/bradesco/scripts/generate_tabbed_report.py
+python projects/Financeiro/scripts/generate_consolidated_report.py
+python projects/Financeiro/scripts/generate_roi_analysis.py
+python projects/Financeiro/scripts/generate_tabbed_report.py
 
 # Normalize & archive
-python projects/bradesco/scripts/normalize_outputs_to_template.py
+python projects/Financeiro/scripts/normalize_outputs_to_template.py
 ```
 
 ---
@@ -332,7 +332,7 @@ python projects/bradesco/scripts/normalize_outputs_to_template.py
 
 Required fields:
 ```yaml
-project_name: Bradesco
+project_name: Financeiro
 discovery_owner: john.doe@avanade.com
 source_platform: cloudera
 target_platform: databricks
@@ -356,11 +356,11 @@ scope:
 
 To migrate another project (e.g., Reference-Saude):
 
-1. Create `projects/einstein-hiae/`
-2. Copy `projects/bradesco/scripts/` to new project
-3. Create `projects/einstein-hiae/wave-config.yaml`
-4. Place legacy data in `projects/einstein-hiae/legacy/`
-5. Run: `python projects/einstein-hiae/scripts/00_MASTER_PIPELINE.py`
+1. Create `projects/Reference-Sa�de/`
+2. Copy `projects/Financeiro/scripts/` to new project
+3. Create `projects/Reference-Sa�de/wave-config.yaml`
+4. Place legacy data in `projects/Reference-Sa�de/legacy/`
+5. Run: `python projects/Reference-Sa�de/scripts/00_MASTER_PIPELINE.py`
 
 All logic adapts automatically based on configuration.
 

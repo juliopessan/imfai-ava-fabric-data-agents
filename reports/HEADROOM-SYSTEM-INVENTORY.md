@@ -166,7 +166,7 @@ Final: 87.5% de economia de tokens comparado ao original
 
 ## 💰 ROI & Cost Savings
 
-### Bradesco (1 projeto)
+### Financeiro (1 projeto)
 
 **Consumo Mensal Atual:**
 ```
@@ -432,7 +432,7 @@ With Headroom:
 | Token reduction | > 70% | 87.5% (cascade) | ✅ PASS |
 | Latency (compress) | < 500ms | 98ms | ✅ PASS |
 | CCR test (recoverable) | 100% | 100% | ✅ PASS |
-| Cost savings annual (Bradesco) | > $200 | $243 | ✅ PASS |
+| Cost savings annual (Financeiro) | > $200 | $243 | ✅ PASS |
 | Microsoft compatible | Yes | Yes (mock) | ✅ PASS |
 
 ---

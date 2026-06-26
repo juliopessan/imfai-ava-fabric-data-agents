@@ -1,15 +1,15 @@
-# Bradesco Project — TIER 1 Validation Results
+# Financeiro Project — TIER 1 Validation Results
 
 **Validation Date:** 2026-06-09T09:05:45  
-**Project:** Bradesco  
-**Validator:** run_bradesco_tier1_validation.py  
+**Project:** Financeiro  
+**Validator:** run_Financeiro_tier1_validation.py  
 **Status:** 🔴 **ALL GATES BLOCKED** (Expected — project requires artifact generation)
 
 ---
 
 ## Executive Summary
 
-The Bradesco project has been validated against DMF TIER 1 governance standards. **All three gates are currently blocked** due to missing required artifacts. This is normal for a new project and indicates the next phase: artifact generation and gate progression.
+The Financeiro project has been validated against DMF TIER 1 governance standards. **All three gates are currently blocked** due to missing required artifacts. This is normal for a new project and indicates the next phase: artifact generation and gate progression.
 
 **Overall Recommendation:** ✅ **PROCEED WITH ARTIFACT GENERATION**
 - Wave config needs 3 missing fields
@@ -30,7 +30,7 @@ The Bradesco project has been validated against DMF TIER 1 governance standards.
 - ❌ `entities` — List of data entities in wave
 - ❌ `gates` — Gate progression flags (gate1, gate2, gate3)
 
-**Action:** Update `projects/bradesco/wave-config.yaml` with:
+**Action:** Update `projects/Financeiro/wave-config.yaml` with:
 ```yaml
 discovery_owner: "[team member name]"
 entities:
@@ -81,7 +81,7 @@ gates:
 **Example risk_assessment.json:**
 ```json
 {
-  "wave_id": "bradesco-wave-001",
+  "wave_id": "Financeiro-wave-001",
   "risks": [
     {
       "id": "R001",
@@ -137,7 +137,7 @@ gates:
 ```
 # Data Contracts
 
-## Contract: Bradesco Customers
+## Contract: Financeiro Customers
 - **SLA Availability:** 99.9%
 - **RTO:** 4 hours
 - **RPO:** 15 minutes
@@ -175,7 +175,7 @@ The `validation_reconciliation.json` file is **MISSING AND CRITICAL** for Gate 3
 
 ```json
 {
-  "wave_id": "bradesco-wave-001",
+  "wave_id": "Financeiro-wave-001",
   "reconciliation": {
     "row_count_validation": "PASSED",
     "schema_validation": "PASSED",
@@ -224,7 +224,7 @@ Estimated Timeline:
 
 ```bash
 # After completing Gate 1 artifacts
-python run_bradesco_tier1_validation.py
+python run_Financeiro_tier1_validation.py
 
 # Expected output shows:
 # Gate 1 GateScore: 0.XX (conditional or higher)
@@ -234,14 +234,14 @@ python run_bradesco_tier1_validation.py
 
 ```bash
 # Run just Gate 1 validation
-python -c "from src.shared.scripts.validate_gate1_artifacts import Gate1ArtifactsValidator; v = Gate1ArtifactsValidator('projects/bradesco/outputs/upstream'); r = v.validate(); print(f'Gate 1: {r.completude:.0%} complete')"
+python -c "from src.shared.scripts.validate_gate1_artifacts import Gate1ArtifactsValidator; v = Gate1ArtifactsValidator('projects/Financeiro/outputs/upstream'); r = v.validate(); print(f'Gate 1: {r.completude:.0%} complete')"
 ```
 
 ### View Detailed JSON Results
 
 ```bash
 # Full results saved after each run
-cat reports/bradesco/tier1-validation-results.json | python -m json.tool
+cat reports/Financeiro/tier1-validation-results.json | python -m json.tool
 ```
 
 ---
@@ -250,7 +250,7 @@ cat reports/bradesco/tier1-validation-results.json | python -m json.tool
 
 Each gate is **approved** when:
 
-| Criterion | Requirement | Current Bradesco | Status |
+| Criterion | Requirement | Current Financeiro | Status |
 |-----------|-------------|------------------|--------|
 | Completude | ≥ 90% | 0% | ❌ |
 | Quality | ≥ 0.70 | 0.00 | ❌ |
@@ -266,7 +266,7 @@ Each gate is **approved** when:
 
 - [TIER1-COMPLETION-REPORT.md](TIER1-COMPLETION-REPORT.md) — Technical documentation of validators
 - [TIER1-FINAL-SUMMARY.md](TIER1-FINAL-SUMMARY.md) — Implementation summary + next steps
-- [BRADESCO-TIER1-EXECUTION-PLAN.md](BRADESCO-TIER1-EXECUTION-PLAN.md) — Execution guide
+- [Financeiro-TIER1-EXECUTION-PLAN.md](Financeiro-TIER1-EXECUTION-PLAN.md) — Execution guide
 
 ---
 
@@ -275,11 +275,11 @@ Each gate is **approved** when:
 ### By EOD Today
 1. ✅ Review this report with stakeholders
 2. ✅ Assign artifact generation owners
-3. ✅ Create `projects/bradesco/wave-config.yaml` updates
+3. ✅ Create `projects/Financeiro/wave-config.yaml` updates
 
 ### By EOW (This Friday)
 1. ⏳ Generate Gate 1 (5 required artifacts)
-2. ⏳ Re-run validation: `python run_bradesco_tier1_validation.py`
+2. ⏳ Re-run validation: `python run_Financeiro_tier1_validation.py`
 3. ⏳ Report Gate 1 progress
 
 ### For Week 2

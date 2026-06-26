@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Padroniza todos os arquivos HTML com a estrutura Avanade do Bradesco.
+Padroniza todos os arquivos HTML com a estrutura Avanade do Financeiro.
 Aplica o template mestre a todos os dashboards.
 """
 
@@ -429,22 +429,22 @@ def main():
             'project': 'Avanade Data Migration Factory'
         },
         {
-            'path': reports_dir / 'bradesco' / 'ROI_ANALYSIS_VISUAL.html',
-            'title': '💰 ROI Analysis - Bradesco',
+            'path': reports_dir / 'Financeiro' / 'ROI_ANALYSIS_VISUAL.html',
+            'title': '💰 ROI Analysis - Financeiro',
             'subtitle': 'Cost-Benefit Analysis & Savings',
-            'project': 'Bradesco Data Migration'
+            'project': 'Financeiro Data Migration'
         },
         {
-            'path': reports_dir / 'bradesco' / 'bradesco-autonomous-test-report.html',
-            'title': '✅ Autonomous Test Report - Bradesco',
+            'path': reports_dir / 'Financeiro' / 'Financeiro-autonomous-test-report.html',
+            'title': '✅ Autonomous Test Report - Financeiro',
             'subtitle': 'Full Migration Testing & Validation',
-            'project': 'Bradesco Data Migration'
+            'project': 'Financeiro Data Migration'
         },
         {
-            'path': reports_dir / 'bradesco' / 'bradesco-3tier-dashboard.html',
-            'title': '🏗️ 3-Tier Migration Dashboard - Bradesco',
+            'path': reports_dir / 'Financeiro' / 'Financeiro-3tier-dashboard.html',
+            'title': '🏗️ 3-Tier Migration Dashboard - Financeiro',
             'subtitle': 'Upstream · Midstream · Downstream',
-            'project': 'Bradesco Data Migration'
+            'project': 'Financeiro Data Migration'
         },
     ]
     

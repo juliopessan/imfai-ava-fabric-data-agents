@@ -1,4 +1,4 @@
-# 📚 Bradesco Data Migration Suite — Documentação Completa
+# 📚 Financeiro Data Migration Suite — Documentação Completa
 
 > Centro de conhecimento técnico, operacional e comercial para o suite de agentes de migração de dados.
 
@@ -32,7 +32,7 @@ Central de navegação com índices, links rápidos e tabelas de referência.
 | **Proposta Comercial** | ROI, timeline, value (1-page) | Executivos | [COMMERCIAL_PROPOSAL_ONE_PAGE.html](../COMMERCIAL_PROPOSAL_ONE_PAGE.html) |
 | **Calculadora de Esforço** | Estimativa de horas/custos | PMs, Executivos | [EFFORT_CALCULATOR.html](../EFFORT_CALCULATOR.html) |
 | **Dashboard Consolidado** | 3-view (Upstream/Mid/Downstream) | Executivos, Ops | [00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html](../00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html) |
-| **Dashboard Bradesco** | Visão executiva | Stakeholders | [BRADESCO_MIGRATION_DASHBOARD.html](../BRADESCO_MIGRATION_DASHBOARD.html) |
+| **Dashboard Financeiro** | Visão executiva | Stakeholders | [Financeiro_MIGRATION_DASHBOARD.html](../Financeiro_MIGRATION_DASHBOARD.html) |
 | **Dashboard Premium** | Operações de dados e IA | Devs, Ops | [DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html](../DATA_AI_OPERATIONS_PREMIUM_DASHBOARD.html) |
 | **Dashboard Factory** | Fábrica de dados | Arquitetos | [EXECUTIVE_DATA_FACTORY_DASHBOARD.html](../EXECUTIVE_DATA_FACTORY_DASHBOARD.html) |
 | **Dashboard Telemetria** | Métricas de observabilidade | SRE, Ops | [TELEMETRY_DEMO_DASHBOARD.html](../TELEMETRY_DEMO_DASHBOARD.html) |

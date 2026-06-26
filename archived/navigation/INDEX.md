@@ -50,7 +50,7 @@ imfai-ava-fabric-data-agents/
 │   └── README.md
 │
 ├── 📂 projects/                             # Projetos de Migração (Reorganizado!)
-│   ├── 📂 bradesco/
+│   ├── 📂 Financeiro/
 │   │   ├── 📂 scripts/                      # ✅ Todos scripts centralizados
 │   │   ├── 📂 outputs/                      # ✅ Todos outputs aqui
 │   │   ├── 📂 state/                        # Configuração & logs
@@ -89,7 +89,7 @@ imfai-ava-fabric-data-agents/
 │
 ├── 📂 reports/                              # Relatórios Dinâmicos
 │   ├── 📂 _templates/
-│   ├── 📂 bradesco/
+│   ├── 📂 Financeiro/
 │   └── README.md
 │
 ├── 📂 scripts/                              # Scripts Legados
@@ -145,22 +145,22 @@ python validate_repo_structure.py
 
 ### 3. Executar um Projeto (30-50 segundos)
 
-#### Opção A: Bradesco Migration
+#### Opção A: Financeiro Migration
 ```bash
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
-# Outputs: projects/bradesco/outputs/
+python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
+# Outputs: projects/Financeiro/outputs/
 ```
 
-#### Opção B: Einstein-HIAE KPI Portal
+#### Opção B: Reference-Sa�de KPI Portal
 ```bash
-python projects/einstein-hiae/scripts/generate_kpi_portal.py
-# Portal gerado em: projects/einstein-hiae/outputs/KPI_PORTAL_MASTER.html
+python projects/Reference-Sa�de/scripts/generate_kpi_portal.py
+# Portal gerado em: projects/Reference-Sa�de/outputs/KPI_PORTAL_MASTER.html
 ```
 
 ### 4. Visualizar Resultados (30 segundos)
 ```bash
 # Serve os outputs localmente
-python -m http.server 8000 --directory projects/einstein-hiae/outputs
+python -m http.server 8000 --directory projects/Reference-Sa�de/outputs
 # Abra: http://localhost:8000/KPI_PORTAL_MASTER.html
 ```
 
@@ -219,9 +219,9 @@ Gate Score >= 0.85 required for promotion
 ### Para Começar com um Projeto
 | Recurso | Localização | Tempo |
 |---------|-------------|-------|
-| Bradesco Setup | [`projects/bradesco/README.md`](./projects/bradesco/README.md) | 5 min |
-| Einstein-HIAE Portal | [`projects/einstein-hiae/README.md`](./projects/einstein-hiae/README.md) | 5 min |
-| Scripts Reference | [`projects/einstein-hiae/scripts/README.md`](./projects/einstein-hiae/scripts/README.md) | 10 min |
+| Financeiro Setup | [`projects/Financeiro/README.md`](./projects/Financeiro/README.md) | 5 min |
+| Reference-Sa�de Portal | [`projects/Reference-Sa�de/README.md`](./projects/Reference-Sa�de/README.md) | 5 min |
+| Scripts Reference | [`projects/Reference-Sa�de/scripts/README.md`](./projects/Reference-Sa�de/scripts/README.md) | 10 min |
 | Multi-Platform Wave | [`projects/multi-platform-migration/README.md`](./projects/multi-platform-migration/README.md) | 10 min |
 
 ### Para Usar Ferramentas
@@ -274,8 +274,8 @@ python tools/validation/WORKFLOW-INTEGRATION-CHECK.py
 # Validação completa (v2)
 python tools/validation/WORKFLOW-INTEGRATION-CHECK-v2.py
 
-# Validação específica (Bradesco)
-python tools/validation/run_bradesco_tier1_validation.py
+# Validação específica (Financeiro)
+python tools/validation/run_Financeiro_tier1_validation.py
 ```
 
 ### Explorar Governança

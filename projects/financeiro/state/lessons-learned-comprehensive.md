@@ -1,6 +1,6 @@
-# Lições Aprendidas — Bradesco Data Migration (Comprehensive)
+# Lições Aprendidas — Financeiro Data Migration (Comprehensive)
 
-**Wave:** bradesco-einstein-2026-06  
+**Wave:** Financeiro-reference-2026-06  
 **Data:** 2026-06-16  
 **Status:** ✅ 3/3 Gates Aprovados (GateScore Avg: 0.91)  
 **Gerado por:** Kai (Iteration Improvement Agent)  
@@ -93,7 +93,7 @@ Migração autônoma bem-sucedida de **Cloudera → Databricks** com **100% apro
 | **Self-Healing Rules** | Auto-fix para schema mismatches, row count deltas | 23 issues resolvidas automaticamente |
 | **Consolidated Reporting** | Agregação de logs de múltiplos agents | Auditoria 100% rastreável |
 
-**Insight:** Padrões reutilizáveis — não são específicos de Bradesco, funcionam para qualquer legacy migration.
+**Insight:** Padrões reutilizáveis — não são específicos de Financeiro, funcionam para qualquer legacy migration.
 
 **Replicar em:** Template orchestration em `src/shared/patterns/` para Wave 2/3/4+.
 
@@ -284,7 +284,7 @@ Wave 3 (início): Continuous monitoring + incident playbooks + rollback automati
 
 **O que criar:** Library de padrões orchestration que funcionam para qualquer legacy migration.
 
-| Padrão | Bradesco Implementado? | Reutilização | Candidato Wave 2? |
+| Padrão | Financeiro Implementado? | Reutilização | Candidato Wave 2? |
 |--------|----------------------|----------------|----------------|
 | Discovery Parallelization | ✅ | Sim | ✅ Usar direto |
 | Gate-based Validation | ✅ | Sim | ✅ Usar direto |
@@ -337,7 +337,7 @@ Time = (artifacts × 0.04) + (contracts × 0.19) + (rows_millions × 3.6)
 | Abordagem | Tempo | Risco Humano | Custo Estimado |
 |-----------|-------|--------------|----------------|
 | **Manual (legacy)** | 480 min (~8h) | Alto (múltiplas reviews) | $12,000 (8h × 3 roles) |
-| **Orchestrated (Bradesco)** | 120 min (~2h) | Baixo (rules-based) | $3,000 (2h engineering) |
+| **Orchestrated (Financeiro)** | 120 min (~2h) | Baixo (rules-based) | $3,000 (2h engineering) |
 | **Savings** | **-75%** | **-85%** | **-75%** ✅ |
 
 **ROI Calculation:**
@@ -379,7 +379,7 @@ Time = (artifacts × 0.04) + (contracts × 0.19) + (rows_millions × 3.6)
 
 ## 6️⃣ Checklist para Wave 2 Preparation
 
-- [ ] Copiar `orchestration-patterns/` de Bradesco para template shared
+- [ ] Copiar `orchestration-patterns/` de Financeiro para template shared
 - [ ] Criar `reconciliation-sampler.py` (teste 10K linhas em Gate 2)
 - [ ] Expandir `self-healing-catalog.py` com 8 novas regras
 - [ ] Implementar `@timing_decorator` em todos handlers
@@ -387,17 +387,17 @@ Time = (artifacts × 0.04) + (contracts × 0.19) + (rows_millions × 3.6)
 - [ ] Configurar stakeholder checkpoint automático em migration-coordinator
 - [ ] Documentar incident playbook com runbooks (5 cenários)
 - [ ] Setup continuous monitoring dashboard skeleton
-- [ ] Schedule retrospective com team (lições Bradesco)
+- [ ] Schedule retrospective com team (lições Financeiro)
 - [ ] Update wave-config validation para enforce assumptions.md
 
 ---
 
 ## 📝 Referências
 
-- **Orchestration Metrics:** `projects/bradesco/state/ORCHESTRATION_METRICS.json`
-- **Gate Decisions:** `projects/bradesco/state/gate{1,2,3}-decision.md`
-- **Execution Log:** `projects/bradesco/state/orchestration-execution-log.json`
-- **Wave Status:** `projects/bradesco/state/wave-status-consolidated.md`
+- **Orchestration Metrics:** `projects/Financeiro/state/ORCHESTRATION_METRICS.json`
+- **Gate Decisions:** `projects/Financeiro/state/gate{1,2,3}-decision.md`
+- **Execution Log:** `projects/Financeiro/state/orchestration-execution-log.json`
+- **Wave Status:** `projects/Financeiro/state/wave-status-consolidated.md`
 
 ---
 

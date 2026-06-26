@@ -12,14 +12,14 @@
 
 | Relatório | Tipo | Status | Tamanho | Descrição |
 |-----------|------|--------|---------|-----------|
-| [`bradesco-3tier-dashboard.html`](bradesco/bradesco-3tier-dashboard.html) | Dashboard | ✅ Produção | 22 KB | Visualização 3-tier (Upstream + Midstream + Downstream) |
-| [`bradesco-autonomous-test-report.html`](bradesco/bradesco-autonomous-test-report.html) | Relatório | ✅ Completo | 34 KB | Resultado teste autônomo (Upstream 7 fases) |
-| [`ROI_ANALYSIS_VISUAL.html`](bradesco/ROI_ANALYSIS_VISUAL.html) | Dashboard | ✅ Completo | 26 KB | ROI com benchmarks mercado ($167K, 76.4%) |
+| [`Financeiro-3tier-dashboard.html`](Financeiro/Financeiro-3tier-dashboard.html) | Dashboard | ✅ Produção | 22 KB | Visualização 3-tier (Upstream + Midstream + Downstream) |
+| [`Financeiro-autonomous-test-report.html`](Financeiro/Financeiro-autonomous-test-report.html) | Relatório | ✅ Completo | 34 KB | Resultado teste autônomo (Upstream 7 fases) |
+| [`ROI_ANALYSIS_VISUAL.html`](Financeiro/ROI_ANALYSIS_VISUAL.html) | Dashboard | ✅ Completo | 26 KB | ROI com benchmarks mercado ($167K, 76.4%) |
 
 **Artefatos Complementares:**
-- 📄 [`00_CONSOLIDATED_MIGRATION_REPORT.md`](../projects/bradesco/outputs/00_CONSOLIDATED_MIGRATION_REPORT.md) — Relatório consolidado 3-tier
-- 📊 [`ROI_ANALYSIS_REPORT.json`](../projects/bradesco/outputs/ROI_ANALYSIS_REPORT.json) — Dados estruturados ROI
-- 📋 [`ROI_SUMMARY_PT-BR.md`](../projects/bradesco/outputs/ROI_SUMMARY_PT-BR.md) — Resumo ROI em Português
+- 📄 [`00_CONSOLIDATED_MIGRATION_REPORT.md`](../projects/Financeiro/outputs/00_CONSOLIDATED_MIGRATION_REPORT.md) — Relatório consolidado 3-tier
+- 📊 [`ROI_ANALYSIS_REPORT.json`](../projects/Financeiro/outputs/ROI_ANALYSIS_REPORT.json) — Dados estruturados ROI
+- 📋 [`ROI_SUMMARY_PT-BR.md`](../projects/Financeiro/outputs/ROI_SUMMARY_PT-BR.md) — Resumo ROI em Português
 
 ---
 
@@ -78,7 +78,7 @@
 
 ### Via Arquivo Local
 ```
-file:///c:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/bradesco/
+file:///c:/Users/julio.cesar.d.pessan/Downloads/imfai-ava-fabric-data-agents/reports/Financeiro/
 ```
 
 ### Via Flask Server
@@ -96,7 +96,7 @@ python dashboard_server.py --port 8000
 
 ## 📊 Métricas & Estatísticas
 
-### Bradesco Project
+### Financeiro Project
 
 | Métrica | Valor |
 |---------|-------|
@@ -153,11 +153,11 @@ python dashboard_server.py --port 8000
 
 ## 📞 Links Rápidos
 
-### Bradesco
-- 🎯 [Dashboard 3-Tier](bradesco/bradesco-3tier-dashboard.html)
-- 📋 [Test Report](bradesco/bradesco-autonomous-test-report.html)
-- 💰 [ROI Analysis](bradesco/ROI_ANALYSIS_VISUAL.html)
-- 📊 [Consolidated Report](../projects/bradesco/outputs/00_CONSOLIDATED_MIGRATION_REPORT.md)
+### Financeiro
+- 🎯 [Dashboard 3-Tier](Financeiro/Financeiro-3tier-dashboard.html)
+- 📋 [Test Report](Financeiro/Financeiro-autonomous-test-report.html)
+- 💰 [ROI Analysis](Financeiro/ROI_ANALYSIS_VISUAL.html)
+- 📊 [Consolidated Report](../projects/Financeiro/outputs/00_CONSOLIDATED_MIGRATION_REPORT.md)
 
 ### Templates
 - 🏗️ [Executive Dashboard](._templates/executive-dashboard.html)
@@ -173,9 +173,9 @@ python dashboard_server.py --port 8000
 [cliente]-[tipo]-[descrição?].html
 
 Exemplos:
-✅ bradesco-3tier-dashboard.html
-✅ bradesco-autonomous-test-report.html
-✅ einstein-roi-analysis.html
+✅ Financeiro-3tier-dashboard.html
+✅ Financeiro-autonomous-test-report.html
+✅ reference-roi-analysis.html
 ```
 
 ### Versões com Timestamp (Opcional)
@@ -183,14 +183,14 @@ Exemplos:
 [cliente]-[tipo]-[timestamp].html
 
 Exemplo:
-✅ bradesco-3tier-dashboard-2026-06-05T160800.html
+✅ Financeiro-3tier-dashboard-2026-06-05T160800.html
 ```
 
 ---
 
 ## ✅ Próximas Adições
 
-- [ ] Relatórios Einstein HIAE
+- [ ] Relatórios reference saude
 - [ ] Versioning com timestamps
 - [ ] Integração com Data Viewer
 - [ ] Exportação para PDF

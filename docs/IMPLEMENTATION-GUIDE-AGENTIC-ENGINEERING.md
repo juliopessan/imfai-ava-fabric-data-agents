@@ -153,7 +153,7 @@ Implementamos **5 recomendações estruturais** que transformam DMF de "agentes 
 ```bash
 # 1. Usar como template para próximas waves
 # 2. Validate com validate_wave_config.py
-# 3. Atualizar exemplo (Bradesco) com dados reais
+# 3. Atualizar exemplo (Financeiro) com dados reais
 # 4. Implementar skills versioning no orchestrator
 ```
 
@@ -188,7 +188,7 @@ Implementamos **5 recomendações estruturais** que transformam DMF de "agentes 
 # 1. Implement DataContractValidator class
 # 2. Integrate into validate_gate3_artifacts.py
 # 3. Test com mock source/target connections
-# 4. Write data contracts YAML para Bradesco
+# 4. Write data contracts YAML para Financeiro
 # 5. Add "Spec Review" checklist para gate approvals
 ```
 
@@ -262,7 +262,7 @@ Implementamos **5 recomendações estruturais** que transformam DMF de "agentes 
 ### Week 2: Skills Versioning
 - [ ] Implement skill versioning em `.github/skills/`
 - [ ] Update wave-config schema (accept `skill@version`)
-- [ ] Migrate Bradesco wave to new schema
+- [ ] Migrate Financeiro wave to new schema
 - [ ] Test fallback logic (versão não disponível)
 
 **Deliverable:** Skills versionadas; wave-config-extended.yaml pronto.
@@ -280,7 +280,7 @@ Implementamos **5 recomendações estruturais** que transformam DMF de "agentes 
 - [ ] Set up routing (Slack/Teams)
 - [ ] Implement DataContractValidator
 - [ ] Integrate em Gate 3
-- [ ] Write data contracts para Bradesco
+- [ ] Write data contracts para Financeiro
 
 **Deliverable:** Escalations automáticas; specs executáveis; Gate 3 robusto.
 
@@ -291,7 +291,7 @@ Implementamos **5 recomendações estruturais** que transformam DMF de "agentes 
 Antes de considerar "completo", verificar:
 
 - [ ] Harness v1.0.0 formally approved (com sign-off)
-- [ ] Skills versioning testado com Bradesco (2+ waves)
+- [ ] Skills versioning testado com Financeiro (2+ waves)
 - [ ] Observability: 100% de traces coletados (application insights)
 - [ ] Human-Agent Checkpoints: escalations rodam por 1 week sem issue
 - [ ] Spec-as-Executable: DataContractValidator passing 90% de validações

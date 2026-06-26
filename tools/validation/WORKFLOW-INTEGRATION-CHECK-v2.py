@@ -46,7 +46,7 @@ def validate():
     print(f"{C.B}[1] ESTRUTURA DE CASES{C.E}")
     print("=" * 76)
     
-    for case_name in ["bradesco", "einstein-hiae"]:
+    for case_name in ["Financeiro", "Reference-Sa�de"]:
         case_path = ws_root / "projects" / case_name
         exists = case_path.exists()
         
@@ -67,13 +67,13 @@ def validate():
     print("=" * 76)
     
     critical_scripts = {
-        "projects/bradesco/scripts/00_MASTER_PIPELINE.py": "Master orchestrator",
-        "projects/bradesco/scripts/run_all_phases.py": "Phase B: Upstream",
-        "projects/bradesco/scripts/run_midstream_phases.py": "Phase C: Midstream",
-        "projects/bradesco/scripts/run_downstream_phases.py": "Phase D: Downstream",
-        "projects/bradesco/scripts/generate_consolidated_report.py": "Report generation",
-        "projects/bradesco/scripts/generate_tabbed_report.py": "Dashboard generation",
-        "projects/bradesco/scripts/normalize_outputs_to_template.py": "Template normalization"
+        "projects/Financeiro/scripts/00_MASTER_PIPELINE.py": "Master orchestrator",
+        "projects/Financeiro/scripts/run_all_phases.py": "Phase B: Upstream",
+        "projects/Financeiro/scripts/run_midstream_phases.py": "Phase C: Midstream",
+        "projects/Financeiro/scripts/run_downstream_phases.py": "Phase D: Downstream",
+        "projects/Financeiro/scripts/generate_consolidated_report.py": "Report generation",
+        "projects/Financeiro/scripts/generate_tabbed_report.py": "Dashboard generation",
+        "projects/Financeiro/scripts/normalize_outputs_to_template.py": "Template normalization"
     }
     
     for script_rel, description in critical_scripts.items():
@@ -122,7 +122,7 @@ def validate():
     print(f"\n{C.B}[4] CONFIGURAÇÃO{C.E}")
     print("=" * 76)
     
-    wave_config = ws_root / "projects" / "einstein-hiae" / "wave-config.yaml"
+    wave_config = ws_root / "projects" / "Reference-Sa�de" / "wave-config.yaml"
     if wave_config.exists():
         ok("wave-config.yaml", "Configuration file present")
         
@@ -173,11 +173,11 @@ def validate():
     print(f"\n{C.B}[6] OUTPUTS & FUNCIONALIDADE{C.E}")
     print("=" * 76)
     
-    outputs_path = ws_root / "projects" / "bradesco" / "outputs"
+    outputs_path = ws_root / "projects" / "Financeiro" / "outputs"
     if outputs_path.exists():
-        ok("Outputs folder: bradesco", "Ready for generated reports")
+        ok("Outputs folder: Financeiro", "Ready for generated reports")
     else:
-        fail("Outputs folder: bradesco", "NOT FOUND")
+        fail("Outputs folder: Financeiro", "NOT FOUND")
         all_ok = False
     
     # ========================================================================
@@ -191,10 +191,10 @@ def validate():
         print(f"{C.G}{C.B}✓ TUDO 100% FUNCIONAL!{C.E}\n")
         print(f"{C.C}Sistema pronto para:{C.E}")
         print(f"  1. Executar master pipeline:")
-        print(f"     python projects/bradesco/scripts/00_MASTER_PIPELINE.py")
+        print(f"     python projects/Financeiro/scripts/00_MASTER_PIPELINE.py")
         print(f"\n  2. Referenciar documentação:")
         print(f"     - Memória: /memories/repo/MEMORY-INDEX.md")
-        print(f"     - Código: projects/bradesco/README.md")
+        print(f"     - Código: projects/Financeiro/README.md")
         print(f"\n  3. Adicionar novo case:")
         print(f"     - Veja: /memories/repo/fabricae-best-practices.md")
         return 0

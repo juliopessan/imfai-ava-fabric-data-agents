@@ -50,7 +50,7 @@ class TelemetryCollector:
 
         Args:
             agent_id: Agent identifier (e.g., 'data-architect')
-            wave: Wave name (e.g., 'bradesco_wave_2')
+            wave: Wave name (e.g., 'Financeiro_wave_2')
             gate: Gate number (1, 2, or 3)
             model: Model name (e.g., 'claude-opus-4-1')
             tokens_in: Input tokens consumed

@@ -237,7 +237,7 @@ Before Jun 25 Kickoff:
 - [ ] migration-coordinator.py modified with telemetry_hook call
 - [ ] No syntax errors
 - [ ] Tested with real agent execution
-- [ ] `.coach/telemetry/bradesco_wave_2_*.jsonl` file created
+- [ ] `.coach/telemetry/Financeiro_wave_2_*.jsonl` file created
 - [ ] Events contain: timestamp, agent_id, tokens, cost
 
 **GateScore Adjustment (Week 2):**

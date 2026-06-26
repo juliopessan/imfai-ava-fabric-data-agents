@@ -1,8 +1,8 @@
 """
 ================================================================================
-BRADESCO — ETL DATABRICKS WORKFLOWS DAG (GATE 3 PHASE 1)
+Financeiro — ETL DATABRICKS WORKFLOWS DAG (GATE 3 PHASE 1)
 ================================================================================
-Wave: bradesco-einstein-2026-06 | Owner: downstream-executor (Diego)
+Wave: Financeiro-reference-2026-06 | Owner: downstream-executor (Diego)
 Date: 2026-06-08 | Runtime: Databricks Jobs + Workflows (Python 3.11)
 SLA: Daily 11:30 UTC (ETL complete + reconciliation validated)
 
@@ -50,23 +50,23 @@ class Config:
     workspace_token: str = "${DATABRICKS_TOKEN}"
     
     # Clusters & Resources
-    cluster_name: str = "bradesco-etl-cluster"
+    cluster_name: str = "Financeiro-etl-cluster"
     cluster_spark_version: str = "13.3.x-scala2.12"
     num_workers: int = 8
     worker_node_type: str = "i3.2xlarge"  # SSD storage for Z-order
     driver_node_type: str = "i3.xlarge"
     
     # Catalogs & Schemas
-    bronze_catalog: str = "bradesco_bronze"
+    bronze_catalog: str = "Financeiro_bronze"
     bronze_schema: str = "raw_aaar"
-    silver_catalog: str = "bradesco_silver"
+    silver_catalog: str = "Financeiro_silver"
     silver_schema: str = "conformed_aaar"
-    gold_catalog: str = "bradesco_gold"
+    gold_catalog: str = "Financeiro_gold"
     gold_schema_facts: str = "business_facts"
     gold_schema_dims: str = "dimensions"
     
     # Data Paths (ADLS Gen2)
-    adls_mount: str = "/mnt/bradesco-lake"
+    adls_mount: str = "/mnt/Financeiro-lake"
     bronze_path: str = f"{adls_mount}/bronze"
     silver_path: str = f"{adls_mount}/silver"
     gold_path: str = f"{adls_mount}/gold"
@@ -98,7 +98,7 @@ def task_bronze_portfolio_ingest():
     - Source: Teradata (TDCH landing ADLS: /mnt/teradata-bridge/)
     - Validation: Schema check + row count vs. baseline
     - Transformation: Compute _row_hash MD5 for reconciliation
-    - Target: bradesco_bronze.raw_aaar.portfolio_daily_raw
+    - Target: Financeiro_bronze.raw_aaar.portfolio_daily_raw
     - SLA: 20 min max (P95 <15 min typical)
     """
     
@@ -168,17 +168,17 @@ except Exception as e:
 """
     
     return NotebookTask(
-        notebook_path="/Workspace/bradesco/etl/bronze/1_portfolio_ingest",
+        notebook_path="/Workspace/Financeiro/etl/bronze/1_portfolio_ingest",
         base_parameters={}
     )
 
 def task_bronze_product_ingest():
     """Task 2: Product Daily ingestion"""
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/bronze/2_product_ingest")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/bronze/2_product_ingest")
 
 def task_bronze_asset_class_ingest():
     """Task 3: Asset Class Daily ingestion"""
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/bronze/3_asset_class_ingest")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/bronze/3_asset_class_ingest")
 
 def task_bronze_validate_schemas():
     """
@@ -198,7 +198,7 @@ SELECT
     COUNT(DISTINCT CASE WHEN data_type LIKE '%DECIMAL%' THEN 1 END) AS decimal_cols,
     MAX(CASE WHEN is_nullable = 'false' THEN 1 ELSE 0 END) AS has_not_null
 FROM information_schema.columns
-WHERE table_catalog = 'bradesco_bronze'
+WHERE table_catalog = 'Financeiro_bronze'
   AND table_schema = 'raw_aaar'
   AND table_name = 'portfolio_daily_raw'
 GROUP BY table_name;
@@ -227,20 +227,20 @@ CREATE TEMP TABLE row_count_validation AS
 SELECT 
     'portfolio_daily' AS table_name,
     1024500 AS source_count,  -- Teradata count (replace with actual JDBC query)
-    (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw) AS target_count,
-    ABS(1024500 - (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw)) AS variance_abs,
+    (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw) AS target_count,
+    ABS(1024500 - (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw)) AS variance_abs,
     ROUND(
-        100.0 * ABS(1024500 - (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw)) / 1024500, 
+        100.0 * ABS(1024500 - (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw)) / 1024500, 
         4
     ) AS variance_pct,
     CASE 
-        WHEN ROUND(100.0 * ABS(1024500 - (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw)) / 1024500, 4) <= 0.1 THEN 'PASS'
-        WHEN ROUND(100.0 * ABS(1024500 - (SELECT COUNT(*) FROM bradesco_bronze.raw_aaar.portfolio_daily_raw)) / 1024500, 4) <= 0.5 THEN 'WARN'
+        WHEN ROUND(100.0 * ABS(1024500 - (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw)) / 1024500, 4) <= 0.1 THEN 'PASS'
+        WHEN ROUND(100.0 * ABS(1024500 - (SELECT COUNT(*) FROM Financeiro_bronze.raw_aaar.portfolio_daily_raw)) / 1024500, 4) <= 0.5 THEN 'WARN'
         ELSE 'FAIL'
     END AS status,
     current_timestamp() AS check_timestamp;
 
-INSERT INTO bradesco_silver.reconciliation_log 
+INSERT INTO Financeiro_silver.reconciliation_log 
 SELECT 
     row_number() OVER (ORDER BY table_name) AS reconciliation_id,
     * 
@@ -269,7 +269,7 @@ def task_silver_portfolio_transform():
     - Precision upgrade: DECIMAL(18,2) → DECIMAL(38,12)
     - SCD2 logic: Detect changes, set effective_to_ts
     - Partition: By year/month/day
-    - Target: bradesco_silver.conformed_aaar.portfolio_daily
+    - Target: Financeiro_silver.conformed_aaar.portfolio_daily
     """
     
     spark_code = """
@@ -358,16 +358,16 @@ except Exception as e:
 """
     
     return NotebookTask(
-        notebook_path="/Workspace/bradesco/etl/silver/6_portfolio_transform"
+        notebook_path="/Workspace/Financeiro/etl/silver/6_portfolio_transform"
     )
 
 def task_silver_product_transform():
     """Task 7: Product transformation (Bronze → Silver)"""
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/silver/7_product_transform")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/silver/7_product_transform")
 
 def task_silver_asset_class_transform():
     """Task 8: Asset class transformation (Bronze → Silver)"""
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/silver/8_asset_class_transform")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/silver/8_asset_class_transform")
 
 def task_silver_pii_audit():
     """
@@ -389,7 +389,7 @@ SELECT
     COUNT(DISTINCT client_id_masked) AS unique_masks,
     MAX(LENGTH(client_id_masked)) AS max_hash_length,
     MIN(LENGTH(client_id_masked)) AS min_hash_length
-FROM bradesco_silver.conformed_aaar.portfolio_daily
+FROM Financeiro_silver.conformed_aaar.portfolio_daily
 WHERE is_current = TRUE;
 
 SELECT * FROM pii_audit;
@@ -420,8 +420,8 @@ try:
     # dbt profiles.yml configured for Databricks Unity Catalog
     result = subprocess.run(
         ["dbt", "run", 
-         "--project-dir", "/Workspace/bradesco/dbt",
-         "--profiles-dir", "/Workspace/bradesco/.dbt",
+         "--project-dir", "/Workspace/Financeiro/dbt",
+         "--profiles-dir", "/Workspace/Financeiro/.dbt",
          "--select", "tag:silver",
          "--fail-fast"],
         capture_output=True,
@@ -445,7 +445,7 @@ except Exception as e:
 
 """
     
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/silver/10_dbt_run")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/silver/10_dbt_run")
 
 # ============================================================================
 # SECTION 3: GOLD LAYER (Star Schema + Metrics)
@@ -455,7 +455,7 @@ def task_gold_portfolio_fact():
     """
     Task 11: Build Gold fact_portfolio_daily
     
-    - Source: bradesco_silver.conformed_aaar.portfolio_daily
+    - Source: Financeiro_silver.conformed_aaar.portfolio_daily
     - Join: dim_date, dim_client, dim_account, dim_portfolio
     - Metrics: AUM, daily_yield_brl, monthly_yield_pct, ytd_return_pct, fee_brl, aum_contribution_pct
     - Partition: year/month
@@ -464,7 +464,7 @@ def task_gold_portfolio_fact():
     
     sql_code = """
 -- Gold Task 11: Portfolio Fact Table
-INSERT INTO bradesco_gold.business_facts.fact_portfolio_daily
+INSERT INTO Financeiro_gold.business_facts.fact_portfolio_daily
 SELECT 
     row_number() OVER (ORDER BY sp.dt_partition, sp.client_id_masked) AS fact_portfolio_daily_id,
     dd.date_id,
@@ -481,20 +481,20 @@ SELECT
     0 AS fee_brl,  -- From finance dimension
     0 AS aum_contribution_pct,  -- Calculated post-fact build
     current_timestamp() AS dw_insert_ts
-FROM bradesco_silver.conformed_aaar.portfolio_daily sp
-LEFT JOIN bradesco_gold.dim_date dd 
+FROM Financeiro_silver.conformed_aaar.portfolio_daily sp
+LEFT JOIN Financeiro_gold.dim_date dd 
     ON sp.dt_partition = dd.calendar_date
-LEFT JOIN bradesco_gold.dim_client dc 
+LEFT JOIN Financeiro_gold.dim_client dc 
     ON sp.client_id_masked = dc.client_id_masked 
     AND dc.is_current = TRUE
-LEFT JOIN bradesco_gold.dim_account da 
+LEFT JOIN Financeiro_gold.dim_account da 
     ON 1 = 1  -- JOIN logic via account source table
-LEFT JOIN bradesco_gold.dim_portfolio dp 
+LEFT JOIN Financeiro_gold.dim_portfolio dp 
     ON 1 = 1  -- JOIN logic via portfolio source table
 WHERE sp.is_current = TRUE;
 
 -- Optimize with Z-order
-OPTIMIZE bradesco_gold.business_facts.fact_portfolio_daily 
+OPTIMIZE Financeiro_gold.business_facts.fact_portfolio_daily 
 ZORDER BY (date_id, client_sk, account_sk);
 
 """
@@ -524,7 +524,7 @@ def task_gold_summary_singleton():
     
     sql_code = """
 -- Gold Task 15: Portfolio Summary (Daily Singleton)
-INSERT INTO bradesco_gold.business_facts.fact_summary_daily
+INSERT INTO Financeiro_gold.business_facts.fact_summary_daily
 SELECT 
     row_number() OVER (ORDER BY dd.date_id) AS fact_summary_id,
     dd.date_id,
@@ -534,8 +534,8 @@ SELECT
     COUNT(DISTINCT fpd.client_sk) AS client_count,
     COUNT(DISTINCT fpd.account_sk) AS account_count,
     current_timestamp() AS dw_insert_ts
-FROM bradesco_gold.business_facts.fact_portfolio_daily fpd
-LEFT JOIN bradesco_gold.dim_date dd ON fpd.date_id = dd.date_id
+FROM Financeiro_gold.business_facts.fact_portfolio_daily fpd
+LEFT JOIN Financeiro_gold.dim_date dd ON fpd.date_id = dd.date_id
 WHERE fpd.dw_insert_ts >= current_date()
 GROUP BY dd.date_id;
 
@@ -586,7 +586,7 @@ try:
         ]
     }
     
-    checkpoint = context.get_checkpoint("bradesco_validation")
+    checkpoint = context.get_checkpoint("Financeiro_validation")
     result = checkpoint.run()
     
     if not result["success"]:
@@ -601,7 +601,7 @@ except Exception as e:
 
 """
     
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/quality/16_great_expectations")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/quality/16_great_expectations")
 
 def task_quality_dbt_tests():
     """
@@ -622,8 +622,8 @@ logger = logging.getLogger(__name__)
 try:
     result = subprocess.run(
         ["dbt", "test",
-         "--project-dir", "/Workspace/bradesco/dbt",
-         "--profiles-dir", "/Workspace/bradesco/.dbt",
+         "--project-dir", "/Workspace/Financeiro/dbt",
+         "--profiles-dir", "/Workspace/Financeiro/.dbt",
          "--fail-fast"],
         capture_output=True,
         text=True,
@@ -642,7 +642,7 @@ except Exception as e:
 
 """
     
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/quality/17_dbt_tests")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/quality/17_dbt_tests")
 
 def task_quality_reconciliation():
     """
@@ -659,7 +659,7 @@ def task_quality_reconciliation():
 CREATE TEMP VIEW reconciliation_summary AS
 SELECT 
     'portfolio_daily' AS table_name,
-    (SELECT COUNT(*) FROM bradesco_silver.conformed_aaar.portfolio_daily WHERE is_current = TRUE) AS target_count,
+    (SELECT COUNT(*) FROM Financeiro_silver.conformed_aaar.portfolio_daily WHERE is_current = TRUE) AS target_count,
     CASE 
         WHEN ABS(target_count - 1024500) / 1024500 <= 0.001 THEN 'PASS'
         ELSE 'FAIL'
@@ -678,7 +678,7 @@ def task_quality_scorecard_update():
     
     sql_code = """
 -- Quality Task 19: Quality Scorecard Update
-INSERT INTO bradesco_silver.rentability.quality_scorecard_daily
+INSERT INTO Financeiro_silver.rentability.quality_scorecard_daily
 SELECT 
     row_number() OVER (ORDER BY current_date()) AS scorecard_id,
     current_date() AS dt_partition,
@@ -722,21 +722,21 @@ logger = logging.getLogger(__name__)
 
 alerts_config = [
     {
-        "name": "Bradesco_Freshness_Alert",
+        "name": "Financeiro_Freshness_Alert",
         "query_id": "query_freshness_check",
         "threshold": 30,  # minutes
         "trigger": "MAX(check_ts) > NOW() - INTERVAL '30 minutes'",
         "email": "diego-downstream@avanade.com"
     },
     {
-        "name": "Bradesco_Quality_Alert",
+        "name": "Financeiro_Quality_Alert",
         "query_id": "query_quality_scorecard",
         "threshold": 90,  # % score
         "trigger": "overall_score < 90",
         "email": "gaia-qualitymanager@avanade.com"
     },
     {
-        "name": "Bradesco_SLA_Alert",
+        "name": "Financeiro_SLA_Alert",
         "query_id": "query_etl_runtime",
         "threshold": 60,  # minutes
         "trigger": "etl_runtime_min > 60",
@@ -748,7 +748,7 @@ logger.info(f"✅ Configured {len(alerts_config)} Databricks SQL alerts")
 
 """
     
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/quality/20_alerts_config")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/quality/20_alerts_config")
 
 def task_bi_publish_gate():
     """
@@ -765,9 +765,9 @@ def task_bi_publish_gate():
 CREATE TEMP VIEW bi_publish_check AS
 SELECT 
     CASE 
-        WHEN (SELECT overall_score FROM bradesco_silver.rentability.quality_scorecard_daily 
+        WHEN (SELECT overall_score FROM Financeiro_silver.rentability.quality_scorecard_daily 
               WHERE dt_partition = CURRENT_DATE ORDER BY _log_ts DESC LIMIT 1) >= 90
-         AND (SELECT COUNT(*) FROM bradesco_silver.reconciliation_log 
+         AND (SELECT COUNT(*) FROM Financeiro_silver.reconciliation_log 
               WHERE dt_partition = CURRENT_DATE AND status = 'FAIL') = 0
         THEN TRUE 
         ELSE FALSE
@@ -804,7 +804,7 @@ handoff_report = f"""
 GATE 3 PHASE 1 — ETL PIPELINE COMPLETE
 ================================================================================
 Timestamp: {datetime.now().isoformat()}
-Wave: bradesco-einstein-2026-06
+Wave: Financeiro-reference-2026-06
 Status: ✅ READY FOR RECONCILIATION VALIDATION
 
 DELIVERABLES:
@@ -827,7 +827,7 @@ logger.info(handoff_report)
 
 """
     
-    return NotebookTask(notebook_path="/Workspace/bradesco/etl/quality/22_handoff")
+    return NotebookTask(notebook_path="/Workspace/Financeiro/etl/quality/22_handoff")
 
 # ============================================================================
 # WORKFLOW DAG DEFINITION
@@ -973,7 +973,7 @@ def create_workflows_dag():
     ]
     
     job_config = CreateJob(
-        name="bradesco-etl-gate3-phase1",
+        name="Financeiro-etl-gate3-phase1",
         description="Gate 3 Phase 1: DDL + ETL DAG (Bronze→Silver→Gold, daily 11:30 UTC)",
         tasks=tasks,
         job_clusters=[
@@ -1006,7 +1006,7 @@ def create_workflows_dag():
     return job_config
 
 if __name__ == "__main__":
-    logger.info("Bradesco ETL Gate 3 Phase 1 DAG definition")
+    logger.info("Financeiro ETL Gate 3 Phase 1 DAG definition")
     job_config = create_workflows_dag()
     logger.info(f"Job config: {job_config}")
 

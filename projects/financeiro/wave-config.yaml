@@ -1,5 +1,5 @@
-wave_id: bradesco-einstein-2026-06
-project_name: Bradesco — Einstein Migration Wave
+wave_id: Financeiro-reference-2026-06
+project_name: Financeiro — reference Migration Wave
 description: Migration wave for legacy Cloudera assets to Databricks (proof-of-concept + phased roll-out)
 discovery_owner_primary: julio.cesar.d.pessan@company.example
 discovery_owner_secondary: data-architect@avanade.example

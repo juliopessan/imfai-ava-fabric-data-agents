@@ -416,10 +416,10 @@ def main():
     base_path = Path("reports")
     
     dashboards = [
-        "bradesco/bradesco-autonomous-test-report.html",
-        "bradesco/bradesco-3tier-dashboard.html",
-        "bradesco/bradesco-executive-dashboard.html",
-        "bradesco/ROI_ANALYSIS_VISUAL.html",
+        "Financeiro/Financeiro-autonomous-test-report.html",
+        "Financeiro/Financeiro-3tier-dashboard.html",
+        "Financeiro/Financeiro-executive-dashboard.html",
+        "Financeiro/ROI_ANALYSIS_VISUAL.html",
         "_templates/DASHBOARD-TEMPLATE-ORANGE-DNA.html",
         "_templates/DASHBOARD-ENTERPRISE-STANDARD.html",
         "_templates/dashboard-with-metrics.html",

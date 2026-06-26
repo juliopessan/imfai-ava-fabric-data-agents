@@ -1,7 +1,7 @@
 # Wave 2 — Optimization Summary & Quantified Savings
 
 **Date:** 2026-06-16T11:38:02.098009  
-**Project:** Bradesco — Einstein HIAE Migration  
+**Project:** Financeiro — reference saude Migration  
 **Wave:** Wave 2 (Optimized) vs Wave 1 (Baseline)  
 **Status:** 🟢 COMPLETE — All targets met
 
@@ -80,7 +80,7 @@ Wave 2: Gate 1 (30min) → Gate 2 (28min, early sample validation) → Gate 3 (3
 
 ### Annualized Impact
 
-Assuming **4 waves/year** (similar to Bradesco cadence):
+Assuming **4 waves/year** (similar to Financeiro cadence):
 
 ```
 Time Savings per Wave:      27 minutes

@@ -75,7 +75,7 @@ class TraceContext:
     parent_span_id: str = None  # Link to caller
     span_id: str = None  # This span's ID
     agent_id: str = None  # data-modeler, quality-gate, etc.
-    wave_id: str = None  # bradesco-g1
+    wave_id: str = None  # Financeiro-g1
     gate: int = None  # 1, 2, 3
     session_id: str = None  # User session (if applicable)
     timestamp: str = None  # ISO 8601
@@ -141,7 +141,7 @@ class TraceContext:
   "span_id": "agent-modeler-001",
   "parent_span_id": "trace-root",
   "agent_id": "data-modeler",
-  "wave_id": "bradesco-g1",
+  "wave_id": "Financeiro-g1",
   "gate": 2,
   "timestamp_start": "2026-06-16T14:30:42.100Z",
   "timestamp_end": "2026-06-16T14:31:00.600Z",
@@ -188,7 +188,7 @@ class TraceContext:
   "timestamp_end": "2026-06-16T14:30:53.700Z",
   "duration_ms": 2300,
   "inputs": {
-    "file_path": "projects/bradesco/outputs/gate2/data-contracts.yaml",
+    "file_path": "projects/Financeiro/outputs/gate2/data-contracts.yaml",
     "strict_mode": true
   },
   "outputs": {
@@ -336,7 +336,7 @@ Sub_agent_cost = Sub_agent_trace_cost  # Recursive
 ```json
 {
   "trace_id": "a7f3-92c1-4e8b-11d7-5fk2m9p0",
-  "wave": "bradesco-g1",
+  "wave": "Financeiro-g1",
   "gate": 2,
   "cost_breakdown": {
     "llm_tokens": {

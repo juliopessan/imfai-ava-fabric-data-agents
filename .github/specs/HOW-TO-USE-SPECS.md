@@ -220,9 +220,9 @@ If an agent violates a constraint, **validation fails immediately**.
 
 ### Request
 ```yaml
-user_request: "Analyze Bradesco legacy system"
-project: "bradesco"
-wave_config: "projects/bradesco/wave-config.yaml"
+user_request: "Analyze Financeiro legacy system"
+project: "Financeiro"
+wave_config: "projects/Financeiro/wave-config.yaml"
 ```
 
 ### Execution Flow
@@ -300,7 +300,7 @@ Result:
 
 ### Token Savings Per Wave
 ```
-3-wave project (Bradesco, Einstein, Multi-Platform):
+3-wave project (Financeiro, reference, Multi-Platform):
   - Without specs: ~100,000 tokens (hallucination loops)
   - With specs: ~30,000 tokens (deterministic execution)
   - Savings: 70%

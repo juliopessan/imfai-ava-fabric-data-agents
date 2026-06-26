@@ -2,14 +2,14 @@
 ================================================================
 
 **Execution Date:** 2026-06-16  
-**Wave ID:** bradesco-wave4-2026-06  
+**Wave ID:** Financeiro-wave4-2026-06  
 **Status:** 🟢 GREEN — ALL TARGETS EXCEEDED
 
 ---
 
 ## Executive Summary
 
-Wave 4 successfully implemented **tri-gate parallelization + ML-driven rule discovery** on Bradesco Risk Assessment dataset (18.2M rows, 89 schemas, max complexity). All targets exceeded with margin.
+Wave 4 successfully implemented **tri-gate parallelization + ML-driven rule discovery** on Financeiro Risk Assessment dataset (18.2M rows, 89 schemas, max complexity). All targets exceeded with margin.
 
 | Metric | Target | Actual | Δ | Status |
 |--------|--------|--------|---|--------|

@@ -36,8 +36,8 @@ python tools/validation/WORKFLOW-INTEGRATION-CHECK.py
 # Executar validação v2
 python tools/validation/WORKFLOW-INTEGRATION-CHECK-v2.py
 
-# Validar projeto Bradesco
-python tools/validation/run_bradesco_tier1_validation.py
+# Validar projeto Financeiro
+python tools/validation/run_Financeiro_tier1_validation.py
 ```
 
 ### Executar Testes de Telemetria

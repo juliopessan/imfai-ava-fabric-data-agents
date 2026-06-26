@@ -1,16 +1,16 @@
-# Bradesco Project — TIER 1 Validation Execution
+# Financeiro Project — TIER 1 Validation Execution
 
 **Date:** 2026-06-09  
-**Objective:** Execute TIER 1 validators against Bradesco project artifacts and document validation results
+**Objective:** Execute TIER 1 validators against Financeiro project artifacts and document validation results
 
 ---
 
 ## 1. Pre-Execution Checklist
 
-### 1.1 Bradesco Project Structure
+### 1.1 Financeiro Project Structure
 
 ```
-projects/bradesco/
+projects/Financeiro/
 ├── wave-config.yaml
 ├── outputs/
 │   ├── upstream/
@@ -40,26 +40,26 @@ pytest src/shared/tests/ -q
 ## 2. Execution Plan
 
 ### Phase 1: Wave Config Validation
-1. Read `projects/bradesco/wave-config.yaml`
-2. Execute: `WaveConfigValidator("projects/bradesco/wave-config.yaml").validate()`
+1. Read `projects/Financeiro/wave-config.yaml`
+2. Execute: `WaveConfigValidator("projects/Financeiro/wave-config.yaml").validate()`
 3. Document: Configuration status, errors, warnings, score
 4. Decision: Proceed to Gate validations or flag configuration issues
 
 ### Phase 2: Gate 1 (Upstream) Validation
-1. Check artifact directory: `projects/bradesco/outputs/upstream/`
-2. Execute: `Gate1ArtifactsValidator("projects/bradesco/outputs/upstream/", wave_id).validate()`
+1. Check artifact directory: `projects/Financeiro/outputs/upstream/`
+2. Execute: `Gate1ArtifactsValidator("projects/Financeiro/outputs/upstream/", wave_id).validate()`
 3. Document: Artifact inventory, completude, quality score, missing artifacts
 4. Decision: Gate 1 status (approved/conditional/blocked)
 
 ### Phase 3: Gate 2 (Midstream) Validation
-1. Check artifact directory: `projects/bradesco/outputs/midstream/`
-2. Execute: `Gate2ArtifactsValidator("projects/bradesco/outputs/midstream/", wave_id).validate()`
+1. Check artifact directory: `projects/Financeiro/outputs/midstream/`
+2. Execute: `Gate2ArtifactsValidator("projects/Financeiro/outputs/midstream/", wave_id).validate()`
 3. Document: Design artifacts, completude, quality score
 4. Decision: Gate 2 status
 
 ### Phase 4: Gate 3 (Downstream) Validation
-1. Check artifact directory: `projects/bradesco/outputs/downstream/`
-2. Execute: `Gate3ArtifactsValidator("projects/bradesco/outputs/downstream/", wave_id).validate()`
+1. Check artifact directory: `projects/Financeiro/outputs/downstream/`
+2. Execute: `Gate3ArtifactsValidator("projects/Financeiro/outputs/downstream/", wave_id).validate()`
 3. Document: Execution artifacts, reconciliation score (CRITICAL)
 4. Decision: Gate 3 status, reconciliation readiness
 
@@ -78,7 +78,7 @@ pytest src/shared/tests/ -q
 **Status:** ⏳ PENDING EXECUTION
 
 Expected Inputs:
-- File: `projects/bradesco/wave-config.yaml`
+- File: `projects/Financeiro/wave-config.yaml`
 - Fields: wave_id, project_name, discovery_owner, target_platform, entities, gates
 
 Expected Outputs:
@@ -148,7 +148,7 @@ Expected Outputs:
 ```
 GATE 1 VALIDATION RESULT
 ========================
-Wave ID: bradesco-wave-001
+Wave ID: Financeiro-wave-001
 Validation Date: 2026-06-09
 Status: 🟢 APPROVED
 
@@ -171,9 +171,9 @@ Approved Date: 2026-06-09
 
 ## 5. Integration with Existing Artifacts
 
-### Current Bradesco Structure Analysis
+### Current Financeiro Structure Analysis
 
-**Status:** PENDING — Need to discover what's currently in `projects/bradesco/outputs/`
+**Status:** PENDING — Need to discover what's currently in `projects/Financeiro/outputs/`
 
 To determine:
 1. What artifacts exist today?
@@ -208,7 +208,7 @@ To determine:
 
 ## 8. Next Steps After Execution
 
-1. **Document findings** in Bradesco-TIER1-Validation-Report.md
+1. **Document findings** in Financeiro-TIER1-Validation-Report.md
 2. **Identify gaps** for TIER 2 development
 3. **Adjust TIER 2 priorities** based on gaps found
 4. **Plan remediation** if artifacts missing

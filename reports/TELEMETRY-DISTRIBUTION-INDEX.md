@@ -26,7 +26,7 @@
 ```
 📚 TELEMETRY-SYSTEM-INVENTORY.md (complete reference)
 📄 docs/observability/OBSERVABILITY-AND-TRACES.md
-🔧 projects/bradesco/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
+🔧 projects/Financeiro/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
 ```
 
 ### 🔧 **For DevOps/SRE**
@@ -132,7 +132,7 @@
 **📍 Code Locations:**
 ```
 src/shared/scripts/                    (Core engines)
-projects/bradesco/scripts/             (Production examples)
+projects/Financeiro/scripts/             (Production examples)
 tools/utilities/                       (Tests & demos)
 .trace-logs/                          (Schemas)
 .coach/                               (Coach schemas)
@@ -378,7 +378,7 @@ src/shared/scripts/
 ├── execution_telemetry.py                  (core)
 └── generate_telemetry_dashboard.py         (dashboard)
 
-projects/bradesco/scripts/
+projects/Financeiro/scripts/
 └── 00_MASTER_PIPELINE_WITH_TELEMETRY.py   (production example)
 
 tools/utilities/

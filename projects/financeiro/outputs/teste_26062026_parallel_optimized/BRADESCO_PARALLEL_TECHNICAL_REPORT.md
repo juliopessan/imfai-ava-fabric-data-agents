@@ -1,4 +1,4 @@
-# 🚀 Bradesco Parallel Orchestration — Performance Report
+# 🚀 Financeiro Parallel Orchestration — Performance Report
 
 **Generated:** 2026-06-25T18:44:36.493631
 

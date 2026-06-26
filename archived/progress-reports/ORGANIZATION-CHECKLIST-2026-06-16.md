@@ -79,8 +79,8 @@ Repository Root
 │   └── 📂 tests/
 │
 ├── 📂 projects/
-│   ├── bradesco/
-│   ├── einstein-hiae/
+│   ├── Financeiro/
+│   ├── Reference-Sa�de/
 │   └── multi-platform-migration/
 │
 └── [existing structure unchanged]
@@ -132,7 +132,7 @@ Repository Root
 
 | Component | Has Overview | Has Details | Has Examples | Has Roadmap | Status |
 |-----------|-------------|------------|-------------|------------|--------|
-| Harness | ✅ | ✅ | ✅ (Bradesco) | ✅ | 🟢 |
+| Harness | ✅ | ✅ | ✅ (Financeiro) | ✅ | 🟢 |
 | Skills Versioning | ✅ | ✅ | ✅ (YAML) | ✅ | 🟢 |
 | Observability | ✅ | ✅ | ✅ (Code) | ✅ (8 wk) | 🟢 |
 | Escalation | ✅ | ✅ | ✅ (Rules) | ✅ (Gates) | 🟢 |

@@ -12,7 +12,7 @@ Workflow **Fabricae v3** (Autonomous Data Migration Factory) agora está **total
 
 1. ✅ **Sistema de Memória Persistente** (`/memories/repo/`)
 2. ✅ **Master Pipeline Orchestrator** (28 segundos end-to-end)
-3. ✅ **Dois Cases Operacionais** (Bradesco + Einstein-HIAE)
+3. ✅ **Dois Cases Operacionais** (Financeiro + Reference-Sa�de)
 4. ✅ **Avanade Branding Completo** (#5c2d91 + #ff6b35)
 5. ✅ **Dependências Python Instaladas** (markdown + yaml)
 6. ✅ **Scripts Críticos Validados** (7/7 presentes)
@@ -38,10 +38,10 @@ TOTAL                               ✓ 22/22 OK
 
 ## 🚀 Sistema Pronto Para
 
-### 1. Executar Master Pipeline (Bradesco)
+### 1. Executar Master Pipeline (Financeiro)
 ```powershell
 cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/Financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 **Resultado esperado**: 
@@ -72,7 +72,7 @@ Veja: `/memories/repo/fabricae-best-practices.md` → Seção "Adding a New Case
 
 **Passos** (1 hora total):
 1. Criar pasta: `mkdir projects/case-name/{scripts,legacy,context,outputs}`
-2. Copiar scripts: `cp projects/bradesco/scripts/* projects/case-name/scripts/`
+2. Copiar scripts: `cp projects/Financeiro/scripts/* projects/case-name/scripts/`
 3. Atualizar: `wave-config.yaml` com dados específicos do case
 4. Executar: `python projects/case-name/scripts/00_MASTER_PIPELINE.py`
 
@@ -92,9 +92,9 @@ python -m pip install markdown
 migration_scope: "Full modernization: SQL Server → Microsoft Fabric Medallion"
 ```
 
-### ✅ Correção 3: Estrutura Einstein-HIAE Completa
+### ✅ Correção 3: Estrutura Reference-Sa�de Completa
 ```
-projects/einstein-hiae/
+projects/Reference-Sa�de/
 ├── scripts/          [✓ Criado]
 ├── context/          [✓ Criado]
 ├── legacy/           [✓ Existia]
@@ -123,7 +123,7 @@ projects/einstein-hiae/
 | **Memória do Sistema** | 6 arquivos, ~62 KB | ✓ |
 | **Tempo Master Pipeline** | 28 segundos | ✓ |
 | **ROI Calculado** | $167,049 | ✓ |
-| **Validação Gates** | 27/27 Pass (Bradesco) | ✓ |
+| **Validação Gates** | 27/27 Pass (Financeiro) | ✓ |
 | **Token Savings (futuro)** | ~40% por sessão | ✓ |
 
 ---
@@ -155,8 +155,8 @@ projects/einstein-hiae/
 | MEMORY-INDEX.md | Navegação da memória | `/memories/repo/` |
 | fabricae-best-practices.md | How-to guide | `/memories/repo/` |
 | fabricae-architecture-decisions.md | Rationale técnica (10 ADRs) | `/memories/repo/` |
-| README.md | Quick start | `projects/bradesco/` |
-| WORKFLOW_AND_ARCHITECTURE.md | Detalhes workflow | `projects/bradesco/` |
+| README.md | Quick start | `projects/Financeiro/` |
+| WORKFLOW_AND_ARCHITECTURE.md | Detalhes workflow | `projects/Financeiro/` |
 | REPOSITORY-STRUCTURE.md | Organização folders | `workspace root` |
 
 ---
@@ -203,7 +203,7 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 │                                                          │
 │  ✅ Sistema de Memória Operacional                       │
 │  ✅ Master Pipeline Validado                             │
-│  ✅ Cases Operacionais (Bradesco + HIAE)                 │
+│  ✅ Cases Operacionais (Financeiro + saude)                 │
 │  ✅ Avanade Branding Completo                            │
 │  ✅ Dependências Instaladas                              │
 │  ✅ Documentação Centralizada                            │
@@ -211,7 +211,7 @@ python WORKFLOW-INTEGRATION-CHECK-v2.py
 │  🚀 PRONTO PARA PRODUÇÃO                                 │
 │                                                          │
 │  Próximo passo: Executar master pipeline                 │
-│  python projects/bradesco/scripts/00_MASTER_PIPELINE.py  │
+│  python projects/Financeiro/scripts/00_MASTER_PIPELINE.py  │
 └─────────────────────────────────────────────────────────┘
 ```
 

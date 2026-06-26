@@ -1,4 +1,4 @@
-# Wave Status Tracker — Bradesco Einstein Migration
+# Wave Status Tracker — Financeiro reference Migration
 
 **Gerado:** 2026-06-16 11:18:17
 
@@ -12,8 +12,8 @@
 
 ## Resumo da Migração
 
-- **Wave ID:** bradesco-einstein-2026-06
-- **Projeto:** Bradesco — Einstein Migration Wave
+- **Wave ID:** Financeiro-reference-2026-06
+- **Projeto:** Financeiro — reference Migration Wave
 - **Plataforma Origem:** Cloudera
 - **Plataforma Destino:** Databricks
 - **Padrão Migração:** Lift-and-shift

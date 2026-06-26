@@ -48,13 +48,13 @@ Playwright v1.40.0 OK
 
 ```bash
 # Capturar etapa Upstream (Discovery)
-python reports/_templates/playwright_screenshot_generator.py --project bradesco --stage upstream
+python reports/_templates/playwright_screenshot_generator.py --project Financeiro --stage upstream
 
 # Capturar etapa Midstream (Design)
-python reports/_templates/playwright_screenshot_generator.py --project bradesco --stage midstream
+python reports/_templates/playwright_screenshot_generator.py --project Financeiro --stage midstream
 
 # Capturar etapa Downstream (Execution)
-python reports/_templates/playwright_screenshot_generator.py --project bradesco --stage downstream
+python reports/_templates/playwright_screenshot_generator.py --project Financeiro --stage downstream
 ```
 
 ---
@@ -63,7 +63,7 @@ python reports/_templates/playwright_screenshot_generator.py --project bradesco 
 
 ```
 reports/screenshots/
-├── bradesco/
+├── Financeiro/
 │   ├── metadata.json
 │   ├── before_after_comparison.html
 │   ├── upstream_executive_dashboard_estado_inicial.png
@@ -126,7 +126,7 @@ Adicionar ao `.vscode/tasks.json`:
     "command": "python",
     "args": [
         "reports/_templates/playwright_screenshot_generator.py",
-        "--project", "bradesco",
+        "--project", "Financeiro",
         "--stage", "upstream"
     ],
     "group": {
@@ -145,7 +145,7 @@ Adicionar ao `.vscode/tasks.json`:
 Executar no Terminal do VS Code:
 
 ```powershell
-python reports/_templates/playwright_screenshot_generator.py --project bradesco --stage upstream
+python reports/_templates/playwright_screenshot_generator.py --project Financeiro --stage upstream
 ```
 
 ---

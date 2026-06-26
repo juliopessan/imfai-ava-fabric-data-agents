@@ -1,4 +1,4 @@
-# Wave 3 Executive Summary — Bradesco Financial Models Migration
+# Wave 3 Executive Summary — Financeiro Financial Models Migration
 
 **Status:** ✅ **COMPLETE** | **Date:** 2026-06-16 | **GateScore:** 🟢 **0.9486 (Target: ≥0.94)**
 
@@ -6,7 +6,7 @@
 
 ## Mission Accomplished
 
-**Wave 3 Advanced Orchestration** successfully validated **5 new optimization techniques** on the **Bradesco Financial Models dataset (15.8M rows, 67 schemas)**, achieving:
+**Wave 3 Advanced Orchestration** successfully validated **5 new optimization techniques** on the **Financeiro Financial Models dataset (15.8M rows, 67 schemas)**, achieving:
 
 - ✅ **GateScore: 0.9486** (Target ≥0.94) — **EXCEEDED**
 - ✅ **Time: 77 minutes** (Target ≤80 min) — **EXCEEDED**  
@@ -146,11 +146,11 @@ Volume     12.4M   →   8.2M     →   15.8M       → Scalability proven
 
 | # | Deliverable | Status | Location |
 |---|-------------|--------|----------|
-| 1 | wave3-gatescore-reports.md | ✅ | `projects/bradesco/state/` |
-| 2 | wave3-advanced-optimizations-summary.md | ✅ | `projects/bradesco/state/` |
-| 3 | wave3-vs-wave1-wave2-comparison.html | ✅ | `projects/bradesco/state/` |
-| 4 | wave3-financial-models-learnings.md | ✅ | `projects/bradesco/state/` |
-| 5 | wave3-cost-prediction-model.json | ✅ | `projects/bradesco/state/` |
+| 1 | wave3-gatescore-reports.md | ✅ | `projects/Financeiro/state/` |
+| 2 | wave3-advanced-optimizations-summary.md | ✅ | `projects/Financeiro/state/` |
+| 3 | wave3-vs-wave1-wave2-comparison.html | ✅ | `projects/Financeiro/state/` |
+| 4 | wave3-financial-models-learnings.md | ✅ | `projects/Financeiro/state/` |
+| 5 | wave3-cost-prediction-model.json | ✅ | `projects/Financeiro/state/` |
 
 ---
 
