@@ -14,7 +14,7 @@ Implementada estratégia 2-layer de consolidação de dashboards que unifica KPI
 
 **Características**:
 - 🎯 **6 KPIs Globais**: Projetos (2), Completude (98.7%), Agentes (21), Qualidade (0.92), Artefatos (545+), Gates (3)
-- 🏢 **2 Cards de Projeto**: Bradesco ✓ Completo + Einstein-HIAE ⏱ Em Progresso
+- 🏢 **2 Cards de Projeto**: Financeiro ✓ Completo + Einstein-Saúde ⏱ Em Progresso
 - 📊 **Tabelas Consolidadas**: Métricas por projeto + Status Gates 3-tier
 - 📱 **Responsivo**: Desktop, tablet, mobile com dark mode
 - 🎨 **Avanade Orange DNA**: 100% fiel ao design padrão
@@ -61,7 +61,7 @@ python reports/_templates/consolidate_dashboards.py
 python reports/_templates/consolidate_dashboards.py --dry-run
 
 # Projeto específico
-python reports/_templates/consolidate_dashboards.py --projects=bradesco
+python reports/_templates/consolidate_dashboards.py --projects=financeiro
 ```
 
 **Output**:

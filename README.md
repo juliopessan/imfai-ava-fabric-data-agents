@@ -15,11 +15,11 @@ A **complete orchestration framework** for data platform migrations that:
 
 ✅ **Inventories** legacy systems (6+ platforms supported)  
 ✅ **Designs** target cloud architectures (Microsoft Fabric primary)  
-✅ **Executes** migrations autonomously (28 seconds for Bradesco)  
+✅ **Executes** migrations autonomously (28 seconds for Financeiro)
 ✅ **Validates** data integrity (98.7% accuracy)  
 ✅ **Generates** executive dashboards (Avanade-branded)
 
-### Real-World Example: Bradesco
+### Real-World Example: Financeiro
 
 | Metric | Value |
 |--------|-------|
@@ -44,14 +44,14 @@ cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
 pip install -r config/requirements-dev.txt
 ```
 
-### 2. Run Bradesco Migration
+### 2. Run Financeiro Migration
 ```powershell
-python projects/bradesco/scripts/00_MASTER_PIPELINE.py
+python projects/financeiro/scripts/00_MASTER_PIPELINE.py
 ```
 
 ### 3. View Dashboard
 ```powershell
-python -m http.server 8000 --directory projects/bradesco/outputs
+python -m http.server 8000 --directory projects/financeiro/outputs
 # Open: http://localhost:8000/00_CONSOLIDATED_MIGRATION_REPORT_tabbed.html
 ```
 
@@ -89,12 +89,12 @@ Start here if you're implementing **harness formalization, skills versioning, ob
 
 ### For Project Managers
 - **[projects/multi-platform-migration/EXEC-SUMMARY.md](projects/multi-platform-migration/EXEC-SUMMARY.md)** — 6-platform wave executive brief
-- **[docs/project-plans/BRADESCO-TIER1-EXECUTION-PLAN.md](docs/project-plans/BRADESCO-TIER1-EXECUTION-PLAN.md)** — Detailed execution plan
+- **[docs/project-plans/FINANCEIRO-TIER1-EXECUTION-PLAN.md](docs/project-plans/FINANCEIRO-TIER1-EXECUTION-PLAN.md)** — Detailed execution plan
 
 ### For Developers & Architects
-- **[projects/bradesco/README.md](projects/bradesco/README.md)** — How to run the main case
-- **[projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md)** — Complete workflow breakdown
-- **[projects/einstein-hiae/README.md](projects/einstein-hiae/README.md)** — KPI Portal & legacy analysis
+- **[projects/financeiro/README.md](projects/financeiro/README.md)** — How to run the main case
+- **[projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md](projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md)** — Complete workflow breakdown
+- **[projects/einstein-saude/README.md](projects/einstein-saude/README.md)** — KPI Portal & legacy analysis
 - **[REPOSITORY-QUICK-REFERENCE.md](REPOSITORY-QUICK-REFERENCE.md)** — Script and file locations
 - **[src/shared/scripts/README.md](src/shared/scripts/README.md)** — 23 governance modules
 - **[.github/specs/HOW-TO-USE-SPECS.md](.github/specs/HOW-TO-USE-SPECS.md)** — Specs system (3000+ words)
@@ -114,13 +114,13 @@ imfai-ava-fabric-data-agents/
 ├── 🆕 AGENTIC-ENGINEERING-V1-SUMMARY.md    ⭐ New: Harness formalization + roadmap (4 weeks)
 │
 ├── 🚀 projects/                            Active migration cases
-│   ├── bradesco/                           ⭐ Main case (COMPLETE)
-│   ├── einstein-hiae/                      Reference case
+│   ├── financeiro/                         ⭐ Main case (COMPLETE)
+│   ├── einstein-saude/                     Reference case
 │   └── multi-platform-migration/           6-platform wave (IN PROGRESS)
 │
 ├── 📊 reports/                             Dashboards & findings
 │   ├── _templates/                         Avanade branding templates
-│   ├── bradesco/                           Bradesco dashboards
+│   ├── financeiro/                         Financeiro dashboards
 │   └── [client-specific reports]
 │
 ├── 📚 docs/                                Documentation hub
@@ -221,7 +221,7 @@ imfai-ava-fabric-data-agents/
 
 ## 📊 Key Metrics
 
-### Bradesco Case (Completed ✅)
+### Financeiro Case (Completed ✅)
 - **Legacy Artifacts Extracted:** 545 files
 - **Logical Entities Designed:** 146 models
 - **Data Migrated:** 12.4M rows

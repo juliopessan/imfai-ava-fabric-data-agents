@@ -43,7 +43,7 @@ result = migration_coordinator.spawn_agent(...)
 
 telemetry_collector.log_execution(
     agent_id="data-architect",
-    wave="bradesco_wave_2",
+    wave="financeiro_wave_2",
     gate=1,
     model="claude-opus-4-1",
     tokens_in=12500,

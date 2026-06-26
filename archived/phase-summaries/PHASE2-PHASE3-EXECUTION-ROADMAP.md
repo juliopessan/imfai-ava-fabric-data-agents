@@ -18,7 +18,7 @@
 - ✅ Workflow chain validated end-to-end
 - ✅ Token reduction ≥ 70%
 - ✅ Zero hallucinations verified
-- ✅ Bradesco wave ready for Phase 4 deployment
+- ✅ Financeiro wave ready for Phase 4 deployment
 
 ---
 
@@ -126,7 +126,7 @@ Open 3 agent files and verify:
 
 - [ ] Phase 2 integration complete ✅ (will be done)
 - [ ] `test_specs_system.py` ready ✅ (Done)
-- [ ] Bradesco wave-config.yaml exists
+- [ ] Financeiro wave-config.yaml exists
 - [ ] Test environment ready
 - [ ] Performance baseline recorded
 

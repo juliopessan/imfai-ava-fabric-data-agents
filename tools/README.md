@@ -12,7 +12,7 @@ Scripts para validação de integração, qualidade e conformidade.
 |--------|-----------|-----|
 | `WORKFLOW-INTEGRATION-CHECK.py` | Validação inicial de integração | `python WORKFLOW-INTEGRATION-CHECK.py` |
 | `WORKFLOW-INTEGRATION-CHECK-v2.py` | Validação melhorada (v2) | `python WORKFLOW-INTEGRATION-CHECK-v2.py` |
-| `run_bradesco_tier1_validation.py` | Validação específica Bradesco TIER 1 | `python run_bradesco_tier1_validation.py` |
+| `run_financeiro_tier1_validation.py` | Validação específica Financeiro TIER 1 | `python run_financeiro_tier1_validation.py` |
 
 ### `utilities/` — Scripts Auxiliares
 

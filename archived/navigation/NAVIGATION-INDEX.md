@@ -20,7 +20,7 @@ Start here to understand the project:
 Understand the architecture:
 - **[docs/HARNESS-MANIFEST.md](docs/HARNESS-MANIFEST.md)** — Harness components & policies
 - **[docs/HUMAN-AGENT-CHECKPOINTS.md](docs/HUMAN-AGENT-CHECKPOINTS.md)** — Escalation rules (3-tier)
-- **[projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md](projects/bradesco/WORKFLOW_AND_ARCHITECTURE.md)** — Migration pipeline
+- **[projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md](projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md)** — Migration pipeline
 - **[AGENTIC-ENGINEERING-V1-SUMMARY.md](AGENTIC-ENGINEERING-V1-SUMMARY.md)** — New framework overview
 - **[src/shared/schemas/wave-config-extended.yaml](src/shared/schemas/wave-config-extended.yaml)** — Configuration schema
 

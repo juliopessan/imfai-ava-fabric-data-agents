@@ -11,7 +11,7 @@
 Compression Ratio:       50% (single) / 87.5% (cascade)
 Latency:                 < 100ms
 Stack Compliance:        ✅ Microsoft-only (mock fallback)
-Cost Savings:            $243/ano (Bradesco) → $2.4K+ (10 projects)
+Cost Savings:            $243/ano (Financeiro) → $2.4K+ (10 projects)
 Start Date:              2026-06-22
 Duration:                8 weeks (32 hours dev)
 Decision:                ✅ GO APPROVED (2026-06-15)

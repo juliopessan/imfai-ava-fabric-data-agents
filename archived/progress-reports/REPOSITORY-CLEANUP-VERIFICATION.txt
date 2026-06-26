@@ -17,7 +17,7 @@ Status: ✅ VERIFIED & PASSED
 ═══════════════════════════════════════════════════════════════════════════════
 
 **Total Changes Made:** 20 files reorganized
-**Projects Affected:** 3 (bradesco, einstein-hiae, multi-platform-migration)
+**Projects Affected:** 3 (financeiro, einstein-saude, multi-platform-migration)
 **Validation Checks:** 15/15 PASSED ✅
 
 
@@ -35,7 +35,7 @@ Status: ✅ VERIFIED & PASSED
 **Result:** Einstein root cleaned, all scripts centralized ✅
 
 
-## PHASE 2: BRADESCO DOCS → outputs/
+## PHASE 2: FINANCEIRO DOCS → outputs/
 
 ✅ Moved 4 documentation files from root to outputs/:
    1. AUTONOMOUS-TEST-REPORT-2026-06-05.md

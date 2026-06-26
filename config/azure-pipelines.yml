@@ -51,7 +51,7 @@ stages:
               python -m pip install -r requirements-dev.txt
             displayName: 'Install dependencies'
           - script: |
-              python projects/bradesco/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
+              python projects/financeiro/scripts/00_MASTER_PIPELINE_WITH_TELEMETRY.py
             displayName: 'Run master pipeline with telemetry'
           - task: PublishBuildArtifacts@1
             inputs:

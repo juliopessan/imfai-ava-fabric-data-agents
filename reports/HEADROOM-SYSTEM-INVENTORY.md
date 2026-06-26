@@ -13,7 +13,7 @@ O projeto possui um **sistema de compressão de contexto (Headroom)** que reduz 
 - ⏱️ < 100ms latência
 - ✅ Decision: **GO APPROVED** (2026-06-15)
 - 📅 Start: 2026-06-22 (Phase 1)
-- 💵 Economia: $243/ano (Bradesco) → $2.4K+ (10 projetos)
+- 💵 Economia: $243/ano (Financeiro) → $2.4K+ (10 projetos)
 
 ---
 

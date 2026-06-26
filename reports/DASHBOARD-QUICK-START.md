@@ -16,9 +16,9 @@ Criada estratégia 2-layer para dashboards:
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  LAYER 2: Dashboards de Projeto (mantidos separados)        │
-│  ├─ Bradesco (4 dashboards)                                 │
+│  ├─ Financeiro (4 dashboards)                                 │
 │  │  └─ Detalhes técnicos, testing, ROI                      │
-│  └─ Einstein-HIAE (a criar)                                 │
+│  └─ Einstein-Saúde (a criar)                                 │
 │     └─ Discovery, design, healthcare-specific               │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -35,7 +35,7 @@ reports/
 │   └── README-GOLDEN-STANDARD.md                 (referência)
 ├── DASHBOARD-CONSOLIDATION-STRATEGY.md           ✅ NOVO (docs)
 │
-└── bradesco/
+└── financeiro/
     ├── bradesco-executive-dashboard.html         (fonte de KPIs)
     ├── bradesco-3tier-dashboard.html             (fase técnica)
     ├── bradesco-autonomous-test-report.html      (testes)
