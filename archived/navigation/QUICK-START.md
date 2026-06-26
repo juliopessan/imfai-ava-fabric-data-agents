@@ -27,7 +27,7 @@ pip install -r config/requirements-dev.txt
 python projects/bradesco/scripts/00_MASTER_PIPELINE.py
 ```
 
-### Option B: Einstein-HIAE KPI Portal
+### Option B: Reference-Saúde KPI Portal
 ```powershell
 # Generate the KPI portal with real legacy metrics
 python projects/einstein-hiae/scripts/generate_kpi_portal.py

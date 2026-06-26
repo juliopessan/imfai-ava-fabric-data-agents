@@ -21,7 +21,7 @@ Status: ✅ VERIFIED & PASSED
 **Validation Checks:** 15/15 PASSED ✅
 
 
-## PHASE 1: EINSTEIN-HIAE SCRIPTS → scripts/
+## PHASE 1: REFERENCE-SAÚDE SCRIPTS → scripts/
 
 ✅ Moved 7 Python scripts from root to scripts/ folder:
    1. create_executive_dashboard.py

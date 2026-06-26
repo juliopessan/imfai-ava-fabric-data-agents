@@ -1,4 +1,4 @@
-# 📊 Einstein-HIAE Project — KPI Portal & Legacy Analysis
+# 📊 Reference-Saúde Project — KPI Portal & Legacy Analysis
 
 **Status:** ✅ PHASE 1-4 COMPLETE | Ready for Phase 5 (Go-Live)
 

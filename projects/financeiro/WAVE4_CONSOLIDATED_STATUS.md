@@ -8,7 +8,7 @@
 
 ## ⚡ SÍNTESE EXECUTIVA
 
-A **Bradesco Einstein Migration Wave 4** executou com **sucesso absoluto** de forma totalmente autônoma em 3 gates sequenciais, superando **TODOS** os KPIs de Wave 3:
+A **Financeiro Reference Migration Wave 4** executou com **sucesso absoluto** de forma totalmente autônoma em 3 gates sequenciais, superando **TODOS** os KPIs de Wave 3:
 
 ### Métricas em uma linha
 - ✅ **GateScore:** 0.9587 (target ≥0.95, +0.87%)

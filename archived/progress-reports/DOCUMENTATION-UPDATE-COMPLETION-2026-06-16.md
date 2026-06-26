@@ -12,7 +12,7 @@
 |--------|---|---|---|
 | **Main Documentation** | 3 | ✅ Complete | README.md, INDEX.md, QUICK-START.md |
 | **Project READMEs** | 3 | ✅ Complete | financeiro, reference-saude, multi-platform-migration |
-| **Scripts Documentation** | 1 | ✅ Complete | einstein-hiae/scripts/README.md |
+| **Scripts Documentation** | 1 | ✅ Complete | reference-saude/scripts/README.md |
 | **Organization Guide** | 1 | ✅ Complete | REPOSITORY-ORGANIZATION.md |
 | **Reference Guides** | 2 | ✅ Complete | REPOSITORY-QUICK-REFERENCE.md + this file |
 | **Validation** | 1 | ✅ Complete | validate_repo_structure.py (15/15 checks) |
@@ -32,7 +32,7 @@
 #### ✅ INDEX.md  
 - Updated Comece por Aqui section with new paths
 - Reorganized projects structure section (shows scripts/, outputs/, state/)
-- Updated Quick Start with 2 project options (Bradesco + Einstein)
+- Updated Quick Start with 2 project options (Financeiro + Reference-Saúde)
 - Updated documentation references
 - Added validation checks section
 
@@ -50,7 +50,7 @@
 - Added reference to REPOSITORY-QUICK-REFERENCE.md
 - Maintained existing technical documentation
 
-#### ✅ projects/einstein-hiae/README.md
+#### ✅ projects/reference-saude/README.md
 - **NEW FILE** — Comprehensive project overview
 - 309 legacy objects extracted (real numbers)
 - All 4 phases documented with Gate scores

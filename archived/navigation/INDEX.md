@@ -58,7 +58,7 @@ imfai-ava-fabric-data-agents/
 │   │   ├── README.md
 │   │   └── wave-config.yaml
 │   │
-│   ├── 📂 einstein-hiae/
+│   ├── 📂 reference-saude/
 │   │   ├── 📂 scripts/                      # ✅ 7 scripts organizados
 │   │   │   ├── orchestrator.py
 │   │   │   ├── deep_legacy_analyzer.py

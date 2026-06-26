@@ -18,7 +18,7 @@ Criada estratégia 2-layer para dashboards:
 │  LAYER 2: Dashboards de Projeto (mantidos separados)        │
 │  ├─ Financeiro (4 dashboards)                                 │
 │  │  └─ Detalhes técnicos, testing, ROI                      │
-│  └─ Einstein-Saúde (a criar)                                 │
+│  └─ Reference-Saúde (a criar)                                 │
 │     └─ Discovery, design, healthcare-specific               │
 └─────────────────────────────────────────────────────────────┘
 ```
