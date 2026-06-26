@@ -13,9 +13,10 @@
 > ⚠️ **Data Anonymization Notice**  
 > All customer identifiable information has been anonymized for privacy protection:
 > - **Bradesco** → **Financeiro** (Financial Services)
-> - **HIAE** → **Saúde** (Healthcare)
-> - Project paths and references updated accordingly
-> - This is a reference implementation; actual customer names are protected.
+> - **Einstein-HIAE** → **Reference-Saúde** (Healthcare)
+> - **einstein** → **reference** (identifier cleanup)
+> - Project paths, references, and metadata updated for complete anonymization
+> - This is a reference implementation; actual customer names are protected in compliance with data governance.
 
 ---
 
