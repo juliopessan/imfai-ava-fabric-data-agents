@@ -485,10 +485,10 @@ docker pull ghcr.io/juliopessan/imfai-ava-fabric-data-agents:latest
 
 ## 🙏 Credits
 
-**Framework:** Avanade Global AI Hub  
-**Lead Architect:** GitHub Copilot (Claude Haiku 4.5)  
+**Framework:** Avanade BEH Hub  
+**Gen AI Lead Architect:** Julio Pessan  
 **Quality Assurance:** Multi-agent orchestration system  
-**Branding:** Avanade Orange DNA design system
+**Branding:** Avanade design system
 
 ---
 
