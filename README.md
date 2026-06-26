@@ -6,6 +6,16 @@
 [![Tests](https://img.shields.io/badge/tests-189%20passed-brightgreen)](src/shared/tests/)
 [![Python](https://img.shields.io/badge/python-3.13+-blue)](.)
 [![License](https://img.shields.io/badge/license-Avanade%20Internal-blueviolet)](.)
+[![Data Anonymized](https://img.shields.io/badge/data-anonymized-success)](.)
+
+---
+
+> ⚠️ **Data Anonymization Notice**  
+> All customer identifiable information has been anonymized for privacy protection:
+> - **Bradesco** → **Financeiro** (Financial Services)
+> - **HIAE** → **Saúde** (Healthcare)
+> - Project paths and references updated accordingly
+> - This is a reference implementation; actual customer names are protected.
 
 ---
 
