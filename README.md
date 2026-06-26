@@ -11,12 +11,10 @@
 ---
 
 > ⚠️ **Data Anonymization Notice**  
-> All customer identifiable information has been anonymized for privacy protection:
-> - **Bradesco** → **Financeiro** (Financial Services)
-> - **Einstein-HIAE** → **Reference-Saúde** (Healthcare)
-> - **einstein** → **reference** (identifier cleanup)
-> - Project paths, references, and metadata updated for complete anonymization
-> - This is a reference implementation; actual customer names are protected in compliance with data governance.
+> All customer identifiable information has been anonymized for privacy protection.
+> This repository contains no customer names, project identifiers, or customer-specific references.
+> All documentation and paths use anonymized placeholders (Financeiro, Reference-Saúde, etc.).
+> This is a reference implementation; actual customer names are protected in compliance with data governance.
 
 ---
 
@@ -30,7 +28,7 @@ A **complete orchestration framework** for data platform migrations that:
 ✅ **Validates** data integrity (98.7% accuracy)  
 ✅ **Generates** executive dashboards (Avanade-branded)
 
-### Real-World Example: Financeiro
+### Reference Example: Multi-Platform Migration
 
 | Metric | Value |
 |--------|-------|
@@ -55,7 +53,7 @@ cd c:\Users\julio.cesar.d.pessan\Downloads\imfai-ava-fabric-data-agents
 pip install -r config/requirements-dev.txt
 ```
 
-### 2. Run Financeiro Migration
+### 2. Run Migration Pipeline
 ```powershell
 python projects/financeiro/scripts/00_MASTER_PIPELINE.py
 ```
