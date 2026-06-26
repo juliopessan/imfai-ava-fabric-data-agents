@@ -1,4 +1,4 @@
-# 🚀 BRADESCO EINSTEIN MIGRATION WAVE 4 — ORCHESTRATION COMPLETE
+# 🚀 FINANCEIRO REFERENCE MIGRATION WAVE 4 — ORCHESTRATION COMPLETE
 
 **Data de Execução:** 2026-06-16 | **Status:** 🟢 **PRODUCTION READY**  
 **Wave ID:** `bradesco-einstein-2026-06` | **Coordenador:** migration-coordinator  

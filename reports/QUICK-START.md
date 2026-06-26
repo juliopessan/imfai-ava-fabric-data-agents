@@ -19,7 +19,7 @@ reports/
 │   ├── 🎨 executive-dashboard.html ............... Template executivo
 │   └── 📚 *.md ................................... Guias e documentação
 │
-└── 📁 einstein-hiae/ ................ Planejado para futuro
+└── 📁 reference-saude/ ................ Planejado para futuro
 ```
 
 ---

@@ -1,4 +1,4 @@
-# 🚀 GO-LIVE CHECKLIST — Bradesco Einstein Migration
+# 🚀 GO-LIVE CHECKLIST — Financeiro Reference Migration
 
 **Production Deployment Readiness Verification**
 

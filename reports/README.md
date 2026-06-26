@@ -16,7 +16,7 @@ reports/
 │   ├── bradesco-autonomous-test-report.html   (Relatório de teste autônomo)
 │   └── ROI_ANALYSIS_VISUAL.html               (Dashboard ROI com benchmarks)
 │
-├── einstein-hiae/                    ← CLIENTE: Einstein HIAE (planejado)
+├── reference-saude/                    ← CLIENTE: Reference Saude (planejado)
 │   └── (relatórios por cliente)
 │
 └── _templates/                       ← TEMPLATES & FERRAMENTAS COMPARTILHADAS

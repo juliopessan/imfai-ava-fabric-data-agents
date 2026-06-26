@@ -1,7 +1,7 @@
 # 🟢 Wave 2 Execution — Executive Summary
 
 **Date:** 2026-06-16  
-**Project:** Bradesco — Einstein HIAE Migration (Wave 2 Optimized)  
+**Project:** Financeiro — Reference Saude Migration (Wave 2 Optimized)  
 **Dataset:** 8.2M rows | 42 schemas | 380 GB  
 **Duration:** 93 minutes (vs 120 Wave 1 = **-22.5%**)  
 **Status:** ✅ **ALL 3 GATES APPROVED**

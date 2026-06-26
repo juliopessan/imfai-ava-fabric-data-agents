@@ -354,7 +354,7 @@ scope:
 
 ## 🚀 Reusability
 
-To migrate another project (e.g., Einstein-HIAE):
+To migrate another project (e.g., Reference-Saude):
 
 1. Create `projects/einstein-hiae/`
 2. Copy `projects/bradesco/scripts/` to new project

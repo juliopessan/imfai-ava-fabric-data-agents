@@ -12,7 +12,7 @@
 
 | Fase | Ação | Impacto |
 |------|------|--------|
-| **1** | Movidos 7 scripts Python (Einstein) → `scripts/` | Raiz limpa ✅ |
+| **1** | Movidos 7 scripts Python (Reference) → `scripts/` | Raiz limpa ✅ |
 | **2** | Movidos 7 docs (Bradesco) → `outputs/` | Docs organizadas ✅ |
 | **3** | Criado `state/` para config/logs | Admin centralizado ✅ |
 | **4** | Movidos 2 summaries (Einstein) → `outputs/` | Outputs consolidados ✅ |

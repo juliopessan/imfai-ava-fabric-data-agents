@@ -16,7 +16,7 @@ Bem-vindo ao repositório da **Data Migration Factory (DMF)** — um orquestrado
 1. **Leia primeiro:** [`README.md`](../README.md) (root)
 2. **Entenda a estrutura:** [`REPOSITORY-ORGANIZATION.md`](./REPOSITORY-ORGANIZATION.md) | [`REPOSITORY-QUICK-REFERENCE.md`](../REPOSITORY-QUICK-REFERENCE.md)
 3. **Setup local:** [`config/README.md`](./config/README.md)
-4. **Comece com um projeto:** [`projects/financeiro/README.md`](./projects/financeiro/README.md) ou [`projects/einstein-saude/README.md`](./projects/einstein-saude/README.md)
+4. **Comece com um projeto:** [`projects/financeiro/README.md`](./projects/financeiro/README.md) ou [`projects/reference-saude/README.md`](./projects/reference-saude/README.md)
 5. **Comece a codificar:** [`src/shared/README.md`](./src/shared/README.md)
 
 ### Já Familiarizado?

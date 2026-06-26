@@ -6,7 +6,7 @@ Consolida KPIs de dashboards de projeto no Executive Unified Dashboard.
 Extrai métricas principais e atualiza a visão gerencial automaticamente.
 
 Uso:
-    python consolidate_dashboards.py [--projects bradesco,einstein] [--dry-run]
+    python consolidate_dashboards.py [--projects financeiro,reference] [--dry-run]
 
 Exemplo:
     python consolidate_dashboards.py

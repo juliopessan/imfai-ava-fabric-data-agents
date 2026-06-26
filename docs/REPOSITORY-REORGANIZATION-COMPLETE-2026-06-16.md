@@ -10,7 +10,7 @@
 
 ### ✅ COMPLETED
 
-#### Phase 1: Einstein-HIAE Project Reorganization
+#### Phase 1: Reference-Saude Project Reorganization
 - ✅ Moved 7 Python scripts from root → `scripts/` folder
   - `create_executive_dashboard.py`
   - `deep_legacy_analyzer.py`

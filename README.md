@@ -104,7 +104,7 @@ Start here if you're implementing **harness formalization, skills versioning, ob
 ### For Developers & Architects
 - **[projects/financeiro/README.md](projects/financeiro/README.md)** — How to run the main case
 - **[projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md](projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md)** — Complete workflow breakdown
-- **[projects/einstein-saude/README.md](projects/einstein-saude/README.md)** — KPI Portal & legacy analysis
+- **[projects/reference-saude/README.md](projects/reference-saude/README.md)** — KPI Portal & legacy analysis
 - **[REPOSITORY-QUICK-REFERENCE.md](REPOSITORY-QUICK-REFERENCE.md)** — Script and file locations
 - **[src/shared/scripts/README.md](src/shared/scripts/README.md)** — 23 governance modules
 - **[.github/specs/HOW-TO-USE-SPECS.md](.github/specs/HOW-TO-USE-SPECS.md)** — Specs system (3000+ words)
