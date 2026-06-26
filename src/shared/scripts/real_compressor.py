@@ -22,6 +22,14 @@ Transform applied:
 
 For non-JSON text (markdown, SQL, logs), only whitespace normalization is
 applied — real but modest, which is the honest answer for unstructured text.
+
+Token-counting caveat: this module uses tiktoken (OpenAI's tokenizer) as an
+offline approximation when no live Anthropic client is available. Per
+Anthropic's own guidance, tiktoken undercounts real Claude tokens by roughly
+15-20%+ on typical text (more on code) — it is a labeled approximation, not
+a substitute for the real count. When a live client exists, prefer
+anthropic_client.count_tokens_real(), which calls the actual
+`messages.count_tokens` endpoint.
 """
 from __future__ import annotations
 

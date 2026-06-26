@@ -7,6 +7,12 @@ pyyaml
 tiktoken>=0.5.0
 opentelemetry-sdk>=1.24.0
 
+# Real Anthropic API client (anthropic_client.py, model_router.py) — model
+# routing, prompt caching, and real usage/cost capture. No long-path issues.
+# Requires ANTHROPIC_API_KEY in the environment for live calls; tests inject
+# a fake client and run without it.
+anthropic>=0.110.0
+
 # Optional: the real Headroom engine (github.com/juliopessan/headroom,
 # published as `headroom-ai`). Its compression core is a Rust extension
 # shipped only for macOS/Linux (manylinux) — there is no Windows wheel, so on

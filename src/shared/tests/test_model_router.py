@@ -1,5 +1,5 @@
 """
-Tests for model_router.py — complexity-based Azure OpenAI model routing.
+Tests for model_router.py — complexity-based Claude model routing.
 
 Covers:
 - Task classification (SIMPLE / MEDIUM / COMPLEX)
@@ -72,15 +72,15 @@ class TestRoute:
 
     def test_simple_task_routes_to_mini(self):
         deployment = self.router.route("validate_gate_score")
-        assert deployment == "gpt-4o-mini"
+        assert deployment == "claude-haiku-4-5"
 
-    def test_medium_task_routes_to_gpt4o(self):
+    def test_medium_task_routes_to_sonnet(self):
         deployment = self.router.route("generate_sttm")
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-sonnet-4-6"
 
-    def test_complex_task_routes_to_gpt4o(self):
+    def test_complex_task_routes_to_opus(self):
         deployment = self.router.route("generate_adr")
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-opus-4-8"
 
     def test_route_returns_string(self):
         result = self.router.route("validate_schema")
@@ -90,7 +90,7 @@ class TestRoute:
     def test_route_with_empty_context(self):
         # Should not raise
         result = self.router.route("validate_gate_score", context={})
-        assert result == "gpt-4o-mini"
+        assert result == "claude-haiku-4-5"
 
 
 # ---------------------------------------------------------------------------
@@ -107,46 +107,46 @@ class TestEscalation:
             "validate_gate_score", context={"entity_count": 50}
         )
         # validate_gate_score is SIMPLE base, escalated to MEDIUM by entity_count > 30
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-sonnet-4-6"
 
     def test_very_high_entity_count_escalates_to_complex(self):
         deployment = self.router.route(
             "validate_gate_score", context={"entity_count": 150}
         )
-        assert deployment == "gpt-4o"  # COMPLEX still maps to gpt-4o
+        assert deployment == "claude-opus-4-8"  # entity_count > 100 -> COMPLEX
 
     def test_adr_required_flag_escalates_to_complex(self):
         deployment = self.router.route(
             "validate_schema", context={"adr_required": True}
         )
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-opus-4-8"
 
     def test_cross_domain_flag_escalates_to_complex(self):
         deployment = self.router.route(
             "check_wave_config", context={"cross_domain": True}
         )
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-opus-4-8"
 
     def test_no_escalation_below_thresholds(self):
         deployment = self.router.route(
             "validate_gate_score", context={"entity_count": 5}
         )
         # Below 30 threshold → stays SIMPLE
-        assert deployment == "gpt-4o-mini"
+        assert deployment == "claude-haiku-4-5"
 
     def test_complex_task_not_downgraded_by_small_context(self):
         # COMPLEX task should never drop to SIMPLE even with trivial context
         deployment = self.router.route(
             "generate_adr", context={"entity_count": 1}
         )
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-opus-4-8"
 
     def test_large_schema_escalates(self):
         # schema_size_kb > 500 → COMPLEX
         deployment = self.router.route(
             "validate_schema", context={"schema_size_kb": 600}
         )
-        assert deployment == "gpt-4o"
+        assert deployment == "claude-opus-4-8"
 
 
 # ---------------------------------------------------------------------------
@@ -213,7 +213,7 @@ class TestRoutingSummary:
 class TestModuleLevelHelpers:
     def test_route_task_function(self):
         result = route_task("validate_gate_score")
-        assert result == "gpt-4o-mini"
+        assert result == "claude-haiku-4-5"
 
     def test_get_router_returns_singleton(self):
         r1 = get_router()
@@ -222,7 +222,7 @@ class TestModuleLevelHelpers:
 
     def test_route_task_with_context(self):
         result = route_task("validate_schema", {"entity_count": 200})
-        assert result == "gpt-4o"
+        assert result == "claude-opus-4-8"
 
 
 # ---------------------------------------------------------------------------

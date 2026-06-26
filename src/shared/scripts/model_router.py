@@ -1,30 +1,44 @@
 #!/usr/bin/env python3
 """
-Model Router — routes DMF agent tasks to the appropriate Azure OpenAI deployment
+Model Router — routes DMF agent tasks to the appropriate Claude model
 based on task complexity, optimising cost while preserving quality.
 
-Routing tiers (Azure OpenAI only — Microsoft-only constraint):
-  SIMPLE   → gpt-4o-mini     (validation, schema checks, format verification)
-  MEDIUM   → gpt-4o          (STTM generation, DDL review, data quality rules)
-  COMPLEX  → gpt-4o / o1     (architecture decisions, ADRs, risk mapping)
+Routing tiers (Claude, via the Anthropic API — see anthropic_client.py):
+  SIMPLE   -> claude-haiku-4-5   (validation, schema checks, format verification)
+  MEDIUM   -> claude-sonnet-4-6  (STTM generation, DDL review, data quality rules)
+  COMPLEX  -> claude-opus-4-8    (architecture decisions, ADRs, risk mapping)
+
+Previously targeted Azure OpenAI deployments (gpt-4o-mini/gpt-4o). Switched
+to Claude because that's what every agent in this repo (.github/agents/*) and
+the rest of the cost-instrumentation chain (model_pricing.py,
+enhanced_token_metrics.py, execution_telemetry.py) actually assumes — the
+Azure OpenAI version was a parallel design nothing in this repo ever called.
 
 Usage
 -----
 >>> router = ModelRouter()
 >>> model = router.route("validate_gate_score", context={})
 >>> model
-'gpt-4o-mini'
+'claude-haiku-4-5'
 
 >>> model = router.route("generate_adr", context={"entity_count": 50})
 >>> model
-'gpt-4o'
+'claude-opus-4-8'
 """
 from __future__ import annotations
 
 import logging
+import sys
 from dataclasses import dataclass, field
 from enum import Enum
+from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+import model_pricing
 
 logger = logging.getLogger(__name__)
 
@@ -45,9 +59,9 @@ class TaskComplexity(str, Enum):
 
 @dataclass(frozen=True)
 class ModelConfig:
-    deployment: str
+    deployment: str  # Claude model ID, e.g. "claude-haiku-4-5"
     max_tokens: int
-    cost_per_1k_input: float   # USD
+    cost_per_1k_input: float   # USD — derived from model_pricing.py, not hand-picked
     cost_per_1k_output: float  # USD
     suitable_for: List[str] = field(default_factory=list)
 
@@ -56,13 +70,23 @@ class ModelConfig:
         return self.cost_per_1k_input + self.cost_per_1k_output
 
 
-# Default Azure OpenAI deployments — override via ModelRouter(model_map=…)
+def _config_for(model: str, max_tokens: int, suitable_for: List[str]) -> ModelConfig:
+    """Build a ModelConfig with cost fields sourced from model_pricing.py."""
+    price = model_pricing.get_price(model)
+    return ModelConfig(
+        deployment=model,
+        max_tokens=max_tokens,
+        cost_per_1k_input=price.input_per_mtok / 1000,
+        cost_per_1k_output=price.output_per_mtok / 1000,
+        suitable_for=suitable_for,
+    )
+
+
+# Default Claude models per tier — override via ModelRouter(model_map=…)
 DEFAULT_MODEL_MAP: Dict[TaskComplexity, ModelConfig] = {
-    TaskComplexity.SIMPLE: ModelConfig(
-        deployment="gpt-4o-mini",
+    TaskComplexity.SIMPLE: _config_for(
+        "claude-haiku-4-5",
         max_tokens=4096,
-        cost_per_1k_input=0.000150,
-        cost_per_1k_output=0.000600,
         suitable_for=[
             "validate_gate_score",
             "validate_schema",
@@ -74,11 +98,9 @@ DEFAULT_MODEL_MAP: Dict[TaskComplexity, ModelConfig] = {
             "reconciliation_check",
         ],
     ),
-    TaskComplexity.MEDIUM: ModelConfig(
-        deployment="gpt-4o",
+    TaskComplexity.MEDIUM: _config_for(
+        "claude-sonnet-4-6",
         max_tokens=16384,
-        cost_per_1k_input=0.002500,
-        cost_per_1k_output=0.010000,
         suitable_for=[
             "generate_sttm",
             "review_ddl",
@@ -91,11 +113,9 @@ DEFAULT_MODEL_MAP: Dict[TaskComplexity, ModelConfig] = {
             "cost_estimate",
         ],
     ),
-    TaskComplexity.COMPLEX: ModelConfig(
-        deployment="gpt-4o",
+    TaskComplexity.COMPLEX: _config_for(
+        "claude-opus-4-8",
         max_tokens=32768,
-        cost_per_1k_input=0.002500,
-        cost_per_1k_output=0.010000,
         suitable_for=[
             "generate_adr",
             "architecture_design",
@@ -127,14 +147,14 @@ _ESCALATION_RULES: List[tuple] = [
 
 class ModelRouter:
     """
-    Route DMF agent tasks to the right Azure OpenAI deployment.
+    Route DMF agent tasks to the right Claude model.
 
     Design principles
     -----------------
-    1. Default to cheapest model that can handle the task.
+    1. Default to the cheapest model that can handle the task.
     2. Escalate only when context signals demand it.
     3. Never downgrade a task that was already classified as COMPLEX.
-    4. All deployments are Azure OpenAI (Microsoft-only).
+    4. Cost fields come from model_pricing.py — one source of truth.
     """
 
     def __init__(
@@ -157,7 +177,7 @@ class ModelRouter:
         context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """
-        Return the Azure OpenAI deployment name for *task_name*.
+        Return the Claude model ID for *task_name*.
 
         Parameters
         ----------
@@ -169,7 +189,7 @@ class ModelRouter:
         Returns
         -------
         str
-            Azure OpenAI deployment name (e.g. "gpt-4o-mini").
+            Claude model ID (e.g. "claude-haiku-4-5").
         """
         context = context or {}
         base_complexity = self._classify_task(task_name)
@@ -184,7 +204,7 @@ class ModelRouter:
             "escalated": final_complexity != base_complexity,
         }
         self._routing_log.append(entry)
-        logger.debug("Route: %s → %s (%s)", task_name, config.deployment, final_complexity.value)
+        logger.debug("Route: %s -> %s (%s)", task_name, config.deployment, final_complexity.value)
 
         return config.deployment
 
@@ -229,7 +249,7 @@ class ModelRouter:
     # ------------------------------------------------------------------
 
     def _build_task_index(self) -> Dict[str, TaskComplexity]:
-        """Build a flat lookup: task_name → complexity tier."""
+        """Build a flat lookup: task_name -> complexity tier."""
         index: Dict[str, TaskComplexity] = {}
         for complexity, config in self.model_map.items():
             for task in config.suitable_for:
