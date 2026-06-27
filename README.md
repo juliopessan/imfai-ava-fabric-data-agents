@@ -15,11 +15,11 @@ A **complete orchestration framework** for data platform migrations that:
 
 ✅ **Inventories** legacy systems (6+ platforms supported)  
 ✅ **Designs** target cloud architectures (Microsoft Fabric primary)  
-✅ **Executes** migrations autonomously (28 seconds for Bradesco)  
+✅ **Executes** migrations autonomously (28 seconds for Finance)  
 ✅ **Validates** data integrity (98.7% accuracy)  
 ✅ **Generates** executive dashboards (Avanade-branded)
 
-### Real-World Example: Bradesco
+### Real-World Example: Finance
 
 | Metric | Value |
 |--------|-------|
