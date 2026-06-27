@@ -1,15 +1,15 @@
 # 🚀 Financeiro Parallel Orchestration — Performance Report
 
-**Generated:** 2026-06-25T18:44:36.493631
+**Generated:** 2026-06-27T20:22:22.271691
 
 ## 📊 Executive Summary
 
 | Metric | Value |
 |--------|-------|
-| **Speedup Factor** | **3.9x** ⚡ |
-| **Serial Time** | 0.61s |
-| **Parallel Time** | 0.16s |
-| **Time Saved** | 0.45s (74.1%) |
+| **Speedup Factor** | **3.8x** ⚡ |
+| **Serial Time** | 0.62s |
+| **Parallel Time** | 0.17s |
+| **Time Saved** | 0.46s (73.4%) |
 | **Token Reduction** | 0.0% |
 | **Cost Savings** | $0.0017 |
 
@@ -17,7 +17,7 @@
 
 ### Parallel Execution
 - **4 Waves in Parallel:** Serial 6s → Parallel 0.2s
-- **Speedup:** 3.9x faster 🚀
+- **Speedup:** 3.8x faster 🚀
 - **Concurrent Threads:** 4 (one per wave)
 
 ### Schema Caching
@@ -45,7 +45,7 @@
 
 ## ✅ Conclusion
 
-Parallel execution achieved **3.9x speedup** with schema caching reducing tokens by **0.0%**.
+Parallel execution achieved **3.8x speedup** with schema caching reducing tokens by **0.0%**.
 
 ### ROI Assessment
 - **Development Time:** 3-4 hours

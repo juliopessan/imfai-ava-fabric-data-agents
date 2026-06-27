@@ -192,6 +192,45 @@ imfai-ava-fabric-data-agents/
     ├── REPOSITORY-QUICK-REFERENCE.md       File & script locations
     ├── PHASE2-PHASE3-*.md                  Phase 2 & 3 deliverables (7 files)
     └── [other guides]
+
+## 📦 File Organization (27/06/2026)
+
+Loose files have been organized into logical folders:
+
+```
+tools/
+├── trace-integration/              ⭐ NEW: Real trace integration
+│   ├── trace_writer.py            Core module (370 lines)
+│   ├── WAVE4_AUTONOMOUS_WITH_REAL_TRACES.py
+│   ├── TRACE_INTEGRATION_GUIDE.md  Step-by-step implementation
+│   ├── README-TRACE-INTEGRATION.md Quick start (5 min)
+│   ├── TRACE_INTEGRATION_DELIVERY_SUMMARY.txt
+│   ├── 00-START-HERE-TRACE-INTEGRATION.txt
+│   ├── 00-TRACE-REAL-INTEGRATION-SUMMARY.md
+│   └── analyze_trace_logs.py
+│
+└── analytics/                      Data analysis & reporting
+    ├── analyze_financeiro.py
+    ├── analyze_financeiro_detailed.py
+    ├── analyze_saude.py
+    ├── analyze_saude_detailed.py
+    ├── report_saude_summary.py
+    └── report_token_summary.py
+
+docs/
+├── scopes/                         Project scope documents
+│   ├── ESCOPO-CONSOLIDADO.md
+│   ├── FINANCEIRO-ESCOPO-TOKENS.md
+│   └── SAUDE-ESCOPO-TOKENS.md
+│
+└── test-reports/                   Test & analysis reports
+    ├── 00-COMECE-AQUI-TESTE-2026-06-27.md
+    ├── 00-TRACE-LOGS-QUICK-SUMMARY.md
+    ├── ANALISE_TRACE_LOGS_COMPLETA_2026-06-27.md
+    ├── INDEX-TRACE-LOGS-ANALYSIS-2026-06-27.md
+    ├── PADROES_ERROS_TRACE_LOGS_2026-06-27.md
+    └── [other test reports]
+```
 ```
 
 ---
