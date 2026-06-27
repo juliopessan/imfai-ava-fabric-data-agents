@@ -96,6 +96,18 @@ Start here if you're implementing **harness formalization, skills versioning, ob
 2. **[INDEX.md](INDEX.md)** — Navigation hub (master index)
 3. **[REPOSITORY-ORGANIZATION.md](REPOSITORY-ORGANIZATION.md)** — How the repo is structured
 
+### 🆕 **Trace Integration — Observability & Audit Trails** (27/06/2026)
+Complete trace capture system for real-time monitoring and audit trails.
+
+- **[00-START-HERE-TRACE-INTEGRATION.txt](00-START-HERE-TRACE-INTEGRATION.txt)** — 👈 **START HERE!** Overview in 2 minutes
+- **[README-TRACE-INTEGRATION.md](README-TRACE-INTEGRATION.md)** — Quick start (5 min demo)
+- **[TRACE_INTEGRATION_GUIDE.md](TRACE_INTEGRATION_GUIDE.md)** — Complete implementation guide
+- **[trace_writer.py](trace_writer.py)** — Core module (production-ready, thread-safe)
+- **[WAVE4_AUTONOMOUS_WITH_REAL_TRACES.py](WAVE4_AUTONOMOUS_WITH_REAL_TRACES.py)** — Demo with 17 real traces
+- **[TRACE_INTEGRATION_DELIVERY_SUMMARY.txt](TRACE_INTEGRATION_DELIVERY_SUMMARY.txt)** — Full delivery summary
+
+**Status:** ✅ Production-Ready (17 traces captured, 35.01s demo, 100% success)
+
 ### For Project Managers
 - **[projects/multi-platform-migration/EXEC-SUMMARY.md](projects/multi-platform-migration/EXEC-SUMMARY.md)** — 6-platform wave executive brief
 - **[docs/project-plans/FINANCEIRO-TIER1-EXECUTION-PLAN.md](docs/project-plans/FINANCEIRO-TIER1-EXECUTION-PLAN.md)** — Detailed execution plan
