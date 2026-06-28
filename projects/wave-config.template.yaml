@@ -1,0 +1,84 @@
+# ============================================================================
+# WAVE CONFIG TEMPLATE — Data Migration Factory v3
+# Copy this to projects/<project-slug>/wave-config.yaml
+# or use: python scripts/FACTORY_BOOTSTRAP.py --project-name <name>
+# ============================================================================
+project_name: "{PROJECT_NAME}"
+project_id: "{PROJECT_SLUG}-{YEAR}"
+description: "Describe the project scope here"
+organization: "Avanade"
+target_platform: "fabric"           # fabric | databricks | synapse
+migration_scope: "Full lift-and-shift + modernization."
+
+# ── Wave ──────────────────────────────────────────────────────────────────────
+wave_number: 1
+wave_name: "{PROJECT_NAME} Wave 1"
+wave_start_date: "YYYY-MM-DD"
+wave_target_completion: "YYYY-MM-DD"
+
+# ── Ownership & RACI ──────────────────────────────────────────────────────────
+discovery_owner: "discovery-scout"
+architecture_owner: "data-architect"
+data_model_owner: "data-modeler"
+code_generator_owner: "code-generator"
+quality_gate_owner: "quality-gate"
+security_owner: "security-compliance"
+
+# ── Known Sources ─────────────────────────────────────────────────────────────
+sources:
+  - "Legacy System A"
+  - "Legacy System B"
+
+# ── Token Budgets (Ponytail Ladder) ───────────────────────────────────────────
+# Tip: adjust based on actual source complexity.
+# Ponytail enforces 50% compression (tokens_out = tokens_in / 2).
+token_budgets:
+  upstream: 150000          # Gate 1 — 7 phases
+  midstream: 120000         # Gate 2 — 3 phases
+  downstream: 100000        # Gate 3 — 3 phases
+  consolidation: 50000      # Gate 4 — consolidation + dashboards
+
+# ── Cost Targets per Gate (USD) ───────────────────────────────────────────────
+cost_targets:
+  gate_1_upstream: 0.50
+  gate_2_midstream: 0.40
+  gate_3_downstream: 0.35
+  gate_4_consolidation: 0.20
+
+# ── Artifact Targets (Ponytail YAGNI enforcement) ────────────────────────────
+# target = ideal number of artifacts; max = trigger review if exceeded
+artifact_targets:
+  gate_1: {min: 1, target: 3, max: 5}
+  gate_2: {min: 2, target: 5, max: 8}
+  gate_3: {min: 3, target: 6, max: 10}
+  gate_4: {min: 2, target: 11, max: 20}
+
+# ── Known Risks ───────────────────────────────────────────────────────────────
+known_risks:
+  - "data_quality_unknown"
+  - "legacy_documentation_gaps"
+  - "schema_drift_during_migration"
+
+# ── GateScore Formula ─────────────────────────────────────────────────────────
+# Score = 0.35×Completude + 0.25×Qualidade + 0.20×RiscoResidual + 0.20×Reconciliação
+# Approved: >= 0.85 | Approved with items: 0.70–0.84 | Blocked: < 0.70
+gate_score_threshold:
+  approved: 0.85
+  approved_with_items: 0.70
+  blocked: 0.70
+
+# ── Trace & Observability ─────────────────────────────────────────────────────
+trace:
+  enabled: true
+  wave_id: "{PROJECT_SLUG}-wave1"
+  output_dir: ".trace-logs"
+
+# ── Domain Hints (informational) ─────────────────────────────────────────────
+# Reference budgets by domain — use FACTORY_BOOTSTRAP.py to auto-fill these
+# domain_defaults:
+#   logistics:   upstream=160000, midstream=130000, downstream=110000, consolidation=55000
+#   retail:      upstream=140000, midstream=110000, downstream=95000,  consolidation=50000
+#   ecommerce:   upstream=150000, midstream=120000, downstream=100000, consolidation=50000
+#   healthcare:  upstream=170000, midstream=140000, downstream=120000, consolidation=60000
+#   finance:     upstream=150000, midstream=120000, downstream=100000, consolidation=50000
+#   manufacturing: upstream=155000, midstream=125000, downstream=105000, consolidation=52000
