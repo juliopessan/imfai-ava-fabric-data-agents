@@ -266,7 +266,6 @@ docs/
     ├── PADROES_ERROS_TRACE_LOGS_2026-06-27.md
     └── [other test reports]
 ```
-```
 
 ---
 
