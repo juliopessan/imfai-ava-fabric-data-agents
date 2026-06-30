@@ -3,7 +3,7 @@
 **An autonomous, multi-agent data migration system with 3-tier governance.**
 
 [![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-brightgreen)](.)
-[![Tests](https://img.shields.io/badge/tests-397%20passed-brightgreen)](src/shared/tests/)
+[![Tests](https://img.shields.io/badge/tests-463%20passed-brightgreen)](src/shared/tests/)
 [![Python](https://img.shields.io/badge/python-3.13+-blue)](.)
 [![License](https://img.shields.io/badge/license-Avanade%20Internal-blueviolet)](.)
 [![Data Anonymized](https://img.shields.io/badge/data-anonymized-success)](.)
@@ -140,6 +140,16 @@ Complete trace capture system for real-time monitoring and audit trails.
 
 **Status:** ✅ Production-Ready (17 traces captured, 35.01s demo, 100% success)
 
+### 🆕 **Tier C — Semantic Cache & Distillation** (30/06/2026)
+Two new zero-dependency modules that close the last two gaps in the shared governance stack.
+
+| Module | Purpose | Tests |
+|--------|---------|-------|
+| [`src/shared/scripts/semantic_cache.py`](src/shared/scripts/semantic_cache.py) | Global LLM response cache — exact SHA256 + cosine-similarity (TF-vector, pure Python). Eliminates duplicate calls across waves/projects. Tracks cost_avoided_usd and tokens_avoided. | 18 ✅ |
+| [`src/shared/scripts/distillation_exporter.py`](src/shared/scripts/distillation_exporter.py) | Captures high-quality agent invocations; exports fine-tuning pairs to OpenAI JSONL, Anthropic JSONL, or CSV. Quality score = 0.40×gate_score + 0.40×compression + 0.20×success. | 31 ✅ |
+
+Both backed by SQLite, share the same context-manager pattern as `knowledge_graph_store.py`, and require no external libraries.
+
 ### For Project Managers
 - **[projects/multi-platform-migration/EXEC-SUMMARY.md](projects/multi-platform-migration/EXEC-SUMMARY.md)** — 6-platform wave executive brief
 - **[docs/project-plans/FINANCEIRO-TIER1-EXECUTION-PLAN.md](docs/project-plans/FINANCEIRO-TIER1-EXECUTION-PLAN.md)** — Detailed execution plan
@@ -149,7 +159,7 @@ Complete trace capture system for real-time monitoring and audit trails.
 - **[projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md](projects/financeiro/WORKFLOW_AND_ARCHITECTURE.md)** — Complete workflow breakdown
 - **[projects/reference-saude/README.md](projects/reference-saude/README.md)** — KPI Portal & legacy analysis
 - **[REPOSITORY-QUICK-REFERENCE.md](REPOSITORY-QUICK-REFERENCE.md)** — Script and file locations
-- **[src/shared/scripts/README.md](src/shared/scripts/README.md)** — 23 governance modules
+- **[src/shared/scripts/README.md](src/shared/scripts/README.md)** — 31 governance modules
 - **[.github/specs/HOW-TO-USE-SPECS.md](.github/specs/HOW-TO-USE-SPECS.md)** — Specs system (3000+ words)
 - **[docs/README.md](docs/README.md)** — Documentation index (reports, projects, strategies)
 
@@ -197,8 +207,8 @@ imfai-ava-fabric-data-agents/
 │   │   │   ├── 🆕 wave-config-extended.yaml       Skills versioning + specs
 │   │   │   ├── 🆕 spec-as-executable.md          Specs → Validators
 │   │   │   └── [other schemas]
-│   │   ├── scripts/                        23 governance modules (Wave tracking, QA, Cost, etc.)
-│   │   ├── tests/                          189 test cases (100% passing) + 7 pending
+│   │   ├── scripts/                        31 governance modules (Wave tracking, QA, Cost, Semantic Cache, Distillation)
+│   │   ├── tests/                          463 test cases (100% passing)
 │   │   └── __init__.py
 │   └── __init__.py
 │
@@ -302,7 +312,7 @@ docs/
 - **Power BI** — Dashboards
 
 ### Testing & Quality
-- **pytest** — 397 unit tests (100% passing)
+- **pytest** — 463 unit tests (100% passing)
 - **pyyaml** — Configuration validation
 - **git** — Version control
 
@@ -340,7 +350,8 @@ docs/
 - **Phase 3 (Execution):** 158 tests ✓
 - **Phase 2 & 3 (Specs):** 7 automated tests — 5/6 sub-tests pass for real; 6th correctly red (missing agent prompt stubs)
 - **Governance suite (wave, gate, DQ):** 75 additional tests ✓
-- **Total:** 397 tests (100% passing)
+- **Tier B (semantic cache, distillation, complementation):** 66 tests ✓
+- **Total:** 463 tests (100% passing)
 
 ---
 

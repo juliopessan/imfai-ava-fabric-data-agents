@@ -173,6 +173,8 @@ def copy_and_patch_scripts(project_dir: Path, project_name: str, domain_info: di
         "generate_tabbed_report.py",
         "normalize_outputs_to_template.py",
         "md_to_html.py",
+        # Tier B orchestrator — thin wrapper; generic engine is src/shared/scripts/tier_b_orchestrator.py
+        "WAVE5_PLUS_TIER_B_ORCHESTRATOR.py",
     ]
 
     copied = 0
@@ -189,6 +191,13 @@ def copy_and_patch_scripts(project_dir: Path, project_name: str, domain_info: di
         content = content.replace('"Financeiro"', f'"{project_name}"')
         content = content.replace("Financeiro-", f"{project_name}-")
         content = content.replace("Financeiro_", f"{project_name}_")
+        # Lowercase variants (used in tier_b_orchestrator wrapper defaults)
+        content = content.replace('"financeiro"', f'"{project_name}"')
+        content = content.replace("financeiro_tier_b", f"{project_name}_tier_b")
+        # Cosmetic: docstring/comment labels in the Tier B wrapper
+        content = content.replace("Financeiro entry-point", f"{project_name.title()} entry-point")
+        content = content.replace("--project financeiro", f"--project {project_name}")
+        content = content.replace("/financeiro/scripts/", f"/{project_name}/scripts/")
 
         dst.write_text(content, encoding="utf-8")
         copied += 1
