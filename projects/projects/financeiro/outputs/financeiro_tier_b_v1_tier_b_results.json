@@ -1,0 +1,122 @@
+{
+  "wave_id": "financeiro_tier_b_v1",
+  "project": "financeiro",
+  "start_time": "2026-06-30T12:05:13.424021",
+  "gates": {
+    "gate1": {
+      "gate": 1,
+      "discovered_entities": 7,
+      "reused_entities": 0,
+      "new_entities": 7,
+      "reuse_percentage": 0.0,
+      "confidence_score": 0.279,
+      "escalation_needed": true,
+      "escalation_reason": "Critical: confidence below 70% threshold (27.90%)",
+      "duration_sec": 0.050546884536743164,
+      "estimated_tokens_saved": 0,
+      "phase": "upstream",
+      "status": "pending_review"
+    },
+    "gate2": {
+      "gate": 2,
+      "etl_scripts_analyzed": 3,
+      "lineage_edges_extracted": 0,
+      "scd_patterns_detected": 1,
+      "incremental_patterns_detected": 1,
+      "confidence_score": 0.43,
+      "duration_sec": 0.004629850387573242,
+      "tokens_saved_vs_llm": 1500,
+      "phase": "midstream",
+      "status": "approved"
+    },
+    "gate3": {
+      "gate": 3,
+      "ddl_scripts": 2,
+      "contracts_defined": 2,
+      "confidence_score": 0.965,
+      "reconciliation_match_pct": 98.0,
+      "duration_sec": 0.2061934471130371,
+      "phase": "downstream",
+      "status": "approved"
+    },
+    "gate4": {
+      "gate": 4,
+      "deduplication": {
+        "total_artifacts_registered": 2,
+        "total_reuses": 0,
+        "total_tokens_saved": 200.0,
+        "estimated_cost_saved_usd": 0.002,
+        "by_artifact_type": {
+          "DDL": {
+            "count": 2,
+            "total_reuses": 0,
+            "total_tokens_saved": 200.0,
+            "avg_size_bytes": 58.0
+          }
+        }
+      },
+      "knowledge_graph": {
+        "total_entities": 0,
+        "total_lineage_edges": 0,
+        "waves_stored": 0,
+        "db_file": "projects\\financeiro\\outputs\\knowledge_graph.db"
+      },
+      "specifications": {
+        "total_contracts": 2,
+        "total_rules": 0,
+        "total_schemas": 0,
+        "unique_contracts": 2,
+        "unique_rules": 0,
+        "unique_schemas": 0
+      },
+      "duration_sec": 0.007666349411010742,
+      "phase": "consolidation",
+      "status": "complete"
+    }
+  },
+  "execution_log": [],
+  "summary": {
+    "total_duration_sec": 0.27440452575683594,
+    "total_tokens_in": 2600,
+    "total_tokens_out": 1450,
+    "total_tokens_saved": 1150,
+    "compression_ratio": 0.4423076923076923,
+    "estimated_cost_usd": 0.0145,
+    "estimated_cost_saved_usd": 0.011500000000000002,
+    "execution_log": [
+      {
+        "phase": "Gate1_Upstream",
+        "duration_sec": 0.050546884536743164,
+        "tokens_in": 700,
+        "tokens_out": 700,
+        "compression_ratio": 0.0,
+        "timestamp": "2026-06-30T12:05:13.475582"
+      },
+      {
+        "phase": "Gate2_Midstream",
+        "duration_sec": 0.004629850387573242,
+        "tokens_in": 600,
+        "tokens_out": 150,
+        "compression_ratio": 0.75,
+        "timestamp": "2026-06-30T12:05:13.481218"
+      },
+      {
+        "phase": "Gate3_Downstream",
+        "duration_sec": 0.2061934471130371,
+        "tokens_in": 300,
+        "tokens_out": 100,
+        "compression_ratio": 0.6666666666666667,
+        "timestamp": "2026-06-30T12:05:13.688417"
+      },
+      {
+        "phase": "Gate4_Consolidation",
+        "duration_sec": 0.007666349411010742,
+        "tokens_in": 1000,
+        "tokens_out": 500,
+        "compression_ratio": 0.5,
+        "timestamp": "2026-06-30T12:05:13.698335"
+      }
+    ]
+  },
+  "end_time": "2026-06-30T12:05:13.698432"
+}

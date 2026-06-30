@@ -1,0 +1,24 @@
+{
+  "DDL": [
+    {
+      "artifact_id": "ddl_2",
+      "artifact_type": "DDL",
+      "wave_id": "financeiro_tier_b_v1",
+      "content_hash": "f6f22b1e540c3c664669e3da66326951f8b36fc266699a7d9b0b03c0102aa94c",
+      "size_bytes": 50,
+      "created_at": "2026-06-30T12:05:13.563111",
+      "reuse_count": 0,
+      "token_savings": 100.0
+    },
+    {
+      "artifact_id": "ddl_2",
+      "artifact_type": "DDL",
+      "wave_id": "financeiro_tier_b_v1",
+      "content_hash": "e2eca079aa51c5b15321ef1f5fbc6fb38abe845cf437df6f50122f1890053d36",
+      "size_bytes": 66,
+      "created_at": "2026-06-30T12:05:13.664063",
+      "reuse_count": 0,
+      "token_savings": 100.0
+    }
+  ]
+}

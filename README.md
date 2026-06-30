@@ -66,7 +66,9 @@ python -m http.server 8000 --directory projects/financeiro/outputs
 
 **Total time: ~1 minute** (most of it is display setup)
 
-👉 **[See QUICK-START.md for detailed steps](QUICK-START.md)**
+� **[→ View Strategic Roadmap (Tier A/B/C Complete)](FACTORY-ROADMAP-2026.html)** — Production-ready dashboard with ROI analysis
+
+�👉 **[See QUICK-START.md for detailed steps](QUICK-START.md)**
 
 ---
 

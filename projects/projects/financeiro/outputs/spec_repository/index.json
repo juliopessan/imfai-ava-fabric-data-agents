@@ -1,0 +1,22 @@
+{
+  "contracts": {
+    "table_0": [
+      {
+        "version": 1,
+        "path": "projects\\financeiro\\outputs\\spec_repository\\contracts\\table_0_v1.json",
+        "created_at": "2026-06-30T12:05:13.482251",
+        "created_by": ""
+      }
+    ],
+    "table_1": [
+      {
+        "version": 1,
+        "path": "projects\\financeiro\\outputs\\spec_repository\\contracts\\table_1_v1.json",
+        "created_at": "2026-06-30T12:05:13.494821",
+        "created_by": ""
+      }
+    ]
+  },
+  "rules": {},
+  "schemas": {}
+}
