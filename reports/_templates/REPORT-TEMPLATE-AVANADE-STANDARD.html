@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{REPORT_TITLE}}</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --ava-orange: #FF5800; --ava-magenta: #CE0569; --ava-red: #C80000;
+  --ava-gold: #FFB314; --ava-purple: #890078; --ava-green: #47800A;
+  --ava-dark: #2D2D2D; --ava-gray: #595959; --ava-light: #E7E6E6;
+  --bg-body: #FAFAFA; --text-primary: #1A1A1A; --text-secondary: #5A5A5A;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-body); color: var(--text-primary); line-height: 1.6; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1700 30%, var(--ava-orange) 100%);
+  padding: 48px 56px; color: white; position: relative; overflow: hidden;
+}
+.header::before { 
+  content:''; position:absolute; top:-80px; right:-40px; width:550px; height:550px; 
+  background:radial-gradient(circle,rgba(255,88,0,0.25) 0%,transparent 55%); 
+  border-radius:50%; 
+}
+.header-top { 
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; 
+  position:relative; z-index:1; 
+}
+.brand { display:flex; align-items:center; gap:18px; }
+.brand-divider { width:1px; height:40px; background:rgba(255,255,255,0.3); }
+.brand-product h2 { font-family:'Segoe UI Black',sans-serif; font-size:20px; font-weight:900; }
+.brand-product p { font-size:11px; opacity:0.6; margin-top:1px; }
+.header-date { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:8px 18px; border-radius:24px; font-size:12px; opacity:0.85; }
+.header-content { position:relative; z-index:1; }
+.header-content h1 { font-family:'Segoe UI Black',sans-serif; font-size:36px; font-weight:900; line-height:1.15; margin-bottom:10px; }
+.header-content h1 span { color:var(--ava-gold); }
+.header-content p { font-size:15px; opacity:0.7; max-width:700px; }
+.version-badge { 
+  display:inline-block; background:rgba(255,179,20,0.2); border:1px solid rgba(255,179,20,0.4); 
+  padding:4px 14px; border-radius:6px; font-size:12px; font-weight:700; 
+  color:var(--ava-gold); margin-top:12px; 
+}
+
+/* MAIN */
+.main { max-width:1520px; margin:0 auto; padding:44px; }
+.section-title { 
+  font-family:'Segoe UI Black',sans-serif; font-size:20px; font-weight:900; 
+  color:var(--ava-dark); margin-bottom:24px; display:flex; align-items:center; gap:12px; 
+}
+.section-title::after { content:''; flex:1; height:2px; background:linear-gradient(to right,var(--ava-orange),transparent); }
+.section-icon { 
+  width:34px; height:34px; border-radius:8px; background:var(--ava-orange); 
+  color:white; display:flex; align-items:center; justify-content:center; 
+  font-size:15px; flex-shrink:0; 
+}
+
+/* KPI GRID */
+.kpi-grid { 
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr)); 
+  gap:16px; margin-bottom:48px; 
+}
+.kpi-card { 
+  background:white; border-radius:14px; padding:20px; 
+  box-shadow:0 2px 14px rgba(0,0,0,0.05); border-top:4px solid var(--ava-light); 
+  transition:transform 0.2s,box-shadow 0.2s; 
+}
+.kpi-card:hover { 
+  transform:translateY(-3px); box-shadow:0 6px 28px rgba(0,0,0,0.09); 
+}
+.kpi-card.c-orange { border-top-color:var(--ava-orange); }
+.kpi-card.c-magenta { border-top-color:var(--ava-magenta); }
+.kpi-card.c-red { border-top-color:var(--ava-red); }
+.kpi-card.c-gold { border-top-color:var(--ava-gold); }
+.kpi-card.c-green { border-top-color:var(--ava-green); }
+.kpi-card.c-blue { border-top-color:#0057B8; }
+.kpi-value { 
+  font-family:'Segoe UI Black',sans-serif; font-size:38px; font-weight:900; 
+  line-height:1; margin-bottom:5px; 
+}
+.kpi-card.c-orange .kpi-value { color:var(--ava-orange); }
+.kpi-card.c-magenta .kpi-value { color:var(--ava-magenta); }
+.kpi-card.c-red .kpi-value { color:var(--ava-red); }
+.kpi-card.c-gold .kpi-value { color:#c88800; }
+.kpi-card.c-green .kpi-value { color:var(--ava-green); }
+.kpi-card.c-blue .kpi-value { color:#0057B8; }
+.kpi-label { font-size:12px; color:var(--text-secondary); font-weight:700; }
+.kpi-sub { font-size:10px; color:#999; margin-top:3px; }
+
+/* CONTENT BLOCKS */
+.content-block { 
+  background:white; border-radius:14px; padding:28px; 
+  margin-bottom:24px; box-shadow:0 2px 14px rgba(0,0,0,0.05); 
+}
+.content-block h3 { 
+  font-family:'Segoe UI Black',sans-serif; font-size:16px; font-weight:900; 
+  margin-bottom:12px; color:var(--ava-dark); 
+}
+.content-block p { 
+  font-size:13px; line-height:1.7; color:var(--text-secondary); margin-bottom:10px; 
+}
+
+/* TABLE */
+.table-wrapper { overflow-x:auto; margin:16px 0; }
+table { 
+  width:100%; border-collapse:collapse; font-size:12px; 
+}
+table thead { background:linear-gradient(135deg,var(--ava-orange) 0%,#ff7a3a 100%); color:white; }
+table th { 
+  padding:12px 14px; text-align:left; font-weight:700; 
+}
+table td { 
+  padding:10px 14px; border-bottom:1px solid #e0e0e0; 
+}
+table tbody tr:hover { background:#f8f8f8; }
+
+/* FOOTER */
+.footer { 
+  background:var(--ava-dark); color:white; padding:32px 56px; text-align:center; 
+  border-top:1px solid #e0e0e0; margin-top:64px; 
+}
+.footer p { 
+  font-size:12px; opacity:0.8; margin:2px 0; 
+}
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  .main { padding:24px; }
+  .header { padding:32px 24px; }
+  .header-content h1 { font-size:24px; }
+  .kpi-grid { grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="brand">
+      <div style="font-size:18px;">🏢</div>
+      <div class="brand-divider"></div>
+      <div class="brand-product">
+        <h2>Avanade Global AI Hub</h2>
+        <p>Data Transformation Factory</p>
+      </div>
+    </div>
+    <div class="header-date">{{REPORT_DATE}}</div>
+  </div>
+  <div class="header-content">
+    <h1>{{REPORT_TITLE}}<span>.</span></h1>
+    <p>{{REPORT_SUBTITLE}}</p>
+    <div class="version-badge">{{REPORT_VERSION}}</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- KPI SECTION -->
+  <h2 class="section-title">
+    <div class="section-icon">📊</div>
+    Key Performance Indicators
+  </h2>
+  <div class="kpi-grid">
+    {{KPI_CARDS}}
+  </div>
+
+  <!-- CONTENT SECTIONS -->
+  {{CONTENT_SECTIONS}}
+
+  <!-- NEXT STEPS -->
+  <h2 class="section-title">
+    <div class="section-icon">🎯</div>
+    Next Steps
+  </h2>
+  <div class="content-block">
+    {{NEXT_STEPS}}
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>{{REPORT_TITLE}}</strong></p>
+  <p>Generated: {{REPORT_DATE}} | Version {{REPORT_VERSION}}</p>
+  <p>Avanade Data Migration Factory v3 © 2026</p>
+</div>
+
+</body>
+</html>
