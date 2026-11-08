@@ -454,3 +454,9 @@ print(writer.trace_logs_root)  # Verificar path
 **Documento gerado:** 27/06/2026  
 **Status:** ✅ Pronto para produção  
 **Owner:** Data Migration Factory — Observability Team
+
+---
+
+## Orquestrador Financeiro simulado (C-14)
+
+A captura de traces dos gates do orquestrador simulado (`FINANCEIRO_WAVES_1-4_PARALLEL_OPTIMIZED.py`), incluindo limitações e verificação, está em `projects/financeiro/docs/TRACE_CAPTURE_SIMULATED_ORCHESTRATOR.md`.

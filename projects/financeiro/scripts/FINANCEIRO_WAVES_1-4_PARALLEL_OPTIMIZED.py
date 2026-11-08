@@ -21,6 +21,8 @@ import time
 import sys
 import os
 import io
+import argparse
+import uuid
 from pathlib import Path
 from dataclasses import dataclass, asdict, field
 from enum import Enum
@@ -66,6 +68,37 @@ WAVE_CONFIGS = {
         "legacy_focus": "all-systems-synthesis",
     },
 }
+
+
+# ============================================================================
+# TRACE CAPTURE (opt-in, simulation only)
+# ============================================================================
+
+TRACE_DIR_ENV = "FINANCEIRO_TRACE_DIR"
+TRACE_SOURCE = "FINANCEIRO_WAVES_1-4_PARALLEL_OPTIMIZED.py"
+TRACE_INTEGRATION_DIR = Path(__file__).resolve().parents[3] / "tools" / "trace-integration"
+
+# Fields of a gate trace that come from formulas/constants, never from a real run
+ESTIMATED_FIELDS = [
+    "tokens_in", "tokens_out", "cost_usd", "completeness_percent",
+    "quality_percent", "reconciliation_percent", "gate_score",
+]
+
+
+class TraceCaptureError(RuntimeError):
+    """Raised when one or more gate traces could not be written."""
+
+    def __init__(self, errors: List[str]):
+        self.errors = list(errors)
+        super().__init__(f"{len(self.errors)} trace write failure(s): " + "; ".join(self.errors))
+
+
+def build_trace_writer(trace_dir):
+    """Create the shared TraceWriter rooted at trace_dir (imported lazily from tools/)."""
+    if str(TRACE_INTEGRATION_DIR) not in sys.path:
+        sys.path.insert(0, str(TRACE_INTEGRATION_DIR))
+    from trace_writer import TraceWriter
+    return TraceWriter(Path(trace_dir))
 
 
 # ============================================================================
@@ -165,8 +198,14 @@ class ParallelExecutionMetrics:
 class FinanceiroBrallelOrchestrator:
     """Parallel DMF orchestrator with schema caching."""
     
-    def __init__(self, legacy_count: int = 545):
+    def __init__(self, legacy_count: int = 545, trace_writer=None):
+        """trace_writer: optional TraceWriter shared by all gate threads (None = no tracing)."""
         self.schema_cache = SchemaCache()
+        self.trace_writer = trace_writer
+        self.run_id = uuid.uuid4().hex
+        self.trace_events_written = 0
+        self.trace_errors: List[str] = []
+        self._trace_lock = Lock()
         self.wave_metrics: Dict[str, WaveMetrics] = {}
         self.execution_metrics: Optional[ParallelExecutionMetrics] = None
         self.legacy_count = legacy_count
@@ -192,7 +231,91 @@ class FinanceiroBrallelOrchestrator:
         
         return tokens, int(tokens * 0.3)  # input, output
     
-    def _execute_gate(self, wave_id: str, gate_num: int, is_cached: bool = False) -> GateMetrics:
+    def _emit_gate_trace(self, wave_id: str, gate_num: int, execution_mode: str,
+                         duration: float, error: Optional[str] = None,
+                         gate: Optional[GateMetrics] = None) -> None:
+        """Write one JSONL event for an executed (simulated) gate; failures are recorded, never swallowed."""
+        if self.trace_writer is None:
+            return
+        wave_slug = f"financeiro-wave{wave_id.split()[-1]}"
+        estimated = {}
+        if gate is not None:
+            estimated = {
+                "tokens_in": gate.tokens_input,
+                "tokens_out": gate.tokens_output,
+                "cost_usd": gate.cost_usd,
+                "completeness_percent": gate.completeness_percent,
+                "quality_percent": gate.quality_percent,
+                "reconciliation_percent": gate.reconciliation_percent,
+                "gate_score": gate.gate_score,
+            }
+        try:
+            trace = self.trace_writer.write_trace(
+                trace_type="gate_scoring",
+                context={
+                    "category": "gates",
+                    "wave": wave_slug,
+                    "wave_id": wave_id,
+                    "gate": gate_num,
+                    "gate_id": f"GATE{gate_num}",
+                    "execution_mode": execution_mode,
+                    "run_id": self.run_id,
+                },
+                operation={
+                    "name": "simulated_gate_execution",
+                    "duration_sec": duration,
+                    "status": "failure" if error else "success",
+                    "error": error,
+                },
+                metrics={
+                    # Wall-clock of the simulated gate (time.sleep + formulas), not production work
+                    "measured": {"duration_sec": duration},
+                    # Computed from formulas/constants: estimates, not measurements
+                    "estimated": estimated,
+                },
+                metadata={
+                    "source": TRACE_SOURCE,
+                    "version": "2.0",
+                    "environment": "simulation",
+                    "data_origin": "simulated",
+                    "simulated_gate_result": gate.status if gate else None,
+                    "measured_fields": ["duration_sec"],
+                    "estimated_fields": ESTIMATED_FIELDS,
+                    "note": "Simulated gate: no external service, ETL or migration was executed.",
+                },
+                tags=["simulated", "estimated-metrics", execution_mode],
+            )
+            if trace is None:
+                raise RuntimeError("TraceWriter.write_trace returned None (validation or write error, see stderr)")
+        except Exception as exc:
+            message = f"{wave_id} GATE{gate_num} ({execution_mode}): {type(exc).__name__}: {exc}"
+            print(f"❌ Trace not written: {message}", file=sys.stderr)
+            with self._trace_lock:
+                self.trace_errors.append(message)
+            return
+        with self._trace_lock:
+            self.trace_events_written += 1
+
+    def _raise_if_trace_errors(self) -> None:
+        with self._trace_lock:
+            errors = list(self.trace_errors)
+        if errors:
+            raise TraceCaptureError(errors)
+
+    def _execute_gate(self, wave_id: str, gate_num: int, is_cached: bool = False,
+                      execution_mode: str = "serial") -> GateMetrics:
+        """Execute single gate and emit its trace event (failure event + re-raise on error)."""
+        start = time.time()
+        try:
+            gate = self._run_gate_simulation(wave_id, gate_num, is_cached)
+        except Exception as exc:
+            self._emit_gate_trace(wave_id, gate_num, execution_mode, time.time() - start,
+                                  error=f"{type(exc).__name__}: {exc}")
+            raise
+        self._emit_gate_trace(wave_id, gate_num, execution_mode, gate.duration_seconds, gate=gate)
+        return gate
+
+    def _run_gate_simulation(self, wave_id: str, gate_num: int, is_cached: bool = False) -> GateMetrics:
         """Execute single gate with timing."""
         gate_id = f"GATE{gate_num}"
         gate_start = time.time()
@@ -233,21 +356,21 @@ class FinanceiroBrallelOrchestrator:
             timestamp=datetime.utcnow().isoformat(),
         )
     
-    def _execute_wave(self, wave_id: str) -> WaveMetrics:
+    def _execute_wave(self, wave_id: str, execution_mode: str = "serial") -> WaveMetrics:
         """Execute single wave (3 gates: GATE1, GATE2, GATE3)."""
         wave_start = time.time()
         gate_metrics = []
         
         # GATE1: Upstream (no cache benefit)
-        gate1 = self._execute_gate(wave_id, 1, is_cached=False)
+        gate1 = self._execute_gate(wave_id, 1, is_cached=False, execution_mode=execution_mode)
         gate_metrics.append(gate1)
         
         # GATE2: Midstream (use schema cache)
-        gate2 = self._execute_gate(wave_id, 2, is_cached=True)
+        gate2 = self._execute_gate(wave_id, 2, is_cached=True, execution_mode=execution_mode)
         gate_metrics.append(gate2)
         
         # GATE3: Downstream (use schema cache)
-        gate3 = self._execute_gate(wave_id, 3, is_cached=True)
+        gate3 = self._execute_gate(wave_id, 3, is_cached=True, execution_mode=execution_mode)
         gate_metrics.append(gate3)
         
         total_duration = time.time() - wave_start
@@ -273,7 +396,7 @@ class FinanceiroBrallelOrchestrator:
         with ThreadPoolExecutor(max_workers=4) as executor:
             # Submit all wave tasks
             futures = {
-                executor.submit(self._execute_wave, wave_id): wave_id
+                executor.submit(self._execute_wave, wave_id, "parallel"): wave_id
                 for wave_id in WAVE_CONFIGS.keys()
             }
             
@@ -284,6 +407,7 @@ class FinanceiroBrallelOrchestrator:
                 self.wave_metrics[wave_id] = wave_metrics
         
         total_parallel_time = time.time() - self._start_time
+        self._raise_if_trace_errors()
         return self.wave_metrics, total_parallel_time
     
     def execute_serial(self) -> tuple:
@@ -291,9 +415,10 @@ class FinanceiroBrallelOrchestrator:
         serial_start = time.time()
         
         for wave_id in WAVE_CONFIGS.keys():
-            self.wave_metrics[wave_id] = self._execute_wave(wave_id)
+            self.wave_metrics[wave_id] = self._execute_wave(wave_id, "serial")
         
         total_serial_time = time.time() - serial_start
+        self._raise_if_trace_errors()
         return self.wave_metrics, total_serial_time
     
     def generate_comparison_report(self, serial_time: float, parallel_time: float) -> str:
@@ -435,8 +560,15 @@ class FinanceiroBrallelOrchestrator:
 # MAIN
 # ============================================================================
 
-def main():
+def main(argv=None):
     """Execute parallel orchestration and generate reports."""
+    parser = argparse.ArgumentParser(description="Financeiro waves 1-4 simulated orchestrator")
+    parser.add_argument(
+        "--trace-dir", default=os.environ.get(TRACE_DIR_ENV),
+        help=f"Enable gate trace capture (JSONL) under this directory (env: {TRACE_DIR_ENV}). "
+             "Events are marked as simulated; disabled when omitted.")
+    args = parser.parse_args(argv)
+    trace_writer = build_trace_writer(args.trace_dir) if args.trace_dir else None
     
     # Configure output encoding
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -446,15 +578,20 @@ def main():
     print("="*80)
     print(f"Start Time: {datetime.utcnow().isoformat()}\n")
     
-    orchestrator = FinanceiroBrallelOrchestrator()
+    # One TraceWriter shared by both orchestrators and all wave threads
+    orchestrator = FinanceiroBrallelOrchestrator(trace_writer=trace_writer)
     
     # ========================================
     # SERIAL BASELINE
     # ========================================
     print("📊 Running SERIAL baseline (4 waves sequentially)...")
     serial_start = time.time()
-    orchestrator_serial = FinanceiroBrallelOrchestrator()
-    _, serial_time = orchestrator_serial.execute_serial()
+    orchestrator_serial = FinanceiroBrallelOrchestrator(trace_writer=trace_writer)
+    try:
+        _, serial_time = orchestrator_serial.execute_serial()
+    except TraceCaptureError as exc:
+        print(f"❌ TRACE CAPTURE FAILED: {exc}", file=sys.stderr)
+        return 1
     print(f"   ✅ Serial completed in {serial_time:.2f}s\n")
     
     # ========================================
@@ -462,7 +599,11 @@ def main():
     # ========================================
     print("⚡ Running PARALLEL execution (4 waves simultaneously)...")
     parallel_start = time.time()
-    _, parallel_time = orchestrator.execute_parallel()
+    try:
+        _, parallel_time = orchestrator.execute_parallel()
+    except TraceCaptureError as exc:
+        print(f"❌ TRACE CAPTURE FAILED: {exc}", file=sys.stderr)
+        return 1
     print(f"   ✅ Parallel completed in {parallel_time:.2f}s\n")
     
     # ========================================
@@ -630,7 +771,14 @@ Parallel execution achieved **{speedup:.1f}x speedup** with schema caching reduc
     print(f"\n📁 Output Directory: {output_dir}")
     print(f"   Reports: HTML dashboard, JSON metrics, Markdown analysis")
     print(f"\n✨ Status: 🟢 PRODUCTION-READY\n")
+    
+    if trace_writer is not None:
+        written = orchestrator_serial.trace_events_written + orchestrator.trace_events_written
+        print(f"🧵 Gate traces: {written} events in {trace_writer.trace_logs_root}")
+        print("   ⚠️  SIMULATED run: gates are simulated, tokens/cost/scores are estimates;")
+        print("   only duration_sec is measured (wall-clock of the simulation). No ETL/migration occurred.\n")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
