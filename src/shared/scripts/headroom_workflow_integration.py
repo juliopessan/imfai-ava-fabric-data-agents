@@ -18,7 +18,10 @@ from pathlib import Path
 from typing import Any, Dict
 from datetime import datetime
 
-from headroom_context_manager import HeadroomContextManager
+try:
+    from .headroom_context_manager import HeadroomContextManager
+except ImportError:  # executed as a plain script
+    from headroom_context_manager import HeadroomContextManager
 
 
 class HeadroomWorkflowIntegration:

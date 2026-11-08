@@ -3,6 +3,14 @@
 Headroom Context Manager
 Integrates token compression into agent handoffs using Headroom.
 Part of DMF Phase 1 implementation (starting 2026-06-22).
+
+Engine selection:
+1. Headroom (``headroom`` package) when it is importable and ``use_mock`` is False.
+2. Project fallback compressor (``_compress_mock``) otherwise, or when Headroom
+   fails at call time.
+
+Token counts and ratios are measured on the real input/output text
+(1 token ≈ 4 characters), not taken from heuristic estimates.
 """
 from __future__ import annotations
 
@@ -29,7 +37,7 @@ class CompressionStats:
     compression_ratio: float
     tokens_saved: int
     latency_ms: float
-    method: str  # "headroom" or "mock"
+    method: str  # "headroom" or "mock" (project fallback compressor)
     timestamp: str
     reversible: bool = True
     
@@ -42,8 +50,8 @@ class HeadroomContextManager:
     """
     Manage token compression for agent handoffs.
     
-    Falls back gracefully to mock compression if real Headroom unavailable.
-    Implements: Try real → Mock fallback
+    Falls back gracefully to the project compressor if real Headroom is unavailable.
+    Implements: Try Headroom → project compressor fallback
     """
     
     def __init__(self, project_root: str | None = None, use_mock: bool = False):
@@ -54,7 +62,7 @@ class HeadroomContextManager:
         self.compression_stats: list[CompressionStats] = []
         
         if not self.headroom_available:
-            logger.warning("⚠️  Headroom not available. Using mock fallback.")
+            logger.warning("⚠️  Headroom not available. Using project fallback compressor.")
             self.use_mock = True
 
     def _check_headroom(self) -> bool:
@@ -63,11 +71,11 @@ class HeadroomContextManager:
             return False
         
         try:
-            import headroom
+            import headroom  # noqa: F401
             logger.info("✅ Headroom library available")
             return True
         except ImportError:
-            logger.debug("ℹ️  Headroom not installed. Mock fallback enabled.")
+            logger.debug("ℹ️  Headroom not installed. Fallback compressor enabled.")
             return False
 
     def compress_handoff(
@@ -100,14 +108,16 @@ class HeadroomContextManager:
         start_time = datetime.now()
         
         if self.headroom_available and not self.use_mock:
-            compressed, ratio = self._compress_real(data_str, model)
+            compressed, method = self._compress_real(data_str, model)
         else:
-            compressed, ratio = self._compress_mock(data_str, model)
+            compressed, method = self._compress_mock(data_str, model), "mock"
         
         elapsed_ms = (datetime.now() - start_time).total_seconds() * 1000
         
-        output_tokens = int(input_tokens * (1 - ratio))
+        # Measured on the actual output, not on a heuristic estimate.
+        output_tokens = self._estimate_tokens(compressed)
         tokens_saved = input_tokens - output_tokens
+        ratio = tokens_saved / input_tokens
         
         stats = CompressionStats(
             source_agent=source_agent,
@@ -117,82 +127,77 @@ class HeadroomContextManager:
             compression_ratio=ratio,
             tokens_saved=tokens_saved,
             latency_ms=elapsed_ms,
-            method="headroom" if self.headroom_available else "mock",
+            method=method,
             timestamp=datetime.now().isoformat(),
+            reversible=method == "headroom",
         )
         
         self.compression_stats.append(stats)
         
         logger.info(
-            f"📦 Handoff {source_agent} → {target_agent}: "
+            f"📦 Handoff {source_agent} → {target_agent} [{method}]: "
             f"{input_tokens:,} → {output_tokens:,} tokens ({ratio*100:.1f}% compression)"
         )
         
         return compressed, stats
 
-    def _compress_real(self, data: str, model: str) -> tuple[str, float]:
-        """Compress using real Headroom library."""
+    def _compress_real(self, data: str, model: str) -> tuple[str, str]:
+        """
+        Compress using real Headroom library.
+
+        Returns (compressed, method). Any Headroom failure (missing API,
+        exception, unusable result) falls back to the project compressor.
+        """
         try:
             from headroom import compress, Configuration
             
             config = Configuration(model=model)
-            compressed = compress(data, config=config)
-            
-            input_len = len(data)
-            output_len = len(compressed)
-            ratio = (input_len - output_len) / input_len if input_len > 0 else 0.0
-            
-            return compressed, ratio
+            result = compress(data, config=config)
+            return self._extract_text(result), "headroom"
         except Exception as e:
-            logger.warning(f"Real Headroom failed: {e}. Falling back to mock.")
-            return self._compress_mock(data, model)
+            logger.warning(f"Real Headroom failed: {e}. Falling back to project compressor.")
+            return self._compress_mock(data, model), "mock"
 
-    def _compress_mock(self, data: str, model: str) -> tuple[str, float]:
+    @staticmethod
+    def _extract_text(result: Any) -> str:
+        """Get the compressed text from a Headroom result."""
+        if isinstance(result, str):
+            return result
+        if isinstance(result, dict) and isinstance(result.get("content"), str):
+            return result["content"]
+        content = getattr(result, "content", None)
+        if isinstance(content, str):
+            return content
+        raise TypeError(f"Unsupported Headroom result type: {type(result).__name__}")
+
+    def _compress_mock(self, data: str, model: str) -> str:
         """
-        Mock compression using heuristic ratios.
-        
-        Heuristics (realistic for DMF artifacts):
-        - JSON/YAML: 65% compression (structured data compresses well)
-        - SQL/DDL: 45% compression (code less repetitive)
-        - Markdown: 30% compression (prose harder to compress)
-        - Logs: 15% compression (already sparse)
+        Project fallback compressor (no external dependency).
+
+        Deterministic and content-preserving:
+        - valid JSON: re-serialised without indentation or extra whitespace
+        - anything else: trailing whitespace and repeated blank lines removed
         """
-        data_lower = data.lower()
-        
-        # Detect type
-        if "{" in data or ":" in data and "-" in data:
-            ratio = 0.65  # JSON/YAML
-        elif "select" in data_lower or "create" in data_lower:
-            ratio = 0.45  # SQL
-        elif "#" in data and "\n" in data:
-            ratio = 0.30  # Markdown
-        elif "error" in data_lower or "warn" in data_lower:
-            ratio = 0.15  # Logs
-        else:
-            ratio = 0.50  # Default
-        
-        # Apply "compression" - just mark it for retrieval
-        metadata = {
-            "compressed": True,
-            "compression_ratio": ratio,
-            "method": "mock-estimator",
-            "original_size": len(data),
-            "timestamp": datetime.now().isoformat(),
-        }
-        
-        compressed_marker = f"\n<!-- COMPRESSED (mock): {ratio*100:.0f}% -->\n"
-        return data + compressed_marker, ratio
+        try:
+            return json.dumps(json.loads(data), separators=(",", ":"), ensure_ascii=False)
+        except (ValueError, TypeError):
+            pass
+
+        out: list[str] = []
+        for line in data.splitlines():
+            line = line.rstrip()
+            if not line and (not out or not out[-1]):
+                continue
+            out.append(line)
+        return "\n".join(out).strip("\n")
 
     def retrieve_if_needed(self, data: str, retrieval_id: str) -> str:
         """
         Retrieve original data if compression used reversible CCR.
         
-        For now, returns data as-is (mock doesn't actually compress).
+        For now, returns data as-is (neither engine keeps an original store yet).
         Real Headroom would call CCR retriever here.
         """
-        if "COMPRESSED (mock)" in data:
-            # Remove compression marker
-            return data.replace("\n<!-- COMPRESSED (mock):", "<!-- (was compressed) ").split("-->\n")[0]
         return data
 
     def get_stats(self) -> Dict[str, Any]:
